@@ -97,5 +97,8 @@ These scripts produce:
 
 ---
 
+## Citation & Acknowledgments
+Bayazit Karaman, "Semantic Complexity Aligns with Brain Activity During Naturalistic Language Processing." Submitted to NeuroImage, 2025.
+
 ## License
 MIT License 
