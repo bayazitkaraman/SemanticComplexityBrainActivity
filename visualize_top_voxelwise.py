@@ -40,4 +40,3 @@ for i, (title, file_path) in enumerate(top_examples):
 
 plt.tight_layout()
 plt.savefig(os.path.join(output_dir, "figure_best_voxelwise_examples.png"), dpi=300, bbox_inches="tight")
-plt.show()
