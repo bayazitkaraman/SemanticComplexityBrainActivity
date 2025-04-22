@@ -1,6 +1,6 @@
 # Semantic Complexity and Brain Activity
 
-This repository explores the relationship between **semantic complexity**—derived from contextual GPT-2 embeddings—and **brain activity** during naturalistic story comprehension, using fMRI data from the <a href="https://openneuro.org/datasets/ds002245/versions/1.0.1" target="_blank">Narratives dataset</a>.
+This project investigates the relationship between semantic complexity in natural language and brain activity using fMRI data from the <a href="https://openneuro.org/datasets/ds002245/versions/1.0.1" target="_blank">Narratives dataset</a>. The pipeline aligns language features with fMRI signals and computes correlations across different brain regions.
 
 ---
 
@@ -17,7 +17,7 @@ This repository explores the relationship between **semantic complexity**—deri
 │   ├── csv/                          # ROI correlation summaries
 │   ├── maps/                         # Individual voxelwise maps (NIfTI)
 │   ├── figures/                      # Visual figures (PNG)
-│   └── group_averages/              # Group-level mean maps
+│   └── group_averages/               # Group-level mean maps
 ```
 
 ---
