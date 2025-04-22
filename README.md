@@ -48,7 +48,7 @@ Organize your dataset similar to this structure:
   │    └── lucy_transcript.txt
   └── merlin/ ...
 ```
-Ensure paths in `experiment_subject_list.py` point to the correct files.
+Note: The data/ directory should contain the transcript.csv and events.tsv files. Please download the necessary .nii.gz files directly from the source.​ Ensure paths in `experiment_subject_list.py` point to the correct files.
 
 ### Step 2: Run the Analysis
 ```bash
