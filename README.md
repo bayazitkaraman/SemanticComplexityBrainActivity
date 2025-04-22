@@ -98,7 +98,7 @@ These scripts produce:
 ---
 
 ## Citation & Acknowledgments
-Bayazit Karaman, "Semantic Complexity Aligns with Brain Activity During Naturalistic Language Processing." Submitted to NeuroImage, 2025.
+Bayazit Karaman, "Tracking Brain Activity with Semantic Complexity During Naturalistic Narrative Comprehension." Submitted to NeuroImage, 2025.
 
 ## License
 MIT License 
