@@ -113,11 +113,12 @@ def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels
                     best_r, best_p, best_lag = r, p, lag
 
         # Shuffled control correlations
+        np.random.seed(42)  # reproducibility
         shuffled_rs = []
-        for _ in range(5):
+        for _ in range(1000):
             shuffled = np.random.permutation(complexity_hrf)
             best_r_shuf = np.nan
-            for lag in range(0, 7):
+            for lag in range(7):
                 shifted = np.roll(shuffled, lag)
                 shifted[:lag] = np.nan
                 valid = ~np.isnan(shifted) & ~np.isnan(roi_activation)
