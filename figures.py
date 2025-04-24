@@ -46,3 +46,40 @@ plt.title("ROI Correlation Heatmap Across Subjects")
 plt.tight_layout()
 plt.savefig("results/figures/roi_correlation_heatmap.png")
 plt.close()
+
+# === Figure 6: Actual vs Shuffled ===
+roi_avg = df.groupby("roi").agg(
+    actual_r=("r", "mean"),
+    shuffled_r=("mean_r_shuffled", "mean")
+).reset_index()
+
+x = range(len(roi_avg))
+plt.figure(figsize=(10, 5))
+plt.bar([i - 0.2 for i in x], roi_avg["actual_r"], width=0.4, label="Actual", color="blue")
+plt.bar([i + 0.2 for i in x], roi_avg["shuffled_r"], width=0.4, label="Shuffled", color="orange")
+plt.xticks(x, roi_avg["roi"], rotation=90)
+plt.title("Figure 6: Actual vs. Shuffled ROI Correlation")
+plt.ylabel("Pearson r")
+plt.legend()
+plt.tight_layout()
+plt.savefig("results/figures/fig6_actual_vs_shuffled.png")
+plt.close()
+
+# === Figure 8: ROI-by-Story Correlation ===
+storywise = df.groupby(["roi", "story"]).agg(mean_r=("r", "mean")).reset_index()
+pivot = storywise.pivot(index="roi", columns="story", values="mean_r").fillna(0)
+top10 = pivot.mean(axis=1).sort_values(ascending=False).head(10).index
+pivot = pivot.loc[top10]
+
+x = np.arange(len(pivot))
+width = 0.25
+plt.figure(figsize=(12, 6))
+for i, story in enumerate(pivot.columns):
+    plt.bar(x + i * width, pivot[story], width=width, label=story)
+plt.xticks(x + width, pivot.index, rotation=45, ha='right')
+plt.ylabel("Mean Pearson r")
+plt.title("Figure 8: ROI-wise Correlation by Story")
+plt.legend()
+plt.tight_layout()
+plt.savefig("results/figures/fig8_storywise_roi_bars.png")
+plt.close()
