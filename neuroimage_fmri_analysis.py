@@ -185,7 +185,7 @@ def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels
     plotting.plot_stat_map(corr_img, threshold=0.3, cmap='coolwarm', title=f"Voxel-wise Correlation: {story['name']} {story['subject']}", display_mode='ortho', draw_cross=False, cut_coords=[-18, 53, 11], colorbar=True).savefig(png_filename)
     print(f"Saved: {png_filename}")
 
-    return results, corr_img
+    return results, corr_img, lag_curve_records
 
 # ---------------------- MAIN ENTRY POINT ----------------------
 def run_all():
@@ -219,24 +219,29 @@ def run_all():
 
     all_results = []
     group_maps = []
+    all_lag_curve_records = []
 
     for story in stories:
-        print(f"Processing: {story['name']} ({story['subject']})")
-        results, corr_img = analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels_to_test)
-        all_results.extend(results)
-        if corr_img:
-            group_maps.append(corr_img)
+    print(f"Processing: {story['name']} ({story['subject']})")
+    results, corr_img, lag_curves = analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels_to_test)
+    all_results.extend(results)
+    all_lag_curve_records.extend(lag_curves)
+    if corr_img:
+        group_maps.append(corr_img)
 
     pd.DataFrame(all_results).to_csv(os.path.join(CSV_DIR, "roi_language_correlation_summary.csv"), index=False)
     print("Saved summary CSV.")
 
-if __name__ == "__main__":
-    run_all()
-    
     # Save lag tuning curves to CSV
     with open("results/csv/lag_tuning_curves.csv", "w", newline='') as csvfile:
         fieldnames = ["story", "subject", "roi", "lag", "r"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-    for row in all_lag_curve_records:
-        writer.writerow(row)
+        for row in all_lag_curve_records:
+            writer.writerow(row)
+    print("Saved lag tuning curve CSV.")
+
+if __name__ == "__main__":
+    run_all()
+    
+    
