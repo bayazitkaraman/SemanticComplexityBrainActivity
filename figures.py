@@ -27,15 +27,9 @@ plt.tight_layout()
 plt.savefig("results/figures/fig2_top5_rois_mean_r.png")
 plt.close()
 
-# === Figure 3: Bar plot of top ROIs by mean z-score ===
-plt.figure(figsize=(10, 5))
-plt.bar(top_z["roi"], top_z["mean_z"], yerr=top_z["std_z"], capsize=5, color='orange')
-plt.title("Top 5 ROIs by Mean Z-Score (vs. Shuffled Control)")
-plt.ylabel("Mean Z-Score")
-plt.xticks(rotation=45, ha='right')
-plt.tight_layout()
-plt.savefig("results/figures/fig3_top5_rois_mean_z.png")
-plt.close()
+# === Figure 3: Group-level voxel-wise correlation map for the Lucy narrative ===
+# You can generate the figure by calling generate_group_voxelwise_maps.py function
+
 
 # === Figure 4: Heatmap of ROI r values across subjects ===
 df["story_subject"] = df["story"] + "_" + df["subject"]
@@ -47,7 +41,7 @@ plt.tight_layout()
 plt.savefig("results/figures/fig4_heatmap_roi_subject.png")
 plt.close()
 
-# === Figure 5: Actual vs Shuffled ===
+# === Figure 6: Actual vs Shuffled ===
 roi_avg = df.groupby("roi").agg(
     actual_r=("r", "mean"),
     shuffled_r=("mean_r_shuffled", "mean")
@@ -62,10 +56,10 @@ plt.title("Figure 6: Actual vs. Shuffled ROI Correlation")
 plt.ylabel("Pearson r")
 plt.legend()
 plt.tight_layout()
-plt.savefig("results/figures/fig5_actual_vs_shuffled.png")
+plt.savefig("results/figures/fig6_actual_vs_shuffled.png")
 plt.close()
 
-# === Figure 7: ROI-by-Story Correlation ===
+# === Figure 8: ROI-by-Story Correlation ===
 storywise = df.groupby(["roi", "story"]).agg(mean_r=("r", "mean")).reset_index()
 pivot = storywise.pivot(index="roi", columns="story", values="mean_r").fillna(0)
 top10 = pivot.mean(axis=1).sort_values(ascending=False).head(10).index
