@@ -5,6 +5,7 @@ import torch
 import nibabel as nib
 import numpy as np
 import pandas as pd
+import csv
 
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -86,6 +87,7 @@ def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels
     resampled_data = resampled_atlas.get_fdata()
 
     results = []
+    lag_curve_records = []  # for saving lag vs r per ROI
     for roi_label in roi_labels_to_test:
         if roi_label not in atlas_labels:
             continue
@@ -230,3 +232,11 @@ def run_all():
 
 if __name__ == "__main__":
     run_all()
+    
+    # Save lag tuning curves to CSV
+    with open("results/csv/lag_tuning_curves.csv", "w", newline='') as csvfile:
+        fieldnames = ["story", "subject", "roi", "lag", "r"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+    for row in all_lag_curve_records:
+        writer.writerow(row)
