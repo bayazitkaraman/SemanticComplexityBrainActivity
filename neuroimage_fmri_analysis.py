@@ -222,12 +222,12 @@ def run_all():
     all_lag_curve_records = []
 
     for story in stories:
-    print(f"Processing: {story['name']} ({story['subject']})")
-    results, corr_img, lag_curves = analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels_to_test)
-    all_results.extend(results)
-    all_lag_curve_records.extend(lag_curves)
-    if corr_img:
-        group_maps.append(corr_img)
+        print(f"Processing: {story['name']} ({story['subject']})")
+        results, corr_img, lag_curves = analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels_to_test)
+        all_results.extend(results)
+        all_lag_curve_records.extend(lag_curves)
+        if corr_img:
+            group_maps.append(corr_img)
 
     pd.DataFrame(all_results).to_csv(os.path.join(CSV_DIR, "roi_language_correlation_summary.csv"), index=False)
     print("Saved summary CSV.")
