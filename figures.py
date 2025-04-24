@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 # Load the correlation summary
 df = pd.read_csv("results/csv/roi_language_correlation_summary.csv")
