@@ -111,6 +111,14 @@ def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels
             valid = ~np.isnan(shifted) & ~np.isnan(roi_activation)
             if valid.sum() > 1:
                 r, p = pearsonr(shifted[valid], roi_activation[valid])
+                lag_curve_records.append({
+                    "story": story['name'],
+                    "subject": story['subject'],
+                    "roi": roi_label,
+                    "lag": lag,
+                    "r": r
+                })
+
                 if np.isnan(best_r) or abs(r) > abs(best_r):
                     best_r, best_p, best_lag = r, p, lag
 
