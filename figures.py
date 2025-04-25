@@ -35,9 +35,11 @@ plt.close()
 # === Figure 4: Heatmap of ROI r values across subjects ===
 df["story_subject"] = df["story"] + "_" + df["subject"]
 pivot_df = df.pivot(index="story_subject", columns="roi", values="r")
-plt.figure(figsize=(14, 8))
-sns.heatmap(pivot_df, annot=True, fmt=".2f", cmap="coolwarm", center=0, cbar_kws={'label': 'Pearson r'})
+plt.figure(figsize=(18, 10))
+sns.heatmap(pivot_df, annot=True, fmt=".2f", cmap="coolwarm", center=0, cbar_kws={'label': 'Pearson r'}, annot_kws={"fontsize": 7})
 plt.title("ROI Correlation Heatmap Across Subjects")
+plt.xticks(rotation=45, ha='right', fontsize=10)
+plt.yticks(fontsize=10)
 plt.tight_layout()
 plt.savefig("results/figures/fig4_heatmap_roi_subject.png")
 plt.close()
@@ -48,33 +50,73 @@ roi_avg = df.groupby("roi").agg(
     shuffled_r=("mean_r_shuffled", "mean")
 ).reset_index()
 
-x = range(len(roi_avg))
-plt.figure(figsize=(10, 5))
-plt.bar([i - 0.2 for i in x], roi_avg["actual_r"], width=0.4, label="Actual", color="blue")
-plt.bar([i + 0.2 for i in x], roi_avg["shuffled_r"], width=0.4, label="Shuffled", color="orange")
-plt.xticks(x, roi_avg["roi"], rotation=90)
-plt.title("Figure 6: Actual vs. Shuffled ROI Correlation")
-plt.ylabel("Pearson r")
+# Sort ROIs by actual_r
+roi_avg = roi_avg.sort_values(by="actual_r", ascending=False).reset_index(drop=True)
+x = np.arange(len(roi_avg))
+
+plt.figure(figsize=(14, 6))
+bar_width = 0.35
+plt.bar(x - bar_width / 2, roi_avg["actual_r"], width=bar_width, label="Actual", color="steelblue")
+plt.bar(x + bar_width / 2, roi_avg["shuffled_r"], width=bar_width, label="Shuffled", color="orange")
+
+plt.xticks(x, roi_avg["roi"], rotation=45, ha='right')
+plt.ylabel("Mean Pearson r")
+plt.title("Actual vs. Shuffled ROI Correlation (Mean Across Subjects)")
 plt.legend()
 plt.tight_layout()
-plt.savefig("results/figures/fig6_actual_vs_shuffled.png")
+
+# Save high-quality version
+plt.savefig("results/figures/fig6_actual_vs_shuffled.png", dpi=400, bbox_inches="tight")
 plt.close()
 
 # === Figure 8: ROI-by-Story Correlation ===
-storywise = df.groupby(["roi", "story"]).agg(mean_r=("r", "mean")).reset_index()
-pivot = storywise.pivot(index="roi", columns="story", values="mean_r").fillna(0)
-top10 = pivot.mean(axis=1).sort_values(ascending=False).head(10).index
-pivot = pivot.loc[top10]
+storywise = df.groupby(["roi", "story"]).agg(mean_r=("r", "mean"), std_r=("r", "std")).reset_index()
 
-x = np.arange(len(pivot))
+# Get top 10 ROIs by average mean_r across all stories
+roi_means = storywise.groupby("roi")["mean_r"].mean().sort_values(ascending=False).head(10).index
+top_df = storywise[storywise["roi"].isin(roi_means)]
+
+# Pivot for plotting
+pivot_mean = top_df.pivot(index="roi", columns="story", values="mean_r").loc[roi_means]
+pivot_std = top_df.pivot(index="roi", columns="story", values="std_r").loc[roi_means]
+
+# Plot grouped bar chart with error bars
+stories = pivot_mean.columns
+x = np.arange(len(pivot_mean))
 width = 0.25
-plt.figure(figsize=(12, 6))
-for i, story in enumerate(pivot.columns):
-    plt.bar(x + i * width, pivot[story], width=width, label=story)
-plt.xticks(x + width, pivot.index, rotation=45, ha='right')
+
+plt.figure(figsize=(14, 6))
+for i, story in enumerate(stories):
+    means = pivot_mean[story]
+    stds = pivot_std[story]
+    plt.bar(x + i * width, means, width=width, yerr=stds, capsize=4, label=story)
+
+plt.xticks(x + width, pivot_mean.index, rotation=45, ha='right')
 plt.ylabel("Mean Pearson r")
-plt.title("Figure 8: ROI-wise Correlation by Story")
-plt.legend()
+plt.title("ROI-wise Correlation by Story (Mean ± SD)")
+plt.legend(title="Story")
 plt.tight_layout()
-plt.savefig("results/figures/fig7_storywise_roi_bars.png")
+
+plt.savefig("results/figures/fig8_storywise_roi_bars.png")
+plt.close()
+
+# === Figure 7: Lag Tuning Curves ===
+df_lag = pd.read_csv("results/csv/lag_tuning_curves.csv")
+
+selected_rois = df_lag.groupby("roi")["r"].mean().sort_values(ascending=False).head(5).index.tolist()
+
+plt.figure(figsize=(12, 8))
+for roi in selected_rois:
+    roi_df = df_lag[df_lag["roi"] == roi]
+    means = roi_df.groupby("lag")["r"].mean()
+    plt.plot(means.index, means.values, marker='o', label=roi)
+
+plt.xlabel("Lag (TRs)")
+plt.ylabel("Mean Pearson r")
+plt.title("Lag Tuning Curves of Semantic Complexity Correlation for Top ROIs")
+plt.xticks(ticks=range(7), labels=[f"{1.5 * i:.1f}" for i in range(7)])
+plt.legend(loc="upper left", bbox_to_anchor=(1.02, 1))
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("results/figures/fig7_lag_tuning_curves.png", dpi=300, bbox_inches='tight')
 plt.close()
