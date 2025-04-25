@@ -17,8 +17,8 @@ vmax = 0.8
 vmin = -0.8
 cmap = "coolwarm"
 
-# Plot
-fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+# Plot Figure 5 with tighter layout and no empty margin
+fig, axes = plt.subplots(1, 3, figsize=(14, 5), constrained_layout=True)
 for i, (title, file_path) in enumerate(top_examples):
     img = image.load_img(file_path)
     display = plotting.plot_stat_map(
@@ -32,11 +32,8 @@ for i, (title, file_path) in enumerate(top_examples):
         vmax=vmax,
         vmin=vmin,
         axes=axes[i],
-        annotate=False  # prevent automatic title
+        annotate=False
     )
-    # Add label below
-    axes[i].set_title("", fontsize=1)
-    axes[i].text(0.5, -0.15, rf"$\mathbf{{{title}}}$", ha='center', va='top', fontsize=10, transform=axes[i].transAxes)
+    axes[i].text(0.5, -0.1, title, ha='center', va='top', fontsize=10, transform=axes[i].transAxes)
 
-plt.tight_layout()
-plt.savefig(os.path.join(output_dir, "figure_best_voxelwise_examples.png"), dpi=300, bbox_inches="tight")
+fig.savefig(os.path.join(output_dir, "figure5_best_voxelwise_examples.png"), dpi=300, bbox_inches="tight")
