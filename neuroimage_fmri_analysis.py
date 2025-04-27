@@ -214,7 +214,7 @@ def run_all():
         'Supramarginal Gyrus, anterior division',
         'Supramarginal Gyrus, posterior division',
         'Frontal Pole',
-        'Precuneous Cortex',
+        'Precuneus Cortex',
         'Temporal Fusiform Cortex, anterior division',
         'Temporal Fusiform Cortex, posterior division',
         'Parahippocampal Gyrus, anterior division',
