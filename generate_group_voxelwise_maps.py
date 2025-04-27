@@ -35,10 +35,12 @@ for story in story_names:
 
     # Save PNG plot
     png_out_path = os.path.join(output_folder, f"group_mean_corr_map_{story}.png")
-    plotting.plot_stat_map(
+    display =plotting.plot_stat_map(
         mean_img_masked, title=f"Group-level Correlation: {story}",
         threshold=0.25, display_mode='ortho', draw_cross=False,
         cut_coords=[-18, 53, 11], cmap="coolwarm", colorbar=True
-    ).savefig(png_out_path)
+    )
+    display.savefig(png_out_path)
+    display.close()
 
     print(f"✅ Saved average map for {story} → {png_out_path}")
