@@ -190,7 +190,8 @@ def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels
     nii_filename = os.path.join(MAP_DIR, f"corr_map_{story['name']}_{story['subject']}.nii.gz")
     png_filename = os.path.join(FIG_DIR, f"corr_map_{story['name']}_{story['subject']}.png")
     corr_img.to_filename(nii_filename)
-    display = plotting.plot_stat_map(corr_img, threshold=0.3, cmap='coolwarm', title=f"Voxel-wise Correlation: {story['name']} {story['subject']}", display_mode='ortho', draw_cross=False, cut_coords=[-18, 53, 11], colorbar=True).savefig(png_filename)
+    display = plotting.plot_stat_map(corr_img, threshold=0.3, cmap='coolwarm', title=f"Voxel-wise Correlation: {story['name']} {story['subject']}", display_mode='ortho', draw_cross=False, cut_coords=[-18, 53, 11], colorbar=True)
+    display.savefig(png_filename)
     print(f"Saved: {png_filename}")
     display.close()
 
