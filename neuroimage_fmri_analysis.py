@@ -88,6 +88,7 @@ def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels
 
     results = []
     lag_curve_records = []  # for saving lag vs r per ROI
+    np.random.seed(42)  # reproducibility
     for roi_label in roi_labels_to_test:
         if roi_label not in atlas_labels:
             continue
@@ -123,7 +124,6 @@ def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels
                     best_r, best_p, best_lag = r, p, lag
 
         # Shuffled control correlations
-        np.random.seed(42)  # reproducibility
         shuffled_rs = []
         for _ in range(1000):
             shuffled = np.random.permutation(complexity_hrf)
