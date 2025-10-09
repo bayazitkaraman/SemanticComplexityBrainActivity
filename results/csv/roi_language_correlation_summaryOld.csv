@@ -1,0 +1,481 @@
+story,subject,roi,r,p,p_emp,lag,mean_r_shuffled,std_r_shuffled,z_score,TR,duration,onset,q_roi,signif_roi_fdr
+lucy,sub-026,"Superior Temporal Gyrus, anterior division",0.1704,0.00131,0.011699,8,0.0003,0.0963,1.7674,1.5,542.0,3.0,0.017017,True
+lucy,sub-026,"Superior Temporal Gyrus, posterior division",0.1592,0.002518,0.025697,-3,0.0004,0.1,1.5878,1.5,542.0,3.0,0.034263,True
+lucy,sub-026,"Middle Temporal Gyrus, anterior division",0.244,3e-06,0.0001,-3,0.0019,0.0971,2.4923,1.5,542.0,3.0,0.000267,True
+lucy,sub-026,"Middle Temporal Gyrus, posterior division",0.2418,3e-06,0.0001,-1,-0.0002,0.092,2.6312,1.5,542.0,3.0,0.000267,True
+lucy,sub-026,"Inferior Frontal Gyrus, pars triangularis",0.0724,0.174637,0.770423,8,0.002,0.099,0.711,1.5,542.0,3.0,0.821785,False
+lucy,sub-026,"Inferior Frontal Gyrus, pars opercularis",-0.0578,0.275259,0.934407,-3,-0.0003,0.101,-0.5696,1.5,542.0,3.0,0.934407,False
+lucy,sub-026,Angular Gyrus,0.2498,2e-06,0.0001,8,0.0023,0.1008,2.4556,1.5,542.0,3.0,0.000267,True
+lucy,sub-026,"Supramarginal Gyrus, anterior division",0.0784,0.141521,0.644736,8,0.0007,0.0965,0.8047,1.5,542.0,3.0,0.736841,False
+lucy,sub-026,"Supramarginal Gyrus, posterior division",0.0965,0.070154,0.436356,8,-0.0006,0.0989,0.9809,1.5,542.0,3.0,0.537054,False
+lucy,sub-026,Frontal Pole,0.2292,1.2e-05,0.0004,3,-0.0005,0.0913,2.5161,1.5,542.0,3.0,0.0008,True
+lucy,sub-026,"Temporal Fusiform Cortex, anterior division",0.2771,0.0,0.0001,-3,-0.0009,0.086,3.2324,1.5,542.0,3.0,0.000267,True
+lucy,sub-026,"Temporal Fusiform Cortex, posterior division",0.2677,0.0,0.0001,-3,0.0,0.088,3.0419,1.5,542.0,3.0,0.000267,True
+lucy,sub-026,"Parahippocampal Gyrus, anterior division",0.2929,0.0,0.0001,2,0.0002,0.0879,3.3292,1.5,542.0,3.0,0.000267,True
+lucy,sub-026,"Parahippocampal Gyrus, posterior division",0.2143,4.8e-05,0.0003,7,0.001,0.09,2.3697,1.5,542.0,3.0,0.000686,True
+lucy,sub-026,"Cingulate Gyrus, anterior division",0.1745,0.000993,0.006899,8,-0.0002,0.0909,1.9209,1.5,542.0,3.0,0.012265,True
+lucy,sub-026,"Cingulate Gyrus, posterior division",0.1698,0.001365,0.010199,8,-0.0009,0.0915,1.8647,1.5,542.0,3.0,0.016318,True
+lucy,sub-041,"Superior Temporal Gyrus, anterior division",0.2077,7.5e-05,0.0013,-3,0.0002,0.0946,2.1936,1.5,542.0,3.0,0.001891,True
+lucy,sub-041,"Superior Temporal Gyrus, posterior division",-0.4741,0.0,0.0001,8,0.0004,0.0888,-5.3432,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,"Middle Temporal Gyrus, anterior division",0.2048,9.5e-05,0.0015,-3,0.0022,0.0757,2.6749,1.5,542.0,3.0,0.001969,True
+lucy,sub-041,"Middle Temporal Gyrus, posterior division",0.3826,0.0,0.0001,-3,-0.0002,0.0776,4.9353,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,"Inferior Frontal Gyrus, pars triangularis",-0.0671,0.208198,0.788721,8,0.0012,0.0958,-0.713,1.5,542.0,3.0,0.788721,False
+lucy,sub-041,"Inferior Frontal Gyrus, pars opercularis",0.4607,0.0,0.0001,8,0.0001,0.0904,5.0936,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,Angular Gyrus,0.4337,0.0,0.0001,8,0.0018,0.0945,4.571,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,"Supramarginal Gyrus, anterior division",0.1371,0.009902,0.055494,8,0.0003,0.0879,1.5564,1.5,542.0,3.0,0.059194,False
+lucy,sub-041,"Supramarginal Gyrus, posterior division",0.1405,0.008191,0.047095,8,-0.0009,0.0882,1.6033,1.5,542.0,3.0,0.053823,False
+lucy,sub-041,Frontal Pole,0.2399,4e-06,0.0001,-3,0.0009,0.1036,2.3074,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,"Temporal Fusiform Cortex, anterior division",0.2021,0.000118,0.0016,-3,-0.0006,0.0942,2.1505,1.5,542.0,3.0,0.001969,True
+lucy,sub-041,"Temporal Fusiform Cortex, posterior division",0.3481,0.0,0.0001,-3,0.0005,0.0898,3.8696,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,"Parahippocampal Gyrus, anterior division",0.4114,0.0,0.0001,8,0.0016,0.1015,4.0379,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,"Parahippocampal Gyrus, posterior division",0.4303,0.0,0.0001,-3,0.0017,0.09,4.7618,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,"Cingulate Gyrus, anterior division",0.4254,0.0,0.0001,-3,-0.0001,0.0907,4.6916,1.5,542.0,3.0,0.00016,True
+lucy,sub-041,"Cingulate Gyrus, posterior division",0.5139,0.0,0.0001,8,-0.0001,0.0922,5.5736,1.5,542.0,3.0,0.00016,True
+lucy,sub-052,"Superior Temporal Gyrus, anterior division",0.4423,0.0,0.0001,-3,0.0,0.0764,5.7926,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Superior Temporal Gyrus, posterior division",-0.1596,0.00263,0.013899,8,0.0018,0.0836,-1.9304,1.5,542.0,3.0,0.013899,True
+lucy,sub-052,"Middle Temporal Gyrus, anterior division",0.188,0.000349,0.0022,-3,0.0014,0.0815,2.2885,1.5,542.0,3.0,0.002347,True
+lucy,sub-052,"Middle Temporal Gyrus, posterior division",0.4852,0.0,0.0001,8,0.0004,0.0746,6.4993,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Inferior Frontal Gyrus, pars triangularis",0.5903,0.0,0.0001,8,0.0005,0.0792,7.4465,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Inferior Frontal Gyrus, pars opercularis",0.5765,0.0,0.0001,8,0.0013,0.0859,6.6976,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,Angular Gyrus,0.5813,0.0,0.0001,8,0.0006,0.0767,7.5673,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Supramarginal Gyrus, anterior division",0.5784,0.0,0.0001,8,-0.0005,0.0767,7.5442,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Supramarginal Gyrus, posterior division",0.573,0.0,0.0001,8,0.0004,0.0759,7.5458,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,Frontal Pole,0.4016,0.0,0.0001,-3,-0.0003,0.0816,4.9271,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Temporal Fusiform Cortex, anterior division",0.261,1e-06,0.0001,-3,-0.0001,0.0842,3.1023,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Temporal Fusiform Cortex, posterior division",0.3642,0.0,0.0001,-3,0.0001,0.0811,4.4922,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Parahippocampal Gyrus, anterior division",0.4429,0.0,0.0001,-3,-0.0002,0.0865,5.1219,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Parahippocampal Gyrus, posterior division",0.3664,0.0,0.0001,-3,0.002,0.0846,4.3074,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Cingulate Gyrus, anterior division",0.4567,0.0,0.0001,-3,-0.0001,0.0817,5.5883,1.5,542.0,3.0,0.000114,True
+lucy,sub-052,"Cingulate Gyrus, posterior division",0.5111,0.0,0.0001,8,-0.0004,0.0818,6.2517,1.5,542.0,3.0,0.000114,True
+lucy,sub-053,"Superior Temporal Gyrus, anterior division",0.452,0.0,0.0001,8,-0.0002,0.0739,6.1165,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Superior Temporal Gyrus, posterior division",0.3666,0.0,0.0001,8,0.0011,0.0709,5.1559,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Middle Temporal Gyrus, anterior division",0.4936,0.0,0.0001,8,0.0,0.0704,7.0166,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Middle Temporal Gyrus, posterior division",0.5577,0.0,0.0001,8,0.0004,0.0723,7.7084,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Inferior Frontal Gyrus, pars triangularis",0.2744,0.0,0.0001,8,0.0013,0.1011,2.702,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Inferior Frontal Gyrus, pars opercularis",0.2528,1e-06,0.0001,-3,0.002,0.094,2.6678,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,Angular Gyrus,0.1498,0.004518,0.016298,-3,0.0003,0.0765,1.9526,1.5,542.0,3.0,0.016298,True
+lucy,sub-053,"Supramarginal Gyrus, anterior division",0.3031,0.0,0.0001,-3,-0.0007,0.0831,3.6576,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Supramarginal Gyrus, posterior division",0.2745,0.0,0.0001,-3,-0.0005,0.0819,3.3565,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,Frontal Pole,0.3949,0.0,0.0001,8,-0.0008,0.0817,4.8451,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Temporal Fusiform Cortex, anterior division",0.4695,0.0,0.0001,8,0.0005,0.0897,5.2272,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Temporal Fusiform Cortex, posterior division",0.2966,0.0,0.0001,8,-0.0001,0.0883,3.3622,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Parahippocampal Gyrus, anterior division",0.4774,0.0,0.0001,8,0.001,0.0892,5.3406,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Parahippocampal Gyrus, posterior division",0.4642,0.0,0.0001,8,0.0028,0.0801,5.759,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Cingulate Gyrus, anterior division",0.4321,0.0,0.0001,8,0.0003,0.0888,4.8635,1.5,542.0,3.0,0.000107,True
+lucy,sub-053,"Cingulate Gyrus, posterior division",0.2973,0.0,0.0001,-3,-0.0001,0.0856,3.4738,1.5,542.0,3.0,0.000107,True
+lucy,sub-055,"Superior Temporal Gyrus, anterior division",0.3512,0.0,0.0001,-3,0.0015,0.0936,3.7347,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Superior Temporal Gyrus, posterior division",0.5084,0.0,0.0001,-3,0.0003,0.0971,5.2311,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Middle Temporal Gyrus, anterior division",0.3973,0.0,0.0001,-3,-0.0003,0.0982,4.0485,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Middle Temporal Gyrus, posterior division",0.3665,0.0,0.0001,-3,0.0012,0.0987,3.7028,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Inferior Frontal Gyrus, pars triangularis",0.3332,0.0,0.0001,-3,-0.0011,0.0951,3.5142,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Inferior Frontal Gyrus, pars opercularis",0.3106,0.0,0.0001,-3,0.0016,0.0958,3.2255,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,Angular Gyrus,0.2722,0.0,0.0001,8,0.0013,0.0972,2.7884,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Supramarginal Gyrus, anterior division",0.3881,0.0,0.0001,-2,-0.0001,0.0899,4.3162,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Supramarginal Gyrus, posterior division",0.3028,0.0,0.0001,7,0.001,0.0935,3.2281,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,Frontal Pole,0.5229,0.0,0.0001,-3,-0.0004,0.0952,5.4968,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Temporal Fusiform Cortex, anterior division",0.3992,0.0,0.0001,-3,0.0005,0.0959,4.1592,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Temporal Fusiform Cortex, posterior division",0.531,0.0,0.0001,-3,-0.0013,0.0889,5.9898,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Parahippocampal Gyrus, anterior division",0.535,0.0,0.0001,8,0.0014,0.0899,5.9329,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Parahippocampal Gyrus, posterior division",0.5634,0.0,0.0001,-3,0.0019,0.0861,6.5222,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Cingulate Gyrus, anterior division",0.5265,0.0,0.0001,-3,0.0002,0.091,5.7837,1.5,542.0,3.0,0.0001,True
+lucy,sub-055,"Cingulate Gyrus, posterior division",0.4287,0.0,0.0001,-3,0.0005,0.0899,4.762,1.5,542.0,3.0,0.0001,True
+lucy,sub-056,"Superior Temporal Gyrus, anterior division",0.3721,0.0,0.0001,-3,-0.0,0.0719,5.1787,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Superior Temporal Gyrus, posterior division",0.3634,0.0,0.0001,6,0.0008,0.0986,3.6785,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Middle Temporal Gyrus, anterior division",0.4476,0.0,0.0001,-2,0.0013,0.085,5.2508,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Middle Temporal Gyrus, posterior division",0.3836,0.0,0.0001,-3,0.0001,0.0679,5.6444,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Inferior Frontal Gyrus, pars triangularis",0.0888,0.093388,0.272773,-3,0.0008,0.0793,1.1096,1.5,542.0,3.0,0.272773,False
+lucy,sub-056,"Inferior Frontal Gyrus, pars opercularis",0.2077,7.5e-05,0.0004,-3,0.002,0.0749,2.7471,1.5,542.0,3.0,0.000427,True
+lucy,sub-056,Angular Gyrus,0.4969,0.0,0.0001,-3,0.0006,0.0656,7.5686,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Supramarginal Gyrus, anterior division",0.3471,0.0,0.0001,-3,-0.0005,0.0679,5.122,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Supramarginal Gyrus, posterior division",0.3743,0.0,0.0001,-3,0.0002,0.0667,5.6068,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,Frontal Pole,0.4985,0.0,0.0001,-3,-0.001,0.0815,6.1255,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Temporal Fusiform Cortex, anterior division",0.558,0.0,0.0001,8,-0.0023,0.0888,6.3092,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Temporal Fusiform Cortex, posterior division",0.4495,0.0,0.0001,-3,-0.0003,0.0769,5.8475,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Parahippocampal Gyrus, anterior division",0.4429,0.0,0.0001,-3,0.0004,0.0764,5.7936,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Parahippocampal Gyrus, posterior division",0.4181,0.0,0.0001,-3,0.0019,0.07,5.9496,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Cingulate Gyrus, anterior division",0.3535,0.0,0.0001,-3,-0.0001,0.0722,4.8978,1.5,542.0,3.0,0.000114,True
+lucy,sub-056,"Cingulate Gyrus, posterior division",0.3527,0.0,0.0001,-3,0.0005,0.0702,5.0191,1.5,542.0,3.0,0.000114,True
+lucy,sub-058,"Superior Temporal Gyrus, anterior division",0.3621,0.0,0.0001,8,0.0001,0.0899,4.0274,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Superior Temporal Gyrus, posterior division",-0.115,0.029632,0.209379,-3,0.0011,0.0971,-1.195,1.5,542.0,3.0,0.223338,False
+lucy,sub-058,"Middle Temporal Gyrus, anterior division",0.1211,0.021348,0.146985,0,0.002,0.095,1.2543,1.5,542.0,3.0,0.167983,False
+lucy,sub-058,"Middle Temporal Gyrus, posterior division",0.4436,0.0,0.0001,8,-0.0001,0.0759,5.8447,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Inferior Frontal Gyrus, pars triangularis",0.4872,0.0,0.0001,8,-0.0004,0.078,6.2519,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Inferior Frontal Gyrus, pars opercularis",0.4296,0.0,0.0001,8,0.0014,0.0797,5.373,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,Angular Gyrus,0.4396,0.0,0.0001,-3,0.0007,0.0704,6.2349,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Supramarginal Gyrus, anterior division",0.4224,0.0,0.0001,8,-0.0005,0.0747,5.6606,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Supramarginal Gyrus, posterior division",0.4476,0.0,0.0001,5,0.0004,0.0713,6.2742,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,Frontal Pole,0.4739,0.0,0.0001,8,-0.0009,0.0877,5.4154,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Temporal Fusiform Cortex, anterior division",0.0347,0.513186,0.9979,-3,0.0017,0.098,0.3367,1.5,542.0,3.0,0.9979,False
+lucy,sub-058,"Temporal Fusiform Cortex, posterior division",0.514,0.0,0.0001,8,-0.0003,0.076,6.771,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Parahippocampal Gyrus, anterior division",0.5456,0.0,0.0001,8,0.001,0.0818,6.6558,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Parahippocampal Gyrus, posterior division",0.4211,0.0,0.0001,4,0.0019,0.0794,5.2779,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Cingulate Gyrus, anterior division",0.398,0.0,0.0001,8,0.0001,0.0828,4.8022,1.5,542.0,3.0,0.000123,True
+lucy,sub-058,"Cingulate Gyrus, posterior division",0.3886,0.0,0.0001,3,-0.0009,0.0766,5.0875,1.5,542.0,3.0,0.000123,True
+lucy,sub-059,"Superior Temporal Gyrus, anterior division",0.0551,0.301952,0.827317,8,-0.0008,0.089,0.6286,1.5,542.0,3.0,0.9995,False
+lucy,sub-059,"Superior Temporal Gyrus, posterior division",0.1221,0.021749,0.082192,8,0.0015,0.0804,1.4992,1.5,542.0,3.0,0.263014,False
+lucy,sub-059,"Middle Temporal Gyrus, anterior division",0.1571,0.003078,0.014699,8,0.0013,0.0804,1.9373,1.5,542.0,3.0,0.117592,False
+lucy,sub-059,"Middle Temporal Gyrus, posterior division",0.2703,0.0,0.0001,8,-0.0003,0.0839,3.2248,1.5,542.0,3.0,0.0016,True
+lucy,sub-059,"Inferior Frontal Gyrus, pars triangularis",-0.0973,0.065824,0.292171,-3,0.0012,0.0882,-1.1171,1.5,542.0,3.0,0.584342,False
+lucy,sub-059,"Inferior Frontal Gyrus, pars opercularis",-0.1242,0.018757,0.113589,-3,-0.001,0.0905,-1.3613,1.5,542.0,3.0,0.302904,False
+lucy,sub-059,Angular Gyrus,0.0643,0.228083,0.744926,8,0.0013,0.0916,0.6879,1.5,542.0,3.0,0.993235,False
+lucy,sub-059,"Supramarginal Gyrus, anterior division",0.0172,0.747221,0.9995,8,-0.0022,0.0919,0.2115,1.5,542.0,3.0,0.9995,False
+lucy,sub-059,"Supramarginal Gyrus, posterior division",0.0693,0.194104,0.705529,8,-0.0005,0.0934,0.7466,1.5,542.0,3.0,0.993235,False
+lucy,sub-059,Frontal Pole,0.0839,0.115643,0.477052,8,-0.0003,0.0904,0.9305,1.5,542.0,3.0,0.848092,False
+lucy,sub-059,"Temporal Fusiform Cortex, anterior division",0.0949,0.075065,0.227377,8,-0.0008,0.0798,1.1995,1.5,542.0,3.0,0.519719,False
+lucy,sub-059,"Temporal Fusiform Cortex, posterior division",0.1454,0.006211,0.033197,8,0.0005,0.0849,1.7059,1.5,542.0,3.0,0.159584,False
+lucy,sub-059,"Parahippocampal Gyrus, anterior division",0.0728,0.172276,0.548945,8,-0.0005,0.0866,0.847,1.5,542.0,3.0,0.878312,False
+lucy,sub-059,"Parahippocampal Gyrus, posterior division",0.1419,0.007177,0.039896,-3,0.0006,0.0882,1.6022,1.5,542.0,3.0,0.159584,False
+lucy,sub-059,"Cingulate Gyrus, anterior division",0.0304,0.568651,0.983302,8,0.0005,0.0884,0.3392,1.5,542.0,3.0,0.9995,False
+lucy,sub-059,"Cingulate Gyrus, posterior division",0.0163,0.758925,0.9995,-3,-0.0001,0.0877,0.1862,1.5,542.0,3.0,0.9995,False
+lucy,sub-060,"Superior Temporal Gyrus, anterior division",0.6149,0.0,0.0001,8,0.0002,0.0671,9.1569,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Superior Temporal Gyrus, posterior division",0.5582,0.0,0.0001,-3,0.0013,0.0647,8.6128,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Middle Temporal Gyrus, anterior division",0.6205,0.0,0.0001,-3,0.0013,0.0641,9.6603,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Middle Temporal Gyrus, posterior division",0.6055,0.0,0.0001,8,0.0001,0.0687,8.8101,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Inferior Frontal Gyrus, pars triangularis",0.3709,0.0,0.0001,8,-0.0007,0.0947,3.923,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Inferior Frontal Gyrus, pars opercularis",-0.6043,0.0,0.0001,6,-0.0019,0.0698,-8.6289,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,Angular Gyrus,-0.6376,0.0,0.0001,-3,-0.001,0.0676,-9.4208,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Supramarginal Gyrus, anterior division",-0.5273,0.0,0.0001,-3,0.0003,0.0773,-6.8236,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Supramarginal Gyrus, posterior division",-0.5731,0.0,0.0001,-3,-0.0006,0.0736,-7.776,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,Frontal Pole,0.5956,0.0,0.0001,8,-0.0003,0.0659,9.0369,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Temporal Fusiform Cortex, anterior division",0.6703,0.0,0.0001,8,0.0004,0.0724,9.2511,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Temporal Fusiform Cortex, posterior division",0.544,0.0,0.0001,8,-0.0001,0.0729,7.4599,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Parahippocampal Gyrus, anterior division",0.5879,0.0,0.0001,8,0.0008,0.0745,7.8846,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Parahippocampal Gyrus, posterior division",0.5467,0.0,0.0001,-3,0.0023,0.0747,7.2884,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Cingulate Gyrus, anterior division",0.3203,0.0,0.0001,8,0.0002,0.0909,3.5215,1.5,542.0,3.0,0.0001,True
+lucy,sub-060,"Cingulate Gyrus, posterior division",-0.5007,0.0,0.0001,-3,-0.0001,0.0801,-6.2477,1.5,542.0,3.0,0.0001,True
+lucy,sub-061,"Superior Temporal Gyrus, anterior division",-0.4336,0.0,0.0001,-3,-0.0005,0.0678,-6.386,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Superior Temporal Gyrus, posterior division",-0.3888,0.0,0.0001,-3,-0.0011,0.0745,-5.2025,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Middle Temporal Gyrus, anterior division",-0.3991,0.0,0.0001,-3,-0.0019,0.0721,-5.51,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Middle Temporal Gyrus, posterior division",-0.4028,0.0,0.0001,-3,0.0003,0.0728,-5.5398,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Inferior Frontal Gyrus, pars triangularis",-0.429,0.0,0.0001,-3,0.0002,0.0714,-6.0082,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Inferior Frontal Gyrus, pars opercularis",-0.4293,0.0,0.0001,-3,-0.0015,0.0709,-6.0347,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,Angular Gyrus,-0.4047,0.0,0.0001,-3,-0.0002,0.0738,-5.4792,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Supramarginal Gyrus, anterior division",-0.4274,0.0,0.0001,-3,0.0005,0.0686,-6.2364,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Supramarginal Gyrus, posterior division",-0.4256,0.0,0.0001,-3,-0.0009,0.0704,-6.0332,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,Frontal Pole,-0.421,0.0,0.0001,-3,0.0005,0.07,-6.0201,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Temporal Fusiform Cortex, anterior division",0.4413,0.0,0.0001,8,-0.0019,0.0892,4.9656,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Temporal Fusiform Cortex, posterior division",-0.1793,0.000655,0.0036,-3,-0.0005,0.0854,-2.0934,1.5,542.0,3.0,0.0036,True
+lucy,sub-061,"Parahippocampal Gyrus, anterior division",0.4431,0.0,0.0001,8,0.0015,0.0858,5.145,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Parahippocampal Gyrus, posterior division",-0.2991,0.0,0.0001,-3,-0.0019,0.0804,-3.6989,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Cingulate Gyrus, anterior division",-0.3905,0.0,0.0001,-3,-0.0002,0.0745,-5.2386,1.5,542.0,3.0,0.000107,True
+lucy,sub-061,"Cingulate Gyrus, posterior division",-0.3996,0.0,0.0001,-3,0.0001,0.0727,-5.4949,1.5,542.0,3.0,0.000107,True
+merlin,sub-075,"Superior Temporal Gyrus, anterior division",-0.6022,0.0,0.0001,1,0.001,0.0665,-9.0759,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,"Superior Temporal Gyrus, posterior division",-0.6583,0.0,0.0001,-3,0.0002,0.0642,-10.2601,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,"Middle Temporal Gyrus, anterior division",-0.6282,0.0,0.0001,-3,0.0007,0.0655,-9.5974,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,"Middle Temporal Gyrus, posterior division",-0.27,0.0,0.0001,6,0.0013,0.0711,-3.8169,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,"Inferior Frontal Gyrus, pars triangularis",0.027,0.515305,0.9965,8,0.0004,0.0754,0.3536,1.5,886.0,33.5,0.9965,False
+merlin,sub-075,"Inferior Frontal Gyrus, pars opercularis",0.1337,0.001226,0.010599,8,0.0013,0.0733,1.8065,1.5,886.0,33.5,0.014132,True
+merlin,sub-075,Angular Gyrus,0.397,0.0,0.0001,-3,-0.0005,0.0677,5.8707,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,"Supramarginal Gyrus, anterior division",0.0752,0.068587,0.351965,-3,-0.0003,0.0724,1.0431,1.5,886.0,33.5,0.433188,False
+merlin,sub-075,"Supramarginal Gyrus, posterior division",0.2557,0.0,0.0001,-3,-0.0,0.0713,3.5869,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,Frontal Pole,-0.5783,0.0,0.0001,-2,0.0002,0.0686,-8.4283,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,"Temporal Fusiform Cortex, anterior division",0.2537,0.0,0.0001,-3,0.0005,0.071,3.5651,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,"Temporal Fusiform Cortex, posterior division",-0.062,0.135263,0.658634,8,-0.0001,0.0765,-0.8096,1.5,886.0,33.5,0.752725,False
+merlin,sub-075,"Parahippocampal Gyrus, anterior division",0.1392,0.000723,0.007099,-3,-0.0001,0.0729,1.9111,1.5,886.0,33.5,0.010326,True
+merlin,sub-075,"Parahippocampal Gyrus, posterior division",-0.2845,0.0,0.0001,2,-0.0003,0.0732,-3.8812,1.5,886.0,33.5,0.00016,True
+merlin,sub-075,"Cingulate Gyrus, anterior division",0.0401,0.333912,0.940906,8,0.0007,0.0752,0.5241,1.5,886.0,33.5,0.9965,False
+merlin,sub-075,"Cingulate Gyrus, posterior division",0.2248,0.0,0.0001,-1,0.0011,0.0721,3.1024,1.5,886.0,33.5,0.00016,True
+merlin,sub-146,"Superior Temporal Gyrus, anterior division",0.1036,0.012423,0.09839,8,0.0,0.0763,1.3569,1.5,886.0,33.5,0.09839,False
+merlin,sub-146,"Superior Temporal Gyrus, posterior division",0.3019,0.0,0.0001,-3,0.0002,0.0527,5.7274,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Middle Temporal Gyrus, anterior division",0.3358,0.0,0.0001,-3,0.0004,0.0538,6.2285,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Middle Temporal Gyrus, posterior division",0.3391,0.0,0.0001,8,0.0009,0.0701,4.8235,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Inferior Frontal Gyrus, pars triangularis",0.2393,0.0,0.0001,5,-0.0007,0.0737,3.2584,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Inferior Frontal Gyrus, pars opercularis",-0.2754,0.0,0.0001,-3,0.0001,0.0603,-4.5712,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,Angular Gyrus,-0.3138,0.0,0.0001,-3,0.0002,0.0545,-5.7645,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Supramarginal Gyrus, anterior division",-0.3201,0.0,0.0001,-3,0.0001,0.0578,-5.5396,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Supramarginal Gyrus, posterior division",-0.3122,0.0,0.0001,-3,0.0,0.0566,-5.5135,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,Frontal Pole,0.2414,0.0,0.0001,8,0.0013,0.0774,3.1024,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Temporal Fusiform Cortex, anterior division",0.3215,0.0,0.0001,-3,0.0003,0.0532,6.0419,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Temporal Fusiform Cortex, posterior division",0.3073,0.0,0.0001,8,-0.0005,0.0655,4.699,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Parahippocampal Gyrus, anterior division",0.1973,2e-06,0.0001,8,0.0008,0.0733,2.6803,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Parahippocampal Gyrus, posterior division",0.2043,1e-06,0.0001,8,0.0008,0.0732,2.7796,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Cingulate Gyrus, anterior division",0.251,0.0,0.0001,8,-0.0001,0.0709,3.5417,1.5,886.0,33.5,0.000114,True
+merlin,sub-146,"Cingulate Gyrus, posterior division",-0.1677,4.4e-05,0.0004,-3,0.0007,0.0691,-2.4388,1.5,886.0,33.5,0.000427,True
+merlin,sub-147,"Superior Temporal Gyrus, anterior division",-0.1457,0.00042,0.0036,8,-0.0005,0.0713,-2.0381,1.5,886.0,33.5,0.0064,True
+merlin,sub-147,"Superior Temporal Gyrus, posterior division",0.0922,0.026116,0.09699,8,-0.0,0.0639,1.4446,1.5,886.0,33.5,0.141076,False
+merlin,sub-147,"Middle Temporal Gyrus, anterior division",-0.0908,0.027642,0.19608,-2,0.0001,0.0755,-1.2045,1.5,886.0,33.5,0.241329,False
+merlin,sub-147,"Middle Temporal Gyrus, posterior division",-0.1821,1e-05,0.0001,8,-0.0005,0.0639,-2.8425,1.5,886.0,33.5,0.000267,True
+merlin,sub-147,"Inferior Frontal Gyrus, pars triangularis",-0.2034,1e-06,0.0001,8,0.0014,0.0641,-3.1951,1.5,886.0,33.5,0.000267,True
+merlin,sub-147,"Inferior Frontal Gyrus, pars opercularis",-0.1527,0.000217,0.0005,8,-0.0008,0.0554,-2.7429,1.5,886.0,33.5,0.001143,True
+merlin,sub-147,Angular Gyrus,-0.0475,0.252123,0.50255,8,0.0004,0.058,-0.8268,1.5,886.0,33.5,0.574343,False
+merlin,sub-147,"Supramarginal Gyrus, anterior division",-0.0249,0.549391,0.974103,8,0.0002,0.0657,-0.382,1.5,886.0,33.5,0.974103,False
+merlin,sub-147,"Supramarginal Gyrus, posterior division",0.0502,0.225047,0.627837,-3,0.0001,0.0655,0.7638,1.5,886.0,33.5,0.669693,False
+merlin,sub-147,Frontal Pole,-0.1122,0.006761,0.051895,8,-0.0016,0.075,-1.4751,1.5,886.0,33.5,0.083032,False
+merlin,sub-147,"Temporal Fusiform Cortex, anterior division",-0.3875,0.0,0.0001,-3,-0.0012,0.0696,-5.5469,1.5,886.0,33.5,0.000267,True
+merlin,sub-147,"Temporal Fusiform Cortex, posterior division",-0.2739,0.0,0.0001,8,-0.0003,0.0706,-3.8763,1.5,886.0,33.5,0.000267,True
+merlin,sub-147,"Parahippocampal Gyrus, anterior division",-0.34,0.0,0.0001,8,0.0002,0.0683,-4.9854,1.5,886.0,33.5,0.000267,True
+merlin,sub-147,"Parahippocampal Gyrus, posterior division",-0.0969,0.019426,0.109789,8,0.0004,0.0704,-1.3823,1.5,886.0,33.5,0.146385,False
+merlin,sub-147,"Cingulate Gyrus, anterior division",-0.1966,2e-06,0.0001,8,-0.0004,0.08,-2.4523,1.5,886.0,33.5,0.000267,True
+merlin,sub-147,"Cingulate Gyrus, posterior division",-0.1637,7.3e-05,0.0009,8,0.0003,0.07,-2.344,1.5,886.0,33.5,0.0018,True
+merlin,sub-148,"Superior Temporal Gyrus, anterior division",-0.0296,0.476073,0.987301,8,-0.0,0.0737,-0.401,1.5,886.0,33.5,0.9995,False
+merlin,sub-148,"Superior Temporal Gyrus, posterior division",0.0372,0.368607,0.947905,-3,-0.0011,0.0741,0.5165,1.5,886.0,33.5,0.9995,False
+merlin,sub-148,"Middle Temporal Gyrus, anterior division",0.0175,0.671801,0.9995,-3,-0.0001,0.0744,0.2374,1.5,886.0,33.5,0.9995,False
+merlin,sub-148,"Middle Temporal Gyrus, posterior division",-0.1565,0.000151,0.0012,8,-0.0014,0.077,-2.0149,1.5,886.0,33.5,0.00384,True
+merlin,sub-148,"Inferior Frontal Gyrus, pars triangularis",-0.232,0.0,0.0001,8,0.001,0.0717,-3.2519,1.5,886.0,33.5,0.0004,True
+merlin,sub-148,"Inferior Frontal Gyrus, pars opercularis",-0.2013,1e-06,0.0001,8,-0.0006,0.0673,-2.9821,1.5,886.0,33.5,0.0004,True
+merlin,sub-148,Angular Gyrus,-0.1223,0.003119,0.018698,8,-0.0,0.0681,-1.7969,1.5,886.0,33.5,0.042738,True
+merlin,sub-148,"Supramarginal Gyrus, anterior division",-0.1287,0.001864,0.011299,8,0.0003,0.0673,-1.9156,1.5,886.0,33.5,0.030131,True
+merlin,sub-148,"Supramarginal Gyrus, posterior division",-0.1992,1e-06,0.0001,8,0.0001,0.0692,-2.8796,1.5,886.0,33.5,0.0004,True
+merlin,sub-148,Frontal Pole,-0.0668,0.107503,0.511349,8,-0.0003,0.0739,-0.8997,1.5,886.0,33.5,0.909065,False
+merlin,sub-148,"Temporal Fusiform Cortex, anterior division",0.2198,0.0,0.0001,6,0.0012,0.0735,2.9719,1.5,886.0,33.5,0.0004,True
+merlin,sub-148,"Temporal Fusiform Cortex, posterior division",0.0609,0.140684,0.666033,-3,0.0,0.0761,0.7993,1.5,886.0,33.5,0.9995,False
+merlin,sub-148,"Parahippocampal Gyrus, anterior division",0.0561,0.176469,0.724128,7,-0.0002,0.075,0.7509,1.5,886.0,33.5,0.9995,False
+merlin,sub-148,"Parahippocampal Gyrus, posterior division",0.1018,0.013631,0.09559,-3,0.0006,0.0732,1.382,1.5,886.0,33.5,0.19118,False
+merlin,sub-148,"Cingulate Gyrus, anterior division",0.0392,0.342738,0.928507,-3,-0.0002,0.0736,0.5361,1.5,886.0,33.5,0.9995,False
+merlin,sub-148,"Cingulate Gyrus, posterior division",0.0344,0.404837,0.943206,-3,0.0002,0.0707,0.4844,1.5,886.0,33.5,0.9995,False
+merlin,sub-149,"Superior Temporal Gyrus, anterior division",-0.3825,0.0,0.0001,8,0.0009,0.0674,-5.6847,1.5,886.0,33.5,0.000229,True
+merlin,sub-149,"Superior Temporal Gyrus, posterior division",0.041,0.32174,0.885311,-3,0.0003,0.0715,0.5687,1.5,886.0,33.5,1.0,False
+merlin,sub-149,"Middle Temporal Gyrus, anterior division",-0.049,0.237785,0.815018,8,0.0011,0.0741,-0.6762,1.5,886.0,33.5,1.0,False
+merlin,sub-149,"Middle Temporal Gyrus, posterior division",-0.1379,0.000808,0.0048,-3,0.0,0.065,-2.1222,1.5,886.0,33.5,0.0096,True
+merlin,sub-149,"Inferior Frontal Gyrus, pars triangularis",-0.5874,0.0,0.0001,8,-0.0002,0.0612,-9.5935,1.5,886.0,33.5,0.000229,True
+merlin,sub-149,"Inferior Frontal Gyrus, pars opercularis",-0.5658,0.0,0.0001,8,0.0001,0.0551,-10.2769,1.5,886.0,33.5,0.000229,True
+merlin,sub-149,Angular Gyrus,-0.3269,0.0,0.0001,-3,-0.0001,0.0549,-5.9484,1.5,886.0,33.5,0.000229,True
+merlin,sub-149,"Supramarginal Gyrus, anterior division",-0.4209,0.0,0.0001,8,0.0002,0.0562,-7.4856,1.5,886.0,33.5,0.000229,True
+merlin,sub-149,"Supramarginal Gyrus, posterior division",-0.3895,0.0,0.0001,0,-0.0012,0.0544,-7.1363,1.5,886.0,33.5,0.000229,True
+merlin,sub-149,Frontal Pole,-0.0503,0.223342,0.876312,-2,-0.0,0.0783,-0.6419,1.5,886.0,33.5,1.0,False
+merlin,sub-149,"Temporal Fusiform Cortex, anterior division",0.3799,0.0,0.0001,-3,0.0011,0.065,5.8332,1.5,886.0,33.5,0.000229,True
+merlin,sub-149,"Temporal Fusiform Cortex, posterior division",0.0825,0.045729,0.388061,-3,0.0011,0.0811,1.0041,1.5,886.0,33.5,0.689886,False
+merlin,sub-149,"Parahippocampal Gyrus, anterior division",0.0584,0.157479,0.818418,-3,0.0017,0.0809,0.7011,1.5,886.0,33.5,1.0,False
+merlin,sub-149,"Parahippocampal Gyrus, posterior division",-0.0372,0.368508,0.90431,-3,-0.0005,0.0694,-0.5281,1.5,886.0,33.5,1.0,False
+merlin,sub-149,"Cingulate Gyrus, anterior division",-0.0138,0.740518,1.0,8,0.0005,0.0781,-0.1826,1.5,886.0,33.5,1.0,False
+merlin,sub-149,"Cingulate Gyrus, posterior division",0.0131,0.752019,1.0,-3,0.0,0.0789,0.1653,1.5,886.0,33.5,1.0,False
+merlin,sub-150,"Superior Temporal Gyrus, anterior division",-0.3984,0.0,0.0001,-1,0.001,0.0573,-6.9732,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Superior Temporal Gyrus, posterior division",-0.4203,0.0,0.0001,0,-0.0009,0.0536,-7.8183,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Middle Temporal Gyrus, anterior division",-0.3624,0.0,0.0001,-3,-0.0002,0.0554,-6.536,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Middle Temporal Gyrus, posterior division",-0.1719,2.7e-05,0.0005,0,-0.001,0.0651,-2.6226,1.5,886.0,33.5,0.000571,True
+merlin,sub-150,"Inferior Frontal Gyrus, pars triangularis",-0.2124,0.0,0.0001,0,-0.0009,0.0766,-2.7619,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Inferior Frontal Gyrus, pars opercularis",0.3583,0.0,0.0001,-3,-0.0004,0.0567,6.3318,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,Angular Gyrus,0.3746,0.0,0.0001,-3,0.0003,0.0572,6.5451,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Supramarginal Gyrus, anterior division",0.3486,0.0,0.0001,-3,-0.0003,0.0605,5.7709,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Supramarginal Gyrus, posterior division",0.3932,0.0,0.0001,-3,0.0008,0.0588,6.6684,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,Frontal Pole,-0.4129,0.0,0.0001,0,-0.0001,0.0585,-7.0577,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Temporal Fusiform Cortex, anterior division",0.3585,0.0,0.0001,8,0.0005,0.0605,5.9132,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Temporal Fusiform Cortex, posterior division",0.1299,0.001681,0.013099,8,0.0003,0.0738,1.7578,1.5,886.0,33.5,0.013972,True
+merlin,sub-150,"Parahippocampal Gyrus, anterior division",0.339,0.0,0.0001,8,0.0004,0.0609,5.5598,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Parahippocampal Gyrus, posterior division",-0.2143,0.0,0.0001,-2,-0.0009,0.0712,-2.9972,1.5,886.0,33.5,0.000123,True
+merlin,sub-150,"Cingulate Gyrus, anterior division",0.0659,0.110815,0.529047,-3,-0.0008,0.0737,0.905,1.5,886.0,33.5,0.529047,False
+merlin,sub-150,"Cingulate Gyrus, posterior division",0.3522,0.0,0.0001,-3,0.0006,0.0628,5.6005,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Superior Temporal Gyrus, anterior division",0.0587,0.155572,0.346665,-3,-0.0,0.0577,1.018,1.5,886.0,33.5,0.346665,False
+merlin,sub-151,"Superior Temporal Gyrus, posterior division",0.3114,0.0,0.0001,-3,0.0004,0.0482,6.4554,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Middle Temporal Gyrus, anterior division",0.254,0.0,0.0001,4,0.0006,0.0483,5.2522,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Middle Temporal Gyrus, posterior division",-0.3509,0.0,0.0001,-3,-0.0002,0.0516,-6.7963,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Inferior Frontal Gyrus, pars triangularis",0.2097,0.0,0.0001,8,-0.0007,0.0726,2.8959,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Inferior Frontal Gyrus, pars opercularis",-0.4751,0.0,0.0001,-1,0.0005,0.0683,-6.9663,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,Angular Gyrus,-0.6753,0.0,0.0001,-3,-0.0003,0.0503,-13.415,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Supramarginal Gyrus, anterior division",-0.6326,0.0,0.0001,4,0.0003,0.0532,-11.8912,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Supramarginal Gyrus, posterior division",-0.6743,0.0,0.0001,-2,-0.001,0.052,-12.9613,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,Frontal Pole,0.2843,0.0,0.0001,-3,0.0002,0.0566,5.021,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Temporal Fusiform Cortex, anterior division",0.5577,0.0,0.0001,4,0.0011,0.063,8.8359,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Temporal Fusiform Cortex, posterior division",-0.0917,0.026244,0.068093,-3,-0.0008,0.0568,-1.6014,1.5,886.0,33.5,0.072633,False
+merlin,sub-151,"Parahippocampal Gyrus, anterior division",0.2755,0.0,0.0001,8,0.0004,0.0744,3.6958,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Parahippocampal Gyrus, posterior division",-0.3121,0.0,0.0001,-3,-0.0002,0.0558,-5.5926,1.5,886.0,33.5,0.000123,True
+merlin,sub-151,"Cingulate Gyrus, anterior division",-0.1397,0.000712,0.007599,6,0.0009,0.0783,-1.7957,1.5,886.0,33.5,0.008685,True
+merlin,sub-151,"Cingulate Gyrus, posterior division",-0.6009,0.0,0.0001,-1,-0.0002,0.0603,-9.9654,1.5,886.0,33.5,0.000123,True
+merlin,sub-152,"Superior Temporal Gyrus, anterior division",0.49,0.0,0.0001,8,-0.0006,0.0567,8.6485,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Superior Temporal Gyrus, posterior division",0.5076,0.0,0.0001,8,0.0007,0.0528,9.5929,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Middle Temporal Gyrus, anterior division",0.4863,0.0,0.0001,8,-0.0002,0.055,8.8409,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Middle Temporal Gyrus, posterior division",0.3349,0.0,0.0001,8,0.0006,0.0644,5.1944,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Inferior Frontal Gyrus, pars triangularis",-0.1357,0.000978,0.008299,-3,-0.0007,0.0766,-1.7638,1.5,886.0,33.5,0.011065,True
+merlin,sub-152,"Inferior Frontal Gyrus, pars opercularis",-0.3417,0.0,0.0001,8,-0.0004,0.0664,-5.137,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,Angular Gyrus,-0.25,0.0,0.0001,8,-0.0003,0.0702,-3.5558,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Supramarginal Gyrus, anterior division",-0.1785,1.5e-05,0.0001,8,0.0,0.0711,-2.5096,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Supramarginal Gyrus, posterior division",-0.2776,0.0,0.0001,8,-0.0013,0.0696,-3.9672,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,Frontal Pole,0.504,0.0,0.0001,8,0.0006,0.0639,7.8842,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Temporal Fusiform Cortex, anterior division",-0.2424,0.0,0.0001,-2,-0.0009,0.0658,-3.6691,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Temporal Fusiform Cortex, posterior division",0.0552,0.182875,0.690831,6,0.001,0.0727,0.7463,1.5,886.0,33.5,0.736886,False
+merlin,sub-152,"Parahippocampal Gyrus, anterior division",0.0896,0.030597,0.19588,8,0.0004,0.0741,1.2035,1.5,886.0,33.5,0.223863,False
+merlin,sub-152,"Parahippocampal Gyrus, posterior division",0.1899,4e-06,0.0001,8,0.0004,0.0721,2.6307,1.5,886.0,33.5,0.000145,True
+merlin,sub-152,"Cingulate Gyrus, anterior division",0.1098,0.008024,0.048895,8,-0.0008,0.0701,1.5772,1.5,886.0,33.5,0.060178,False
+merlin,sub-152,"Cingulate Gyrus, posterior division",-0.0267,0.518134,0.985001,-3,-0.0011,0.0706,-0.3627,1.5,886.0,33.5,0.985001,False
+merlin,sub-153,"Superior Temporal Gyrus, anterior division",0.0147,0.724138,0.9997,8,-0.0008,0.0742,0.2084,1.5,886.0,33.5,1.0,False
+merlin,sub-153,"Superior Temporal Gyrus, posterior division",0.1973,2e-06,0.0001,8,0.0004,0.0701,2.807,1.5,886.0,33.5,0.000267,True
+merlin,sub-153,"Middle Temporal Gyrus, anterior division",0.1662,5.6e-05,0.0005,8,0.0003,0.0715,2.3214,1.5,886.0,33.5,0.001,True
+merlin,sub-153,"Middle Temporal Gyrus, posterior division",-0.0751,0.068864,0.441356,-3,-0.0015,0.0772,-0.9546,1.5,886.0,33.5,0.641972,False
+merlin,sub-153,"Inferior Frontal Gyrus, pars triangularis",-0.184,7e-06,0.0002,-3,0.0011,0.0736,-2.5134,1.5,886.0,33.5,0.000457,True
+merlin,sub-153,"Inferior Frontal Gyrus, pars opercularis",-0.2368,0.0,0.0001,-3,0.0001,0.0653,-3.6271,1.5,886.0,33.5,0.000267,True
+merlin,sub-153,Angular Gyrus,-0.2546,0.0,0.0001,-3,0.0004,0.0651,-3.9147,1.5,886.0,33.5,0.000267,True
+merlin,sub-153,"Supramarginal Gyrus, anterior division",-0.2216,0.0,0.0001,-3,-0.0007,0.0655,-3.3748,1.5,886.0,33.5,0.000267,True
+merlin,sub-153,"Supramarginal Gyrus, posterior division",-0.2434,0.0,0.0001,-3,-0.0007,0.0643,-3.7763,1.5,886.0,33.5,0.000267,True
+merlin,sub-153,Frontal Pole,-0.0668,0.105975,0.555244,-3,0.0001,0.0757,-0.8835,1.5,886.0,33.5,0.740325,False
+merlin,sub-153,"Temporal Fusiform Cortex, anterior division",0.2256,0.0,0.0001,8,0.0005,0.0656,3.4333,1.5,886.0,33.5,0.000267,True
+merlin,sub-153,"Temporal Fusiform Cortex, posterior division",-0.0214,0.606826,0.9985,8,0.0011,0.0759,-0.2967,1.5,886.0,33.5,1.0,False
+merlin,sub-153,"Parahippocampal Gyrus, anterior division",0.0243,0.557154,0.9994,5,0.0,0.0781,0.311,1.5,886.0,33.5,1.0,False
+merlin,sub-153,"Parahippocampal Gyrus, posterior division",-0.1068,0.009897,0.073993,8,0.001,0.0745,-1.4477,1.5,886.0,33.5,0.118389,False
+merlin,sub-153,"Cingulate Gyrus, anterior division",-0.0132,0.749386,1.0,-3,0.0004,0.0741,-0.1835,1.5,886.0,33.5,1.0,False
+merlin,sub-153,"Cingulate Gyrus, posterior division",-0.1431,0.000508,0.0038,-3,-0.0004,0.0692,-2.0612,1.5,886.0,33.5,0.006756,True
+merlin,sub-154,"Superior Temporal Gyrus, anterior division",-0.1359,0.000964,0.008099,-3,0.0002,0.0702,-1.9383,1.5,886.0,33.5,0.025917,True
+merlin,sub-154,"Superior Temporal Gyrus, posterior division",-0.1504,0.000256,0.0023,-3,-0.0009,0.0719,-2.0771,1.5,886.0,33.5,0.0092,True
+merlin,sub-154,"Middle Temporal Gyrus, anterior division",-0.0567,0.16997,0.480952,-3,-0.0005,0.0645,-0.872,1.5,886.0,33.5,0.769523,False
+merlin,sub-154,"Middle Temporal Gyrus, posterior division",-0.1935,2e-06,0.0001,-3,-0.0,0.075,-2.58,1.5,886.0,33.5,0.0008,True
+merlin,sub-154,"Inferior Frontal Gyrus, pars triangularis",-0.1064,0.00991,0.069293,-3,-0.0005,0.0726,-1.4578,1.5,886.0,33.5,0.138586,False
+merlin,sub-154,"Inferior Frontal Gyrus, pars opercularis",0.0296,0.474742,0.986401,-3,0.0018,0.0743,0.3739,1.5,886.0,33.5,1.0,False
+merlin,sub-154,Angular Gyrus,-0.1318,0.001442,0.011699,8,0.0006,0.0752,-1.7619,1.5,886.0,33.5,0.031197,True
+merlin,sub-154,"Supramarginal Gyrus, anterior division",-0.0601,0.147786,0.605639,8,-0.0006,0.0728,-0.8169,1.5,886.0,33.5,0.880929,False
+merlin,sub-154,"Supramarginal Gyrus, posterior division",-0.0863,0.037301,0.233877,8,-0.0007,0.0743,-1.1521,1.5,886.0,33.5,0.415781,False
+merlin,sub-154,Frontal Pole,-0.1884,4e-06,0.0001,-3,0.0005,0.0677,-2.7906,1.5,886.0,33.5,0.0008,True
+merlin,sub-154,"Temporal Fusiform Cortex, anterior division",0.0496,0.232556,0.886711,8,0.0003,0.0779,0.6324,1.5,886.0,33.5,1.0,False
+merlin,sub-154,"Temporal Fusiform Cortex, posterior division",-0.0225,0.586473,0.9994,-3,-0.0009,0.0774,-0.2786,1.5,886.0,33.5,1.0,False
+merlin,sub-154,"Parahippocampal Gyrus, anterior division",-0.1144,0.005513,0.054595,-3,0.0008,0.0795,-1.4491,1.5,886.0,33.5,0.124789,False
+merlin,sub-154,"Parahippocampal Gyrus, posterior division",-0.16,0.000106,0.0006,8,0.0003,0.0756,-2.1222,1.5,886.0,33.5,0.0032,True
+merlin,sub-154,"Cingulate Gyrus, anterior division",0.0158,0.701926,1.0,-2,0.0005,0.0774,0.1976,1.5,886.0,33.5,1.0,False
+merlin,sub-154,"Cingulate Gyrus, posterior division",-0.0249,0.548662,0.9965,8,0.0005,0.0758,-0.3352,1.5,886.0,33.5,1.0,False
+notthefallintact,sub-317,"Superior Temporal Gyrus, anterior division",0.2305,1e-05,0.0002,-3,0.0008,0.0741,3.0999,1.5,547.0,29.5,0.000246,True
+notthefallintact,sub-317,"Superior Temporal Gyrus, posterior division",0.1435,0.006303,0.019998,-3,-0.0008,0.0707,2.0424,1.5,547.0,29.5,0.021331,True
+notthefallintact,sub-317,"Middle Temporal Gyrus, anterior division",0.1629,0.001906,0.007099,-3,-0.0009,0.072,2.2739,1.5,547.0,29.5,0.008113,True
+notthefallintact,sub-317,"Middle Temporal Gyrus, posterior division",0.28,0.0,0.0001,-3,0.0007,0.0841,3.3229,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Inferior Frontal Gyrus, pars triangularis",0.4543,0.0,0.0001,-1,0.0005,0.0818,5.5498,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Inferior Frontal Gyrus, pars opercularis",0.4168,0.0,0.0001,8,-0.0001,0.0911,4.5781,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,Angular Gyrus,-0.1486,0.004674,0.021598,-3,0.0007,0.0805,-1.8539,1.5,547.0,29.5,0.021598,True
+notthefallintact,sub-317,"Supramarginal Gyrus, anterior division",0.4153,0.0,0.0001,8,0.0005,0.0952,4.3545,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Supramarginal Gyrus, posterior division",0.3754,0.0,0.0001,8,0.0008,0.0952,3.9328,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,Frontal Pole,0.3397,0.0,0.0001,-3,0.0004,0.0741,4.576,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Temporal Fusiform Cortex, anterior division",0.4446,0.0,0.0001,-3,-0.0001,0.0812,5.4785,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Temporal Fusiform Cortex, posterior division",0.2852,0.0,0.0001,-1,-0.0015,0.0928,3.0889,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Parahippocampal Gyrus, anterior division",0.439,0.0,0.0001,-3,-0.0008,0.079,5.5698,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Parahippocampal Gyrus, posterior division",0.3269,0.0,0.0001,-2,0.0017,0.0912,3.5649,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Cingulate Gyrus, anterior division",0.4947,0.0,0.0001,-2,0.0004,0.086,5.7451,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-317,"Cingulate Gyrus, posterior division",0.3673,0.0,0.0001,8,0.0009,0.0937,3.9107,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Superior Temporal Gyrus, anterior division",0.2908,0.0,0.0001,0,0.0013,0.0846,3.4226,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Superior Temporal Gyrus, posterior division",0.3315,0.0,0.0001,4,-0.0003,0.0833,3.9861,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Middle Temporal Gyrus, anterior division",0.0837,0.111093,0.437856,0,0.0007,0.0882,0.9396,1.5,547.0,29.5,0.500407,False
+notthefallintact,sub-318,"Middle Temporal Gyrus, posterior division",0.0399,0.44964,0.976102,-3,0.0009,0.0921,0.4236,1.5,547.0,29.5,0.9994,False
+notthefallintact,sub-318,"Inferior Frontal Gyrus, pars triangularis",0.4874,0.0,0.0001,-3,0.0011,0.0828,5.8712,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Inferior Frontal Gyrus, pars opercularis",0.6175,0.0,0.0001,-3,0.0003,0.0766,8.0624,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,Angular Gyrus,0.5418,0.0,0.0001,-3,0.0003,0.0827,6.5447,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Supramarginal Gyrus, anterior division",0.5599,0.0,0.0001,-3,-0.0004,0.0796,7.0392,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Supramarginal Gyrus, posterior division",0.5526,0.0,0.0001,-3,0.0003,0.0811,6.8083,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,Frontal Pole,0.5481,0.0,0.0001,-3,0.0002,0.0844,6.495,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Temporal Fusiform Cortex, anterior division",-0.0964,0.069387,0.371763,8,0.0002,0.094,-1.027,1.5,547.0,29.5,0.457554,False
+notthefallintact,sub-318,"Temporal Fusiform Cortex, posterior division",0.0233,0.659152,0.9994,-3,-0.0003,0.0935,0.2523,1.5,547.0,29.5,0.9994,False
+notthefallintact,sub-318,"Parahippocampal Gyrus, anterior division",0.4026,0.0,0.0001,-3,-0.0015,0.0853,4.7395,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Parahippocampal Gyrus, posterior division",0.4012,0.0,0.0001,-3,0.0007,0.0875,4.5751,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Cingulate Gyrus, anterior division",0.5037,0.0,0.0001,-3,0.0003,0.0807,6.2347,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-318,"Cingulate Gyrus, posterior division",0.5279,0.0,0.0001,-3,-0.0017,0.0805,6.5803,1.5,547.0,29.5,0.000133,True
+notthefallintact,sub-319,"Superior Temporal Gyrus, anterior division",0.4323,0.0,0.0001,-3,0.0022,0.0861,4.9931,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Superior Temporal Gyrus, posterior division",0.1179,0.02504,0.154385,-3,-0.0005,0.0918,1.2899,1.5,547.0,29.5,0.154385,False
+notthefallintact,sub-319,"Middle Temporal Gyrus, anterior division",0.3395,0.0,0.0001,-3,-0.0005,0.0905,3.7565,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Middle Temporal Gyrus, posterior division",0.4615,0.0,0.0001,0,0.0002,0.0832,5.5442,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Inferior Frontal Gyrus, pars triangularis",0.4746,0.0,0.0001,-3,0.0014,0.0873,5.4206,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Inferior Frontal Gyrus, pars opercularis",0.5111,0.0,0.0001,-3,-0.0006,0.0827,6.1908,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,Angular Gyrus,0.3987,0.0,0.0001,1,0.0007,0.0794,5.0117,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Supramarginal Gyrus, anterior division",0.4891,0.0,0.0001,0,-0.0005,0.0766,6.3928,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Supramarginal Gyrus, posterior division",0.4775,0.0,0.0001,-1,0.0008,0.0772,6.1746,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,Frontal Pole,0.1955,0.000185,0.0021,-3,-0.0006,0.0946,2.0729,1.5,547.0,29.5,0.00224,True
+notthefallintact,sub-319,"Temporal Fusiform Cortex, anterior division",0.4652,0.0,0.0001,2,-0.0006,0.0921,5.0559,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Temporal Fusiform Cortex, posterior division",0.3402,0.0,0.0001,2,-0.0012,0.09,3.7929,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Parahippocampal Gyrus, anterior division",0.4629,0.0,0.0001,1,-0.0019,0.0904,5.144,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Parahippocampal Gyrus, posterior division",0.3797,0.0,0.0001,-3,0.0005,0.0912,4.1559,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Cingulate Gyrus, anterior division",0.4068,0.0,0.0001,-3,-0.0003,0.0843,4.8318,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-319,"Cingulate Gyrus, posterior division",0.4164,0.0,0.0001,-3,-0.002,0.0822,5.0883,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-320,"Superior Temporal Gyrus, anterior division",0.2318,8e-06,0.0002,2,0.001,0.0953,2.4228,1.5,547.0,29.5,0.00032,True
+notthefallintact,sub-320,"Superior Temporal Gyrus, posterior division",-0.5363,0.0,0.0001,-3,-0.0004,0.0832,-6.4408,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-320,"Middle Temporal Gyrus, anterior division",-0.4927,0.0,0.0001,-3,0.0004,0.0871,-5.6594,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-320,"Middle Temporal Gyrus, posterior division",0.0808,0.12828,0.479252,8,0.0009,0.0885,0.9027,1.5,547.0,29.5,0.50095,False
+notthefallintact,sub-320,"Inferior Frontal Gyrus, pars triangularis",0.4791,0.0,0.0001,-3,0.0008,0.0873,5.4826,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-320,"Inferior Frontal Gyrus, pars opercularis",0.507,0.0,0.0001,-3,0.0003,0.0766,6.6116,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-320,Angular Gyrus,0.1936,0.000216,0.0024,-3,-0.0001,0.0882,2.1963,1.5,547.0,29.5,0.003491,True
+notthefallintact,sub-320,"Supramarginal Gyrus, anterior division",0.424,0.0,0.0001,-3,-0.0005,0.0799,5.311,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-320,"Supramarginal Gyrus, posterior division",0.3855,0.0,0.0001,-3,0.0001,0.0832,4.6301,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-320,Frontal Pole,0.1581,0.002597,0.028397,-3,0.0005,0.1006,1.5657,1.5,547.0,29.5,0.032454,True
+notthefallintact,sub-320,"Temporal Fusiform Cortex, anterior division",-0.0844,0.109367,0.50095,-3,0.0009,0.0933,-0.9148,1.5,547.0,29.5,0.50095,False
+notthefallintact,sub-320,"Temporal Fusiform Cortex, posterior division",0.1765,0.000716,0.006599,0,-0.0004,0.0939,1.884,1.5,547.0,29.5,0.008799,True
+notthefallintact,sub-320,"Parahippocampal Gyrus, anterior division",0.3647,0.0,0.0001,-3,-0.0003,0.0884,4.1285,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-320,"Parahippocampal Gyrus, posterior division",0.1762,0.000773,0.007699,-3,0.001,0.0954,1.8357,1.5,547.0,29.5,0.009476,True
+notthefallintact,sub-320,"Cingulate Gyrus, anterior division",0.2902,0.0,0.0001,-3,-0.0002,0.0928,3.1288,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-320,"Cingulate Gyrus, posterior division",0.2999,0.0,0.0001,-3,-0.0017,0.0846,3.5639,1.5,547.0,29.5,0.000178,True
+notthefallintact,sub-321,"Superior Temporal Gyrus, anterior division",0.3201,0.0,0.0001,-3,0.0007,0.0793,4.028,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Superior Temporal Gyrus, posterior division",0.3975,0.0,0.0001,-3,0.0005,0.0759,5.2342,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Middle Temporal Gyrus, anterior division",0.3209,0.0,0.0001,-3,-0.0008,0.0858,3.7483,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Middle Temporal Gyrus, posterior division",0.1127,0.032261,0.159384,-3,0.0002,0.087,1.2936,1.5,547.0,29.5,0.159384,False
+notthefallintact,sub-321,"Inferior Frontal Gyrus, pars triangularis",0.4268,0.0,0.0001,-3,0.0005,0.0851,5.0104,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Inferior Frontal Gyrus, pars opercularis",0.4849,0.0,0.0001,-3,0.0002,0.0808,5.9967,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,Angular Gyrus,0.3413,0.0,0.0001,8,-0.0001,0.0869,3.9265,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Supramarginal Gyrus, anterior division",0.4859,0.0,0.0001,6,0.0001,0.0809,6.0046,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Supramarginal Gyrus, posterior division",0.4449,0.0,0.0001,8,0.0009,0.0847,5.2415,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,Frontal Pole,-0.2124,5.4e-05,0.0007,8,0.0008,0.0836,-2.5507,1.5,547.0,29.5,0.000747,True
+notthefallintact,sub-321,"Temporal Fusiform Cortex, anterior division",0.2778,0.0,0.0001,-3,0.0004,0.0782,3.546,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Temporal Fusiform Cortex, posterior division",0.3121,0.0,0.0001,-3,-0.0013,0.0865,3.6208,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Parahippocampal Gyrus, anterior division",0.4522,0.0,0.0001,-3,-0.0006,0.0768,5.8978,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Parahippocampal Gyrus, posterior division",0.2999,0.0,0.0001,-3,0.0007,0.0858,3.4887,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Cingulate Gyrus, anterior division",0.529,0.0,0.0001,-3,-0.0012,0.0799,6.6337,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-321,"Cingulate Gyrus, posterior division",0.542,0.0,0.0001,6,-0.0003,0.0822,6.5989,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-322,"Superior Temporal Gyrus, anterior division",0.3931,0.0,0.0001,8,-0.0016,0.0898,4.3937,1.5,547.0,29.5,0.000267,True
+notthefallintact,sub-322,"Superior Temporal Gyrus, posterior division",0.3646,0.0,0.0001,8,-0.0001,0.0748,4.8737,1.5,547.0,29.5,0.000267,True
+notthefallintact,sub-322,"Middle Temporal Gyrus, anterior division",0.3517,0.0,0.0001,8,-0.0005,0.0718,4.9037,1.5,547.0,29.5,0.000267,True
+notthefallintact,sub-322,"Middle Temporal Gyrus, posterior division",0.2796,0.0,0.0001,8,-0.0048,0.0957,2.9729,1.5,547.0,29.5,0.000267,True
+notthefallintact,sub-322,"Inferior Frontal Gyrus, pars triangularis",0.2326,9e-06,0.0001,6,-0.0031,0.1018,2.3144,1.5,547.0,29.5,0.000267,True
+notthefallintact,sub-322,"Inferior Frontal Gyrus, pars opercularis",0.0251,0.636564,0.9997,8,-0.0029,0.0977,0.2873,1.5,547.0,29.5,0.9997,False
+notthefallintact,sub-322,Angular Gyrus,-0.0711,0.177481,0.70113,-3,-0.0035,0.0934,-0.724,1.5,547.0,29.5,0.93484,False
+notthefallintact,sub-322,"Supramarginal Gyrus, anterior division",-0.0304,0.565312,0.9994,-3,-0.0084,0.1008,-0.2178,1.5,547.0,29.5,0.9997,False
+notthefallintact,sub-322,"Supramarginal Gyrus, posterior division",-0.0398,0.451273,0.993201,-3,-0.0058,0.1011,-0.3362,1.5,547.0,29.5,0.9997,False
+notthefallintact,sub-322,Frontal Pole,0.3136,0.0,0.0001,8,-0.0,0.0872,3.597,1.5,547.0,29.5,0.000267,True
+notthefallintact,sub-322,"Temporal Fusiform Cortex, anterior division",0.1305,0.013106,0.039596,-3,0.0004,0.0717,1.813,1.5,547.0,29.5,0.057594,False
+notthefallintact,sub-322,"Temporal Fusiform Cortex, posterior division",0.179,0.000635,0.0045,-3,-0.0051,0.0945,1.9473,1.5,547.0,29.5,0.008,True
+notthefallintact,sub-322,"Parahippocampal Gyrus, anterior division",0.1499,0.004308,0.030297,-3,-0.0037,0.0912,1.6849,1.5,547.0,29.5,0.048475,True
+notthefallintact,sub-322,"Parahippocampal Gyrus, posterior division",0.1788,0.000609,0.0016,0,-0.0093,0.1036,1.8155,1.5,547.0,29.5,0.0032,True
+notthefallintact,sub-322,"Cingulate Gyrus, anterior division",0.1882,0.000305,0.0003,0,-0.012,0.1035,1.9353,1.5,547.0,29.5,0.000686,True
+notthefallintact,sub-322,"Cingulate Gyrus, posterior division",0.0827,0.119479,0.789621,8,-0.0095,0.1057,0.8718,1.5,547.0,29.5,0.971841,False
+notthefallintact,sub-323,"Superior Temporal Gyrus, anterior division",0.4227,0.0,0.0001,8,0.0013,0.0938,4.4948,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Superior Temporal Gyrus, posterior division",0.5789,0.0,0.0001,4,-0.0005,0.0834,6.9428,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Middle Temporal Gyrus, anterior division",0.5472,0.0,0.0001,4,-0.0003,0.0822,6.6569,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Middle Temporal Gyrus, posterior division",0.5632,0.0,0.0001,-3,-0.0006,0.0803,7.0242,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Inferior Frontal Gyrus, pars triangularis",0.1859,0.000392,0.004,4,0.0003,0.097,1.9135,1.5,547.0,29.5,0.004267,True
+notthefallintact,sub-323,"Inferior Frontal Gyrus, pars opercularis",0.16,0.002466,0.022498,8,0.0007,0.0967,1.648,1.5,547.0,29.5,0.022498,True
+notthefallintact,sub-323,Angular Gyrus,0.6524,0.0,0.0001,-3,0.0006,0.0857,7.6041,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Supramarginal Gyrus, anterior division",0.5105,0.0,0.0001,7,0.0004,0.0876,5.8224,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Supramarginal Gyrus, posterior division",0.5408,0.0,0.0001,3,0.001,0.0877,6.1541,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,Frontal Pole,0.2985,0.0,0.0001,5,0.0005,0.0919,3.2411,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Temporal Fusiform Cortex, anterior division",0.2199,2.4e-05,0.0001,1,-0.0,0.0866,2.5379,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Temporal Fusiform Cortex, posterior division",0.4754,0.0,0.0001,-3,-0.0004,0.0858,5.5433,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Parahippocampal Gyrus, anterior division",0.4472,0.0,0.0001,-3,-0.0008,0.086,5.2081,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Parahippocampal Gyrus, posterior division",0.4873,0.0,0.0001,-2,0.0016,0.0876,5.5433,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Cingulate Gyrus, anterior division",0.4818,0.0,0.0001,0,0.0005,0.093,5.1723,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-323,"Cingulate Gyrus, posterior division",0.5521,0.0,0.0001,-3,-0.002,0.0908,6.104,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Superior Temporal Gyrus, anterior division",0.4128,0.0,0.0001,-3,0.0021,0.0905,4.5404,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Superior Temporal Gyrus, posterior division",0.6407,0.0,0.0001,8,-0.0008,0.082,7.8223,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Middle Temporal Gyrus, anterior division",0.6662,0.0,0.0001,5,0.0005,0.0826,8.0596,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Middle Temporal Gyrus, posterior division",0.3708,0.0,0.0001,-3,-0.0002,0.0947,3.9193,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Inferior Frontal Gyrus, pars triangularis",0.2609,0.0,0.0001,-3,0.0018,0.0941,2.7521,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Inferior Frontal Gyrus, pars opercularis",-0.346,0.0,0.0001,8,-0.0001,0.0822,-4.2088,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,Angular Gyrus,-0.4736,0.0,0.0001,8,-0.0001,0.0855,-5.5406,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Supramarginal Gyrus, anterior division",-0.2331,9e-06,0.0003,8,0.0009,0.0862,-2.7168,1.5,547.0,29.5,0.00032,True
+notthefallintact,sub-324,"Supramarginal Gyrus, posterior division",-0.3443,0.0,0.0001,8,-0.0002,0.0865,-3.9787,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,Frontal Pole,0.605,0.0,0.0001,8,0.0008,0.0936,6.4552,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Temporal Fusiform Cortex, anterior division",0.707,0.0,0.0001,8,-0.001,0.0805,8.7941,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Temporal Fusiform Cortex, posterior division",0.4607,0.0,0.0001,8,-0.0011,0.0995,4.6431,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Parahippocampal Gyrus, anterior division",0.5414,0.0,0.0001,8,-0.0009,0.097,5.591,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Parahippocampal Gyrus, posterior division",0.331,0.0,0.0001,-3,0.0022,0.0935,3.5163,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Cingulate Gyrus, anterior division",0.414,0.0,0.0001,-3,0.0003,0.0946,4.3723,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-324,"Cingulate Gyrus, posterior division",-0.1224,0.020867,0.10039,8,-0.0019,0.0872,-1.3823,1.5,547.0,29.5,0.10039,False
+notthefallintact,sub-325,"Superior Temporal Gyrus, anterior division",-0.1541,0.00355,0.029197,8,-0.0003,0.0976,-1.5756,1.5,547.0,29.5,0.038929,True
+notthefallintact,sub-325,"Superior Temporal Gyrus, posterior division",-0.3211,0.0,0.0001,8,0.0005,0.0754,-4.267,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,"Middle Temporal Gyrus, anterior division",-0.3509,0.0,0.0001,8,0.0005,0.0791,-4.444,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,"Middle Temporal Gyrus, posterior division",0.1259,0.016674,0.093991,-3,0.001,0.0886,1.4108,1.5,547.0,29.5,0.115681,False
+notthefallintact,sub-325,"Inferior Frontal Gyrus, pars triangularis",-0.0813,0.125624,0.470853,8,0.0015,0.0885,-0.9355,1.5,547.0,29.5,0.502243,False
+notthefallintact,sub-325,"Inferior Frontal Gyrus, pars opercularis",0.3254,0.0,0.0001,-3,0.0001,0.0713,4.5628,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,Angular Gyrus,0.4289,0.0,0.0001,-3,0.0005,0.0675,6.3485,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,"Supramarginal Gyrus, anterior division",0.384,0.0,0.0001,-3,0.0001,0.0671,5.7218,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,"Supramarginal Gyrus, posterior division",0.3958,0.0,0.0001,-3,0.0003,0.0679,5.8208,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,Frontal Pole,-0.3592,0.0,0.0001,7,-0.0009,0.0858,-4.1757,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,"Temporal Fusiform Cortex, anterior division",-0.0989,0.062199,0.446055,8,-0.0,0.1019,-0.9709,1.5,547.0,29.5,0.502243,False
+notthefallintact,sub-325,"Temporal Fusiform Cortex, posterior division",0.4107,0.0,0.0001,-3,-0.0014,0.0827,4.9841,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,"Parahippocampal Gyrus, anterior division",-0.0946,0.074798,0.542746,8,-0.0022,0.1033,-0.8941,1.5,547.0,29.5,0.542746,False
+notthefallintact,sub-325,"Parahippocampal Gyrus, posterior division",0.3012,0.0,0.0001,-3,0.0017,0.0861,3.4783,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,"Cingulate Gyrus, anterior division",0.3042,0.0,0.0001,-3,-0.0,0.0875,3.4778,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-325,"Cingulate Gyrus, posterior division",0.3889,0.0,0.0001,-3,-0.0016,0.0738,5.2902,1.5,547.0,29.5,0.000145,True
+notthefallintact,sub-326,"Superior Temporal Gyrus, anterior division",0.4373,0.0,0.0001,-3,0.0014,0.0711,6.1304,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Superior Temporal Gyrus, posterior division",0.3078,0.0,0.0001,8,-0.0,0.0898,3.4256,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Middle Temporal Gyrus, anterior division",0.3966,0.0,0.0001,-3,-0.0004,0.0743,5.3435,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Middle Temporal Gyrus, posterior division",0.4647,0.0,0.0001,-3,-0.0002,0.065,7.1485,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Inferior Frontal Gyrus, pars triangularis",0.3901,0.0,0.0001,-3,0.0023,0.0791,4.9057,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Inferior Frontal Gyrus, pars opercularis",0.4471,0.0,0.0001,-3,0.0002,0.0773,5.7799,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,Angular Gyrus,0.489,0.0,0.0001,-3,0.0004,0.0635,7.6903,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Supramarginal Gyrus, anterior division",0.4687,0.0,0.0001,-3,-0.0001,0.0649,7.2235,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Supramarginal Gyrus, posterior division",0.5121,0.0,0.0001,-3,0.0,0.0656,7.8109,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,Frontal Pole,0.3816,0.0,0.0001,-3,0.0002,0.0748,5.1014,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Temporal Fusiform Cortex, anterior division",0.1746,0.000865,0.008599,-3,-0.0005,0.0963,1.8184,1.5,547.0,29.5,0.009172,True
+notthefallintact,sub-326,"Temporal Fusiform Cortex, posterior division",0.3803,0.0,0.0001,-3,-0.0007,0.0711,5.3577,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Parahippocampal Gyrus, anterior division",0.1357,0.010371,0.088191,8,0.0006,0.0989,1.3661,1.5,547.0,29.5,0.088191,False
+notthefallintact,sub-326,"Parahippocampal Gyrus, posterior division",0.3639,0.0,0.0001,-3,0.001,0.0701,5.1745,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Cingulate Gyrus, anterior division",0.3924,0.0,0.0001,-3,-0.0001,0.0669,5.8707,1.5,547.0,29.5,0.000114,True
+notthefallintact,sub-326,"Cingulate Gyrus, posterior division",0.3898,0.0,0.0001,-3,-0.0017,0.0651,6.0101,1.5,547.0,29.5,0.000114,True
