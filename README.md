@@ -98,7 +98,7 @@ These scripts produce:
 ---
 
 ## Citation & Acknowledgments
-Bayazit Karaman, "Tracking Brain Activity with Semantic Complexity During Naturalistic Narrative Comprehension." Submitted to NeuroImage, 2025.
+Bayazit Karaman, "Tracking Brain Activity with Semantic Complexity During Naturalistic Narrative Comprehension." Submitted to NeuroImage: Reports, 2025.
 
 ## License
 MIT License 
