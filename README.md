@@ -1,6 +1,6 @@
 # Semantic Complexity and Brain Activity
 
-This project investigates the relationship between semantic complexity in natural language and brain activity using fMRI data from the <a href="https://openneuro.org/datasets/ds002245/versions/1.0.1" target="_blank">Narratives dataset</a>. The pipeline aligns language features with fMRI signals and computes correlations across different brain regions.
+This project investigates the relationship between semantic complexity in natural language and brain activity using fMRI data from the <a href="https://openneuro.org/datasets/ds002345/versions/1.0.1" target="_blank">Narratives dataset</a>. The pipeline aligns language features with fMRI signals and computes correlations across different brain regions.
 
 ---
 
@@ -9,15 +9,13 @@ This project investigates the relationship between semantic complexity in natura
 ```
 .
 ├── neuroimage_fmri_analysis.py       # Main analysis pipeline
-├── generate_group_voxelwise_maps.py  # Group-level voxelwise average maps
-├── visualize_top_voxelwise.py        # Example visualization of top voxelwise maps
-├── figures.py                        # Plots for summary statistics
-├── experiment_subject_list.py        # List of stories and corresponding subject files
+├── figures.py                        # Generates all figures except Figure 1
+├── experiment_subject_list.py        # Defines story names and file paths
 ├── results/
-│   ├── csv/                          # ROI correlation summaries
-│   ├── maps/                         # Individual voxelwise maps (NIfTI)
-│   ├── figures/                      # Visual figures (PNG)
-│   └── group_averages/               # Group-level mean maps
+│   ├── csv/                          # ROI correlation summaries and lag tuning curves
+│   ├── maps/                         # Individual voxelwise correlation maps (NIfTI)
+│   ├── figures/                      # Visualization figures (PNG)
+│   └── group_averages/               # Group-level mean maps (per story)
 ```
 
 ---
@@ -31,7 +29,7 @@ pip install -r requirements.txt
 
 Or install manually:
 ```bash
-pip install torch transformers nilearn scikit-learn matplotlib seaborn pandas nibabel
+pip install torch transformers nilearn scikit-learn matplotlib seaborn pandas nibabel statsmodels
 ```
 
 ---
@@ -46,54 +44,75 @@ Organize your dataset similar to this structure:
   │    ├── sub-XXX_task-lucy_bold.nii.gz
   │    ├── task-lucy_events.tsv
   │    └── lucy_transcript.txt
-  └── merlin/ ...
+  └── merlin/
+       ├── sub-XXX_task-merlin_bold.nii.gz
+       ├── task-merlin_events.tsv
+       └── merlin_transcript.txt
 ```
-Note: The data/ directory should contain the transcript.csv and events.tsv files. Please download the necessary .nii.gz files directly from the source.​ Ensure paths in `experiment_subject_list.py` point to the correct files.
+Ensure that each story folder contains:
+- *_bold.nii.gz - the preprocessed fMRI data
+- *_events.tsv - the event timing file
+- *_transcript.txt - the story transcript
+
+Paths to these files must be specified correctly inside `experiment_subject_list.py` using:
+
+{
+  'name': 'lucy',
+  'subject': 'sub-XXX',
+  'bold_file': '/path/to/sub-XXX_task-lucy_bold.nii.gz',
+  'events_file': '/path/to/task-lucy_events.tsv',
+  'transcript_file': '/path/to/lucy_transcript.txt'
+}
 
 ### Step 2: Run the Analysis
 ```bash
 python neuroimage_fmri_analysis.py
 ```
 This will:
-- Compute GPT-2-based semantic complexity
-- Align it with fMRI data using HRF convolution
-- Run ROI and voxelwise correlation analyses
-- Save results in the `results/` folder
+- Compute GPT-2–based semantic complexity per TR
+- Convolve it with a Glover HRF
+- Perform ROI-wise and voxel-wise correlation analyses
+- Apply FDR correction and permutation testing
+- Save results under the `results/` directory
 
 ### Step 3: Visualize Results
 ```bash
-python generate_group_voxelwise_maps.py
-python visualize_top_voxelwise.py
 python figures.py
 ```
 These scripts produce:
-- Group-level correlation maps
-- Best examples from individuals
-- Bar and heatmap plots of ROI correlation results
+- Group-level mean maps
+- Representative voxelwise correlation figures
+- ROI-level bar and heatmap visualizations
+
+All outputs are saved in the `results/figures/` and `results/group_averages/` folders.
 
 ---
 
 ## Method Summary
-- Semantic complexity is derived by extracting GPT-2 embeddings per TR.
-- Embeddings are PCA-reduced to a single complexity score.
-- Complexity is convolved with a Glover HRF and aligned with BOLD data.
-- Pearson correlations are computed between complexity and fMRI signal at both ROI and voxel levels.
-- Permutation testing is used to compute z-scores.
+- Semantic complexity is derived from GPT-2 hidden embeddings per TR.
+- Embeddings are normalized and reduced to a single dimension via PCA.
+- The resulting complexity signal is convolved with a Glover HRF and aligned to BOLD responses.
+- Pearson correlations are computed between the complexity regressor and BOLD activity at both ROI and voxel levels.
+- A permutation test (10,000 iterations) provides empirical p-values and z-scores.
+- FDR correction (Benjamini–Hochberg) is applied within subject for ROI and voxelwise results.
 
 ---
 
 ## Outputs
 
-- `results/csv/roi_language_correlation_summary.csv`: Main table of ROI correlation results per subject.
-- `results/maps/`: Individual voxelwise NIfTI maps.
-- `results/figures/`: Correlation heatmaps and bar plots.
-- `results/group_averages/`: Mean correlation maps for each story.
+- `results/csv/roi_language_correlation_summary.csv`: ROI correlation statistics per story and subject
+- `results/csv/lag_tuning_curves.csv`: Correlation values across tested lags
+- `results/maps/`: Individual voxelwise correlation maps (NIfTI format)
+- `results/figures/`: Voxelwise and ROI visualization figures (PNG)
+- `results/group_averages/`: Mean correlation maps across subjects per story
 
 ---
 
 ## Notes
-- The model uses GPT-2 and Harvard-Oxford Cortical Atlas for analysis.
-- This pipeline is scalable for additional stories and subjects.
+- The analysis uses GPT-2 (Hugging Face Transformers) and the Harvard–Oxford Cortical Atlas.
+- HRF convolution follows the canonical Glover model.
+- The pipeline is scalable to additional stories, subjects, or models.
+- Reproducibility: random seed is fixed (42) for deterministic behavior.
 
 ---
 
