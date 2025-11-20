@@ -117,7 +117,7 @@ All outputs are saved in the `results/figures/` and `results/group_averages/` fo
 ---
 
 ## Citation & Acknowledgments
-Bayazit Karaman, "Tracking Brain Activity with Semantic Complexity During Naturalistic Narrative Comprehension." Submitted to NeuroImage: Reports, 2025.
+Bayazit Karaman, "Tracking Brain Activity with Semantic Complexity During Naturalistic Narrative Comprehension.".
 
 ## License
 MIT License 
