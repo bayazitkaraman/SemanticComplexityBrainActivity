@@ -45,7 +45,7 @@ def compute_complexity_hrf(story, tokenizer, model, TR):
     events_df = pd.read_csv(story['events_file'], sep='\t')
     story_event = events_df[events_df['trial_type'] == 'story']
     if story_event.empty:
-        return None, None, None, None, None
+        return None, None, None, None, None, None
 
     onset = float(story_event.iloc[0]['onset'])
     duration = float(story_event.iloc[0]['duration'])
@@ -54,7 +54,7 @@ def compute_complexity_hrf(story, tokenizer, model, TR):
     # Split transcript into chunks per TR
     words_per_TR = int(np.floor(len(words) / story_TRs)) if story_TRs > 0 else 0
     if story_TRs <= 0 or words_per_TR == 0:
-        return None, None, None, None, None
+        return None, None, None, None, None, None
 
     word_chunks = [" ".join(words[i * words_per_TR:(i + 1) * words_per_TR]) for i in range(story_TRs)]
     leftover = words[story_TRs * words_per_TR:]
@@ -72,13 +72,20 @@ def compute_complexity_hrf(story, tokenizer, model, TR):
 
     # PCA over normalized embeddings
     X_scaled = StandardScaler().fit_transform(np.stack([e.numpy() for e in embeddings]))
-    complexity = PCA(n_components=1).fit_transform(X_scaled).flatten()
 
-    # Apply Glover HRF
+    # Fit PCA, keep variance explained, use PC1 as semantic complexity
+    pca = PCA(n_components=10)
+    pc_scores = pca.fit_transform(X_scaled)
+    complexity = pc_scores[:, 0]                         # PC1 time series
+    pc1_var = float(pca.explained_variance_ratio_[0])    # fraction of variance explained
+
+    print(f"{story['name']}: PC1 explains {pc1_var*100:.1f}% of variance")
+
+    # Apply Glover HRF to complexity
     hrf = glover_hrf(t_r=TR, oversampling=20, time_length=30, onset=0)
     complexity_hrf = np.convolve(complexity, hrf)[:len(complexity)]
 
-    return complexity_hrf, onset, duration, story_TRs, events_df
+    return complexity_hrf, onset, duration, story_TRs, events_df, pc1_var
 
 # ---------------------- MAIN ANALYSIS ----------------------
 def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels_to_test):
@@ -87,7 +94,8 @@ def analyze_subject(story, tokenizer, model, atlas_img, atlas_labels, roi_labels
     TR = fmri_img.header.get_zooms()[3]
     brain_mask = compute_brain_mask(fmri_img).get_fdata().astype(bool)
 
-    complexity_hrf, onset, duration, story_TRs, events_df = compute_complexity_hrf(story, tokenizer, model, TR)
+    complexity_hrf, onset, duration, story_TRs, events_df, pc1_var = compute_complexity_hrf(story, tokenizer, model, TR)
+
     if complexity_hrf is None:
         return [], None, []
 
