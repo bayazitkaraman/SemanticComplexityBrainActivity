@@ -1,0 +1,10 @@
+story,n_subject_story_rows,n_unique_subjects,bold_source,has_confounds_file
+black,45,45,fmriprep_mni,True
+bronx,47,47,fmriprep_mni,True
+forgot,46,46,fmriprep_mni,True
+milkyway,53,53,fmriprep_mni,True
+notthefallintact,55,55,fmriprep_mni,True
+piemanpni,46,46,fmriprep_mni,True
+shapesphysical,58,58,fmriprep_mni,True
+shapessocial,58,58,fmriprep_mni,True
+TOTAL,408,204,fmriprep_mni,True

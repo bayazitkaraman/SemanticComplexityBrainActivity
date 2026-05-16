@@ -1,123 +1,152 @@
-# Semantic Complexity and Brain Activity
+# Semantic Complexity / Semantic Variation and Brain Activity
 
-This project investigates the relationship between semantic complexity in natural language and brain activity using fMRI data from the <a href="https://openneuro.org/datasets/ds002345/versions/1.0.1" target="_blank">Narratives dataset</a>. The pipeline aligns language features with fMRI signals and computes correlations across different brain regions.
+This repository contains an organized Python pipeline for analyzing how GPT-2-based contextual semantic variation relates to fMRI activity during naturalistic narrative comprehension.
 
----
+The project is organized so that data and virtual environments are **not** included in GitHub. You can add your local `data/` folder later and run the full pipeline from the beginning.
 
-## Project Structure
+## Main goals
 
+This version supports the revision analyses needed after reviewer feedback:
+
+1. Use the full available dataset instead of a small subset.
+2. Test whether GPT-2 PC1 is reducible to simple lexical/time baselines.
+3. Fit a shared PCA space across stories so PC dimensions are comparable.
+4. Compare GPT-2 layers instead of assuming the final layer is best.
+5. Compare baseline-only, GPT2-only, and combined encoding models.
+6. Generate updated figures for the revised manuscript.
+
+## Folder structure
+
+```text
+SemanticComplexityBrainActivity/
+│
+├── configs/                  # story/subject lists
+├── scripts/                  # runnable scripts
+├── src/semantic_fmri/         # reusable utilities
+├── data/                     # local data only, not pushed to GitHub
+├── results/                  # generated outputs
+├── docs/                     # project notes
+└── archive/old_scripts/       # original scripts preserved for reference
 ```
-.
-├── neuroimage_fmri_analysis.py       # Main analysis pipeline
-├── figures.py                        # Generates all figures except Figure 1
-├── experiment_subject_list.py        # Defines story names and file paths
-├── results/
-│   ├── csv/                          # ROI correlation summaries and lag tuning curves
-│   ├── maps/                         # Individual voxelwise correlation maps (NIfTI)
-│   ├── figures/                      # Visualization figures (PNG)
-│   └── group_averages/               # Group-level mean maps (per story)
+
+## Setup
+
+Create and activate your environment outside GitHub tracking:
+
+```bash
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# macOS/Linux:
+source .venv/bin/activate
 ```
 
----
+Install requirements:
 
-## Requirements
-
-Install the required packages using pip:
 ```bash
 pip install -r requirements.txt
+pip install -e .
 ```
 
-Or install manually:
+## Add your data
+
+Put your local dataset under `data/`. This folder is intentionally ignored by Git.
+
+Expected simple layout:
+
+```text
+data/
+├── lucy/
+│   ├── sub-XXX_task-lucy_bold.nii.gz
+│   ├── task-lucy_events.tsv
+│   └── lucy_transcript.txt
+├── merlin/
+│   ├── sub-XXX_task-merlin_bold.nii.gz
+│   ├── task-merlin_events.tsv
+│   └── merlin_transcript.txt
+└── notthefallintact/
+    ├── sub-XXX_task-notthefallintact_bold.nii.gz
+    ├── task-notthefallintact_events.tsv
+    └── notthefallintact_transcript.txt
+```
+
+## Build the full subject list
+
 ```bash
-pip install torch transformers nilearn scikit-learn matplotlib seaborn pandas nibabel statsmodels
+python scripts/build_subject_list.py --data-dir data --output configs/stories_all.py
 ```
 
----
+A small old 30-subject example list is already kept in:
 
-## How to Run
-
-### Step 1: Prepare Your Data
-Organize your dataset similar to this structure:
+```text
+configs/stories_small.py
 ```
-/data/
-  ├── lucy/
-  │    ├── sub-XXX_task-lucy_bold.nii.gz
-  │    ├── task-lucy_events.tsv
-  │    └── lucy_transcript.txt
-  └── merlin/
-       ├── sub-XXX_task-merlin_bold.nii.gz
-       ├── task-merlin_events.tsv
-       └── merlin_transcript.txt
-```
-Ensure that each story folder contains:
-- *_bold.nii.gz - the preprocessed fMRI data
-- *_events.tsv - the event timing file
-- *_transcript.txt - the story transcript
 
-Paths to these files must be specified correctly inside `experiment_subject_list.py` using:
+## Quick test
 
-{
-  'name': 'lucy',
-  'subject': 'sub-XXX',
-  'bold_file': '/path/to/sub-XXX_task-lucy_bold.nii.gz',
-  'events_file': '/path/to/task-lucy_events.tsv',
-  'transcript_file': '/path/to/lucy_transcript.txt'
-}
+Run a small test before launching the full analysis:
 
-### Step 2: Run the Analysis
 ```bash
-python neuroimage_fmri_analysis.py
+python scripts/run_revision_pipeline.py --quick --subject-list configs/stories_all.py
 ```
-This will:
-- Compute GPT-2–based semantic complexity per TR
-- Convolve it with a Glover HRF
-- Perform ROI-wise and voxel-wise correlation analyses
-- Apply FDR correction and permutation testing
-- Save results under the `results/` directory
 
-### Step 3: Visualize Results
+## Full revision pipeline
+
 ```bash
-python figures.py
+python scripts/run_revision_pipeline.py --subject-list configs/stories_all.py
 ```
-These scripts produce:
-- Group-level mean maps
-- Representative voxelwise correlation figures
-- ROI-level bar and heatmap visualizations
 
-All outputs are saved in the `results/figures/` and `results/group_averages/` folders.
+This runs:
 
----
+1. `semantic_baseline_regressors.py`
+2. `shared_pca_regressors.py`
+3. `gpt2_layer_pc_analysis.py`
+4. `roi_encoding_model_comparison.py`
+5. `figures_revision.py`
 
-## Method Summary
-- Semantic complexity is derived from GPT-2 hidden embeddings per TR.
-- Embeddings are normalized and reduced to a single dimension via PCA.
-- The resulting complexity signal is convolved with a Glover HRF and aligned to BOLD responses.
-- Pearson correlations are computed between the complexity regressor and BOLD activity at both ROI and voxel levels.
-- A permutation test (10,000 iterations) provides empirical p-values and z-scores.
-- FDR correction (Benjamini–Hochberg) is applied within subject for ROI and voxelwise results.
+## Original main analysis
 
----
+The original ROI/voxel correlation pipeline is kept as:
 
-## Outputs
+```bash
+python scripts/run_main_analysis.py --subject-list configs/stories_all.py
+```
 
-- `results/csv/roi_language_correlation_summary.csv`: ROI correlation statistics per story and subject
-- `results/csv/lag_tuning_curves.csv`: Correlation values across tested lags
-- `results/maps/`: Individual voxelwise correlation maps (NIfTI format)
-- `results/figures/`: Voxelwise and ROI visualization figures (PNG)
-- `results/group_averages/`: Mean correlation maps across subjects per story
+The original figure-generation script is kept as:
 
----
+```bash
+python scripts/make_figures.py
+```
 
-## Notes
-- The analysis uses GPT-2 (Hugging Face Transformers) and the Harvard–Oxford Cortical Atlas.
-- HRF convolution follows the canonical Glover model.
-- The pipeline is scalable to additional stories, subjects, or models.
-- Reproducibility: random seed is fixed (42) for deterministic behavior.
+## Important outputs
 
----
+```text
+results/diagnostics/pc1_vs_baselines_correlations.csv
+results/regressors/shared_pca_explained_variance.csv
+results/regressors/*_shared_pca_regressors.csv
+results/layer_analysis/layer_overall_summary.csv
+results/model_comparison/encoding_model_comparison.csv
+results/model_comparison/encoding_model_deltas.csv
+results/revision_figures/
+```
 
-## Citation & Acknowledgments
-Bayazit Karaman, "Tracking Brain Activity with Semantic Complexity During Naturalistic Narrative Comprehension.".
+## GitHub notes
 
-## License
-MIT License 
+Do not push:
+
+- `.venv/`
+- `data/`
+- large `.nii.gz` files
+- generated maps under `results/maps/`
+- group-average NIfTI files
+
+Recommended Git commands:
+
+```bash
+git init
+git add .
+git commit -m "Organize semantic fMRI project with revision analysis pipeline"
+git branch -M main
+git remote add origin YOUR_GITHUB_REPO_URL
+git push -u origin main
+```

@@ -1,0 +1,18 @@
+layer,roi,mean_abs_r,mean_r,n
+4,"Temporal Fusiform Cortex, anterior division",0.153667410944275,-0.0131598205507541,408
+4,"Superior Temporal Gyrus, posterior division",0.1515806755297256,0.0011459714693761,408
+4,"Middle Temporal Gyrus, anterior division",0.145161463940296,0.0090487472879323,408
+4,"Inferior Frontal Gyrus, pars opercularis",0.1385178842591583,-0.0009609334634151,408
+4,Angular Gyrus,0.1294701233234777,0.0277428587853496,408
+4,Frontal Pole,0.1291974586173754,-0.0218258371647538,408
+4,"Middle Temporal Gyrus, posterior division",0.1275877224712815,0.0200539416859323,408
+4,"Supramarginal Gyrus, posterior division",0.1269405717745884,0.0397796506197521,408
+4,"Temporal Fusiform Cortex, posterior division",0.1256820618722246,-0.0053792387651257,408
+4,"Supramarginal Gyrus, anterior division",0.1252466473819962,0.0290978555690024,408
+4,"Superior Temporal Gyrus, anterior division",0.1248653138390324,-0.0131797046014093,408
+4,"Parahippocampal Gyrus, anterior division",0.1243843510628948,-0.0192642104079873,408
+4,"Inferior Frontal Gyrus, pars triangularis",0.1238376121723933,0.0026934388858035,408
+4,"Parahippocampal Gyrus, posterior division",0.1117994859780701,-0.0122189462687557,408
+4,"Cingulate Gyrus, anterior division",0.1110629764210385,0.0067709385817233,408
+4,"Cingulate Gyrus, posterior division",0.1110378982796813,0.0184921944209261,408
+4,Precuneous Cortex,0.0975592987536562,0.0073854867596878,408

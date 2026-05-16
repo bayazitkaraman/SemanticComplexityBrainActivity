@@ -1,0 +1,178 @@
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import json
+import subprocess
+from pathlib import Path
+
+
+def load_stories(path: str):
+    spec = importlib.util.spec_from_file_location("stories_module", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return list(module.stories)
+
+
+def git_ls_files(root: Path, pattern: str):
+    proc = subprocess.run(
+        ["git", "ls-files", pattern],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if proc.returncode != 0:
+        return []
+    return [x.strip() for x in proc.stdout.splitlines() if x.strip()]
+
+
+def choose_bold(root: Path, subject: str, story: str):
+    patterns = [
+        f"{subject}/func/{subject}_task-{story}_space-MNI152NLin2009cAsym_res-native_desc-preproc_bold.nii.gz",
+        f"{subject}/func/{subject}_task-{story}_space-MNI152NLin6Asym_res-native_desc-preproc_bold.nii.gz",
+        f"{subject}/func/{subject}_task-{story}_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz",
+        f"{subject}/func/{subject}_task-{story}_space-MNI152NLin6Asym_desc-preproc_bold.nii.gz",
+        f"{subject}/func/{subject}_task-{story}_desc-preproc_bold.nii.gz",
+        f"{subject}/func/*task-{story}*space-MNI152NLin2009cAsym*desc-preproc_bold.nii.gz",
+        f"{subject}/func/*task-{story}*space-MNI152NLin6Asym*desc-preproc_bold.nii.gz",
+        f"{subject}/func/*task-{story}*desc-preproc_bold.nii.gz",
+    ]
+    for pattern in patterns:
+        matches = git_ls_files(root, pattern)
+        if matches:
+            matches = sorted(matches, key=lambda p: (("_run-" in p), p))
+            return matches[0]
+    return None
+
+
+def choose_confounds(root: Path, subject: str, story: str):
+    patterns = [
+        f"{subject}/func/{subject}_task-{story}_desc-confounds_timeseries.tsv",
+        f"{subject}/func/{subject}_task-{story}_desc-confounds_regressors.tsv",
+        f"{subject}/func/*task-{story}*desc-confounds_timeseries.tsv",
+        f"{subject}/func/*task-{story}*desc-confounds_regressors.tsv",
+    ]
+    for pattern in patterns:
+        matches = git_ls_files(root, pattern)
+        if matches:
+            matches = sorted(matches, key=lambda p: (("_run-" in p), p))
+            return matches[0]
+    return None
+
+
+def readable_nifti(path: Path):
+    if not path.exists() or path.stat().st_size < 1024:
+        return False
+    try:
+        import nibabel as nib
+        img = nib.load(str(path))
+        _ = img.shape
+        return True
+    except Exception:
+        return False
+
+
+def readable_tsv(path: Path):
+    if not path.exists() or path.stat().st_size < 20:
+        return False
+    try:
+        import pandas as pd
+        df = pd.read_csv(path, sep="\t", nrows=5)
+        return len(df.columns) > 0
+    except Exception:
+        return False
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--subject-list", default="configs/stories_all.py")
+    parser.add_argument("--fmriprep-dir", default=None)
+    parser.add_argument("--output", default="configs/stories_all_fmriprep_confounds.py")
+    parser.add_argument("--allow-unreadable", action="store_true")
+    parser.add_argument("--allow-missing-confounds", action="store_true")
+    args = parser.parse_args()
+
+    root = Path(args.fmriprep_dir)
+    if not root.exists():
+        raise FileNotFoundError(root)
+
+    old_rows = load_stories(args.subject_list)
+    new_rows = []
+    missing_bold, unreadable_bold = [], []
+    missing_confounds, unreadable_confounds = [], []
+
+    for row in old_rows:
+        subject = row["subject"]
+        story = row["name"]
+
+        bold_rel = choose_bold(root, subject, story)
+        conf_rel = choose_confounds(root, subject, story)
+
+        if bold_rel is None:
+            missing_bold.append(f"{subject} {story}")
+            continue
+
+        bold_path = root / bold_rel
+        if not args.allow_unreadable and not readable_nifti(bold_path):
+            unreadable_bold.append(str(bold_path))
+            continue
+
+        conf_path = None
+        if conf_rel is None:
+            missing_confounds.append(f"{subject} {story}")
+            if not args.allow_missing_confounds:
+                continue
+        else:
+            conf_path = root / conf_rel
+            if not args.allow_unreadable and not readable_tsv(conf_path):
+                unreadable_confounds.append(str(conf_path))
+                if not args.allow_missing_confounds:
+                    continue
+
+        new_row = dict(row)
+        new_row["bold_file"] = str(bold_path).replace("\\", "/")
+        new_row["bold_source"] = "fmriprep_mni"
+        if conf_path is not None:
+            new_row["confounds_file"] = str(conf_path).replace("\\", "/")
+            new_row["confounds_source"] = "fmriprep"
+        new_rows.append(new_row)
+
+    out = Path(args.output)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(
+        "# Auto-generated by scripts/build_subject_list_fmriprep.py\n"
+        "# Includes fMRIPrep MNI-space BOLD and fMRIPrep confounds when available.\n\n"
+        "stories = " + json.dumps(new_rows, indent=4) + "\n",
+        encoding="utf-8",
+    )
+
+    print(f"Saved {len(new_rows)} fMRIPrep+confounds rows to {out}")
+
+    counts = {}
+    for row in new_rows:
+        counts[row["name"]] = counts.get(row["name"], 0) + 1
+    print("\nCounts by story:")
+    for k, v in counts.items():
+        print(f" - {k}: {v}")
+
+    diagnostics = {
+        "missing_bold": missing_bold,
+        "unreadable_bold": unreadable_bold,
+        "missing_confounds": missing_confounds,
+        "unreadable_confounds": unreadable_confounds,
+    }
+
+    diag_dir = Path("results/diagnostics")
+    diag_dir.mkdir(parents=True, exist_ok=True)
+
+    for name, rows in diagnostics.items():
+        if rows:
+            p = diag_dir / f"fmriprep_{name}.txt"
+            p.write_text("\n".join(rows) + "\n", encoding="utf-8")
+            print(f"{name}: {len(rows)}. See {p}")
+
+
+if __name__ == "__main__":
+    main()
+

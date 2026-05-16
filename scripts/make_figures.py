@@ -1,0 +1,423 @@
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+# figures.py
+"""
+Generates publication-ready Figures 2–8.
+
+Key upgrades:
+- Fig2: 95% CI error bars
+- Fig3: NaN-safe group mean maps + combined 1x3 panel saved to results/figures
+- Fig4: jittered dots, stricter stars (≥50% pairs FDR<.05), short ROI labels
+- Fig5: auto-pick best 3 maps, shared colorbar, threshold=0.35
+- Fig6: error bars (SD) + inferred permutation count in title
+- Fig7: SEM shading + seconds axis, uses actual lag values (e.g., −3…+8)
+- Fig8: short ROI labels, mean ± SD by story
+
+Run: python figures.py
+"""
+
+import os
+import shutil
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from nilearn import plotting, image
+from nilearn.masking import compute_brain_mask
+import nibabel as nib
+
+# Common font sizes for all figures
+TITLE_FS  = 12
+LABEL_FS  = 10
+TICK_FS   = 10
+LEGEND_FS = 10
+
+# ----------------------------- Paths & discovery -----------------------------
+CSV_DIR = "results/csv"
+MAP_DIR = "results/maps"
+FIG_DIR = "results/figures"
+GROUP_DIR = "results/group_averages"
+os.makedirs(FIG_DIR, exist_ok=True)
+os.makedirs(GROUP_DIR, exist_ok=True)
+
+def pick_first_existing(candidates):
+    for p in candidates:
+        if os.path.exists(p):
+            return p
+    # fall back to first path even if missing, so errors are informative
+    return candidates[0]
+
+CSV_ROI = pick_first_existing([
+    os.path.join(CSV_DIR, "roi_language_correlation_summary(-3,8).csv"),
+    os.path.join(CSV_DIR, "roi_language_correlation_summary.csv"),
+    os.path.join(CSV_DIR, "roi_language_correlation_summary(-2,6).csv"),
+])
+CSV_LAG = pick_first_existing([
+    os.path.join(CSV_DIR, "lag_tuning_curves(-3,8).csv"),
+    os.path.join(CSV_DIR, "lag_tuning_curves.csv"),
+    os.path.join(CSV_DIR, "lag_tuning_curves(-2,6).csv"),
+])
+
+# Stories to expect for group means / panel (others will still be handled)
+STORY_NAMES = ["lucy", "merlin", "notthefallintact"]
+
+# Common plotting params
+CMAP = "coolwarm"
+VTHRESH_SUBJ = 0.35   # slightly higher to reduce speckle
+VTHRESH_GROUP = 0.25  # group visualization threshold
+CUT_COORDS = [-18, 53, 11]
+
+# Short ROI labels for readability (used in Fig4 and Fig8 only)
+ROI_ABBR = {
+ "Superior Temporal Gyrus, anterior division":"STG a",
+ "Superior Temporal Gyrus, posterior division":"STG p",
+ "Middle Temporal Gyrus, anterior division":"MTG a",
+ "Middle Temporal Gyrus, posterior division":"MTG p",
+ "Inferior Frontal Gyrus, pars triangularis":"IFG tri",
+ "Inferior Frontal Gyrus, pars opercularis":"IFG operc",
+ "Angular Gyrus":"AG",
+ "Supramarginal Gyrus, anterior division":"SMG a",
+ "Supramarginal Gyrus, posterior division":"SMG p",
+ "Frontal Pole":"FP",
+ "Precuneous Cortex":"PreCun",
+ "Temporal Fusiform Cortex, anterior division":"TFC a",
+ "Temporal Fusiform Cortex, posterior division":"TFC p",
+ "Parahippocampal Gyrus, anterior division":"PHG a",
+ "Parahippocampal Gyrus, posterior division":"PHG p",
+ "Cingulate Gyrus, anterior division":"CG a",
+ "Cingulate Gyrus, posterior division":"CG p",
+}
+
+# ----------------------------- Utilities -----------------------------
+def infer_perm_label(df_roi: pd.DataFrame) -> str:
+    if "p_emp" not in df_roi.columns:
+        return "10,000 permutations"
+    p = pd.to_numeric(df_roi["p_emp"], errors="coerce"); p = p[p > 0]
+    if p.empty: return "10,000 permutations"
+    mn = p.min()
+    if mn <= 1.2e-4: return "10,000 permutations"
+    if mn <= 1.2e-3: return "1,000 permutations"
+    approx = int(round(1.0 / mn)) - 1
+    return f"~{approx:,} permutations"
+
+def tr_mode(df_roi: pd.DataFrame, default=1.5) -> float:
+    if "TR" in df_roi.columns and not df_roi["TR"].dropna().empty:
+        return float(df_roi["TR"].mode()[0])
+    return float(default)
+
+def robust_score(nii_path: str) -> float:
+    try:
+        arr = image.load_img(nii_path).get_fdata()
+        return float(np.nanpercentile(np.abs(arr), 95))
+    except Exception:
+        return -np.inf
+
+# ----------------------------- Load ROI CSV -----------------------------
+if not os.path.exists(CSV_ROI):
+    raise FileNotFoundError(f"Missing ROI CSV: {CSV_ROI}")
+
+df = pd.read_csv(CSV_ROI)
+required_cols = {"roi","story","subject","r"}
+missing = required_cols - set(df.columns)
+if missing:
+    raise ValueError(f"[Fig2–8] Missing required columns in {CSV_ROI}: {missing}")
+
+# Normalize types
+for col in ["roi","story","subject"]:
+    df[col] = df[col].astype(str)
+
+# ----------------------------- FIGURE 2: Top-5 (95% CI) -----------------------------
+def abbr_label(long):
+    """Return short ROI label, falling back to a trimmed version."""
+    return ROI_ABBR.get(long, long.replace(" Cortex","").split(",")[0])
+
+g = df.groupby("roi")["r"]
+roi_stats = pd.DataFrame({"mean_r": g.mean(), "sem": g.sem()}).reset_index()
+top = roi_stats.sort_values("mean_r", ascending=False).head(5)
+ci95 = 1.96 * top["sem"]
+
+# numeric x positions + abbreviated labels (same style as Fig4)
+x = np.arange(len(top))
+labels = [abbr_label(r) for r in top["roi"]]
+
+plt.figure(figsize=(10, 5))
+plt.bar(x, top["mean_r"], yerr=ci95, capsize=5)
+plt.title("Top 5 ROIs by Mean Correlation (r) with Semantic Complexity", fontsize=TITLE_FS)
+plt.ylabel("Mean Pearson r (95% CI)", fontsize=LABEL_FS)
+plt.xlabel("ROI", fontsize=LABEL_FS)
+plt.xticks(x, labels, rotation=45, ha='right', fontsize=TICK_FS)
+plt.yticks(fontsize=TICK_FS)
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "fig2_top5_rois_mean_r.png"),
+            dpi=300, bbox_inches="tight")
+plt.close()
+
+
+# ----------------------------- FIGURE 3: Group means + panel -----------------------------
+for story in STORY_NAMES:
+    nii_files = [f for f in os.listdir(MAP_DIR) if f.startswith(f"corr_map_{story}_") and f.endswith(".nii.gz")]
+    nii_paths = [os.path.join(MAP_DIR, f) for f in nii_files]
+    if not nii_paths:
+        print(f"[Fig3] No maps found for {story}. Skipping.")
+        continue
+
+    imgs = [nib.load(p) for p in nii_paths]
+    data_stack = np.stack([img.get_fdata() for img in imgs], axis=0)
+
+    # Mask using first image to avoid averaging outside brain; silence warnings
+    try:
+        brain_mask = compute_brain_mask(imgs[0]).get_fdata().astype(bool)
+        data_stack[:, ~brain_mask] = np.nan
+    except Exception:
+        pass
+
+    stack = np.ma.masked_invalid(data_stack)
+    mean_data = stack.mean(axis=0).filled(0.0)
+    mean_img = nib.Nifti1Image(mean_data, affine=imgs[0].affine)
+
+    nii_out = os.path.join(GROUP_DIR, f"group_mean_corr_map_{story}.nii.gz")
+    png_out = os.path.join(GROUP_DIR, f"group_mean_corr_map_{story}.png")
+    mean_img.to_filename(nii_out)
+    disp = plotting.plot_stat_map(
+        mean_img, title=f"Group-level Correlation: {story}",
+        threshold=VTHRESH_GROUP, display_mode="ortho",
+        draw_cross=False, cut_coords=CUT_COORDS, cmap=CMAP, colorbar=True
+    )
+    disp.savefig(png_out); disp.close()
+    # also copy to figures/ as single images if you like
+    shutil.copyfile(png_out, os.path.join(FIG_DIR, f"figure3_{story}.png"))
+    print(f"[Fig3] Saved: {png_out}")
+
+# Build a 1x3 panel into results/figures
+stories_for_panel = [s for s in STORY_NAMES if os.path.exists(os.path.join(GROUP_DIR, f"group_mean_corr_map_{s}.nii.gz"))]
+if stories_for_panel:
+    vmin, vmax = -0.8, 0.8
+    fig, axes = plt.subplots(1, len(stories_for_panel), figsize=(15, 5), constrained_layout=True)
+    if len(stories_for_panel) == 1: axes = [axes]
+    for ax, s in zip(axes, stories_for_panel):
+        img = image.load_img(os.path.join(GROUP_DIR, f"group_mean_corr_map_{s}.nii.gz"))
+        plotting.plot_stat_map(img, threshold=VTHRESH_GROUP, display_mode="ortho",
+                               cut_coords=CUT_COORDS, draw_cross=False, cmap=CMAP,
+                               colorbar=False, vmin=vmin, vmax=vmax, axes=ax, annotate=False)
+        ax.set_title(s)
+    # shared colorbar
+    import matplotlib as mpl
+    norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)
+    sm = mpl.cm.ScalarMappable(cmap=CMAP, norm=norm); sm.set_array([])
+    fig.colorbar(sm, ax=axes, fraction=0.03, pad=0.02)
+    out_path = os.path.join(FIG_DIR, "figure3_group_mean_corr_maps.png")
+    fig.savefig(out_path, dpi=300, bbox_inches="tight"); plt.close(fig)
+    print(f"[Fig3 panel] Saved: {out_path}")
+
+# ----------------------------- FIGURE 4: Jittered dots -----------------------------
+df_fig4 = df.copy()
+roi_order = df_fig4["roi"].drop_duplicates().tolist()
+stories = df_fig4["story"].drop_duplicates().tolist()
+rng = np.random.default_rng(0)
+offsets = np.linspace(-0.25, 0.25, num=len(stories))
+xs_by_story = {s: [] for s in stories}
+ys_by_story = {s: [] for s in stories}
+
+for i, roi in enumerate(roi_order):
+    for j, s in enumerate(stories):
+        sub = df_fig4[(df_fig4["roi"] == roi) & (df_fig4["story"] == s)]
+        x_vals = i + offsets[j] + 0.04 * rng.normal(size=len(sub))
+        y_vals = sub["r"].to_numpy()
+        xs_by_story[s].extend(x_vals.tolist())
+        ys_by_story[s].extend(y_vals.tolist())
+
+plt.figure(figsize=(12, 6))
+for s in stories:
+    plt.scatter(xs_by_story[s], ys_by_story[s],
+                s=100, alpha=0.6, label=s)
+plt.axhline(0, color="black", linewidth=1, linestyle="--")
+
+xticklabels = [abbr_label(roi) for roi in roi_order]
+plt.xticks(ticks=range(len(roi_order)),
+           labels=xticklabels,
+           rotation=60, ha="right", fontsize=TICK_FS)
+plt.yticks(fontsize=TICK_FS)
+
+plt.xlabel("ROI", fontsize=LABEL_FS)
+plt.ylabel("Correlation (r)", fontsize=LABEL_FS)
+plt.title("Subject-level Correlations by ROI and Story", fontsize=TITLE_FS)
+plt.legend(title="Story", loc="lower right",
+           fontsize=TICK_FS, title_fontsize=LABEL_FS)
+
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "fig4_subject_dots_matplotlib.png"),
+            dpi=300, bbox_inches="tight")
+plt.close()
+
+# ---------------- FIGURE 5: Best voxelwise examples (saved separately: 5a–5c) ----------------
+all_maps = [os.path.join(MAP_DIR, f)
+            for f in os.listdir(MAP_DIR)
+            if f.startswith("corr_map_") and f.endswith(".nii.gz")]
+
+scored = [(os.path.basename(p), p, robust_score(p)) for p in all_maps]
+scored = [t for t in scored if np.isfinite(t[2])]
+scored.sort(key=lambda t: t[2], reverse=True)
+
+# top 3 subjects
+example_list = [(name.replace("corr_map_", "").replace(".nii.gz", ""), path)
+                for name, path, _ in scored[:3]]
+
+if example_list:
+    vmin, vmax = -0.8, 0.8
+    panel_letters = ["a", "b", "c"]
+
+    for (letter, (title, fpath)) in zip(panel_letters, example_list):
+        img = image.load_img(fpath)
+        disp = plotting.plot_stat_map(
+            img,
+            threshold=VTHRESH_SUBJ,
+            cut_coords=CUT_COORDS,
+            display_mode="ortho",
+            draw_cross=False,
+            cmap=CMAP,
+            colorbar=True,
+            vmin=vmin,
+            vmax=vmax,
+        )
+
+        out_name = f"figure5{letter}_{title}.png"
+        out_path = os.path.join(FIG_DIR, out_name)
+        plt.savefig(out_path, dpi=300, bbox_inches="tight")
+        plt.close()
+        print(f"[Fig5{letter}] Saved: {out_path}")
+else:
+    print("[Fig5] No example maps found to plot.")
+
+
+# ----------------------------- FIGURE 6: Paired ROI means (Actual vs Shuffled) -----------------------------
+perm_label = infer_perm_label(df)
+
+# ROI-wise mean correlations for actual and shuffled
+agg = (
+    df.groupby("roi")
+      .agg(
+          actual_r=("r", "mean"),
+          shuf_r=("mean_r_shuffled", "mean"),
+      )
+      .reset_index()
+)
+
+# sort by actual effect size (optional but nice)
+agg = agg.sort_values("actual_r", ascending=False).reset_index(drop=True)
+
+x = np.arange(len(agg))
+
+plt.figure(figsize=(12, 6))
+
+# draw a line for each ROI connecting shuffled -> actual
+for i, row in agg.iterrows():
+    plt.plot(
+        [x[i], x[i]],
+        [row["shuf_r"], row["actual_r"]],
+        color="gray",
+        linewidth=1,
+        alpha=0.7,
+        zorder=1,
+    )
+
+# plot the two conditions as points
+plt.scatter(x, agg["shuf_r"], color="tab:orange", label="Shuffled", zorder=3)
+plt.scatter(x, agg["actual_r"], color="tab:blue", label="Actual", zorder=3)
+
+# reference line at zero
+plt.axhline(0, color="black", linewidth=1, linestyle="--", alpha=0.7)
+
+# axes / labels / fonts
+plt.xticks(
+    x,
+    [abbr_label(r) for r in agg["roi"]],
+    rotation=45,
+    ha="right",
+    fontsize=TICK_FS,
+)
+plt.yticks(fontsize=TICK_FS)
+plt.xlabel("ROI", fontsize=LABEL_FS)
+plt.ylabel("Mean Pearson r", fontsize=LABEL_FS)
+plt.title(
+    f"Actual vs. Shuffled ROI Correlation (Paired ROI Means; {perm_label})",
+    fontsize=TITLE_FS,
+)
+plt.legend(fontsize=LEGEND_FS)
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "fig6_actual_vs_shuffled.png"),
+            dpi=400, bbox_inches="tight")
+plt.close()
+
+
+# ----------------------------- FIGURE 7: Lag tuning (SEM shading + seconds axis) -----------------------------
+if os.path.exists(CSV_LAG):
+    df_lag = pd.read_csv(CSV_LAG)
+    if {"roi","lag","r"} <= set(df_lag.columns):
+        df_lag["roi"] = df_lag["roi"].astype(str)
+        # pick top 5 ROIs by overall mean r across lags
+        selected_rois = (df_lag.groupby("roi")["r"].mean()
+                         .sort_values(ascending=False).head(5).index.tolist())
+
+        plt.figure(figsize=(12, 6))
+        plt.xlabel("Lag (TRs)", fontsize=LABEL_FS)
+        plt.ylabel("Mean Pearson r", fontsize=LABEL_FS)
+        plt.title("Lag Tuning Curves of Semantic Complexity Correlation (top ROIs)", fontsize=TITLE_FS)
+
+        for roi in selected_rois:
+            d = (df_lag[df_lag["roi"] == roi].groupby("lag")["r"]
+                    .agg(["mean","sem"]).sort_index())
+            plt.plot(d.index.values, d["mean"].values, marker='o', label=roi)
+            plt.fill_between(d.index.values, d["mean"]-d["sem"], d["mean"]+d["sem"], alpha=0.15)
+
+        all_lags = sorted(df_lag["lag"].dropna().unique().tolist())
+        plt.xticks(all_lags, [str(int(l)) for l in all_lags], fontsize=TICK_FS)
+        if 0 in all_lags:
+            plt.axvline(0, color="black", linewidth=1, linestyle="--")
+
+        TR = tr_mode(df, default=1.5)
+        ax = plt.gca()
+        def tr_to_sec(x): return x * TR
+        def sec_to_tr(s): return s / TR
+        sec_ax = ax.secondary_xaxis('top', functions=(tr_to_sec, sec_to_tr))
+        sec_ax.set_xlabel("Lag (seconds)", fontsize=LABEL_FS)
+        sec_ax.set_xticks(all_lags)
+        sec_ax.set_xticklabels([f"{l*TR:.1f}" for l in all_lags])
+
+        plt.grid(True)
+        plt.legend(loc="best", fontsize=TICK_FS)
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "fig7_lag_tuning_curves.png"), dpi=300, bbox_inches='tight')
+        plt.close()
+        print("[Fig7] Saved lag tuning figure.")
+    else:
+        print(f"[Fig7] {CSV_LAG} missing required columns (need roi, lag, r).")
+else:
+    print(f"[Fig7] Missing lag CSV: {CSV_LAG}")
+
+# ----------------------------- FIGURE 8: ROI × story (mean ± SD) -----------------------------
+storywise = df.groupby(["roi","story"]).agg(mean_r=("r","mean"), sd_r=("r","std")).reset_index()
+roi_means = storywise.groupby("roi")["mean_r"].mean().sort_values(ascending=False).head(10).index
+top_df = storywise[storywise["roi"].isin(roi_means)]
+pivot_mean = top_df.pivot(index="roi", columns="story", values="mean_r").loc[roi_means]
+pivot_sd   = top_df.pivot(index="roi", columns="story", values="sd_r").loc[roi_means]
+
+stories_order = list(pivot_mean.columns)
+x = np.arange(len(pivot_mean))
+width = 0.25 if len(stories_order) <= 4 else 0.8 / max(1, len(stories_order))
+
+plt.figure(figsize=(12, 6))
+for i, story in enumerate(stories_order):
+    means = pivot_mean[story]; sds = pivot_sd[story]
+    plt.bar(x + i*width, means, width=width, yerr=sds, capsize=4, label=story)
+
+plt.xticks(x + (len(stories_order)-1)*width/2, [abbr_label(r) for r in pivot_mean.index], rotation=45, ha='right', fontsize=TICK_FS)
+plt.ylabel("Mean Pearson r ± SD", fontsize=LABEL_FS)
+plt.xlabel("ROI", fontsize=LABEL_FS)
+plt.title("ROI-wise Correlation by Story (Mean ± SD)", fontsize=TITLE_FS)
+plt.legend(title="Story", fontsize=LEGEND_FS) 
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "fig8_storywise_roi_bars.png"), dpi=300, bbox_inches="tight")
+plt.close()
+
+print("All figures saved to:", FIG_DIR)

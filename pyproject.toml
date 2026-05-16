@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semantic-fmri"
+version = "0.1.0"
+description = "Semantic variation and fMRI analysis for naturalistic narrative comprehension"
+requires-python = ">=3.9"
+
+[tool.setuptools.packages.find]
+where = ["src"]

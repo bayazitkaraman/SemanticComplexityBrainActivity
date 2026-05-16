@@ -1,0 +1,4 @@
+run,model,cv_r,cv_r2
+gentle_motionQC_only,combined_pc1_to_pc5,0.02535662678059212,-7.395110821161445
+gentle_motion6_nohpf,combined_pc1_to_pc5,-0.002099260886690673,-6.744391181173469
+gentle_motion24_nohpf,combined_pc1_to_pc5,-0.01320436359177488,-5.330352839129039
