@@ -1,86 +1,46 @@
-# Choosing 8 Stories
+# Story Selection Criteria
 
-Recommended design:
-
-> 8 stories × all usable subjects, minimum 20 usable subjects per story.
-
-Do not choose stories based on brain results. Choose them using objective dataset criteria:
-
-1. BOLD files available.
-2. Events files available.
-3. At least 20 usable subjects.
-4. Story duration at least 5 minutes.
-5. Transcript/stimulus file available or manually recoverable.
-
-## Workflow
-
-### 1. Clone dataset metadata / small initial download
-
-```bash
-python scripts/download_narratives_data.py --method datalad --stories lucy --max-subjects-per-story 1
-```
-
-This creates:
+The final analysis uses eight stories from the public Narratives fMRI dataset:
 
 ```text
-data/openneuro/ds002345
+black
+bronx
+forgot
+milkyway
+notthefallintact
+piemanpni
+shapesphysical
+shapessocial
 ```
 
-### 2. Scan candidate stories
+## Selection goals
 
-```bash
-python scripts/scan_story_candidates.py \
-    --dataset-dir data/openneuro/ds002345 \
-    --min-subjects 20 \
-    --min-duration-min 5 \
-    --top-n 8 \
-    --output results/diagnostics/story_candidate_table.csv \
-    --selected-output configs/selected_stories.txt
-```
+The selected stories were chosen to support stable TR-level encoding analyses across multiple narratives and many subject--story scans.
 
-### 3. Review the selected stories
+The selection prioritized stories with:
 
-Open:
+1. Available fMRIPrep-preprocessed BOLD data.
+2. Available transcript and event timing files.
+3. Available Gentle word-level forced alignments.
+4. Sufficient usable subject--story scans after motion quality control.
+5. Story durations suitable for TR-level modeling.
+6. Compatibility with shared PCA across stories.
 
-```text
-results/diagnostics/story_candidate_table.csv
-configs/selected_stories.txt
-```
+## Why multiple stories were used
 
-### 4. Download selected stories
+Using multiple stories improves the analysis in several ways:
 
-```bash
-python scripts/download_selected_stories.py \
-    --dataset-dir data/openneuro/ds002345 \
-    --selected-stories configs/selected_stories.txt
-```
+- It reduces dependence on one narrative stimulus.
+- It allows story-level variability to be examined.
+- It supports shared PCA across different narrative contexts.
+- It makes the encoding results more general than a single-story analysis.
 
-### 5. Build the final subject list
+## Motion quality control
 
-On Windows PowerShell:
+The final sample was determined after motion quality control. Runs were excluded if they exceeded predefined framewise-displacement criteria. This produced the final set of 408 motion-QC-passed subject--story scans from 204 unique participants.
 
-```powershell
-$stories = Get-Content configs/selected_stories.txt
-python scripts/build_subject_list_from_openneuro.py --dataset-dir data/openneuro/ds002345 --stories $stories --output configs/stories_all.py
-```
+## Important principle
 
-On macOS/Linux/WSL:
+Stories were selected using data availability, timing quality, and sample-size criteria. They were not selected based on which stories produced the strongest GPT-2/fMRI effects.
 
-```bash
-python scripts/build_subject_list_from_openneuro.py \
-    --dataset-dir data/openneuro/ds002345 \
-    --stories $(cat configs/selected_stories.txt) \
-    --output configs/stories_all.py
-```
-
-### 6. Quick test
-
-```bash
-python scripts/run_revision_pipeline.py --quick --subject-list configs/stories_all.py
-```
-
-### 7. Full run
-
-```bash
-python scripts/run_revision_pipeline.py --subject-list configs/stories_all.py
-```
+This helps keep the analysis objective and avoids choosing stories based on the final encoding-model results.
