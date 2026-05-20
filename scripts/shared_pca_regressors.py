@@ -35,6 +35,7 @@ from sklearn.preprocessing import StandardScaler
 from semantic_fmri.utils import (
     compute_gpt2_embeddings_by_layer,
     compute_text_baselines,
+    compute_acoustic_control_baselines,
     ensure_dir,
     get_unique_stories,
     hrf_convolve,
@@ -79,6 +80,11 @@ def main():
         )[12]
 
         baseline_df = compute_text_baselines(word_chunks)
+        acoustic_df = compute_acoustic_control_baselines(story, tr=args.tr)
+        baseline_df = baseline_df.merge(acoustic_df, on="time_TR", how="left")
+        for col in acoustic_df.columns:
+            if col != "time_TR":
+                baseline_df[col] = baseline_df[col].fillna(0.0)
 
         story_data[story["name"]] = {
             "story": story,
@@ -121,9 +127,16 @@ def main():
         out_df["onset_sec"] = data["onset"]
         out_df["duration_sec"] = data["duration"]
 
-        # Raw and HRF-convolved lexical baselines
-        for col in ["word_count", "mean_char_len", "total_chars", "time_TR"]:
-            out_df[f"{col}_hrf"] = hrf_convolve(out_df[col].to_numpy(), tr=args.tr)
+        # Raw and HRF-convolved lexical/time/acoustic control baselines
+        baseline_cols = [
+            "word_count", "mean_char_len", "total_chars", "time_TR",
+            "speech_duration_sec", "mean_word_duration_sec",
+            "pause_fraction", "articulation_rate", "word_rate",
+            "audio_rms", "audio_abs_mean",
+        ]
+        for col in baseline_cols:
+            if col in out_df.columns:
+                out_df[f"{col}_hrf"] = hrf_convolve(out_df[col].to_numpy(), tr=args.tr)
 
         # Raw and HRF-convolved shared PCs
         for i in range(scores.shape[1]):
@@ -134,7 +147,9 @@ def main():
         # PC1 sanity correlations
         pc1 = out_df["PC1"].to_numpy()
         row = {"story": story_name}
-        for col in ["word_count", "mean_char_len", "total_chars", "time_TR"]:
+        for col in ["word_count", "mean_char_len", "total_chars", "time_TR", "speech_duration_sec", "pause_fraction", "audio_rms"]:
+            if col not in out_df.columns:
+                continue
             r, p = safe_pearson(pc1, out_df[col].to_numpy())
             row[f"r_PC1_{col}"] = r
             row[f"p_PC1_{col}"] = p

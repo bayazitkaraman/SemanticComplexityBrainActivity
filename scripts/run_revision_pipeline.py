@@ -30,6 +30,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--subject-list", default="configs/stories_small.py")
     parser.add_argument("--quick", action="store_true")
+    parser.add_argument("--include-acoustic", action="store_true",
+                        help="Run acoustic/speech-timing adjusted encoding models.")
     args = parser.parse_args()
 
     py = sys.executable
@@ -43,6 +45,8 @@ def main():
     if args.quick:
         layer_cmd.append("--quick")
         enc_cmd.append("--quick")
+    if args.include_acoustic:
+        enc_cmd.append("--include-acoustic")
 
     run(layer_cmd)
     run(enc_cmd)

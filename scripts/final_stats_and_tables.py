@@ -154,7 +154,8 @@ def make_dataset_table(subject_list, motion_qc_file, output_dir):
 
 
 def model_summary_table(primary_df, output_dir):
-    summary = primary_df.groupby("model")[["cv_r", "cv_r2"]].agg(["mean", "median", "std", "sem", "count"])
+    metric_cols = [c for c in ["cv_r", "cv_r2", "cv_r2_train_mean", "cv_r2_fold_mean"] if c in primary_df.columns]
+    summary = primary_df.groupby("model")[metric_cols].agg(["mean", "median", "std", "sem", "count"])
     summary.columns = ["_".join(c) for c in summary.columns]
     summary = summary.reset_index().sort_values("cv_r_mean", ascending=False)
     summary.to_csv(output_dir / "table2_primary_model_comparison.csv", index=False)
@@ -169,6 +170,11 @@ def paired_delta_tables(primary_df, output_dir, seed=42):
         ("combined_pc1", "baseline_only"),
         ("gpt2_pc1_to_pc5", "baseline_only"),
         ("gpt2_pc1", "baseline_only"),
+        # Optional acoustic/speech-timing adjusted comparisons. These are only
+        # written when roi_encoding_model_comparison.py was run with
+        # --include-acoustic and the columns exist.
+        ("combined_acoustic_pc1_to_pc5", "baseline_acoustic_only"),
+        ("combined_acoustic_pc1", "baseline_acoustic_only"),
     ]
     rows = []
     for model, base in planned:
@@ -199,6 +205,28 @@ def paired_delta_tables(primary_df, output_dir, seed=42):
         roi_stats = roi_stats.sort_values("mean", ascending=False)
     roi_stats.to_csv(output_dir / "table4_roi_delta_stats_combined_pc1_to_pc5_vs_baseline.csv", index=False)
     return delta_summary, roi_stats, pivot
+
+
+
+
+def participant_level_robustness_table(paired, output_dir, seed=42):
+    """Summarize the primary delta after averaging repeated story/ROI rows within participant."""
+    target = "delta_combined_pc1_to_pc5_minus_baseline_only"
+    if target not in paired.columns or "subject" not in paired.columns:
+        return pd.DataFrame()
+    participant = (
+        paired.groupby("subject", as_index=False)[target]
+        .mean()
+        .rename(columns={target: "mean_delta_cv_r"})
+    )
+    stats = summarize_values(participant["mean_delta_cv_r"], seed=seed)
+    out = pd.DataFrame([{
+        "comparison": "participant-averaged combined_pc1_to_pc5 - baseline_only",
+        **stats,
+    }])
+    participant.to_csv(output_dir / "table3c_participant_level_primary_delta_values.csv", index=False)
+    out.to_csv(output_dir / "table3c_participant_level_primary_delta_stats.csv", index=False)
+    return out
 
 
 def layer_tables(layer_folder, output_dir):
@@ -282,6 +310,11 @@ def write_markdown_summary(output_dir, dataset_table, model_summary, delta_summa
     if not delta_summary.empty:
         md.append("\n\n## Planned paired model delta statistics\n")
         md.append(delta_summary.to_markdown(index=False))
+    participant_path = output_dir / "table3c_participant_level_primary_delta_stats.csv"
+    if participant_path.exists():
+        participant_summary = pd.read_csv(participant_path)
+        md.append("\n\n## Participant-level robustness check\n")
+        md.append(participant_summary.to_markdown(index=False))
     if not roi_stats.empty:
         md.append("\n\n## Top ROI deltas: combined PC1-PC5 minus baseline\n")
         cols = ["roi", "n", "mean", "median", "ci95_low", "ci95_high", "p_wilcoxon_greater", "q_wilcoxon_greater_fdr"]
@@ -319,6 +352,7 @@ def main():
     dataset = make_dataset_table(args.subject_list, args.motion_qc_file, out)
     model_summary = model_summary_table(primary_df, out)
     delta_summary, roi_stats, paired = paired_delta_tables(primary_df, out, seed=args.seed)
+    participant_summary = participant_level_robustness_table(paired, out, seed=args.seed)
     layer_outputs = layer_tables(args.primary_layer_dir, out)
     sensitivity_tables(default_run_map(), out)
     motion_effect_check(paired, args.motion_qc_file, out)

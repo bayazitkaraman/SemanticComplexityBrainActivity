@@ -36,6 +36,13 @@
 | gpt2_pc1 - baseline_only            | gpt2_pc1            | baseline_only | 6936 | -0.036421   | -0.0183558   | 0.155538  | 0.00186759  | -0.0400455  | -0.0327577   | -19.5016  |         1.67159e-82 |     8.98627e+06 |          1           |
 
 
+## Participant-level robustness check
+
+| comparison                                               |   n |       mean |    median |       std |        sem |    ci95_low |   ci95_high |   t_stat |   p_ttest_two_sided |   wilcoxon_stat |   p_wilcoxon_greater |
+|:---------------------------------------------------------|----:|-----------:|----------:|----------:|-----------:|------------:|------------:|---------:|--------------------:|----------------:|---------------------:|
+| participant-averaged combined_pc1_to_pc5 - baseline_only | 204 | 0.00588806 | 0.0112935 | 0.0682923 | 0.00478141 | -0.00326905 |   0.0148744 |  1.23145 |             0.21958 |           12627 |           0.00504348 |
+
+
 ## Top ROI deltas: combined PC1-PC5 minus baseline
 
 | roi                                          |   n |       mean |     median |    ci95_low |   ci95_high |   p_wilcoxon_greater |   q_wilcoxon_greater_fdr |

@@ -1,4 +1,3 @@
-@'
 # Python
 __pycache__/
 *.py[cod]
@@ -89,6 +88,14 @@ results/maps/*
 !results/final_figures/
 !results/final_figures/**
 
+# Local-path-containing diagnostic table
+results/final_tables/table8b_run_level_delta_with_motion_qc.csv
+
+# Generated local-path configs/tables
+configs/stories_all_fmriprep.py
+configs/stories_all_fmriprep_confounds.py
+configs/stories_all_fmriprep_confounds_motionfiltered.py
+
 # LaTeX build products
 *.aux
 *.bbl
@@ -98,12 +105,3 @@ results/maps/*
 *.out
 *.synctex.gz
 *.toc
-'@ | Set-Content -Encoding UTF8 .gitignore
-# Local-path-containing diagnostic table
-results/final_tables/table8b_run_level_delta_with_motion_qc.csv
-
-# Generated local-path configs/tables
-configs/stories_all_fmriprep.py
-configs/stories_all_fmriprep_confounds.py
-configs/stories_all_fmriprep_confounds_motionfiltered.py
-results/final_tables/table8b_run_level_delta_with_motion_qc.csv

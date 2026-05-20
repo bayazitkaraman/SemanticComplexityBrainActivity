@@ -405,6 +405,226 @@ def compute_text_baselines(word_chunks: Sequence[str]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+# ---------------------------------------------------------------------
+# Acoustic / speech-timing control regressors
+# ---------------------------------------------------------------------
+
+ACOUSTIC_CONTROL_COLUMNS = [
+    "speech_duration_sec",
+    "mean_word_duration_sec",
+    "pause_fraction",
+    "articulation_rate",
+    "word_rate",
+    "audio_rms",
+    "audio_abs_mean",
+]
+
+
+def infer_audio_file_for_story(story: Dict) -> str | None:
+    """
+    Return an audio file path for a story when one is available.
+
+    Priority:
+    1. story["audio_file"] if provided by the subject-list builder.
+    2. A small set of common local stimulus locations.
+
+    The audio controls are optional. If no audio file is found, the pipeline still
+    saves speech-timing controls derived from Gentle word timings.
+    """
+    if "audio_file" in story and story["audio_file"]:
+        path = normalize_path(story["audio_file"])
+        if os.path.exists(path):
+            return path
+
+    name = story_name_to_gentle_name(story["name"])
+    candidates = []
+    for root in [
+        os.environ.get("SEMANTIC_FMRI_AUDIO_DIR", ""),
+        "data/audio",
+        "data/stimuli/audio",
+        "data/openneuro/ds002345/stimuli/audio",
+        "data/openneuro/ds002345/stimuli/stimuli",
+    ]:
+        if not root:
+            continue
+        root_path = Path(normalize_path(root))
+        for ext in [".wav", ".WAV"]:
+            candidates.extend([
+                root_path / f"{name}{ext}",
+                root_path / story["name"] / f"{name}{ext}",
+                root_path / story["name"] / f"{story['name']}{ext}",
+            ])
+
+    for path in candidates:
+        if path.exists():
+            return str(path)
+    return None
+
+
+def _normalize_audio_array(audio: np.ndarray) -> np.ndarray:
+    """Convert integer or floating audio samples to mono float32 in approximately [-1, 1]."""
+    x = np.asarray(audio)
+    if x.ndim == 2:
+        x = x.mean(axis=1)
+    if np.issubdtype(x.dtype, np.integer):
+        info = np.iinfo(x.dtype)
+        denom = max(abs(info.min), abs(info.max))
+        x = x.astype(np.float32) / float(denom)
+    else:
+        x = x.astype(np.float32)
+        max_abs = float(np.nanmax(np.abs(x))) if x.size else 0.0
+        if max_abs > 1.5:
+            x = x / max_abs
+    return np.nan_to_num(x, nan=0.0, posinf=0.0, neginf=0.0)
+
+
+def compute_audio_envelope_features_by_tr(
+    audio_file: str | os.PathLike,
+    duration: float,
+    tr: float = 1.5,
+    origin: float = 0.0,
+    n_trs: int | None = None,
+) -> pd.DataFrame:
+    """
+    Compute simple waveform-level acoustic controls at TR resolution.
+
+    Currently supports WAV files through scipy.io.wavfile. The returned features
+    are intentionally simple and robust: RMS amplitude and mean absolute amplitude
+    within each TR window. The `origin` argument can align the window to the same
+    story onset chosen from Gentle timing.
+    """
+    from scipy.io import wavfile
+
+    audio_file = normalize_path(audio_file)
+    sample_rate, audio = wavfile.read(audio_file)
+    x = _normalize_audio_array(audio)
+
+    if n_trs is None:
+        n_trs = int(duration // tr)
+
+    rows = []
+    for i in range(n_trs):
+        start_sec = max(0.0, origin + i * tr)
+        end_sec = max(0.0, origin + (i + 1) * tr)
+        start = int(round(start_sec * sample_rate))
+        end = int(round(end_sec * sample_rate))
+        seg = x[start:min(end, len(x))]
+        if seg.size == 0:
+            rms = 0.0
+            abs_mean = 0.0
+        else:
+            rms = float(np.sqrt(np.mean(seg ** 2)))
+            abs_mean = float(np.mean(np.abs(seg)))
+        rows.append({
+            "time_TR": i,
+            "audio_rms": rms,
+            "audio_abs_mean": abs_mean,
+        })
+
+    return pd.DataFrame(rows)
+
+
+def compute_gentle_speech_timing_features(
+    story: Dict,
+    tr: float = 1.5,
+) -> tuple[pd.DataFrame, float | None]:
+    """
+    Compute speech-timing controls from Gentle word-level alignments.
+
+    These are not a substitute for full acoustic/prosodic modeling, but they help
+    control for speech density, pauses, and word-duration variation. If real audio
+    is available, `compute_audio_envelope_features_by_tr` can add waveform-level
+    amplitude controls as well.
+    """
+    onset, duration = read_story_event(story["events_file"])
+    n_trs = int(duration // tr)
+    rows = [
+        {
+            "time_TR": i,
+            "speech_duration_sec": 0.0,
+            "mean_word_duration_sec": 0.0,
+            "pause_fraction": 1.0,
+            "articulation_rate": 0.0,
+            "word_rate": 0.0,
+        }
+        for i in range(n_trs)
+    ]
+    align_json = infer_gentle_align_json(story)
+    if align_json is None:
+        return pd.DataFrame(rows), None
+
+    words = load_gentle_words(align_json)
+    origin = choose_gentle_origin(words, duration)
+
+    durations_by_bin: list[list[float]] = [[] for _ in range(n_trs)]
+    for w in words:
+        start = float(w["start"]) - origin
+        end = float(w["end"]) - origin
+        midpoint = (start + end) / 2.0
+        if midpoint < 0 or midpoint >= duration:
+            continue
+        idx = int(midpoint // tr)
+        if 0 <= idx < n_trs:
+            # Use clipped duration so that very rare boundary cases cannot exceed TR.
+            clipped_start = max(0.0, min(tr, start - idx * tr))
+            clipped_end = max(0.0, min(tr, end - idx * tr))
+            dur = max(0.0, clipped_end - clipped_start)
+            if dur == 0.0:
+                dur = max(0.0, float(w["end"]) - float(w["start"]))
+            durations_by_bin[idx].append(dur)
+
+    for i, durs in enumerate(durations_by_bin):
+        n_words = len(durs)
+        speech_dur = float(np.sum(durs)) if durs else 0.0
+        speech_dur_clipped = min(speech_dur, tr)
+        rows[i].update({
+            "speech_duration_sec": speech_dur,
+            "mean_word_duration_sec": float(np.mean(durs)) if durs else 0.0,
+            "pause_fraction": float(max(0.0, 1.0 - speech_dur_clipped / tr)),
+            "articulation_rate": float(n_words / speech_dur) if speech_dur > 0 else 0.0,
+            "word_rate": float(n_words / tr),
+        })
+
+    return pd.DataFrame(rows), origin
+
+
+def compute_acoustic_control_baselines(
+    story: Dict,
+    tr: float = 1.5,
+) -> pd.DataFrame:
+    """
+    Create optional acoustic/speech-timing predictors at TR resolution.
+
+    Always attempts Gentle-derived speech-timing features. If a WAV audio file is
+    available, it also adds RMS and mean-absolute-amplitude predictors. Missing
+    audio is not an error; the analysis can still run with timing controls.
+    """
+    onset, duration = read_story_event(story["events_file"])
+    n_trs = int(duration // tr)
+    timing_df, gentle_origin = compute_gentle_speech_timing_features(story, tr=tr)
+
+    audio_path = infer_audio_file_for_story(story)
+    if audio_path is not None:
+        try:
+            audio_df = compute_audio_envelope_features_by_tr(
+                audio_path,
+                duration=duration,
+                tr=tr,
+                origin=gentle_origin or 0.0,
+                n_trs=n_trs,
+            )
+            timing_df = timing_df.merge(audio_df, on="time_TR", how="left")
+        except Exception as e:
+            print(f"WARNING: Could not compute audio envelope for {story['name']}: {e}")
+
+    for col in ACOUSTIC_CONTROL_COLUMNS:
+        if col not in timing_df.columns:
+            timing_df[col] = 0.0
+        timing_df[col] = timing_df[col].replace([np.inf, -np.inf], np.nan).fillna(0.0)
+
+    return timing_df[["time_TR"] + ACOUSTIC_CONTROL_COLUMNS]
+
+
 def safe_pearson(x: Sequence[float], y: Sequence[float]) -> Tuple[float, float]:
     """Pearson correlation with NaN and zero-variance protection."""
     x = np.asarray(x, dtype=float)
@@ -668,14 +888,14 @@ def get_env_cleaning_strategy() -> str:
         $env:SEMANTIC_FMRI_HIGH_PASS="none"
 
     Supported strategies:
-        none
+        none          # default; matches primary motion-QC-only analysis
         motion6
         motion24
         motion24_wmcsf
         acompcor6
         full
     """
-    return os.environ.get("SEMANTIC_FMRI_CONFOUND_STRATEGY", "motion24").strip().lower()
+    return os.environ.get("SEMANTIC_FMRI_CONFOUND_STRATEGY", "none").strip().lower()
 
 
 def get_env_high_pass(default: float | None = None) -> float | None:
@@ -1026,8 +1246,9 @@ def extract_roi_timeseries(
             roi_matrix[t, j] = np.nanmean(vol[roi_mask])
 
     # Clean full run before extracting story segment.
-    # Defaults are intentionally moderate: motion24 and no high-pass.
-    # You can change behavior with environment variables:
+    # Default is intentionally conservative for the manuscript primary analysis:
+    # no additional nuisance regression after fMRIPrep preprocessing and motion QC.
+    # You can change behavior with environment variables for sensitivity analyses:
     #   SEMANTIC_FMRI_CONFOUND_STRATEGY=motion6|motion24|motion24_wmcsf|acompcor6|full|none
     #   SEMANTIC_FMRI_HIGH_PASS=none|0.008
     confounds = None
