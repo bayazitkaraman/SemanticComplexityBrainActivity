@@ -1,16 +1,19 @@
-# Revision analysis notes
+# Analysis Notes
 
-This organized version is designed to address the main reviewer concerns:
+This project evaluates whether low-dimensional GPT-2 contextual semantic predictors improve fMRI encoding during naturalistic spoken narrative comprehension.
 
-1. Use the full available dataset.
-2. Explain why PC1 is meaningful with direct sanity checks.
-3. Avoid story-specific PC1 ambiguity by fitting shared PCA across stories.
-4. Compare GPT-2 layers rather than assuming the final layer is optimal.
-5. Compare GPT-2 predictors against simple lexical/time baselines.
-6. Report whether GPT-2 adds predictive value beyond baselines.
+The main analysis goals are:
 
-The key manuscript claim should be modest:
+1. Use the selected full Narratives dataset stories with all usable subject--story scans.
+2. Align spoken words to fMRI TRs using Gentle forced-alignment files.
+3. Fit shared PCA across stories so GPT-2 component dimensions are comparable.
+4. Compare lexical/time baseline models, GPT-2-only models, and combined lexical-plus-GPT-2 models.
+5. Evaluate GPT-2 layer-wise alignment as a descriptive analysis.
+6. Test motion-quality-control and nuisance-regression sensitivity.
+7. Test acoustic-envelope and speech-density sensitivity controls.
 
-> A low-dimensional GPT-2 contextual semantic-variation signal predicts narrative-related BOLD responses beyond simple lexical and temporal baselines.
+The main interpretation should remain modest:
 
-Avoid overclaiming that PC1 is a complete definition of semantic complexity.
+> A compact GPT-2 contextual semantic representation adds small but reliable predictive information beyond lexical and temporal baseline features during naturalistic narrative comprehension.
+
+The analysis should not be interpreted as a complete model of semantic comprehension, a complete prosodic/acoustic model, or a strong semantic decoding result.
