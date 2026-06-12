@@ -70,6 +70,20 @@ scripts/run_revision_pipeline.py
 
 Runs the main analysis pipeline. The filename is historical; this is the current full analysis pipeline.
 
+```text
+scripts/jnl_additional_robustness.py
+scripts/jnl_pc_count_sensitivity.py
+scripts/jnl_circular_shift_null.py
+```
+
+Generate the added Journal of Neurolinguistics robustness checks: participant/story summaries, PC-count sensitivity, leave-one-story-out tests, nuisance-strategy deltas, and circular-shift null controls.
+
+```text
+scripts/static_embedding_regressors.py
+```
+
+Creates static or contextual BERT embedding PCA regressors for exploratory embedding-model comparisons.
+
 ## Recommended run order
 
 Primary analysis:

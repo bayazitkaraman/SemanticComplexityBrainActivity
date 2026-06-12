@@ -54,6 +54,10 @@ Older/
 results_quick_backup/
 PATCH_V*_README.md
 
+# Local journal submission packages and manuscript PDFs
+Submission (Brain and Language)/
+Submission (Journal of Neurolinguistics)/
+
 # Intermediate result folders
 results/diagnostics/
 results/regressors/
@@ -69,6 +73,15 @@ results/revision_figures/
 results/revision_figures_gentle_motionQC_only/
 results/revision_figures_gentle_motion6_nohpf/
 results/revision_figures_gentle_motion24_nohpf/
+results/journal_neurolinguistics_robustness/
+results/model_comparison_contextual_bert_base_uncased_gentle_motionQC_only/
+results/model_comparison_static_bert_base_uncased_gentle_motionQC_only/
+results/model_comparison_static_bert_uniform_smoke/
+results/regressors_contextual_bert_base_uncased_gentle_motionfiltered/
+results/regressors_contextual_bert_uniform_smoke/
+results/regressors_static_bert_base_uncased_gentle/
+results/regressors_static_bert_base_uncased_gentle_motionfiltered/
+results/regressors_static_bert_base_uncased_uniform_smoke/
 
 # Ignore most old result folders but keep final paper outputs and placeholder folders
 results/csv/*

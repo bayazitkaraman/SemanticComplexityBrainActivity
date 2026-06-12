@@ -10,7 +10,7 @@ Data files, virtual environments, WAV files, and large neuroimaging outputs are 
 
 ## Project goals
 
-This project supports the final Brain and Language submission analyses:
+This project supports the final Journal of Neurolinguistics submission analyses:
 
 1. Use the full selected Narratives dataset instead of a small subset.
 2. Align spoken words to fMRI TRs using Gentle forced-alignment files.
@@ -20,7 +20,8 @@ This project supports the final Brain and Language submission analyses:
 6. Evaluate whether GPT-2 PC1--PC5 improves prediction beyond lexical and temporal baseline features.
 7. Test whether effects are robust to motion-quality-control and nuisance-regression sensitivity checks.
 8. Add acoustic-envelope and speech-density sensitivity controls.
-9. Generate final tables and figures for the manuscript and supplementary material.
+9. Add PC-count, leave-one-story-out, circular-shift null, and embedding-model comparison checks.
+10. Generate final tables and figures for the manuscript and supplementary material.
 
 ---
 
@@ -333,6 +334,20 @@ scripts/audit_results.py
 
 scripts/run_revision_pipeline.py
     Runs the main revision-analysis pipeline.
+
+scripts/jnl_additional_robustness.py
+    Creates Journal of Neurolinguistics robustness tables, including
+    participant-level, story-level, leave-one-story-out, and nuisance-strategy checks.
+
+scripts/jnl_pc_count_sensitivity.py
+    Evaluates combined lexical-plus-GPT-2 models using PC1 through PC1--PC10.
+
+scripts/jnl_circular_shift_null.py
+    Runs circular-shift null tests for the temporal alignment of GPT-2 PC regressors.
+
+scripts/static_embedding_regressors.py
+    Creates static or contextual BERT embedding PCA regressors for exploratory
+    embedding-model comparisons.
 ```
 
 ---
@@ -367,6 +382,11 @@ results/final_tables/table4_roi_delta_stats_combined_pc1_to_pc5_vs_baseline.csv
 results/final_tables/table5_layer_overall_summary.csv
 results/final_tables/table7_sensitivity_model_comparison_by_strategy.csv
 results/final_tables/table8_motion_correlation_with_gpt2_delta.csv
+results/final_tables/table9_pc_count_sensitivity_scan_stats.csv
+results/final_tables/table10_motion_strategy_scan_level_delta_tests.csv
+results/final_tables/table11_leave_one_story_out_primary_delta.csv
+results/final_tables/table12_circular_shift_null_summary.csv
+results/final_tables/table13_embedding_model_comparison_summary.csv
 ```
 
 ---
