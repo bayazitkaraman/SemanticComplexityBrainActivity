@@ -1,0 +1,2 @@
+analysis,model,n_subject_story_scans,n_subjects,n_stories,estimate,se,z,p,p_two_sided,p_one_sided_positive,ci95_low,ci95_high,converged,warnings
+primary_delta,y ~ 1 + (1 | subject) + (1 | story),408,204,8,0.016374287189989303,0.008981303368778726,1.8231526670071576,0.0682802716764436,0.0682802716764436,0.0341401358382218,-0.001228743947045259,0.033977318327023866,True,lbfgs: The MLE may be on the boundary of the parameter space.

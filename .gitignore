@@ -51,6 +51,7 @@ results/model_comparison_v3_log.txt
 
 # Local backups / old patch files
 Older/
+v2/
 results_quick_backup/
 PATCH_V*_README.md
 

@@ -1,5 +1,5 @@
 """
-Audit generated result files for the Brain and Language submission.
+Audit generated result files for the Journal of Neurolinguistics submission.
 
 This script does not rerun the analysis. It checks whether the final tables and
 figures needed for the manuscript/supplement exist and whether key counts are
@@ -24,12 +24,22 @@ EXPECTED_FINAL_TABLES = [
     "table2_primary_model_comparison.csv",
     "table3_primary_paired_model_delta_stats.csv",
     "table3b_primary_paired_model_values.csv",
+    "table3c_participant_level_primary_delta_stats.csv",
+    "table3c_participant_level_primary_delta_values.csv",
     "table4_roi_delta_stats_combined_pc1_to_pc5_vs_baseline.csv",
     "table5_layer_overall_summary.csv",
     "table6_top_rois_best_layer.csv",
     "table7_sensitivity_model_comparison_by_strategy.csv",
     "table7b_sensitivity_best_model_by_strategy.csv",
     "table8_motion_correlation_with_gpt2_delta.csv",
+    "table9_pc_count_sensitivity_scan_stats.csv",
+    "table9b_pc_count_sensitivity_participant_stats.csv",
+    "table10_motion_strategy_scan_level_delta_tests.csv",
+    "table11_leave_one_story_out_primary_delta.csv",
+    "table12_circular_shift_null_summary.csv",
+    "table13_embedding_model_comparison_summary.csv",
+    "table13b_embedding_model_paired_scan_comparisons.csv",
+    "table21_rich_audio_control_sensitivity.csv",
 ]
 
 EXPECTED_FINAL_FIGURES = [

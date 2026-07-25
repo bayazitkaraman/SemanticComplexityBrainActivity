@@ -1,8 +1,8 @@
 # Semantic Complexity and Brain Activity
 
-This repository contains a reproducible Python pipeline for analyzing how low-dimensional GPT-2 contextual semantic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
+This repository contains a reproducible Python pipeline for analyzing how low-dimensional GPT-2-derived linguistic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
 
-The final manuscript analysis uses the public **Narratives** fMRI dataset, Gentle word-level alignments, GPT-2 contextual embeddings, shared PCA-derived semantic regressors, HRF convolution, ROI-level encoding models, motion-quality-control checks, and acoustic-envelope sensitivity analyses.
+The final manuscript analysis uses the public **Narratives** fMRI dataset, Gentle word-level alignments, GPT-2 contextual embeddings, shared PCA-derived linguistic regressors, HRF convolution, ROI-level encoding models, motion-quality-control checks, acoustic-envelope/speech-density controls, and richer audio-control sensitivity analyses.
 
 Data files, virtual environments, WAV files, and large neuroimaging outputs are intentionally **not** stored in this repository.
 
@@ -19,7 +19,7 @@ This project supports the final Journal of Neurolinguistics submission analyses:
 5. Compare lexical/time baseline models, GPT-2-only models, and combined lexical-plus-GPT-2 models.
 6. Evaluate whether GPT-2 PC1--PC5 improves prediction beyond lexical and temporal baseline features.
 7. Test whether effects are robust to motion-quality-control and nuisance-regression sensitivity checks.
-8. Add acoustic-envelope and speech-density sensitivity controls.
+8. Add acoustic-envelope, speech-density, and richer audio-control sensitivity checks.
 9. Add PC-count, leave-one-story-out, circular-shift null, and embedding-model comparison checks.
 10. Generate final tables and figures for the manuscript and supplementary material.
 
@@ -308,6 +308,18 @@ python scripts/final_stats_and_tables.py
 python scripts/audit_results.py
 ```
 
+Run the richer waveform/spectral/coarse-voicing audio-control analysis used in the Journal of Neurolinguistics revision:
+
+```bash
+python scripts/jnl_rich_audio_controls.py --subject-list configs/stories_all_fmriprep_confounds_motionfiltered.py --gentle-root /path/to/narratives/stimuli/gentle
+```
+
+Windows PowerShell example:
+
+```powershell
+python scripts\jnl_rich_audio_controls.py --subject-list configs\stories_all_fmriprep_confounds_motionfiltered.py --gentle-root "D:\OpenNeuroData\narratives\stimuli\gentle"
+```
+
 ---
 
 ## Main scripts
@@ -348,6 +360,10 @@ scripts/jnl_circular_shift_null.py
 scripts/static_embedding_regressors.py
     Creates static or contextual BERT embedding PCA regressors for exploratory
     embedding-model comparisons.
+
+scripts/jnl_rich_audio_controls.py
+    Runs the richer waveform/spectral/coarse-voicing audio-control sensitivity
+    analysis and writes table21_rich_audio_control_sensitivity.csv.
 ```
 
 ---
@@ -378,15 +394,19 @@ Key final tables include:
 results/final_tables/table1_dataset_story_counts.csv
 results/final_tables/table2_primary_model_comparison.csv
 results/final_tables/table3_primary_paired_model_delta_stats.csv
+results/final_tables/table3c_participant_level_primary_delta_stats.csv
 results/final_tables/table4_roi_delta_stats_combined_pc1_to_pc5_vs_baseline.csv
 results/final_tables/table5_layer_overall_summary.csv
 results/final_tables/table7_sensitivity_model_comparison_by_strategy.csv
 results/final_tables/table8_motion_correlation_with_gpt2_delta.csv
 results/final_tables/table9_pc_count_sensitivity_scan_stats.csv
+results/final_tables/table9b_pc_count_sensitivity_participant_stats.csv
 results/final_tables/table10_motion_strategy_scan_level_delta_tests.csv
 results/final_tables/table11_leave_one_story_out_primary_delta.csv
 results/final_tables/table12_circular_shift_null_summary.csv
 results/final_tables/table13_embedding_model_comparison_summary.csv
+results/final_tables/table13b_embedding_model_paired_scan_comparisons.csv
+results/final_tables/table21_rich_audio_control_sensitivity.csv
 ```
 
 ---
@@ -417,6 +437,16 @@ combined_acoustic_pc1_to_pc5
 ```
 
 where the acoustic baseline includes lexical, temporal, speech-density, and waveform-envelope predictors.
+
+The richer audio-control sensitivity analysis compares:
+
+```text
+baseline_rich_audio
+vs.
+combined_rich_audio_gpt2_pc1_to_pc5
+```
+
+where the richer baseline includes lexical/time predictors, acoustic-envelope/speech-density controls, and additional waveform, spectral, and coarse voicing-related predictors.
 
 The primary performance metric is:
 

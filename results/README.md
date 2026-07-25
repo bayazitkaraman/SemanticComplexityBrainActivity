@@ -12,5 +12,6 @@ results/final_figures/
 
 The final tables include the primary GPT-2 encoding results plus the added
 Journal of Neurolinguistics robustness checks: PC-count sensitivity, nuisance
-strategy deltas, leave-one-story-out, circular-shift null summary, and
-exploratory BERT embedding comparisons.
+strategy deltas, leave-one-story-out, circular-shift null summary,
+exploratory BERT embedding comparisons, and the richer audio-control
+sensitivity table.
