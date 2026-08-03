@@ -409,6 +409,14 @@ def evaluate_replication(
     for story in HELDOUT_STORIES:
         targets, roi_names = load_story_targets(cache_dir, story)
         design = heldout_design(regressor_dir, story)
+        target_length = targets.shape[1]
+        for name, values in design.items():
+            if len(values) < target_length:
+                raise ValueError(
+                    f"Design {name} is shorter than the aligned target for {story}: "
+                    f"{len(values)} < {target_length}"
+                )
+            design[name] = values[:target_length]
         story_data[story] = (targets, roi_names, design)
         print(f"Loaded held-out analysis data: {story} {targets.shape}", flush=True)
 

@@ -346,7 +346,15 @@ def write_summary_markdown(
         "",
         paired.to_markdown(index=False),
         "",
-        "Across all 11 stories, right-minus-left differences were nominally positive for full-group, participant split-half, and leave-one-participant-out analyses. None survived FDR correction across the nine scope-by-analysis paired tests (smallest q=0.131672). The development and held-out contrasts were also not significant when evaluated separately, so this result does not establish lateralization.",
+        (
+            "Across all 11 stories, right-minus-left differences were nominally "
+            "positive for full-group, participant split-half, and leave-one-participant-out "
+            "analyses. None survived FDR correction across the nine scope-by-analysis "
+            "paired tests (smallest q="
+            f"{paired['p_fdr_across_nine_tests'].min():.6f}). The development and "
+            "held-out contrasts were also not significant when evaluated separately, "
+            "so this result does not establish lateralization."
+        ),
         "",
     ]
     path.write_text("\n".join(lines), encoding="utf-8")

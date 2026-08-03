@@ -58,12 +58,18 @@ def standardize_subject_timeseries(y: np.ndarray) -> np.ndarray:
     return (y - mean) / sd
 
 
-def load_story_targets(cache_dir: Path, story: str) -> tuple[np.ndarray, list[str]]:
+def load_story_targets(
+    cache_dir: Path,
+    story: str,
+    standardize: bool = True,
+) -> tuple[np.ndarray, list[str]]:
     files = sorted(cache_dir.glob(f"{story}_*.npz"))
     if not files:
         raise FileNotFoundError(f"No ROI cache files found for {story} in {cache_dir}")
 
     subject_targets = []
+    subject_trs = []
+    subject_onsets = []
     roi_names: list[str] | None = None
     for path in files:
         cached = np.load(path, allow_pickle=False)
@@ -72,12 +78,40 @@ def load_story_targets(cache_dir: Path, story: str) -> tuple[np.ndarray, list[st
             roi_names = current_names
         elif current_names != roi_names:
             raise ValueError(f"ROI order differs in {path}")
-        subject_targets.append(
-            standardize_subject_timeseries(np.asarray(cached["y_matrix"], dtype=float))
+        subject_targets.append(np.asarray(cached["y_matrix"], dtype=float))
+        subject_trs.append(float(cached["bold_tr"]))
+        subject_onsets.append(float(cached["onset"]))
+
+    # Cached segments begin at floor(onset / TR). Put every participant on the
+    # common story-relative 1.5-s grid before averaging across listeners. This
+    # handles fractional event onsets and the 1.52-s Milky Way acquisitions.
+    source_times = []
+    minimum_supported_end = np.inf
+    for target, tr, onset in zip(subject_targets, subject_trs, subject_onsets):
+        segment_start = int(onset // tr)
+        onset_offset = onset - segment_start * tr
+        times = np.arange(len(target), dtype=float) * tr - onset_offset
+        source_times.append(times)
+        minimum_supported_end = min(minimum_supported_end, float(times[-1]))
+
+    common_tr = 1.5
+    n_timepoints = int(np.floor((minimum_supported_end + 1e-10) / common_tr)) + 1
+    common_times = np.arange(n_timepoints, dtype=float) * common_tr
+    aligned_targets = []
+    for target, times in zip(subject_targets, source_times):
+        if common_times[0] < times[0] - 1e-10 or common_times[-1] > times[-1] + 1e-10:
+            raise ValueError(f"Common story grid exceeds BOLD support for {story}")
+        aligned = np.column_stack(
+            [
+                np.interp(common_times, times, target[:, roi_index])
+                for roi_index in range(target.shape[1])
+            ]
+        )
+        aligned_targets.append(
+            standardize_subject_timeseries(aligned) if standardize else aligned
         )
 
-    n_timepoints = min(len(target) for target in subject_targets)
-    targets = np.stack([target[:n_timepoints] for target in subject_targets], axis=0)
+    targets = np.stack(aligned_targets, axis=0)
     return targets, roi_names or []
 
 
@@ -644,6 +678,14 @@ def main() -> None:
     for story in STORIES:
         targets, roi_names = load_story_targets(cache_dir, story)
         designs = load_story_designs(args, story)
+        target_length = targets.shape[1]
+        for name, design in designs.items():
+            if len(design) < target_length:
+                raise ValueError(
+                    f"Design {name} is shorter than the aligned target for {story}: "
+                    f"{len(design)} < {target_length}"
+                )
+            designs[name] = design[:target_length]
         story_data[story] = (targets, roi_names, designs)
         print(
             f"Loaded {story}: {targets.shape[0]} subjects, "

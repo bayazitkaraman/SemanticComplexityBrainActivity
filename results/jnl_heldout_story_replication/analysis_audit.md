@@ -17,16 +17,18 @@ objective candidate ranking. The held-out set contains the next three eligible
 entries in that same ranking: `prettymouth`, `sherlock`, and `merlin`.
 
 - `prettymouth`: 40 participants, 450 story TRs, 17 ROIs
-- `sherlock`: 36 participants, 701 story TRs, 17 ROIs
-- `merlin`: 36 participants, 590 story TRs, 17 ROIs
+- `sherlock`: 36 participants, 700 retained story TRs, 17 ROIs
+- `merlin`: 36 participants, 589 retained story TRs, 17 ROIs
 - Total held-out scans: 112
 - Missing or non-finite ROI outcomes: 0
 - Motion-QC exclusions: 0 under the locked thresholds
 
 The event onsets were used when extracting each participant's story segment
-from the full BOLD run. All extracted ROI series have the same length as their
-story regressors. Word timing, audio features, GPT-2 features, and BOLD targets
-therefore refer to the same story-relative TR grid.
+from the full BOLD run. Each volume was placed at its actual acquisition time
+relative to story onset using the run's recorded TR. Participant ROI series
+were then linearly interpolated to the common 1.5-s story grid. No extrapolation
+was used: only time points supported by every participant were retained, and
+the word, audio, and GPT-2 designs were restricted to the same effective grid.
 
 ## Model audit
 
@@ -49,33 +51,37 @@ averaged over the 17 ROIs.
 
 | Analysis | Mean delta r | Story values | Directional evidence |
 |---|---:|---|---|
-| Full group | 0.0807 | 0.0459, 0.0878, 0.1085 | 3/3 positive; two-sided t-test p = .048 |
-| Participant split-half | 0.0543 | 0.0212, 0.0649, 0.0768 | 3/3 positive |
-| Leave-one-participant-out | 0.0241 | 0.0074, 0.0372, 0.0278 | 3/3 positive |
+| Full group | 0.0913 | 0.0685, 0.0878, 0.1175 | 3/3 positive; two-sided t-test p = .023 |
+| Participant split-half | 0.0620 | 0.0352, 0.0649, 0.0858 | 3/3 positive |
+| Leave-one-participant-out | 0.0271 | 0.0131, 0.0372, 0.0311 | 3/3 positive |
 
 A 1,000-iteration circular-shift null gave `p = .003` for the full-group
-held-out effect. The null mean was -0.0089 and its 95th percentile was 0.0441.
+held-out effect. The null mean was -0.0069 and its 95th percentile was 0.0453.
 
 Across the original eight and held-out three stories, the full-group mean was
-0.0560 (`p = .0022` by two-sided story-level t-test; 9/11 positive). The
-participant split-half mean was 0.0416 (`p = .0030`; 10/11 positive).
+0.0593 (`p = .0009` by two-sided story-level t-test; 9/11 positive). The
+participant split-half mean was 0.0437 (`p = .0013`; 10/11 positive).
 
 ## Robustness checks
 
 These checks were run after seeing the locked result and should be labeled as
 sensitivity analyses.
 
-- Adding an explicit silence control: full-group mean = 0.0850; split-half
-  mean = 0.0575; all three stories positive.
+- Adding an explicit silence control: full-group mean = 0.0928; split-half
+  mean = 0.0638; all three stories positive.
 - Zeroing GPT-2-component values during silent TRs before HRF convolution: full-group
-  mean = 0.0853; split-half mean = 0.0584; all three stories positive.
+  mean = 0.0939; split-half mean = 0.0651; all three stories positive.
 - Ridge alpha 1, 10, 100, and 1,000: the full-group mean remained positive at
-  every value (0.0820, 0.0807, 0.0538, and 0.0287).
-- CV gaps of 5, 10, and 15 TRs: the full-group means were 0.0460, 0.0807, and
-  0.0861. At gap 5, `merlin` was slightly negative (-0.0013), while the other
+  every value (0.0944, 0.0913, 0.0561, and 0.0274).
+- CV gaps of 5, 10, and 15 TRs: the full-group means were 0.0497, 0.0913, and
+  0.0782. At gap 5, `merlin` was slightly negative (-0.0017), while the other
   two stories remained positive.
 - For each tested setting, the mean across all three stories was positive for
   every one of the 50 participant split seeds.
+- Estimating each participant's normalization parameters only from the
+  training portion of each temporal fold gave held-out means of 0.0848,
+  0.0578, and 0.0207 for full-group, split-half, and leave-one-participant-out
+  analyses. All three story values remained positive in each analysis.
 
 ## Interpretation limits
 

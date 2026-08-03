@@ -201,10 +201,11 @@ def build_figure(output: Path) -> None:
     axis_b.set_ylim(-0.165, 0.225)
     axis_b.set_ylabel(r"GPT-2 increment ($\Delta cv_r$)")
     axis_b.set_title("B  Representation comparison", loc="left", fontweight="bold")
+    paired_p = float(stats.ttest_1samp(cumulative - independent, 0.0).pvalue)
     axis_b.text(
         0.5,
         0.205,
-        "paired story contrast: p = .096",
+        f"paired story contrast: p = {paired_p:.3f}".replace("0.", "."),
         ha="center",
         va="top",
         fontsize=8.1,

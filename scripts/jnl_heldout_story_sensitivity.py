@@ -54,6 +54,18 @@ def load_analysis_data(
                 np.column_stack([baseline_with_silence, zero_silence_pcs]),
             ),
         }
+        target_length = targets.shape[1]
+        for name, (baseline, combined) in variants.items():
+            if len(baseline) < target_length or len(combined) < target_length:
+                raise ValueError(
+                    f"Sensitivity design {name} is shorter than the aligned target for "
+                    f"{story}: baseline={len(baseline)}, combined={len(combined)}, "
+                    f"target={target_length}"
+                )
+            variants[name] = (
+                baseline[:target_length],
+                combined[:target_length],
+            )
         story_data[story] = (targets, variants)
     return story_data
 
