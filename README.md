@@ -475,4 +475,4 @@ Raw fMRI data, WAV files, virtual environments, and large intermediate outputs a
 ds002345
 ```
 
-This repository contains the analysis code, configuration files, final result tables, and generated manuscript figures needed to reproduce the final analysis outputs, assuming the user has local access to the required fMRI, transcript, alignment, confound, and audio files.
+This repository contains the analysis code, portable configuration templates, final result tables, and generated manuscript figures needed to reproduce the final analysis outputs, assuming the user has local access to the required fMRI, transcript, alignment, confound, and audio files. Machine-specific configurations and derived imaging caches remain local.

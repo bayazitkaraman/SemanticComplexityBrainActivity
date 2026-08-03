@@ -2,9 +2,9 @@
 
 ## Status
 
-This analysis was kept separate from the manuscript. The three held-out story
-outcomes were not used to choose stories, ROIs, component count, ridge alpha,
-or cross-validation gap.
+The held-out outcomes were kept separate from model development. The three
+held-out story outcomes were not used to choose stories, ROIs, component count,
+ridge alpha, or cross-validation gap.
 
 The locked specification was written before the held-out fMRI outcomes were
 scored. It is recorded in `locked_analysis_specification.json`. This was a
@@ -25,8 +25,8 @@ entries in that same ranking: `prettymouth`, `sherlock`, and `merlin`.
 
 The event onsets were used when extracting each participant's story segment
 from the full BOLD run. All extracted ROI series have the same length as their
-story regressors. Word timing, audio features, semantic features, and BOLD
-targets therefore refer to the same story-relative TR grid.
+story regressors. Word timing, audio features, GPT-2 features, and BOLD targets
+therefore refer to the same story-relative TR grid.
 
 ## Model audit
 
@@ -67,7 +67,7 @@ sensitivity analyses.
 
 - Adding an explicit silence control: full-group mean = 0.0850; split-half
   mean = 0.0575; all three stories positive.
-- Zeroing semantic values during silent TRs before HRF convolution: full-group
+- Zeroing GPT-2-component values during silent TRs before HRF convolution: full-group
   mean = 0.0853; split-half mean = 0.0584; all three stories positive.
 - Ridge alpha 1, 10, 100, and 1,000: the full-group mean remained positive at
   every value (0.0820, 0.0807, 0.0538, and 0.0287).
