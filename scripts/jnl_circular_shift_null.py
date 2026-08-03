@@ -57,7 +57,7 @@ def main() -> None:
     parser.add_argument("--regressor-dir", default="results/regressors")
     parser.add_argument(
         "--roi-cache-dir",
-        default="results/journal_neurolinguistics_robustness/pc_count_full/roi_time_series_cache",
+        default="results/journal_neurolinguistics_robustness/pc_count_full_corrected/roi_time_series_cache",
     )
     parser.add_argument(
         "--output-dir",

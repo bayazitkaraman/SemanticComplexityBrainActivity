@@ -7,7 +7,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import numpy as np
 import pandas as pd
-from scipy.signal import detrend
 from sklearn.linear_model import Ridge
 from sklearn.metrics import r2_score
 from sklearn.model_selection import TimeSeriesSplit
@@ -36,23 +35,36 @@ def load_regressors(regressor_dir, story_name):
         raise FileNotFoundError(f"Missing {path}. Run shared_pca_regressors.py first.")
     return pd.read_csv(path)
 
-def clean_y(y, do_detrend=True):
+def foldwise_target_transform(y, train_idx, test_idx, do_detrend=True):
+    """Detrend and scale the target using training-fold statistics only."""
     y = np.asarray(y, dtype=float)
-    valid = ~np.isnan(y)
-    if valid.sum() < 5:
-        return y
-    y2 = y.copy()
-    if do_detrend:
-        y2[valid] = detrend(y2[valid], type="linear")
-    mu = np.nanmean(y2)
-    sd = np.nanstd(y2)
-    if sd > 0 and not np.isnan(sd):
-        y2 = (y2 - mu) / sd
-    return y2
+    y_train = y[train_idx].astype(float, copy=True)
+    y_test = y[test_idx].astype(float, copy=True)
 
-def cross_validated_prediction(X, y, n_splits=5, alpha=10.0, do_detrend=True):
+    if do_detrend and len(train_idx) >= 2:
+        x_train = train_idx.astype(float)
+        x_test = test_idx.astype(float)
+        slope, intercept = np.polyfit(x_train, y_train, deg=1)
+        y_train = y_train - (slope * x_train + intercept)
+        y_test = y_test - (slope * x_test + intercept)
+
+    mu = float(np.mean(y_train))
+    sd = float(np.std(y_train))
+    if sd > 0 and np.isfinite(sd):
+        y_train = (y_train - mu) / sd
+        y_test = (y_test - mu) / sd
+    return y_train, y_test
+
+def cross_validated_prediction(
+    X,
+    y,
+    n_splits=5,
+    alpha=10.0,
+    do_detrend=True,
+    cv_gap: int = 0,
+):
     X = np.asarray(X, dtype=float)
-    y = clean_y(np.asarray(y, dtype=float), do_detrend=do_detrend)
+    y = np.asarray(y, dtype=float)
 
     n = min(len(X), len(y))
     X, y = X[:n], y[:n]
@@ -76,19 +88,22 @@ def cross_validated_prediction(X, y, n_splits=5, alpha=10.0, do_detrend=True):
     sst_train_mean = 0.0
     fold_r2_values = []
 
-    for train_idx, test_idx in TimeSeriesSplit(n_splits=n_splits).split(X):
+    splitter = TimeSeriesSplit(n_splits=n_splits, gap=max(0, int(cv_gap)))
+    for train_idx, test_idx in splitter.split(X):
         if len(test_idx) < 5:
             continue
-        model.fit(X[train_idx], y[train_idx])
+        y_train, y_test = foldwise_target_transform(
+            y, train_idx, test_idx, do_detrend=do_detrend
+        )
+        model.fit(X[train_idx], y_train)
         pred = model.predict(X[test_idx])
-        y_test = y[test_idx]
         y_true_all.extend(y_test)
         y_pred_all.extend(pred)
 
         # Alternative CV R2 denominator that uses the training-fold mean as the
         # available no-signal predictor. This is often more interpretable for
         # forward-chaining time-series CV than a single concatenated test mean.
-        train_mean = float(np.mean(y[train_idx]))
+        train_mean = float(np.mean(y_train))
         sse_train_mean += float(np.sum((y_test - pred) ** 2))
         sst_train_mean += float(np.sum((y_test - train_mean) ** 2))
         if np.nanstd(y_test) > 0:
@@ -116,9 +131,15 @@ def main():
     parser.add_argument("--ridge-alpha", type=float, default=10.0)
     parser.add_argument("--max-subjects-per-story", type=int, default=0)
     parser.add_argument("--no-detrend", action="store_true")
+    parser.add_argument("--cv-gap", type=int, default=0,
+                        help="Number of TRs to embargo between each training and test fold.")
+    parser.add_argument("--atlas-threshold", type=float, default=0.0,
+                        help="Harvard-Oxford probabilistic atlas threshold.")
     parser.add_argument("--quick", action="store_true")
     parser.add_argument("--include-acoustic", action="store_true",
                         help="Add speech-timing/audio controls and acoustic-adjusted combined models.")
+    parser.add_argument("--include-silence-indicator", action="store_true",
+                        help="Add an HRF-convolved empty-TR indicator to the baseline if present.")
     args = parser.parse_args()
 
     if args.quick:
@@ -137,7 +158,9 @@ def main():
 
     atlas_img, atlas_labels = fetch_harvard_oxford_atlas()
 
-    lexical_baseline_cols = ["word_count_hrf", "mean_char_len_hrf", "total_chars_hrf", "time_TR_hrf"]
+    lexical_baseline_cols = ["word_count_hrf", "mean_char_len_hrf", "total_chars_hrf", "time_TR"]
+    if args.include_silence_indicator:
+        lexical_baseline_cols.append("silence_indicator_hrf")
     pc_cols = [f"PC{i}_hrf" for i in range(1, args.n_pcs + 1)]
 
     rows = []
@@ -158,7 +181,7 @@ def main():
 
         roi_ts, bold_tr, onset, duration, n_trs = extract_roi_timeseries(
             story, roi_labels=ROI_LABELS_TO_TEST, atlas_img=atlas_img,
-            atlas_labels=atlas_labels, fwhm=6.0, atlas_threshold=0.0
+            atlas_labels=atlas_labels, fwhm=6.0, atlas_threshold=args.atlas_threshold
         )
 
         model_mats = {
@@ -180,7 +203,7 @@ def main():
             for model_name, X in model_mats.items():
                 cv_r2, cv_r, cv_r2_train_mean, cv_r2_fold_mean, n_used = cross_validated_prediction(
                     X, y, n_splits=args.n_splits, alpha=args.ridge_alpha,
-                    do_detrend=not args.no_detrend
+                    do_detrend=not args.no_detrend, cv_gap=args.cv_gap
                 )
                 rows.append({
                     "story": story["name"], "subject": story["subject"], "roi": roi,
@@ -189,6 +212,8 @@ def main():
                     "cv_r2_fold_mean": cv_r2_fold_mean,
                     "n_timepoints": n_used, "TR": bold_tr,
                     "duration": duration, "onset": onset,
+                    "atlas_threshold": args.atlas_threshold,
+                    "cv_gap": args.cv_gap,
                 })
 
     df = pd.DataFrame(rows)

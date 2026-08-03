@@ -2,9 +2,30 @@
 
 This repository contains a reproducible Python pipeline for analyzing how low-dimensional GPT-2-derived linguistic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
 
-The final manuscript analysis uses the public **Narratives** fMRI dataset, Gentle word-level alignments, GPT-2 contextual embeddings, shared PCA-derived linguistic regressors, HRF convolution, ROI-level encoding models, motion-quality-control checks, acoustic-envelope/speech-density controls, and richer audio-control sensitivity analyses.
+The current Journal of Neurolinguistics revision uses the public **Narratives** fMRI dataset, Gentle word-level alignments, causal cumulative-context GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, temporally separated cross-validation, shared-response ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
 
 Data files, virtual environments, WAV files, and large neuroimaging outputs are intentionally **not** stored in this repository.
+
+## Current revision analysis
+
+The primary revision result concerns the response shared across listeners, not the earlier individual subject--story estimate. The model was developed in eight stories and then evaluated without refitting the PCA transformation in three held-out stories. Participant split-half and leave-one-participant-out analyses test whether the result generalizes across listeners.
+
+After downloading the dataset and fMRIPrep derivatives, first create the local motion-filtered subject list:
+
+```bash
+python scripts/build_subject_list_fmriprep.py --subject-list configs/stories_all.py --fmriprep-dir /path/to/fmriprep --output configs/stories_all_fmriprep_confounds.py
+python scripts/motion_qc_from_confounds.py --subject-list configs/stories_all_fmriprep_confounds.py --filtered-output configs/stories_all_fmriprep_confounds_motionfiltered.py
+```
+
+Then run the main revision analyses:
+
+```bash
+python scripts/jnl_heldout_story_replication.py --dataset-dir /path/to/ds002345 --fmriprep-dir /path/to/fmriprep --gentle-root /path/to/gentle --discovery-subject-list configs/stories_all_fmriprep_confounds_motionfiltered.py
+python scripts/jnl_heldout_story_sensitivity.py
+python scripts/jnl_shared_response_hemisphere_sensitivity.py --skip-heldout-extraction
+```
+
+The first analysis script runs the locked development and held-out shared-response specification and creates the local held-out configuration and ROI cache. The second runs its sensitivity analyses. The third splits each predefined Harvard--Oxford ROI at MNI x = 0 and repeats the full-group, participant split-half, and leave-one-participant-out analyses for the left and right 17-ROI sets. Omit `--skip-heldout-extraction` when the hemisphere cache has not yet been created. The generated configurations and ROI caches remain local because they contain machine-specific paths or derived imaging data. The hemisphere analysis is exploratory: the pooled right-minus-left contrasts were nominally positive, but none survived FDR correction across the nine paired tests.
 
 ---
 
@@ -12,15 +33,15 @@ Data files, virtual environments, WAV files, and large neuroimaging outputs are 
 
 This project supports the final Journal of Neurolinguistics submission analyses:
 
-1. Use the full selected Narratives dataset instead of a small subset.
+1. Use eight development narratives and three objectively selected held-out narratives.
 2. Align spoken words to fMRI TRs using Gentle forced-alignment files.
 3. Extract GPT-2 contextual embeddings at TR resolution.
-4. Fit shared PCA across stories so GPT-2 PC dimensions are comparable.
-5. Compare lexical/time baseline models, GPT-2-only models, and combined lexical-plus-GPT-2 models.
-6. Evaluate whether GPT-2 PC1--PC5 improves prediction beyond lexical and temporal baseline features.
-7. Test whether effects are robust to motion-quality-control and nuisance-regression sensitivity checks.
-8. Add acoustic-envelope, speech-density, and richer audio-control sensitivity checks.
-9. Add PC-count, leave-one-story-out, circular-shift null, and embedding-model comparison checks.
+4. Fit the scaler and PCA in development stories and project held-out stories without refitting.
+5. Test whether cumulative-context GPT-2 PC1--PC5 adds prediction beyond a rich lexical/acoustic baseline.
+6. Evaluate shared responses across listeners with story-level inference.
+7. Test participant generalization with split-half and leave-one-participant-out prediction.
+8. Evaluate temporal specificity, silence handling, regularization, and temporal-gap sensitivity.
+9. Retain the corrected individual-scan, independent-chunk, and BERT analyses as complementary checks.
 10. Generate final tables and figures for the manuscript and supplementary material.
 
 ---
@@ -241,7 +262,7 @@ shapesphysical_audio.wav
 shapessocial_audio.wav
 ```
 
-The acoustic-control analysis is a sensitivity analysis, not the primary planned comparison.
+This envelope-only control belongs to the earlier individual-scan pipeline. The current shared-response analysis uses the richer lexical/acoustic baseline described below.
 
 ---
 
@@ -271,9 +292,9 @@ python scripts/run_revision_pipeline.py --quick --subject-list configs/stories_a
 
 ---
 
-## Full primary pipeline
+## Legacy individual-scan pipeline
 
-Run the primary analysis:
+Run the earlier individual-scan pipeline retained for audit and supplementary comparisons:
 
 ```bash
 python scripts/run_revision_pipeline.py --subject-list configs/stories_all.py
@@ -289,7 +310,7 @@ Audit finished: all expected final files were found.
 
 ---
 
-## Full pipeline with acoustic controls
+## Legacy pipeline with envelope controls
 
 Run the acoustic-envelope and speech-density sensitivity analysis:
 
@@ -364,6 +385,17 @@ scripts/static_embedding_regressors.py
 scripts/jnl_rich_audio_controls.py
     Runs the richer waveform/spectral/coarse-voicing audio-control sensitivity
     analysis and writes table21_rich_audio_control_sensitivity.csv.
+
+scripts/jnl_heldout_story_replication.py
+    Runs the development and locked held-out cumulative-context shared-response
+    analyses, including participant split-half and leave-one-participant-out tests.
+
+scripts/jnl_heldout_story_sensitivity.py
+    Runs sensitivity analyses for the held-out shared-response specification.
+
+scripts/jnl_shared_response_hemisphere_sensitivity.py
+    Repeats the central shared-response analyses separately for left and right
+    hemisphere ROI sets and evaluates paired right-minus-left differences.
 ```
 
 ---
@@ -386,6 +418,8 @@ Final manuscript/supplement outputs:
 ```text
 results/final_tables/
 results/final_figures/
+results/jnl_heldout_story_replication/
+results/jnl_shared_response_hemisphere_sensitivity/
 ```
 
 Key final tables include:
@@ -413,32 +447,7 @@ results/final_tables/table21_rich_audio_control_sensitivity.csv
 
 ## Reproducibility notes
 
-The main manuscript result compares:
-
-```text
-baseline_only
-vs.
-combined_pc1_to_pc5
-```
-
-where:
-
-```text
-baseline_only = lexical/time predictors
-combined_pc1_to_pc5 = lexical/time predictors + GPT-2 PC1--PC5
-```
-
-The acoustic sensitivity analysis compares:
-
-```text
-baseline_acoustic_only
-vs.
-combined_acoustic_pc1_to_pc5
-```
-
-where the acoustic baseline includes lexical, temporal, speech-density, and waveform-envelope predictors.
-
-The richer audio-control sensitivity analysis compares:
+The current central shared-response analysis compares:
 
 ```text
 baseline_rich_audio
@@ -446,7 +455,7 @@ vs.
 combined_rich_audio_gpt2_pc1_to_pc5
 ```
 
-where the richer baseline includes lexical/time predictors, acoustic-envelope/speech-density controls, and additional waveform, spectral, and coarse voicing-related predictors.
+where the rich baseline includes lexical/time predictors, acoustic-envelope/speech-density controls, and additional waveform, spectral, pitch, and coarse voicing-related predictors. The target is the standardized ROI response averaged across listeners within each story. The earlier individual subject--story comparison is retained as a corrected null audit result, not as the central evidence.
 
 The primary performance metric is:
 
@@ -454,7 +463,7 @@ The primary performance metric is:
 cross-validated prediction correlation (cv_r)
 ```
 
-Cross-validated R² is computed as a secondary diagnostic metric, but it is not used for primary interpretation because it is unstable and often negative for short naturalistic fMRI time series.
+Cross-validated R-squared is computed as a secondary diagnostic metric, but it is not used for primary interpretation because it is unstable and often negative for short naturalistic fMRI time series.
 
 ---
 

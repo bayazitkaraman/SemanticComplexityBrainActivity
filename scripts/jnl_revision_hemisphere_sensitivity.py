@@ -136,8 +136,8 @@ def extract_hemisphere_roi_timeseries(
         roi_matrix,
         tr=tr,
         confounds=confounds,
-        detrend=True,
-        standardize="zscore_sample",
+        detrend=False,
+        standardize=False,
         high_pass=high_pass,
     )
 
@@ -195,11 +195,12 @@ def main() -> None:
     parser.add_argument("--ridge-alpha", type=float, default=10.0)
     parser.add_argument("--atlas-threshold", type=float, default=0.0)
     parser.add_argument("--fwhm", type=float, default=6.0)
+    parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
 
     out_dir = ROOT / args.output_dir
     out_dir.mkdir(parents=True, exist_ok=True)
-    cache_dir = out_dir / "roi_time_series_cache"
+    cache_dir = out_dir / "roi_time_series_cache_corrected"
     stories = load_story_list(str(ROOT / args.subject_list))
     atlas_img, atlas_labels = fetch_harvard_oxford_atlas()
     regressor_dir = ROOT / args.regressor_dir
@@ -208,7 +209,7 @@ def main() -> None:
     rows = []
     long_path = out_dir / "hemisphere_encoding_long.csv"
     done_pairs = set()
-    if long_path.exists():
+    if args.resume and long_path.exists():
         existing = pd.read_csv(long_path)
         rows = existing.to_dict("records")
         counts = existing.groupby(["story", "subject"]).size()

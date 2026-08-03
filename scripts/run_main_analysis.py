@@ -18,8 +18,9 @@ from transformers import GPT2Tokenizer, GPT2Model
 from nilearn import datasets, plotting
 from nilearn.image import resample_to_img, smooth_img, new_img_like, mean_img
 from nilearn.masking import compute_brain_mask
-from nilearn.glm.first_level import glover_hrf
 from statsmodels.stats.multitest import multipletests
+
+from semantic_fmri.utils import hrf_convolve
 
 # ---------------------- SETUP ----------------------
 RESULT_DIR = "results"
@@ -85,9 +86,8 @@ def compute_complexity_hrf(story, tokenizer, model, TR):
 
     print(f"{story['name']}: PC1 explains {pc1_var*100:.1f}% of variance")
 
-    # Apply Glover HRF to complexity
-    hrf = glover_hrf(t_r=TR, oversampling=20, time_length=30, onset=0)
-    complexity_hrf = np.convolve(complexity, hrf)[:len(complexity)]
+    # Apply Glover HRF to complexity on the TR grid.
+    complexity_hrf = hrf_convolve(complexity, tr=TR)
 
     return complexity_hrf, onset, duration, story_TRs, events_df, pc1_var
 

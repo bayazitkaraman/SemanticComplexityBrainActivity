@@ -356,11 +356,11 @@ def main() -> None:
     parser.add_argument("--motion24-dir", default="results/model_comparison_gentle_motion24_nohpf")
     parser.add_argument(
         "--roi-cache-dir",
-        default="results/journal_neurolinguistics_robustness/pc_count_full/roi_time_series_cache",
+        default="results/journal_neurolinguistics_robustness/pc_count_full_corrected/roi_time_series_cache",
     )
     parser.add_argument(
         "--pc-scan-csv",
-        default="results/journal_neurolinguistics_robustness/pc_count_full/pc_count_sensitivity_scan_level.csv",
+        default="results/journal_neurolinguistics_robustness/pc_count_full_corrected/pc_count_sensitivity_scan_level.csv",
     )
     parser.add_argument("--output-dir", default="results/jnl_revision_major_review")
     parser.add_argument("--alphas", default="0.1,1,10,100,1000")

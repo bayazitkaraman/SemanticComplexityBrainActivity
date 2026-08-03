@@ -343,7 +343,7 @@ def main() -> None:
     parser.add_argument("--primary-scan-csv", default="results/jnl_revision_major_review/primary_scan_level_model_values.csv")
     parser.add_argument(
         "--roi-cache-dir",
-        default="results/journal_neurolinguistics_robustness/pc_count_full/roi_time_series_cache",
+        default="results/journal_neurolinguistics_robustness/pc_count_full_corrected/roi_time_series_cache",
     )
     parser.add_argument("--output-dir", default="results/jnl_revision_major_review/context_layer_models")
     parser.add_argument("--tr", type=float, default=1.5)
@@ -376,7 +376,7 @@ def main() -> None:
         baseline["TR"] = args.tr
         baseline["onset_sec"] = onset
         baseline["duration_sec"] = duration
-        for col in ["word_count", "mean_char_len", "total_chars", "time_TR"]:
+        for col in ["word_count", "mean_char_len", "total_chars"]:
             baseline[f"{col}_hrf"] = hrf_convolve(baseline[col].to_numpy(), tr=args.tr)
         story_chunks[story["name"]] = chunks
         story_baselines[story["name"]] = baseline

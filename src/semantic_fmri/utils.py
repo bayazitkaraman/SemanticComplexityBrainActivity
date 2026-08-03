@@ -63,6 +63,8 @@ ROI_LABELS_TO_TEST = [
     "Cingulate Gyrus, posterior division",
 ]
 
+_ROI_MASK_CACHE: dict[tuple, tuple[list[str], list[np.ndarray]]] = {}
+
 
 def normalize_path(path: str | os.PathLike) -> str:
     """Make Windows-style paths usable on macOS/Linux too."""
@@ -653,11 +655,17 @@ def zscore_1d(x: Sequence[float]) -> np.ndarray:
 
 
 def hrf_convolve(x: Sequence[float], tr: float = 1.5) -> np.ndarray:
-    """Z-score then convolve a 1D regressor with the canonical Glover HRF."""
-    x = zscore_1d(x)
-    hrf = glover_hrf(t_r=tr, oversampling=20, time_length=30, onset=0)
+    """Convolve a TR-sampled regressor with the canonical Glover HRF.
+
+    The input vectors used in this project already have one value per fMRI TR.
+    Therefore the HRF is sampled on the same TR grid. Predictor scaling is left
+    to the cross-validation pipeline so training-fold statistics are not mixed
+    with held-out time points.
+    """
+    x = np.asarray(x, dtype=float)
+    hrf = glover_hrf(t_r=tr, oversampling=1, time_length=30, onset=0)
     y = np.convolve(x, hrf)[: len(x)]
-    return zscore_1d(y)
+    return np.nan_to_num(y, nan=0.0, posinf=0.0, neginf=0.0)
 
 
 def load_gpt2(device: str | None = None):
@@ -685,6 +693,7 @@ def compute_gpt2_embeddings_by_layer(
     layers: Sequence[int],
     max_length: int = 128,
     device: str | None = None,
+    empty_tr_strategy: str = "eos",
 ) -> Dict[int, np.ndarray]:
     """
     Compute mean-pooled GPT-2 embeddings for selected hidden-state layers.
@@ -692,17 +701,28 @@ def compute_gpt2_embeddings_by_layer(
     GPT-2 hidden_states length is 13:
     - layer 0: token embedding output
     - layer 1..12: transformer block outputs
+
+    Empty TRs can be represented either by the GPT-2 EOS token ("eos",
+    preserving the historical analysis) or by an all-zero vector ("zero").
     """
     if device is None:
         device = next(model.parameters()).device.type
 
     layers = list(layers)
     output = {layer: [] for layer in layers}
+    empty_tr_strategy = empty_tr_strategy.strip().lower()
+    if empty_tr_strategy not in {"eos", "eos_token", "zero", "zero_vector"}:
+        raise ValueError("empty_tr_strategy must be 'eos' or 'zero'.")
 
     with torch.no_grad():
         for chunk in word_chunks:
             text = chunk.strip() if isinstance(chunk, str) else str(chunk).strip()
             if not text:
+                if empty_tr_strategy in {"zero", "zero_vector"}:
+                    hidden_size = int(model.config.hidden_size)
+                    for layer in layers:
+                        output[layer].append(np.zeros(hidden_size, dtype=np.float32))
+                    continue
                 text = tokenizer.eos_token or "."
             inputs = tokenizer(
                 text,
@@ -1213,26 +1233,36 @@ def extract_roi_timeseries(
     n_trs = int(duration // tr)
     bold_start = int(onset // tr)
 
-    resampled_atlas = resample_to_img(
-        atlas_img,
-        fmri_img,
-        interpolation="nearest",
-        force_resample=True,
-        copy_header=True,
+    mask_key = (
+        tuple(fmri_img.shape[:3]),
+        tuple(np.round(fmri_img.affine, 5).ravel()),
+        tuple(roi_labels),
+        float(atlas_threshold),
     )
-    atlas_data = resampled_atlas.get_fdata()
+    if mask_key in _ROI_MASK_CACHE:
+        selected_roi_labels, roi_masks = _ROI_MASK_CACHE[mask_key]
+    else:
+        resampled_atlas = resample_to_img(
+            atlas_img,
+            fmri_img,
+            interpolation="nearest",
+            force_resample=True,
+            copy_header=True,
+        )
+        atlas_data = resampled_atlas.get_fdata()
 
-    # Build ROI masks first.
-    selected_roi_labels = []
-    roi_masks = []
-    for roi_label in roi_labels:
-        if roi_label not in atlas_labels:
-            continue
-        roi_index = atlas_labels.index(roi_label)
-        roi_mask = atlas_data[..., roi_index] > atlas_threshold
-        if np.any(roi_mask):
-            selected_roi_labels.append(roi_label)
-            roi_masks.append(roi_mask)
+        # Build ROI masks first.
+        selected_roi_labels = []
+        roi_masks = []
+        for roi_label in roi_labels:
+            if roi_label not in atlas_labels:
+                continue
+            roi_index = atlas_labels.index(roi_label)
+            roi_mask = atlas_data[..., roi_index] > atlas_threshold
+            if np.any(roi_mask):
+                selected_roi_labels.append(roi_label)
+                roi_masks.append(roi_mask)
+        _ROI_MASK_CACHE[mask_key] = (selected_roi_labels, roi_masks)
 
     if not selected_roi_labels:
         return {}, tr, onset, duration, n_trs
@@ -1241,9 +1271,7 @@ def extract_roi_timeseries(
     roi_matrix = np.zeros((n_volumes, len(selected_roi_labels)), dtype=float)
 
     for j, roi_mask in enumerate(roi_masks):
-        for t in range(n_volumes):
-            vol = fmri_data[:, :, :, t]
-            roi_matrix[t, j] = np.nanmean(vol[roi_mask])
+        roi_matrix[:, j] = np.nanmean(fmri_data[roi_mask, :], axis=0)
 
     # Clean full run before extracting story segment.
     # Default is intentionally conservative for the manuscript primary analysis:
@@ -1269,8 +1297,8 @@ def extract_roi_timeseries(
         roi_matrix,
         tr=tr,
         confounds=confounds,
-        detrend=True,
-        standardize="zscore_sample",
+        detrend=False,
+        standardize=False,
         high_pass=effective_high_pass,
     )
 
@@ -1284,5 +1312,3 @@ def extract_roi_timeseries(
     }
 
     return roi_ts, tr, onset, duration, n_trs
-
-

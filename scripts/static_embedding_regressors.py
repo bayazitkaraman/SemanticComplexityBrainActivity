@@ -266,7 +266,7 @@ def main():
         out_df["duration_sec"] = data["duration"]
 
         baseline_cols = [
-            "word_count", "mean_char_len", "total_chars", "time_TR",
+            "word_count", "mean_char_len", "total_chars",
             "speech_duration_sec", "mean_word_duration_sec",
             "pause_fraction", "articulation_rate", "word_rate",
             "audio_rms", "audio_abs_mean",

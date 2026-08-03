@@ -31,7 +31,7 @@ from semantic_fmri.utils import (  # noqa: E402
 )
 
 
-DEFAULT_ROI_CACHE = ROOT / "results" / "journal_neurolinguistics_robustness" / "pc_count_full" / "roi_time_series_cache"
+DEFAULT_ROI_CACHE = ROOT / "results" / "journal_neurolinguistics_robustness" / "pc_count_full_corrected" / "roi_time_series_cache"
 DEFAULT_PRIMARY_DELTAS = ROOT / "results" / "model_comparison_gentle_motionQC_only" / "encoding_model_deltas.csv"
 
 

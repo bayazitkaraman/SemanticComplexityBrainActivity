@@ -109,6 +109,7 @@ results/final_tables/table8b_run_level_delta_with_motion_qc.csv
 configs/stories_all_fmriprep.py
 configs/stories_all_fmriprep_confounds.py
 configs/stories_all_fmriprep_confounds_motionfiltered.py
+results/jnl_heldout_story_replication/heldout_motionfiltered_config.py
 
 # LaTeX build products
 *.aux

@@ -9,7 +9,6 @@ import re
 import numpy as np
 import pandas as pd
 from scipy import stats
-from scipy.signal import detrend
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.pipeline import Pipeline
@@ -32,7 +31,7 @@ LEXICAL_BASELINE_COLS = [
     "word_count_hrf",
     "mean_char_len_hrf",
     "total_chars_hrf",
-    "time_TR_hrf",
+    "time_TR",
 ]
 
 
@@ -109,6 +108,7 @@ def load_or_extract_roi_matrix(
     atlas_img,
     atlas_labels,
     cache_dir: Path,
+    atlas_threshold: float = 0.0,
 ) -> tuple[list[str], np.ndarray, float, float, float]:
     cache_dir.mkdir(parents=True, exist_ok=True)
     cache_path = cache_dir / f"{safe_name(story['name'])}_{safe_name(story['subject'])}.npz"
@@ -128,7 +128,7 @@ def load_or_extract_roi_matrix(
         atlas_img=atlas_img,
         atlas_labels=atlas_labels,
         fwhm=6.0,
-        atlas_threshold=0.0,
+        atlas_threshold=atlas_threshold,
     )
     roi_names = list(roi_ts.keys())
     y_matrix = np.column_stack([roi_ts[roi] for roi in roi_names])
@@ -143,20 +143,31 @@ def load_or_extract_roi_matrix(
     return roi_names, y_matrix, bold_tr, onset, duration
 
 
-def clean_y_matrix(y_matrix: np.ndarray, do_detrend: bool = True) -> np.ndarray:
-    y_matrix = np.asarray(y_matrix, dtype=float).copy()
-    for col_idx in range(y_matrix.shape[1]):
-        y = y_matrix[:, col_idx]
-        valid = ~np.isnan(y)
-        if valid.sum() < 5:
-            continue
-        if do_detrend:
-            y[valid] = detrend(y[valid], type="linear")
-        mu = np.nanmean(y)
-        sd = np.nanstd(y)
-        if sd > 0 and not np.isnan(sd):
-            y_matrix[:, col_idx] = (y - mu) / sd
-    return y_matrix
+def foldwise_target_matrix(
+    y_matrix: np.ndarray,
+    train_idx: np.ndarray,
+    test_idx: np.ndarray,
+    do_detrend: bool = True,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Detrend and scale target columns using training-fold statistics only."""
+    y_train = y_matrix[train_idx, :].astype(float, copy=True)
+    y_test = y_matrix[test_idx, :].astype(float, copy=True)
+
+    if do_detrend and len(train_idx) >= 2:
+        x_train = train_idx.astype(float)
+        x_test = test_idx.astype(float)
+        design_train = np.column_stack([x_train, np.ones_like(x_train)])
+        beta = np.linalg.lstsq(design_train, y_train, rcond=None)[0]
+        y_train = y_train - design_train @ beta
+        design_test = np.column_stack([x_test, np.ones_like(x_test)])
+        y_test = y_test - design_test @ beta
+
+    mu = np.mean(y_train, axis=0, keepdims=True)
+    sd = np.std(y_train, axis=0, keepdims=True)
+    safe_sd = np.where((sd > 0) & np.isfinite(sd), sd, 1.0)
+    y_train = (y_train - mu) / safe_sd
+    y_test = (y_test - mu) / safe_sd
+    return y_train, y_test
 
 
 def vectorized_cv_r(
@@ -165,9 +176,10 @@ def vectorized_cv_r(
     n_splits: int = 5,
     alpha: float = 10.0,
     do_detrend: bool = True,
+    cv_gap: int = 0,
 ) -> tuple[np.ndarray, int]:
     x_matrix = np.asarray(x_matrix, dtype=float)
-    y_matrix = clean_y_matrix(y_matrix, do_detrend=do_detrend)
+    y_matrix = np.asarray(y_matrix, dtype=float)
 
     n = min(len(x_matrix), len(y_matrix))
     x_matrix, y_matrix = x_matrix[:n], y_matrix[:n]
@@ -189,11 +201,15 @@ def vectorized_cv_r(
     )
     true_parts = []
     pred_parts = []
-    for train_idx, test_idx in TimeSeriesSplit(n_splits=n_splits).split(x_matrix):
+    splitter = TimeSeriesSplit(n_splits=n_splits, gap=max(0, int(cv_gap)))
+    for train_idx, test_idx in splitter.split(x_matrix):
         if len(test_idx) < 5:
             continue
-        model.fit(x_matrix[train_idx], y_matrix[train_idx])
-        true_parts.append(y_matrix[test_idx])
+        y_train, y_test = foldwise_target_matrix(
+            y_matrix, train_idx, test_idx, do_detrend=do_detrend
+        )
+        model.fit(x_matrix[train_idx], y_train)
+        true_parts.append(y_test)
         pred_parts.append(model.predict(x_matrix[test_idx]))
 
     if not true_parts:
@@ -224,18 +240,30 @@ def main() -> None:
         "--output-dir",
         default="results/journal_neurolinguistics_robustness",
     )
+    parser.add_argument(
+        "--roi-cache-dir",
+        default="",
+        help="Optional existing ROI cache. Leave blank to use output-dir/roi_time_series_cache.",
+    )
     parser.add_argument("--max-pcs", type=int, default=10)
     parser.add_argument("--n-splits", type=int, default=5)
     parser.add_argument("--ridge-alpha", type=float, default=10.0)
     parser.add_argument("--max-subjects-per-story", type=int, default=0)
     parser.add_argument("--no-detrend", action="store_true")
+    parser.add_argument("--cv-gap", type=int, default=0)
+    parser.add_argument("--atlas-threshold", type=float, default=0.0)
+    parser.add_argument(
+        "--include-silence-indicator",
+        action="store_true",
+        help="Add an HRF-convolved empty-TR indicator to the lexical/time baseline if present.",
+    )
     parser.add_argument("--checkpoint-every", type=int, default=10)
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
 
     output_dir = ROOT / args.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
-    cache_dir = output_dir / "roi_time_series_cache"
+    cache_dir = ROOT / args.roi_cache_dir if args.roi_cache_dir else output_dir / "roi_time_series_cache"
     long_path = output_dir / "pc_count_sensitivity_long.csv"
 
     stories = load_story_list(str(ROOT / args.subject_list))
@@ -260,6 +288,9 @@ def main() -> None:
     print(f"Output directory: {output_dir}")
 
     atlas_img, atlas_labels = fetch_harvard_oxford_atlas()
+    baseline_cols = list(LEXICAL_BASELINE_COLS)
+    if args.include_silence_indicator:
+        baseline_cols.append("silence_indicator_hrf")
 
     for i, story in enumerate(stories, start=1):
         pair = (story["name"], story["subject"])
@@ -269,16 +300,16 @@ def main() -> None:
         print(f"[{i}/{len(stories)}] {story['name']} {story['subject']}", flush=True)
         reg_df = load_regressors(ROOT / args.regressor_dir, story["name"])
         pc_cols = [f"PC{j}_hrf" for j in range(1, args.max_pcs + 1)]
-        missing = [c for c in LEXICAL_BASELINE_COLS + pc_cols if c not in reg_df.columns]
+        missing = [c for c in baseline_cols + pc_cols if c not in reg_df.columns]
         if missing:
             raise ValueError(f"Missing columns in {story['name']} regressors: {missing}")
 
         roi_names, y_matrix, bold_tr, onset, duration = load_or_extract_roi_matrix(
-            story, atlas_img, atlas_labels, cache_dir
+            story, atlas_img, atlas_labels, cache_dir, atlas_threshold=args.atlas_threshold
         )
-        baseline_x = reg_df[LEXICAL_BASELINE_COLS].to_numpy()
+        baseline_x = reg_df[baseline_cols].to_numpy()
         combined_x_by_n = {
-            n: reg_df[LEXICAL_BASELINE_COLS + pc_cols[:n]].to_numpy()
+            n: reg_df[baseline_cols + pc_cols[:n]].to_numpy()
             for n in range(1, args.max_pcs + 1)
         }
 
@@ -288,6 +319,7 @@ def main() -> None:
             n_splits=args.n_splits,
             alpha=args.ridge_alpha,
             do_detrend=not args.no_detrend,
+            cv_gap=args.cv_gap,
         )
         combined_cv_r_by_n = {
             n_pcs: vectorized_cv_r(
@@ -296,6 +328,7 @@ def main() -> None:
                 n_splits=args.n_splits,
                 alpha=args.ridge_alpha,
                 do_detrend=not args.no_detrend,
+                cv_gap=args.cv_gap,
             )[0]
             for n_pcs, combined_x in combined_x_by_n.items()
         }
@@ -315,6 +348,9 @@ def main() -> None:
                         "TR": bold_tr,
                         "duration": duration,
                         "onset": onset,
+                        "atlas_threshold": args.atlas_threshold,
+                        "cv_gap": args.cv_gap,
+                        "include_silence_indicator": bool(args.include_silence_indicator),
                     }
                 )
         if args.checkpoint_every > 0 and i % args.checkpoint_every == 0:

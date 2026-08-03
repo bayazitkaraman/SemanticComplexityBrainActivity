@@ -54,6 +54,17 @@ def main():
     parser.add_argument("--max-length", type=int, default=128)
     parser.add_argument("--n-components", type=int, default=10)
     parser.add_argument("--output-dir", default="results/regressors")
+    parser.add_argument(
+        "--empty-tr-strategy",
+        choices=["eos", "zero"],
+        default="eos",
+        help="Embedding used for TRs with no aligned words.",
+    )
+    parser.add_argument(
+        "--include-silence-indicator",
+        action="store_true",
+        help="Save an HRF-convolved empty-TR indicator for silence-control models.",
+    )
     args = parser.parse_args()
 
     ensure_dir(args.output_dir)
@@ -77,9 +88,11 @@ def main():
             layers=[12],
             max_length=args.max_length,
             device=device,
+            empty_tr_strategy=args.empty_tr_strategy,
         )[12]
 
         baseline_df = compute_text_baselines(word_chunks)
+        baseline_df["silence_indicator"] = (baseline_df["word_count"] == 0).astype(float)
         acoustic_df = compute_acoustic_control_baselines(story, tr=args.tr)
         baseline_df = baseline_df.merge(acoustic_df, on="time_TR", how="left")
         for col in acoustic_df.columns:
@@ -127,13 +140,16 @@ def main():
         out_df["onset_sec"] = data["onset"]
         out_df["duration_sec"] = data["duration"]
 
-        # Raw and HRF-convolved lexical/time/acoustic control baselines
+        # Raw and HRF-convolved lexical/acoustic controls. The linear time
+        # regressor is kept unconvolved as a nuisance trend.
         baseline_cols = [
-            "word_count", "mean_char_len", "total_chars", "time_TR",
+            "word_count", "mean_char_len", "total_chars",
             "speech_duration_sec", "mean_word_duration_sec",
             "pause_fraction", "articulation_rate", "word_rate",
             "audio_rms", "audio_abs_mean",
         ]
+        if args.include_silence_indicator:
+            baseline_cols.append("silence_indicator")
         for col in baseline_cols:
             if col in out_df.columns:
                 out_df[f"{col}_hrf"] = hrf_convolve(out_df[col].to_numpy(), tr=args.tr)
