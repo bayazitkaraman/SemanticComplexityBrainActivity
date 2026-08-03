@@ -56,6 +56,23 @@ from semantic_fmri.utils import (
     permutation_p_for_best_lag,
     transcript_to_tr_chunks_uniform,
 )
+from jnl_story_grid import align_target_to_story_grid
+
+
+def load_cached_roi_timeseries(cache_dir: Path, story: dict):
+    path = cache_dir / f"{story['name']}_{story['subject']}.npz"
+    if not path.exists():
+        raise FileNotFoundError(f"Missing ROI cache file: {path}")
+    cached = np.load(path, allow_pickle=False)
+    roi_names = [str(value) for value in cached["roi_names"].tolist()]
+    y_matrix = np.asarray(cached["y_matrix"], dtype=float)
+    return (
+        roi_names,
+        y_matrix,
+        float(cached["bold_tr"]),
+        float(cached["onset"]),
+        float(cached["duration"]),
+    )
 
 
 def parse_layers(text: str):
@@ -94,6 +111,11 @@ def main():
     parser.add_argument("--quick", action="store_true",
                         help="Use layers 0,6,12 and max 2 subjects/story.")
     parser.add_argument("--output-dir", default="results/layer_analysis")
+    parser.add_argument(
+        "--roi-cache-dir",
+        default="",
+        help="Optional existing ROI cache; avoids repeated image extraction.",
+    )
     args = parser.parse_args()
 
     if args.quick:
@@ -171,24 +193,42 @@ def main():
     # ---------------------------------------------------------------------
     # Step 3: extract ROI time series and correlate each layer regressor
     # ---------------------------------------------------------------------
-    atlas_img, atlas_labels = fetch_harvard_oxford_atlas()
+    cache_dir = Path(args.roi_cache_dir) if args.roi_cache_dir else None
+    atlas_img = atlas_labels = None
+    if cache_dir is None:
+        atlas_img, atlas_labels = fetch_harvard_oxford_atlas()
     rows = []
 
     for s_idx, story in enumerate(stories, start=1):
-        print(f"\n[{s_idx}/{len(stories)}] Extracting ROIs: {story['name']} {story['subject']}")
-        roi_ts, bold_tr, onset, duration, n_trs = extract_roi_timeseries(
-            story,
-            roi_labels=ROI_LABELS_TO_TEST,
-            atlas_img=atlas_img,
-            atlas_labels=atlas_labels,
-            fwhm=6.0,
-            atlas_threshold=0.0,
+        print(f"\n[{s_idx}/{len(stories)}] Loading ROIs: {story['name']} {story['subject']}")
+        if cache_dir is not None:
+            roi_names, cached_y, bold_tr, onset, duration = load_cached_roi_timeseries(
+                cache_dir, story
+            )
+        else:
+            roi_ts, bold_tr, onset, duration, _ = extract_roi_timeseries(
+                story,
+                roi_labels=ROI_LABELS_TO_TEST,
+                atlas_img=atlas_img,
+                atlas_labels=atlas_labels,
+                fwhm=6.0,
+                atlas_threshold=0.0,
+            )
+            roi_names = list(roi_ts)
+            cached_y = np.column_stack([roi_ts[roi] for roi in roi_names])
+        y_matrix, _ = align_target_to_story_grid(
+            cached_y,
+            bold_tr,
+            onset,
+            max_timepoints=len(next(iter(layer_regressors.values()))[story["name"]]),
         )
+        target_length = len(y_matrix)
 
         for layer in layers:
-            reg = layer_regressors[layer][story["name"]]
+            reg = layer_regressors[layer][story["name"]][:target_length]
 
-            for roi, y in roi_ts.items():
+            for roi_index, roi in enumerate(roi_names):
+                y = y_matrix[:, roi_index]
                 r, p, best_lag = best_lag_correlation(
                     reg,
                     y,
@@ -219,6 +259,7 @@ def main():
                     "TR": bold_tr,
                     "duration": duration,
                     "onset": onset,
+                    "n_timepoints": target_length,
                 })
 
     df = pd.DataFrame(rows)

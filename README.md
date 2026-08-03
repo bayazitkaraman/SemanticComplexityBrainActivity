@@ -25,9 +25,10 @@ python scripts/jnl_heldout_story_replication.py --dataset-dir /path/to/ds002345 
 python scripts/jnl_heldout_story_sensitivity.py
 python scripts/jnl_fold_safe_subject_normalization.py
 python scripts/jnl_shared_response_hemisphere_sensitivity.py --skip-heldout-extraction
+python scripts/jnl_shared_response_pc_count_sensitivity.py --resume
 ```
 
-The first script evaluates the eight development stories from the prepared ROI and regressor caches. The held-out script builds the three-story held-out configuration and cache, projects the stories into the development-fitted PCA space, and evaluates the locked specification. The next two scripts run held-out parameter checks and repeat the central analyses while estimating participant normalization within each temporal training fold. The final script splits each predefined Harvard--Oxford ROI at MNI x = 0 and repeats the full-group, participant split-half, and leave-one-participant-out analyses for the left and right 17-ROI sets. Omit `--skip-heldout-extraction` when the hemisphere cache has not yet been created. The generated configurations and ROI caches remain local because they contain machine-specific paths or derived imaging data. The hemisphere analysis is exploratory: the pooled right-minus-left contrasts were nominally positive, but none survived FDR correction across the nine paired tests.
+The first script evaluates the eight development stories from the prepared ROI and regressor caches. The held-out script builds the three-story held-out configuration and cache, projects the stories into the development-fitted PCA space, and evaluates the locked specification. The next two scripts run held-out parameter checks and repeat the central analyses while estimating participant normalization within each temporal training fold. The hemisphere script splits each predefined Harvard--Oxford ROI at MNI x = 0 and repeats the full-group, participant split-half, and leave-one-participant-out analyses for the left and right 17-ROI sets. Omit `--skip-heldout-extraction` when the hemisphere cache has not yet been created. The PC-count script preserves the locked PC1--PC5 regressors, fits PC6--PC10 using development stories only, and checks nested component sets in all three analysis modes. Its PC5 reproduction audit must pass before higher-component results are written. The generated configurations and ROI caches remain local because they contain machine-specific paths or derived imaging data. The hemisphere analysis is exploratory: the pooled right-minus-left contrasts were nominally positive, but none survived FDR correction across the nine paired tests.
 
 For every shared-response analysis, cached participant ROI series are placed at their actual acquisition times relative to story onset and linearly interpolated to the common 1.5-s story grid. Only time points supported by every participant in a story are retained; the stimulus designs are restricted to the same effective grid.
 
@@ -44,7 +45,7 @@ This project supports the final Journal of Neurolinguistics submission analyses:
 5. Test whether cumulative-context GPT-2 PC1--PC5 adds prediction beyond a rich lexical/acoustic baseline.
 6. Evaluate shared responses across listeners with story-level inference.
 7. Test participant generalization with split-half and leave-one-participant-out prediction.
-8. Evaluate temporal specificity, participant normalization, silence handling, regularization, and temporal-gap sensitivity.
+8. Evaluate temporal specificity, participant normalization, silence handling, regularization, temporal-gap, and component-count sensitivity.
 9. Retain the corrected individual-scan, independent-chunk, and BERT analyses as complementary checks.
 10. Generate final tables and figures for the manuscript and supplementary material.
 
@@ -408,6 +409,11 @@ scripts/jnl_fold_safe_subject_normalization.py
 scripts/jnl_shared_response_hemisphere_sensitivity.py
     Repeats the central shared-response analyses separately for left and right
     hemisphere ROI sets and evaluates paired right-minus-left differences.
+
+scripts/jnl_shared_response_pc_count_sensitivity.py
+    Preserves the locked PC1--PC5 regressors, appends development-fitted
+    PC6--PC10, and repeats the full-group and cross-participant analyses while
+    requiring exact reproduction of the locked PC5 story results.
 ```
 
 ---
@@ -434,6 +440,7 @@ results/jnl_shared_response_context_validation/
 results/jnl_heldout_story_replication/
 results/jnl_fold_safe_subject_normalization/
 results/jnl_shared_response_hemisphere_sensitivity/
+results/jnl_shared_response_pc_count_sensitivity/
 ```
 
 Key final tables include:

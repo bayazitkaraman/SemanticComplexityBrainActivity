@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from jnl_pc_count_sensitivity import LEXICAL_BASELINE_COLS, safe_name, vectorized_cv_r  # noqa: E402
 from roi_encoding_model_comparison import load_regressors  # noqa: E402
+from jnl_story_grid import align_target_to_story_grid  # noqa: E402
 from semantic_fmri.utils import (  # noqa: E402
     ACOUSTIC_CONTROL_COLUMNS,
     choose_gentle_origin,
@@ -375,8 +376,14 @@ def evaluate_models(
             raise FileNotFoundError(f"Missing ROI cache: {cache_path}")
         cached = np.load(cache_path, allow_pickle=False)
         roi_names = [str(v) for v in cached["roi_names"].tolist()]
-        y_matrix = cached["y_matrix"]
         reg = regressors[story["name"]]
+        y_matrix, _ = align_target_to_story_grid(
+            np.asarray(cached["y_matrix"], dtype=float),
+            float(cached["bold_tr"]),
+            float(cached["onset"]),
+            max_timepoints=len(reg),
+        )
+        target_length = len(y_matrix)
 
         cv_by_model = {}
         for model_name, cols in model_columns.items():
@@ -384,7 +391,7 @@ def evaluate_models(
             if missing:
                 raise ValueError(f"Missing {missing} in {story['name']} regressors")
             cv_by_model[model_name], n_used = vectorized_cv_r(
-                reg[cols].to_numpy(),
+                reg[cols].to_numpy()[:target_length],
                 y_matrix,
                 n_splits=n_splits,
                 alpha=alpha,

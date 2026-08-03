@@ -24,6 +24,7 @@ from jnl_pc_count_sensitivity import (  # noqa: E402
     vectorized_cv_r,
 )
 from roi_encoding_model_comparison import load_regressors  # noqa: E402
+from jnl_story_grid import align_target_to_story_grid  # noqa: E402
 from semantic_fmri.utils import (  # noqa: E402
     compute_text_baselines,
     get_unique_stories,
@@ -228,10 +229,16 @@ def evaluate_representation(
             raise FileNotFoundError(f"Missing ROI cache: {cache_path}")
         cached = np.load(cache_path, allow_pickle=False)
         roi_names = [str(v) for v in cached["roi_names"].tolist()]
-        y_matrix = cached["y_matrix"]
         reg = regressor_by_story[story["name"]]
-        baseline_x = reg[LEXICAL_BASELINE_COLS].to_numpy()
-        combined_x = reg[LEXICAL_BASELINE_COLS + pc_cols].to_numpy()
+        y_matrix, _ = align_target_to_story_grid(
+            np.asarray(cached["y_matrix"], dtype=float),
+            float(cached["bold_tr"]),
+            float(cached["onset"]),
+            max_timepoints=len(reg),
+        )
+        target_length = len(y_matrix)
+        baseline_x = reg[LEXICAL_BASELINE_COLS].to_numpy()[:target_length]
+        combined_x = reg[LEXICAL_BASELINE_COLS + pc_cols].to_numpy()[:target_length]
         baseline_cv_r, n_used = vectorized_cv_r(
             baseline_x, y_matrix, n_splits=n_splits, alpha=alpha
         )
@@ -328,6 +335,16 @@ def representation_summaries(scan_tables: list[pd.DataFrame], primary_scan_csv: 
         diff = wide[col] - wide[base_col]
         row = summarize(diff)
         row["comparison"] = f"{col} minus {base_col}"
+        mixed = mixed_effect_intercept(
+            wide.assign(comparison_difference=diff),
+            "comparison_difference",
+            row["comparison"],
+        )
+        row["mixed_estimate"] = mixed["estimate"]
+        row["mixed_ci95_low"] = mixed["ci95_low"]
+        row["mixed_ci95_high"] = mixed["ci95_high"]
+        row["mixed_p_two_sided"] = mixed["p"]
+        row["mixed_converged"] = mixed["converged"]
         comparison_rows.append(row)
     comp = pd.DataFrame(comparison_rows)
     comp = comp[["comparison"] + [c for c in comp.columns if c != "comparison"]]
@@ -340,7 +357,13 @@ def main() -> None:
         "--subject-list",
         default="configs/stories_all_fmriprep_confounds_motionfiltered.py",
     )
-    parser.add_argument("--primary-scan-csv", default="results/jnl_revision_major_review/primary_scan_level_model_values.csv")
+    parser.add_argument(
+        "--primary-scan-csv",
+        default=(
+            "results/jnl_individual_timing_corrected/gpt2_primary/"
+            "primary_scan_level_model_values.csv"
+        ),
+    )
     parser.add_argument(
         "--roi-cache-dir",
         default="results/journal_neurolinguistics_robustness/pc_count_full_corrected/roi_time_series_cache",
@@ -355,6 +378,11 @@ def main() -> None:
     parser.add_argument("--independent-max-length", type=int, default=128)
     parser.add_argument("--context-max-length", type=int, default=1024)
     parser.add_argument("--context-output-stride", type=int, default=256)
+    parser.add_argument(
+        "--reuse-regressor-root",
+        default="",
+        help="Reuse existing representation subdirectories instead of recomputing embeddings.",
+    )
     parser.add_argument("--skip-context", action="store_true")
     parser.add_argument("--skip-layer4", action="store_true")
     args = parser.parse_args()
@@ -363,6 +391,40 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     stories = load_story_list(str(ROOT / args.subject_list))
     unique_stories = get_unique_stories(stories)
+
+    if args.reuse_regressor_root:
+        source_root = ROOT / args.reuse_regressor_root
+        scan_tables = []
+        for representation, skip in [
+            ("cumulative_context_layer12_current_tokens", args.skip_context),
+            ("independent_chunk_layer4", args.skip_layer4),
+        ]:
+            if skip:
+                continue
+            representation_dir = source_root / representation
+            regressors = {
+                story["name"]: pd.read_csv(
+                    representation_dir
+                    / f"{story['name']}_shared_pca_regressors.csv"
+                )
+                for story in unique_stories
+            }
+            scan_tables.append(
+                evaluate_representation(
+                    representation,
+                    stories,
+                    regressors,
+                    ROOT / args.roi_cache_dir,
+                    out_dir,
+                    alpha=args.alpha,
+                    n_splits=args.n_splits,
+                    n_pcs=args.n_pcs,
+                )
+            )
+        if scan_tables:
+            representation_summaries(scan_tables, ROOT / args.primary_scan_csv, out_dir)
+        print(f"Saved context/layer model outputs in {out_dir}")
+        return
 
     tokenizer, model, device = load_gpt2()
     print(f"Loaded GPT-2 on {device}")

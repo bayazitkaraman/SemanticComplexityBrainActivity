@@ -21,12 +21,13 @@ from jnl_pc_count_sensitivity import (  # noqa: E402
     LEXICAL_BASELINE_COLS,
     vectorized_cv_r,
 )
-from jnl_rescue_network_model_comparisons import (  # noqa: E402
+from jnl_inference_utils import (  # noqa: E402
     bh_fdr,
     fit_mixed_effect,
     simple_stats,
 )
 from jnl_rich_audio_controls import RICH_AUDIO_COLUMNS  # noqa: E402
+from jnl_story_grid import align_targets_to_common_story_grid  # noqa: E402
 from roi_encoding_model_comparison import load_regressors  # noqa: E402
 from semantic_fmri.utils import ACOUSTIC_CONTROL_COLUMNS, hrf_convolve  # noqa: E402
 
@@ -82,34 +83,13 @@ def load_story_targets(
         subject_trs.append(float(cached["bold_tr"]))
         subject_onsets.append(float(cached["onset"]))
 
-    # Cached segments begin at floor(onset / TR). Put every participant on the
-    # common story-relative 1.5-s grid before averaging across listeners. This
-    # handles fractional event onsets and the 1.52-s Milky Way acquisitions.
-    source_times = []
-    minimum_supported_end = np.inf
-    for target, tr, onset in zip(subject_targets, subject_trs, subject_onsets):
-        segment_start = int(onset // tr)
-        onset_offset = onset - segment_start * tr
-        times = np.arange(len(target), dtype=float) * tr - onset_offset
-        source_times.append(times)
-        minimum_supported_end = min(minimum_supported_end, float(times[-1]))
-
-    common_tr = 1.5
-    n_timepoints = int(np.floor((minimum_supported_end + 1e-10) / common_tr)) + 1
-    common_times = np.arange(n_timepoints, dtype=float) * common_tr
-    aligned_targets = []
-    for target, times in zip(subject_targets, source_times):
-        if common_times[0] < times[0] - 1e-10 or common_times[-1] > times[-1] + 1e-10:
-            raise ValueError(f"Common story grid exceeds BOLD support for {story}")
-        aligned = np.column_stack(
-            [
-                np.interp(common_times, times, target[:, roi_index])
-                for roi_index in range(target.shape[1])
-            ]
-        )
-        aligned_targets.append(
-            standardize_subject_timeseries(aligned) if standardize else aligned
-        )
+    aligned_targets, _ = align_targets_to_common_story_grid(
+        subject_targets,
+        subject_trs,
+        subject_onsets,
+    )
+    if standardize:
+        aligned_targets = [standardize_subject_timeseries(target) for target in aligned_targets]
 
     targets = np.stack(aligned_targets, axis=0)
     return targets, roi_names or []

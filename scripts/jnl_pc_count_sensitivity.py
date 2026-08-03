@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from roi_encoding_model_comparison import load_regressors  # noqa: E402
+from jnl_story_grid import align_target_to_story_grid  # noqa: E402
 from semantic_fmri.utils import (  # noqa: E402
     ROI_LABELS_TO_TEST,
     extract_roi_timeseries,
@@ -307,9 +308,16 @@ def main() -> None:
         roi_names, y_matrix, bold_tr, onset, duration = load_or_extract_roi_matrix(
             story, atlas_img, atlas_labels, cache_dir, atlas_threshold=args.atlas_threshold
         )
-        baseline_x = reg_df[baseline_cols].to_numpy()
+        y_matrix, _ = align_target_to_story_grid(
+            y_matrix,
+            bold_tr,
+            onset,
+            max_timepoints=len(reg_df),
+        )
+        target_length = len(y_matrix)
+        baseline_x = reg_df[baseline_cols].to_numpy()[:target_length]
         combined_x_by_n = {
-            n: reg_df[baseline_cols + pc_cols[:n]].to_numpy()
+            n: reg_df[baseline_cols + pc_cols[:n]].to_numpy()[:target_length]
             for n in range(1, args.max_pcs + 1)
         }
 

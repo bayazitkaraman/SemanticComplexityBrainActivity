@@ -17,12 +17,13 @@ from jnl_pc_count_sensitivity import (  # noqa: E402
     safe_name,
     vectorized_cv_r,
 )
-from jnl_rescue_network_model_comparisons import (  # noqa: E402
+from jnl_inference_utils import (  # noqa: E402
     bh_fdr,
     fit_mixed_effect,
     simple_stats,
 )
 from jnl_rich_audio_controls import RICH_AUDIO_COLUMNS  # noqa: E402
+from jnl_story_grid import align_target_to_story_grid  # noqa: E402
 from roi_encoding_model_comparison import load_regressors  # noqa: E402
 from semantic_fmri.utils import ACOUSTIC_CONTROL_COLUMNS, load_story_list  # noqa: E402
 
@@ -122,7 +123,13 @@ def evaluate(args: argparse.Namespace) -> pd.DataFrame:
             raise FileNotFoundError(cache_path)
         cached = np.load(cache_path, allow_pickle=False)
         roi_names = [str(value) for value in cached["roi_names"].tolist()]
-        y_matrix = np.asarray(cached["y_matrix"], dtype=float)
+        y_matrix, _ = align_target_to_story_grid(
+            np.asarray(cached["y_matrix"], dtype=float),
+            float(cached["bold_tr"]),
+            float(cached["onset"]),
+            max_timepoints=len(reg),
+        )
+        target_length = len(y_matrix)
 
         print(
             f"[{index}/{len(stories)}] {story_name} {story['subject']}",
@@ -134,7 +141,7 @@ def evaluate(args: argparse.Namespace) -> pd.DataFrame:
             if missing:
                 raise ValueError(f"Missing columns for {story_name}/{model_name}: {missing}")
             cv_by_model[model_name], n_used = vectorized_cv_r(
-                reg[columns].to_numpy(dtype=float),
+                reg[columns].to_numpy(dtype=float)[:target_length],
                 y_matrix,
                 n_splits=args.n_splits,
                 alpha=args.alpha,

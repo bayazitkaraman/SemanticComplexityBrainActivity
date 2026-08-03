@@ -17,6 +17,7 @@ from semantic_fmri.utils import (
     ROI_LABELS_TO_TEST, ACOUSTIC_CONTROL_COLUMNS, ensure_dir, extract_roi_timeseries,
     fetch_harvard_oxford_atlas, load_story_list, safe_pearson
 )
+from jnl_story_grid import align_target_to_story_grid
 
 def limit_subjects_per_story(stories, max_subjects_per_story):
     if max_subjects_per_story is None or max_subjects_per_story <= 0:
@@ -135,6 +136,11 @@ def main():
                         help="Number of TRs to embargo between each training and test fold.")
     parser.add_argument("--atlas-threshold", type=float, default=0.0,
                         help="Harvard-Oxford probabilistic atlas threshold.")
+    parser.add_argument(
+        "--roi-cache-dir",
+        default="",
+        help="Optional cache produced by jnl_pc_count_sensitivity.py.",
+    )
     parser.add_argument("--quick", action="store_true")
     parser.add_argument("--include-acoustic", action="store_true",
                         help="Add speech-timing/audio controls and acoustic-adjusted combined models.")
@@ -156,7 +162,9 @@ def main():
     print("Primary metric: cv_r; secondary metric: cv_r2")
     print(f"ROI detrending: {not args.no_detrend}")
 
-    atlas_img, atlas_labels = fetch_harvard_oxford_atlas()
+    atlas_img = atlas_labels = None
+    if not args.roi_cache_dir:
+        atlas_img, atlas_labels = fetch_harvard_oxford_atlas()
 
     lexical_baseline_cols = ["word_count_hrf", "mean_char_len_hrf", "total_chars_hrf", "time_TR"]
     if args.include_silence_indicator:
@@ -179,27 +187,51 @@ def main():
         if args.include_acoustic and not acoustic_cols:
             print(f"WARNING: no acoustic/speech-timing HRF columns found for {story['name']}; acoustic-adjusted models will match lexical/time baseline.")
 
-        roi_ts, bold_tr, onset, duration, n_trs = extract_roi_timeseries(
-            story, roi_labels=ROI_LABELS_TO_TEST, atlas_img=atlas_img,
-            atlas_labels=atlas_labels, fwhm=6.0, atlas_threshold=args.atlas_threshold
+        if args.roi_cache_dir:
+            cache_path = Path(args.roi_cache_dir) / (
+                f"{story['name']}_{story['subject']}.npz"
+            )
+            if not cache_path.exists():
+                raise FileNotFoundError(f"Missing ROI cache: {cache_path}")
+            cached = np.load(cache_path, allow_pickle=False)
+            roi_names = [str(value) for value in cached["roi_names"].tolist()]
+            raw_target = np.asarray(cached["y_matrix"], dtype=float)
+            bold_tr = float(cached["bold_tr"])
+            onset = float(cached["onset"])
+            duration = float(cached["duration"])
+        else:
+            roi_ts, bold_tr, onset, duration, _ = extract_roi_timeseries(
+                story, roi_labels=ROI_LABELS_TO_TEST, atlas_img=atlas_img,
+                atlas_labels=atlas_labels, fwhm=6.0, atlas_threshold=args.atlas_threshold
+            )
+            roi_names = list(roi_ts)
+            raw_target = np.column_stack([roi_ts[roi] for roi in roi_names])
+
+        y_matrix, _ = align_target_to_story_grid(
+            raw_target,
+            bold_tr,
+            onset,
+            max_timepoints=len(reg_df),
         )
+        target_length = len(y_matrix)
 
         model_mats = {
-            "baseline_only": reg_df[baseline_cols].to_numpy(),
-            "gpt2_pc1": reg_df[["PC1_hrf"]].to_numpy(),
-            f"gpt2_pc1_to_pc{args.n_pcs}": reg_df[pc_cols].to_numpy(),
-            "combined_pc1": reg_df[baseline_cols + ["PC1_hrf"]].to_numpy(),
-            f"combined_pc1_to_pc{args.n_pcs}": reg_df[baseline_cols + pc_cols].to_numpy(),
+            "baseline_only": reg_df[baseline_cols].to_numpy()[:target_length],
+            "gpt2_pc1": reg_df[["PC1_hrf"]].to_numpy()[:target_length],
+            f"gpt2_pc1_to_pc{args.n_pcs}": reg_df[pc_cols].to_numpy()[:target_length],
+            "combined_pc1": reg_df[baseline_cols + ["PC1_hrf"]].to_numpy()[:target_length],
+            f"combined_pc1_to_pc{args.n_pcs}": reg_df[baseline_cols + pc_cols].to_numpy()[:target_length],
         }
 
         if args.include_acoustic:
             model_mats.update({
-                "baseline_acoustic_only": reg_df[acoustic_baseline_cols].to_numpy(),
-                "combined_acoustic_pc1": reg_df[acoustic_baseline_cols + ["PC1_hrf"]].to_numpy(),
-                f"combined_acoustic_pc1_to_pc{args.n_pcs}": reg_df[acoustic_baseline_cols + pc_cols].to_numpy(),
+                "baseline_acoustic_only": reg_df[acoustic_baseline_cols].to_numpy()[:target_length],
+                "combined_acoustic_pc1": reg_df[acoustic_baseline_cols + ["PC1_hrf"]].to_numpy()[:target_length],
+                f"combined_acoustic_pc1_to_pc{args.n_pcs}": reg_df[acoustic_baseline_cols + pc_cols].to_numpy()[:target_length],
             })
 
-        for roi, y in roi_ts.items():
+        for roi_index, roi in enumerate(roi_names):
+            y = y_matrix[:, roi_index]
             for model_name, X in model_mats.items():
                 cv_r2, cv_r, cv_r2_train_mean, cv_r2_fold_mean, n_used = cross_validated_prediction(
                     X, y, n_splits=args.n_splits, alpha=args.ridge_alpha,

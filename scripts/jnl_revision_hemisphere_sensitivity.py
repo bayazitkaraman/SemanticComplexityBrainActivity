@@ -22,6 +22,7 @@ from jnl_pc_count_sensitivity import (  # noqa: E402
     summarize,
     vectorized_cv_r,
 )
+from jnl_story_grid import align_target_to_story_grid  # noqa: E402
 from roi_encoding_model_comparison import load_regressors  # noqa: E402
 from semantic_fmri.utils import (  # noqa: E402
     ROI_LABELS_TO_TEST,
@@ -195,12 +196,23 @@ def main() -> None:
     parser.add_argument("--ridge-alpha", type=float, default=10.0)
     parser.add_argument("--atlas-threshold", type=float, default=0.0)
     parser.add_argument("--fwhm", type=float, default=6.0)
+    parser.add_argument(
+        "--roi-cache-dir",
+        default="",
+        help="Optional existing hemisphere ROI cache; avoids repeated image extraction.",
+    )
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
 
     out_dir = ROOT / args.output_dir
     out_dir.mkdir(parents=True, exist_ok=True)
-    cache_dir = out_dir / "roi_time_series_cache_corrected"
+    cache_dir = (
+        Path(args.roi_cache_dir)
+        if args.roi_cache_dir and Path(args.roi_cache_dir).is_absolute()
+        else ROOT / args.roi_cache_dir
+        if args.roi_cache_dir
+        else out_dir / "roi_time_series_cache_corrected"
+    )
     stories = load_story_list(str(ROOT / args.subject_list))
     atlas_img, atlas_labels = fetch_harvard_oxford_atlas()
     regressor_dir = ROOT / args.regressor_dir
@@ -233,6 +245,12 @@ def main() -> None:
         reg = load_regressors(regressor_dir, story["name"])
         baseline_x = reg[LEXICAL_BASELINE_COLS].to_numpy()
         combined_x = reg[LEXICAL_BASELINE_COLS + pc_cols].to_numpy()
+        y_matrix, _ = align_target_to_story_grid(
+            y_matrix,
+            tr,
+            onset,
+            max_timepoints=len(reg),
+        )
         baseline_cv_r, n_used = vectorized_cv_r(
             baseline_x,
             y_matrix,

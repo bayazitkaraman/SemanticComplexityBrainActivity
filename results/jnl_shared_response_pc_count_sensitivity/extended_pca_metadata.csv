@@ -1,0 +1,11 @@
+component,explained_variance_ratio,alignment_sign,source_in_models
+PC1,0.08346215,1.0,locked_primary
+PC2,0.045175537,1.0,locked_primary
+PC3,0.038448542,1.0,locked_primary
+PC4,0.028247496,1.0,locked_primary
+PC5,0.02543996,1.0,locked_primary
+PC6,0.02173352,1.0,extended_pca
+PC7,0.02124106,1.0,extended_pca
+PC8,0.019841183,1.0,extended_pca
+PC9,0.017163321,1.0,extended_pca
+PC10,0.016079994,1.0,extended_pca
