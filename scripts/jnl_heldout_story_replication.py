@@ -472,6 +472,8 @@ def evaluate_replication(
                 {
                     "story": story,
                     "seed": seed,
+                    "mean_baseline_cv_r": float(np.mean(baseline_split)),
+                    "mean_combined_cv_r": float(np.mean(combined_split)),
                     "mean_delta_cv_r": float(np.mean(combined_split - baseline_split)),
                 }
             )
@@ -494,6 +496,8 @@ def evaluate_replication(
                 {
                     "story": story,
                     "subject": subject,
+                    "mean_baseline_cv_r": float(np.mean(baseline_leave)),
+                    "mean_combined_cv_r": float(np.mean(combined_leave)),
                     "mean_delta_cv_r": float(np.mean(combined_leave - baseline_leave)),
                 }
             )
@@ -502,8 +506,9 @@ def evaluate_replication(
     split = pd.DataFrame(split_rows)
     leave = pd.DataFrame(leave_rows)
     full_story = full.groupby("story", as_index=False).delta_cv_r.mean()
-    split_story = split.groupby("story", as_index=False).mean_delta_cv_r.mean()
-    leave_story = leave.groupby("story", as_index=False).mean_delta_cv_r.mean()
+    absolute_columns = ["mean_baseline_cv_r", "mean_combined_cv_r", "mean_delta_cv_r"]
+    split_story = split.groupby("story", as_index=False)[absolute_columns].mean()
+    leave_story = leave.groupby("story", as_index=False)[absolute_columns].mean()
 
     summary_rows = []
     for label, table, column in [

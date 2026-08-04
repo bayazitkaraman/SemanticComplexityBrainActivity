@@ -80,9 +80,14 @@ def fit_mixed_effect(scan: pd.DataFrame, value_col: str) -> dict[str, float | bo
     if data.shape[0] < 10:
         return {
             "mixed_estimate": np.nan,
+            "mixed_se": np.nan,
+            "mixed_z": np.nan,
+            "mixed_ci95_low": np.nan,
+            "mixed_ci95_high": np.nan,
             "mixed_p_two_sided": np.nan,
             "mixed_p_one_sided_positive": np.nan,
             "mixed_converged": False,
+            "mixed_optimizer": "none",
             "mixed_warnings": "too_few_rows",
         }
     data = data.rename(columns={value_col: "y"})
@@ -103,13 +108,17 @@ def fit_mixed_effect(scan: pd.DataFrame, value_col: str) -> dict[str, float | bo
             if bool(result.converged):
                 estimate = float(result.params["Intercept"])
                 z_value = float(result.tvalues["Intercept"])
+                ci = result.conf_int().loc["Intercept"]
                 return {
                     "mixed_estimate": estimate,
                     "mixed_se": float(result.bse["Intercept"]),
                     "mixed_z": z_value,
+                    "mixed_ci95_low": float(ci.iloc[0]),
+                    "mixed_ci95_high": float(ci.iloc[1]),
                     "mixed_p_two_sided": float(result.pvalues["Intercept"]),
                     "mixed_p_one_sided_positive": float(stats.norm.sf(z_value)),
                     "mixed_converged": True,
+                    "mixed_optimizer": method,
                     "mixed_warnings": " | ".join(messages),
                 }
             messages.append(f"{method}: did not converge")
@@ -119,8 +128,11 @@ def fit_mixed_effect(scan: pd.DataFrame, value_col: str) -> dict[str, float | bo
         "mixed_estimate": np.nan,
         "mixed_se": np.nan,
         "mixed_z": np.nan,
+        "mixed_ci95_low": np.nan,
+        "mixed_ci95_high": np.nan,
         "mixed_p_two_sided": np.nan,
         "mixed_p_one_sided_positive": np.nan,
         "mixed_converged": False,
+        "mixed_optimizer": "none",
         "mixed_warnings": " | ".join(messages),
     }

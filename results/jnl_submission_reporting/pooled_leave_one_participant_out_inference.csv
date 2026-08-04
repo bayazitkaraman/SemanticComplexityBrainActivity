@@ -1,0 +1,2 @@
+scope,analysis,n_stories,mean_delta_cv_r,median_delta_cv_r,ci95_low,ci95_high,n_positive_stories,t,p_ttest_two_sided,p_wilcoxon_greater,p_sign_greater
+pooled_eleven_stories,leave_one_participant_out,11,0.01881430775712803,0.021772448852358156,0.008596208091698705,0.029032407422557353,10,4.102611195730683,0.0021356380068737464,0.00341796875,0.005859375

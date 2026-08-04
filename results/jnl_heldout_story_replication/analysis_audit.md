@@ -6,15 +6,51 @@ The held-out outcomes were kept separate from model development. The three
 held-out story outcomes were not used to choose stories, ROIs, component count,
 ridge alpha, or cross-validation gap.
 
-The locked specification was written before the held-out fMRI outcomes were
-scored. It is recorded in `locked_analysis_specification.json`. This was a
-local analysis lock, not a public preregistration.
+The local locked specification was first written on August 2, 2026 at 10:37
+EDT, before the held-out fMRI outcomes were scored. The first held-out result
+files were generated at 11:15 EDT. The lock is recorded in
+`locked_analysis_specification.json` (SHA-256:
+`7B2C01AB580554A8CD0149E0017D3CABBAF2E424C6CCE424ACE85736505F6682`).
+This was a local analysis lock, not a public preregistration.
+
+The held-out outcomes had been generated before the final end-to-end timing
+audit on August 3. The later corrections used actual story-relative volume
+times and a common supported 1.5-s grid. They were outcome-independent, were
+applied identically to development and held-out stories, and did not alter the
+stories, predictors, ROIs, component count, regularization, folds, temporal
+gap, or model contrast.
 
 ## Story selection and data completeness
 
-The original eight stories were the first eight entries in the pre-existing
-objective candidate ranking. The held-out set contains the next three eligible
-entries in that same ranking: `prettymouth`, `sherlock`, and `merlin`.
+The objective candidate scan required at least 20 usable participants, at
+least 5 minutes' median duration, and a single BOLD run per participant.
+Eligible stories were ranked by usable participant count and then median
+duration. The scan was run with `--allow-missing-transcript` because the Gentle
+alignments used for modeling were maintained in an external directory rather
+than the dataset locations searched by the scanner. This explains why the
+table's local transcript-candidate field is false although all 11 analyzed
+stories had the required external Gentle and audio resources. The complete
+sanitized candidate table is stored in
+`results/jnl_heldout_story_replication/candidate_story_ranking.csv` and is
+exported from the local diagnostic table by
+`scripts/jnl_submission_reporting_tables.py`. Its first 11 eligible entries
+were:
+
+1. `shapessocial`
+2. `shapesphysical`
+3. `notthefallintact`
+4. `milkyway`
+5. `bronx`
+6. `forgot`
+7. `black`
+8. `piemanpni`
+9. `prettymouth`
+10. `sherlock`
+11. `merlin`
+
+The original eight stories were the first eight entries. The held-out set
+contains the next three eligible entries: `prettymouth`, `sherlock`, and
+`merlin`.
 
 - `prettymouth`: 40 participants, 450 story TRs, 17 ROIs
 - `sherlock`: 36 participants, 700 retained story TRs, 17 ROIs
@@ -32,7 +68,8 @@ the word, audio, and GPT-2 designs were restricted to the same effective grid.
 
 ## Model audit
 
-- GPT-2 embeddings were computed causally from cumulative preceding context.
+- GPT-2 embeddings were computed autoregressively from cumulative preceding
+  context within rolling windows of at most 1,024 tokens.
 - The scaler and five-component PCA were fitted only to the original eight
   stories. The three held-out stories were projected without refitting.
 - Recomputed discovery-story components reproduced the saved components with
@@ -61,6 +98,9 @@ held-out effect. The null mean was -0.0069 and its 95th percentile was 0.0453.
 Across the original eight and held-out three stories, the full-group mean was
 0.0593 (`p = .0009` by two-sided story-level t-test; 9/11 positive). The
 participant split-half mean was 0.0437 (`p = .0013`; 10/11 positive).
+The leave-one-participant-out mean was 0.0188 (`p = .0021`; 10/11 positive).
+Absolute baseline, combined-model, and incremental correlations are stored in
+`results/jnl_submission_reporting/absolute_prediction_story_means.csv`.
 
 ## Robustness checks
 
@@ -90,9 +130,12 @@ features improve prediction of shared, stimulus-locked fMRI responses beyond
 the detailed lexical and acoustic baseline, and this effect generalizes to
 three previously unused narratives.
 
-It does not establish that cumulative context is significantly better than an
-independent-chunk GPT-2 model. The direct contrast in the original eight stories
-was not significant, and that contrast was not part of the locked held-out test.
+It does not establish that cumulative context is better than an independent-
+chunk GPT-2 model. The direct contrast in the original eight stories was
+test-dependent: the full-group two-sided t-test gave `p = .073`, the one-sided
+Wilcoxon test gave `p = .039`, and the sign test gave `p = .145`. With no
+prospectively recorded hierarchy among these development tests, the comparison
+is treated as inconclusive. It was not part of the locked held-out test.
 It also does not support ROI-specific localization: the held-out set has only
 three stories, and no ROI subset was selected. The corrected original
 individual-participant encoding result remains null and must be reported rather

@@ -2,7 +2,7 @@
 
 This repository contains a reproducible Python pipeline for analyzing how low-dimensional GPT-2-derived linguistic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
 
-The current Journal of Neurolinguistics revision uses the public **Narratives** fMRI dataset, Gentle word-level alignments, causal cumulative-context GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, temporally separated cross-validation, shared-response ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
+The current Journal of Neurolinguistics revision uses the public **Narratives** fMRI dataset, Gentle word-level alignments, autoregressive cumulative-context GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, temporally separated cross-validation, shared-response ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
 
 Data files, virtual environments, WAV files, and large neuroimaging outputs are intentionally **not** stored in this repository.
 
@@ -26,9 +26,19 @@ python scripts/jnl_heldout_story_sensitivity.py
 python scripts/jnl_fold_safe_subject_normalization.py
 python scripts/jnl_shared_response_hemisphere_sensitivity.py --skip-heldout-extraction
 python scripts/jnl_shared_response_pc_count_sensitivity.py --resume
+python scripts/jnl_submission_reporting_tables.py
 ```
 
-The first script evaluates the eight development stories from the prepared ROI and regressor caches. The held-out script builds the three-story held-out configuration and cache, projects the stories into the development-fitted PCA space, and evaluates the locked specification. The next two scripts run held-out parameter checks and repeat the central analyses while estimating participant normalization within each temporal training fold. The hemisphere script splits each predefined Harvard--Oxford ROI at MNI x = 0 and repeats the full-group, participant split-half, and leave-one-participant-out analyses for the left and right 17-ROI sets. Omit `--skip-heldout-extraction` when the hemisphere cache has not yet been created. The PC-count script preserves the locked PC1--PC5 regressors, fits PC6--PC10 using development stories only, and checks nested component sets in all three analysis modes. Its PC5 reproduction audit must pass before higher-component results are written. The generated configurations and ROI caches remain local because they contain machine-specific paths or derived imaging data. The hemisphere analysis is exploratory: the pooled right-minus-left contrasts were nominally positive, but none survived FDR correction across the nine paired tests.
+The first script evaluates the eight development stories from the prepared ROI and regressor caches. The held-out script builds the three-story held-out configuration and cache, projects the stories into the development-fitted PCA space, and evaluates the locked specification. The next two scripts run held-out parameter checks and repeat the central analyses while estimating participant normalization within each temporal training fold. The hemisphere script splits each predefined Harvard--Oxford ROI at MNI x = 0 and repeats the full-group, participant split-half, and leave-one-participant-out analyses for the left and right 17-ROI sets. Omit `--skip-heldout-extraction` when the hemisphere cache has not yet been created. The PC-count script preserves the locked PC1--PC5 regressors, fits PC6--PC10 using development stories only, and checks nested component sets in all three analysis modes. Its PC5 reproduction audit must pass before higher-component results are written. The final reporting script verifies each absolute combined-minus-baseline difference and writes the 33 story-by-analysis rows used in Supplementary Table S17 together with pooled leave-one-participant-out inference. The generated configurations and ROI caches remain local because they contain machine-specific paths or derived imaging data. The hemisphere analysis is exploratory: the pooled right-minus-left contrasts were nominally positive, but none survived FDR correction across the nine paired tests.
+
+The local held-out lock is
+`results/jnl_heldout_story_replication/locked_analysis_specification.json`
+(SHA-256 `7B2C01AB580554A8CD0149E0017D3CABBAF2E424C6CCE424ACE85736505F6682`).
+The lock and audit chronology are documented in
+`results/jnl_heldout_story_replication/analysis_audit.md`. The sanitized public
+candidate ranking and eligibility fields are in
+`results/jnl_heldout_story_replication/candidate_story_ranking.csv`; it is
+exported from the local diagnostic table by the submission-reporting script.
 
 For every shared-response analysis, cached participant ROI series are placed at their actual acquisition times relative to story onset and linearly interpolated to the common 1.5-s story grid. Only time points supported by every participant in a story are retained; the stimulus designs are restricted to the same effective grid.
 
@@ -94,9 +104,12 @@ source .venv/bin/activate
 Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-lock.txt
 pip install -e .
 ```
+
+`requirements-lock.txt` records the exact direct-dependency versions used for
+the revision. `requirements.txt` remains the unpinned convenience list.
 
 The editable install is important because the scripts import utilities from:
 
@@ -116,7 +129,7 @@ The final analysis used the public **Narratives** dataset from OpenNeuro/DataLad
 OpenNeuro accession: ds002345
 ```
 
-The selected stories are:
+The eight development stories are:
 
 ```text
 black
@@ -128,6 +141,27 @@ piemanpni
 shapesphysical
 shapessocial
 ```
+
+The three held-out stories are:
+
+```text
+prettymouth
+sherlock
+merlin
+```
+
+The objective candidate scan required at least 20 usable participants, at
+least 5 minutes' median duration, and a single BOLD run per participant.
+Eligible stories were ranked by usable participant count and then median
+duration. The scan used `--allow-missing-transcript` because the required
+Gentle alignments were maintained in an external directory rather than the
+dataset paths searched by the scanner; this is why the public table's local
+transcript-candidate field is false. All 11 analyzed stories had the required
+external Gentle and audio resources. The first eight eligible entries formed
+the development set; the next three formed the held-out set. See
+`scripts/scan_story_candidates.py` and
+`results/jnl_heldout_story_replication/candidate_story_ranking.csv` for the
+complete public ranking.
 
 The exact local data layout can vary depending on how the dataset was downloaded. The pipeline uses the paths defined in:
 
@@ -170,7 +204,10 @@ gentle/
 ├── notthefallintact/align.json
 ├── piemanpni/align.json
 ├── shapesphysical/align.json
-└── shapessocial/align.json
+├── shapessocial/align.json
+├── prettymouth/align.json
+├── sherlock/align.json
+└── merlin/align.json
 ```
 
 The code maps the story name `milkyway` to the Gentle folder `milkywayoriginal`.
@@ -265,6 +302,9 @@ notthefallintact_audio.wav
 piemanpni_audio.wav
 shapesphysical_audio.wav
 shapessocial_audio.wav
+prettymouth_audio.wav
+sherlock_audio.wav
+merlin_audio.wav
 ```
 
 This envelope-only control belongs to the earlier individual-scan pipeline. The current shared-response analysis uses the richer lexical/acoustic baseline described below.
@@ -414,6 +454,11 @@ scripts/jnl_shared_response_pc_count_sensitivity.py
     Preserves the locked PC1--PC5 regressors, appends development-fitted
     PC6--PC10, and repeats the full-group and cross-participant analyses while
     requiring exact reproduction of the locked PC5 story results.
+
+scripts/jnl_submission_reporting_tables.py
+    Combines development and held-out absolute baseline, combined-model, and
+    incremental correlations and computes pooled leave-one-participant-out
+    story-level inference for manuscript reporting.
 ```
 
 ---
@@ -441,6 +486,7 @@ results/jnl_heldout_story_replication/
 results/jnl_fold_safe_subject_normalization/
 results/jnl_shared_response_hemisphere_sensitivity/
 results/jnl_shared_response_pc_count_sensitivity/
+results/jnl_submission_reporting/
 ```
 
 Key final tables include:
@@ -476,7 +522,7 @@ vs.
 combined_rich_audio_gpt2_pc1_to_pc5
 ```
 
-where the rich baseline includes lexical/time predictors, acoustic-envelope/speech-density controls, and additional waveform, spectral, pitch, and coarse voicing-related predictors. The primary target is the full-story-standardized ROI response averaged across listeners within each story. A sensitivity analysis estimates participant normalization only from the training portion of each temporal fold. The earlier individual subject--story comparison is retained as a corrected null audit result, not as the central evidence.
+where the rich baseline includes lexical/time predictors, acoustic-envelope/speech-density controls, and additional waveform, spectral, pitch, and coarse voicing-related predictors. The primary target is the full-story-standardized ROI response averaged across listeners within each story. This participant-level full-story standardization is distinct from the fold-specific detrending and scaling of the resulting shared encoding target. A sensitivity analysis additionally estimates participant means and scales only from the training portion of each temporal fold. The earlier individual subject--story comparison is retained as a corrected null audit result, not as the central evidence.
 
 The primary performance metric is:
 
