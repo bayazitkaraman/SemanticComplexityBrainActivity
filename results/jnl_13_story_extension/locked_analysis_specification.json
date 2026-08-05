@@ -1,0 +1,103 @@
+{
+  "status": "locked before 21styear and tunnel outcomes were computed",
+  "date_locked": "2026-08-05",
+  "scope": "all eligible intact single-run narratives in the local ds002345 v1.1.4 candidate scan",
+  "candidate_flow": {
+    "fMRI_task_labels": 19,
+    "excluded_temporal_scrambling_controls": [
+      "notthefalllongscram",
+      "notthefallshortscram"
+    ],
+    "excluded_by_pre_existing_numeric_or_run_criteria": [
+      "pieman",
+      "schema",
+      "slumlordreach",
+      "lucy"
+    ]
+  },
+  "stories_in_objective_rank_order": [
+    "shapessocial",
+    "shapesphysical",
+    "notthefallintact",
+    "milkyway",
+    "bronx",
+    "forgot",
+    "black",
+    "piemanpni",
+    "prettymouth",
+    "sherlock",
+    "merlin",
+    "21styear",
+    "tunnel"
+  ],
+  "original_development_stories": [
+    "shapessocial",
+    "shapesphysical",
+    "notthefallintact",
+    "milkyway",
+    "bronx",
+    "forgot",
+    "black",
+    "piemanpni"
+  ],
+  "previously_scored_evaluation_stories": [
+    "prettymouth",
+    "sherlock",
+    "merlin"
+  ],
+  "new_evaluation_stories_to_report_regardless_of_outcome": [
+    "21styear",
+    "tunnel"
+  ],
+  "primary_extension": {
+    "feature_transform": "scaler and five-component PCA fitted only on the original eight development stories",
+    "projection": "all five evaluation stories projected without refitting",
+    "contrast": "rich_audio_plus_cumulative_context_pc1_to_pc5 minus rich_audio",
+    "primary_unit": "mean delta cv_r across the 17 predefined ROIs for each story",
+    "ridge_alpha": 10.0,
+    "time_series_splits": 5,
+    "cv_gap_trs": 10,
+    "participant_splits": 50,
+    "motion_qc": {
+      "max_mean_fd": 0.3,
+      "max_pct_fd_gt_0_5": 0.2
+    }
+  },
+  "leave_one_story_out_pca_sensitivity": {
+    "folds": 13,
+    "feature_transform": "for each fold, fit a story-balanced scaler and five-component PCA to cumulative-context embeddings from the other 12 stories and project the omitted story without refitting",
+    "story_balance": "use every available training TR while giving each training story equal total weight; scaler moments and covariance contributions are averaged across stories rather than pooled across all TRs",
+    "temporal_sampling": "no beginning, middle, ending, or other outcome-dependent segment is selected and no story is truncated to the shortest duration",
+    "contrast": "rich_audio_plus_loso_cumulative_context_pc1_to_pc5 minus rich_audio",
+    "evaluations": [
+      "full_group",
+      "participant_split_half",
+      "leave_one_participant_out"
+    ],
+    "ridge_alpha": 10.0,
+    "time_series_splits": 5,
+    "cv_gap_trs": 10,
+    "participant_splits": 50
+  },
+  "leave_one_story_out_encoding_sensitivity": {
+    "folds": 13,
+    "training": "fit ROI encoding coefficients on the shared responses from 12 stories and evaluate the complete omitted story",
+    "feature_transform": "use the corresponding story-balanced leave-one-story-out scaler and five-component PCA",
+    "story_balance": "all training TRs are retained and each training story receives equal total sample weight through per-TR weights proportional to one divided by that story's retained TR count",
+    "target_handling": "detrend and standardize each training-story shared response separately using only that story; detrend and standardize the omitted-story target using the omitted story without using predictor information",
+    "models": [
+      "rich_audio",
+      "rich_audio_plus_cumulative_context_pc1_to_pc5"
+    ],
+    "contrast": "held-out-story prediction correlation difference between the combined and rich-audio models",
+    "ridge_alpha": 10.0,
+    "interpretation": "exploratory full-story stimulus-transfer analysis; it is distinct from within-story forward-chaining prediction"
+  },
+  "interpretation_constraints": [
+    "The 13-story pooled analysis is combined evidence, not an independent replication.",
+    "Leave-one-story-out PCA holds the stimulus out of feature-space fitting but does not train the neural encoding coefficients on the other 12 stories.",
+    "The separate leave-one-story-out encoding sensitivity does train neural coefficients on the other 12 stories and gives every training story equal total weight.",
+    "The two new intact stories will remain in all reports regardless of sign or statistical significance.",
+    "No temporally scrambled task will be substituted for an intact narrative after outcomes are known."
+  ]
+}

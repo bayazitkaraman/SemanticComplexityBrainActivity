@@ -120,3 +120,6 @@ results/jnl_heldout_story_replication/heldout_motionfiltered_config.py
 *.out
 *.synctex.gz
 *.toc
+# Keep pseudonymous participant-level fMRI-derived result rows local.
+results/jnl_13_story_extension/loso/cross_story_participant_transfer_long.csv
+results/jnl_13_story_extension/loso/within_story/leave_one_participant_out_long.csv

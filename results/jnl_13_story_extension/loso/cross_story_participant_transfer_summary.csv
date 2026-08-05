@@ -1,0 +1,2 @@
+analysis,status,n_stories,mean,median,std,t,p_ttest_two_sided,p_wilcoxon_greater,n_positive_stories,p_sign_greater
+train_12_test_1_story_and_participant_held_out,post_outcome_exploratory_sensitivity,13,0.00449992804151261,0.006712614583638721,0.006795594561166927,2.3875352102798026,0.03428892760584564,0.0198974609375,10,0.046142578125

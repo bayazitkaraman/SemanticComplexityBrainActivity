@@ -1,0 +1,2 @@
+analysis,n_stories,mean,median,std,t,p_ttest_two_sided,p_wilcoxon_greater,n_positive_stories,p_sign_greater
+train_12_test_1_full_story,13,0.019168775214725736,0.025070784449065766,0.020871870582563033,3.3113468029203252,0.0062088798976804955,0.001708984375,10,0.046142578125

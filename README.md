@@ -2,13 +2,13 @@
 
 This repository contains a reproducible Python pipeline for analyzing how low-dimensional GPT-2-derived linguistic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
 
-The current Journal of Neurolinguistics revision uses the public **Narratives** fMRI dataset, Gentle word-level alignments, autoregressive cumulative-context GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, temporally separated cross-validation, shared-response ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
+The current Journal of Neurolinguistics revision uses the public **Narratives** fMRI dataset, Gentle word-level alignments, autoregressive cumulative-context GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, cross-narrative shared-response ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
 
 Data files, virtual environments, WAV files, and large neuroimaging outputs are intentionally **not** stored in this repository.
 
 ## Current revision analysis
 
-The primary revision result concerns the response shared across listeners, not the earlier individual subject--story estimate. The model was developed in eight stories and then evaluated without refitting the PCA transformation in three held-out stories. Participant split-half and leave-one-participant-out analyses test whether the result generalizes across listeners.
+The primary result is a 13-fold leave-one-story-out analysis of the response shared across listeners. In each fold, the scaler, PCA, predictor scaling, and neural encoding coefficients are fitted to 12 narratives and evaluated on the complete omitted narrative. Every training story receives equal total weight while all available TRs are retained. A stricter story-and-participant holdout removes each tested listener from every training-story group response before neural-model fitting.
 
 After downloading the dataset and fMRIPrep derivatives, first create the local motion-filtered subject list:
 
@@ -17,28 +17,21 @@ python scripts/build_subject_list_fmriprep.py --subject-list configs/stories_all
 python scripts/motion_qc_from_confounds.py --subject-list configs/stories_all_fmriprep_confounds.py --filtered-output configs/stories_all_fmriprep_confounds_motionfiltered.py
 ```
 
-Then run the main revision analyses:
+After preparing the rich-audio regressors and ROI caches described below, run the central 13-story analysis:
 
 ```bash
-python scripts/jnl_shared_response_context_validation.py
-python scripts/jnl_heldout_story_replication.py --dataset-dir /path/to/ds002345 --fmriprep-dir /path/to/fmriprep --gentle-root /path/to/gentle --discovery-subject-list configs/stories_all_fmriprep_confounds_motionfiltered.py
-python scripts/jnl_heldout_story_sensitivity.py
-python scripts/jnl_fold_safe_subject_normalization.py
-python scripts/jnl_shared_response_hemisphere_sensitivity.py --skip-heldout-extraction
-python scripts/jnl_shared_response_pc_count_sensitivity.py --resume
-python scripts/jnl_submission_reporting_tables.py
+python scripts/jnl_13_story_loso.py --gentle-root /path/to/gentle --stage all
+python scripts/jnl_13_story_transfer_figure.py
 ```
 
-The first script evaluates the eight development stories from the prepared ROI and regressor caches. The held-out script builds the three-story held-out configuration and cache, projects the stories into the development-fitted PCA space, and evaluates the locked specification. The next two scripts run held-out parameter checks and repeat the central analyses while estimating participant normalization within each temporal training fold. The hemisphere script splits each predefined Harvard--Oxford ROI at MNI x = 0 and repeats the full-group, participant split-half, and leave-one-participant-out analyses for the left and right 17-ROI sets. Omit `--skip-heldout-extraction` when the hemisphere cache has not yet been created. The PC-count script preserves the locked PC1--PC5 regressors, fits PC6--PC10 using development stories only, and checks nested component sets in all three analysis modes. Its PC5 reproduction audit must pass before higher-component results are written. The final reporting script verifies each absolute combined-minus-baseline difference and writes the 33 story-by-analysis rows used in Supplementary Table S17 together with pooled leave-one-participant-out inference. The generated configurations and ROI caches remain local because they contain machine-specific paths or derived imaging data. The hemisphere analysis is exploratory: the pooled right-minus-left contrasts were nominally positive, but none survived FDR correction across the nine paired tests.
+`jnl_13_story_loso.py` computes story-balanced leave-one-story-out PCA, the primary train-12/test-1 neural transfer analysis, the story-and-participant holdout, the 1,000-iteration temporal-shift null, and secondary within-story results. The primary setting uses five final-layer GPT-2 components and ridge `alpha=10`; separate output directories hold the ridge sensitivity runs at 1, 100, and 1,000. `jnl_13_story_transfer_figure.py` creates the three-panel cross-story result figure. Generated machine-specific configurations and ROI caches remain local because they contain local paths or derived imaging data.
 
-The local held-out lock is
-`results/jnl_heldout_story_replication/locked_analysis_specification.json`
-(SHA-256 `7B2C01AB580554A8CD0149E0017D3CABBAF2E424C6CCE424ACE85736505F6682`).
-The lock and audit chronology are documented in
-`results/jnl_heldout_story_replication/analysis_audit.md`. The sanitized public
-candidate ranking and eligibility fields are in
-`results/jnl_heldout_story_replication/candidate_story_ranking.csv`; it is
-exported from the local diagnostic table by the submission-reporting script.
+The 13-story analysis specification is
+`results/jnl_13_story_extension/locked_analysis_specification.json`
+(SHA-256 `3B988713ECBE5038ECC8DA8381D22EC14FFCA9B407B412A000574531A7BB1E28`).
+The inclusion logic, equal-weight implementation, principal results, and
+implementation checks are documented in
+`results/jnl_13_story_extension/analysis_audit.md`.
 
 For every shared-response analysis, cached participant ROI series are placed at their actual acquisition times relative to story onset and linearly interpolated to the common 1.5-s story grid. Only time points supported by every participant in a story are retained; the stimulus designs are restricted to the same effective grid.
 
@@ -48,14 +41,14 @@ For every shared-response analysis, cached participant ROI series are placed at 
 
 This project supports the final Journal of Neurolinguistics submission analyses:
 
-1. Use eight development narratives and three objectively selected held-out narratives.
+1. Include all 13 intact narratives meeting the objective run, duration, and participant criteria.
 2. Align spoken words and participant BOLD volumes to a common story-relative 1.5-s grid.
 3. Extract GPT-2 contextual embeddings at TR resolution.
-4. Fit the scaler and PCA in development stories and project held-out stories without refitting.
+4. In each fold, fit a story-balanced scaler and PCA to 12 narratives and project the omitted narrative without refitting.
 5. Test whether cumulative-context GPT-2 PC1--PC5 adds prediction beyond a rich lexical/acoustic baseline.
-6. Evaluate shared responses across listeners with story-level inference.
-7. Test participant generalization with split-half and leave-one-participant-out prediction.
-8. Evaluate temporal specificity, participant normalization, silence handling, regularization, temporal-gap, and component-count sensitivity.
+6. Fit neural encoding coefficients on the same 12 narratives and evaluate the complete omitted narrative.
+7. Test participant generalization by removing the tested listener from all training-story responses.
+8. Evaluate temporal specificity, regularization, within-story prediction, and ROI sensitivity.
 9. Retain the corrected individual-scan, independent-chunk, and BERT analyses as complementary checks.
 10. Generate final tables and figures for the manuscript and supplementary material.
 
@@ -129,39 +122,34 @@ The final analysis used the public **Narratives** dataset from OpenNeuro/DataLad
 OpenNeuro accession: ds002345
 ```
 
-The eight development stories are:
+The 13 intact eligible narratives are:
 
 ```text
+21styear
 black
 bronx
 forgot
+merlin
 milkyway
 notthefallintact
 piemanpni
+prettymouth
 shapesphysical
 shapessocial
-```
-
-The three held-out stories are:
-
-```text
-prettymouth
 sherlock
-merlin
+tunnel
 ```
 
 The objective candidate scan required at least 20 usable participants, at
 least 5 minutes' median duration, and a single BOLD run per participant.
-Eligible stories were ranked by usable participant count and then median
-duration. The scan used `--allow-missing-transcript` because the required
-Gentle alignments were maintained in an external directory rather than the
-dataset paths searched by the scanner; this is why the public table's local
-transcript-candidate field is false. All 11 analyzed stories had the required
-external Gentle and audio resources. The first eight eligible entries formed
-the development set; the next three formed the held-out set. See
-`scripts/scan_story_candidates.py` and
-`results/jnl_heldout_story_replication/candidate_story_ranking.csv` for the
-complete public ranking.
+The two temporally scrambled `notthefall` controls were excluded because the
+analysis concerns intact narratives. `pieman` and `schema` failed the run or
+duration criteria, while `slumlordreach` and `lucy` had fewer than 20 usable
+participants. All 13 remaining stories had the external Gentle alignments and
+audio resources needed for modeling and all 13 entered the leave-one-story-out
+analysis. See `scripts/scan_story_candidates.py` and
+`results/jnl_13_story_extension/analysis_audit.md` for the complete inclusion
+record.
 
 The exact local data layout can vary depending on how the dataset was downloaded. The pipeline uses the paths defined in:
 

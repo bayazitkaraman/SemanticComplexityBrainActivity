@@ -1,0 +1,2 @@
+analysis,status,n_stories,n_shifts,minimum_shift_trs,observed_mean_delta_r,null_mean,null_std,null_95th_percentile,empirical_p_greater
+train_12_test_1_heldout_story_temporal_shift_null,post_outcome_exploratory_sensitivity,13,1000,20,0.01739819007396827,-0.011403918002147838,0.003376978924605838,-0.005452625746174227,0.000999000999000999
