@@ -1,9 +1,28 @@
-# Results folder
+# Results Folder
 
-Generated outputs will be saved here. Large NIfTI files, model-comparison intermediates,
-regressor folders, null-draw files, and local maps are ignored by Git.
+Generated outputs are saved here. Raw or preprocessed neuroimaging files,
+participant-level time series, ROI caches, model intermediates, regressor
+directories, machine-specific paths, and WAV files are excluded from Git.
 
-Public reproducibility outputs are kept in:
+## Central public outputs
+
+```text
+results/jnl_13_story_extension/analysis_audit.md
+results/jnl_13_story_extension/locked_analysis_specification.json
+results/jnl_13_story_extension/loso/
+results/jnl_13_story_extension/component_count_sensitivity/
+results/jnl_story_heterogeneity/original_pieman/
+```
+
+The `loso` directory contains aggregate results from the 13-fold
+train-12/test-1 analysis, the story-and-participant holdout, the temporal-shift
+null, ridge sensitivity, within-story comparisons, and the cross-narrative
+figure. The component-count directory contains the 1--10 component sensitivity
+analysis. The `original_pieman` directory contains aggregate outputs from the
+exploratory matched-performance comparison; it does not contribute to the
+13-story inference.
+
+## Complementary outputs
 
 ```text
 results/final_tables/
@@ -16,16 +35,11 @@ results/jnl_shared_response_pc_count_sensitivity/
 results/jnl_submission_reporting/
 ```
 
-The final tables include the primary GPT-2 encoding results plus the added
-Journal of Neurolinguistics robustness checks: PC-count sensitivity, nuisance
-strategy deltas, leave-one-story-out, circular-shift null summary,
-exploratory BERT embedding comparisons, and the richer audio-control
-sensitivity table.
+These directories preserve the earlier shared-response, individual-scan,
+participant-normalization, hemisphere, component-count, BERT, nuisance,
+acoustic, and reporting analyses used as complementary checks and for the audit
+trail. They are not the primary cross-narrative result.
 
-The held-out folder includes the locked analysis specification, checksum and
-chronology, sanitized candidate ranking, and three-story validation outputs.
-The submission-reporting folder contains absolute baseline, combined-model,
-and incremental correlations for all 11 stories under the three main analysis
-modes, together with pooled leave-one-participant-out inference. Generated
-subject configurations with absolute local paths and cached ROI time series
-are excluded from Git.
+Machine-specific configurations and participant-level time-series caches remain
+local. Portable result tables needed to verify the reported analyses are
+tracked.

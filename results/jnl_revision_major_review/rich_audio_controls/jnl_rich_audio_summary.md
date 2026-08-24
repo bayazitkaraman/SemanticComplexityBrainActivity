@@ -1,4 +1,4 @@
-# Journal of Neurolinguistics rich audio controls
+# Rich audio controls
 
 - `lexical_delta`: mean = 0.0003, 95% CI [-0.0094, 0.0102], p = 0.9522, fraction positive = 0.517.
 - `existing_acoustic_delta`: mean = -0.0007, 95% CI [-0.0091, 0.0078], p = 0.862, fraction positive = 0.512.

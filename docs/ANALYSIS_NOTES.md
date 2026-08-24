@@ -1,19 +1,40 @@
 # Analysis Notes
 
-This project evaluates whether low-dimensional GPT-2 contextual semantic predictors improve fMRI encoding during naturalistic spoken narrative comprehension.
+This project evaluates whether low-dimensional GPT-2-derived linguistic
+predictors improve fMRI encoding during naturalistic spoken narrative
+comprehension.
 
-The main analysis goals are:
+## Central analysis
 
-1. Use the selected full Narratives dataset stories with all usable subject--story scans.
-2. Align spoken words to fMRI TRs using Gentle forced-alignment files.
-3. Fit shared PCA across stories so GPT-2 component dimensions are comparable.
-4. Compare lexical/time baseline models, GPT-2-only models, and combined lexical-plus-GPT-2 models.
-5. Evaluate GPT-2 layer-wise alignment as a descriptive analysis.
-6. Test motion-quality-control and nuisance-regression sensitivity.
-7. Test acoustic-envelope and speech-density sensitivity controls.
+The central analysis:
+
+1. Includes all 13 intact Narratives tasks meeting the predefined run,
+   duration, and participant criteria.
+2. Aligns Gentle word timings and participant BOLD series to a common
+   story-relative 1.5-s grid.
+3. Fits a story-balanced scaler and PCA to 12 narratives in each fold.
+4. Projects the omitted narrative without refitting the feature transform.
+5. Compares a rich lexical-acoustic baseline with the same baseline plus five
+   cumulative-context GPT-2 components.
+6. Fits ROI encoding coefficients on the 12 training narratives and evaluates
+   the complete omitted narrative.
+7. Tests transfer across both stories and listeners by removing each tested
+   participant from every available training-story group response.
+8. Evaluates temporal-shift, ridge, component-count, within-story, ROI, and
+   matched-performance sensitivity analyses.
+
+The older individual-scan, BERT, layer, hemisphere, and independent-chunk
+analyses are retained as complementary checks; they are not the central
+inferential basis of the manuscript.
+
+## Interpretation
 
 The main interpretation should remain modest:
 
-> A compact GPT-2 contextual semantic representation adds small but reliable predictive information beyond lexical and temporal baseline features during naturalistic narrative comprehension.
+> A compact GPT-2 representation adds small but reliable predictive information
+> beyond a rich lexical-acoustic baseline and transfers across naturalistic
+> narratives at the level of shared regional responses.
 
-The analysis should not be interpreted as a complete model of semantic comprehension, a complete prosodic/acoustic model, or a strong semantic decoding result.
+The results should not be interpreted as a complete model of semantic
+comprehension, a complete prosodic or acoustic model, strong semantic decoding,
+or evidence for a uniquely localized neural mechanism.

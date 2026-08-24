@@ -1,5 +1,5 @@
 """
-Audit generated result files for the Journal of Neurolinguistics submission.
+Audit generated result files for the manuscript analyses.
 
 This script does not rerun the analysis. It checks whether the final tables and
 figures needed for the manuscript/supplement exist and whether key counts are

@@ -2,9 +2,9 @@
 
 This repository contains a reproducible Python pipeline for analyzing how low-dimensional GPT-2-derived linguistic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
 
-The Journal of Neurolinguistics analysis uses the public **Narratives** fMRI dataset, Gentle word-level alignments, autoregressive cumulative-context GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, cross-narrative shared-response ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
+The analyses reported in the manuscript use the public **Narratives** fMRI dataset, Gentle word-level alignments, autoregressive cumulative-context GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, cross-narrative shared-response ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
 
-Data files, virtual environments, WAV files, and large neuroimaging outputs are intentionally **not** stored in this repository.
+Raw neuroimaging data, participant-level time series, virtual environments, WAV files, and large intermediate outputs are intentionally **not** stored in this repository.
 
 ## Main analysis
 
@@ -27,6 +27,19 @@ python scripts/jnl_13_story_component_sensitivity.py
 
 `jnl_13_story_loso.py` computes story-balanced leave-one-story-out PCA, the primary train-12/test-1 neural transfer analysis, the story-and-participant holdout, the 1,000-iteration temporal-shift null, and secondary within-story results. The primary setting uses five final-layer GPT-2 components and ridge `alpha=10`; separate output directories hold the ridge sensitivity runs at 1, 100, and 1,000. `jnl_13_story_component_sensitivity.py` repeats all 13 folds with 1--10 retained components, refitting the scaler, PCA, and neural coefficients inside every fold. `jnl_13_story_transfer_figure.py` creates the three-panel cross-story result figure. Generated machine-specific configurations and ROI caches remain local because they contain local paths or derived imaging data.
 
+Build the richer waveform, spectral, pitch, and coarse-voicing controls for a
+prepared subject configuration:
+
+```bash
+python scripts/jnl_rich_audio_controls.py --subject-list configs/stories_all_fmriprep_confounds_motionfiltered.py --gentle-root /path/to/narratives/stimuli/gentle
+```
+
+Windows PowerShell example:
+
+```powershell
+python scripts\jnl_rich_audio_controls.py --subject-list configs\stories_all_fmriprep_confounds_motionfiltered.py --gentle-root "D:\OpenNeuroData\narratives\stimuli\gentle"
+```
+
 The matched-narrative analysis compares the scanner-recorded `piemanpni` retelling with the original `pieman` performance while keeping the `piemanpni` fold's 12-story feature transformation and neural model fixed:
 
 ```bash
@@ -48,7 +61,7 @@ For every shared-response analysis, cached participant ROI series are placed at 
 
 ## Project goals
 
-This project supports the Journal of Neurolinguistics analyses:
+This project supports the following analyses:
 
 1. Include all 13 intact narratives meeting the objective run, duration, and participant criteria.
 2. Align spoken words and participant BOLD volumes to a common story-relative 1.5-s grid.
@@ -69,14 +82,16 @@ This project supports the Journal of Neurolinguistics analyses:
 ```text
 SemanticComplexityBrainActivity/
 │
-├── configs/                  # Story/subject configuration files
-├── scripts/                  # Runnable analysis scripts
-├── src/semantic_fmri/         # Reusable package utilities
-├── results/final_tables/      # Final manuscript/supplement tables
-├── results/final_figures/     # Final manuscript/supplement figures
-├── docs/                     # Notes and documentation
-├── archive/old_scripts/       # Older scripts preserved for reference
-├── data/                     # Local data only; not pushed to GitHub
+├── configs/                                  # Story/subject configurations
+├── scripts/                                  # Runnable analysis scripts
+├── src/semantic_fmri/                         # Reusable package utilities
+├── results/jnl_13_story_extension/loso/      # Central cross-story outputs
+├── results/jnl_story_heterogeneity/          # Matched-story analysis
+├── results/final_tables/                      # Complementary result tables
+├── results/final_figures/                     # Generated figures
+├── docs/                                     # Notes and documentation
+├── archive/old_scripts/                       # Older scripts preserved for reference
+├── data/                                     # Local data only; not pushed to GitHub
 ├── requirements.txt
 ├── pyproject.toml
 └── README.md
@@ -112,7 +127,7 @@ pip install -e .
 ```
 
 `requirements-lock.txt` records the exact direct-dependency versions used for
-the revision. `requirements.txt` remains the unpinned convenience list.
+the reported analyses. `requirements.txt` remains the unpinned convenience list.
 
 The editable install is important because the scripts import utilities from:
 
@@ -157,9 +172,9 @@ analysis concerns intact narratives. `pieman` and `schema` failed the run or
 duration criteria, while `slumlordreach` and `lucy` had fewer than 20 usable
 participants. All 13 remaining stories had the external Gentle alignments and
 audio resources needed for modeling and all 13 entered the leave-one-story-out
-analysis. See `scripts/scan_story_candidates.py` and
-`results/jnl_13_story_extension/analysis_audit.md` for the complete inclusion
-record.
+analysis. See `docs/STORY_INCLUSION.md`, `scripts/scan_story_candidates.py`,
+and `results/jnl_13_story_extension/analysis_audit.md` for the complete
+inclusion record.
 
 The exact local data layout can vary depending on how the dataset was downloaded. The pipeline uses the paths defined in:
 
@@ -195,6 +210,7 @@ Expected Gentle layout:
 
 ```text
 gentle/
+├── 21styear/align.json
 ├── black/align.json
 ├── bronx/align.json
 ├── forgot/align.json
@@ -205,10 +221,13 @@ gentle/
 ├── shapessocial/align.json
 ├── prettymouth/align.json
 ├── sherlock/align.json
-└── merlin/align.json
+├── merlin/align.json
+└── tunnel/align.json
 ```
 
-The code maps the story name `milkyway` to the Gentle folder `milkywayoriginal`.
+Each story directory must contain `align.json`; the rich-audio analysis also
+uses `a.wav` from the same directory. The code maps the story name `milkyway`
+to the Gentle folder `milkywayoriginal`.
 
 ---
 
@@ -372,23 +391,25 @@ python scripts/final_stats_and_tables.py
 python scripts/audit_results.py
 ```
 
-Run the richer waveform/spectral/coarse-voicing audio-control analysis used in the Journal of Neurolinguistics revision:
-
-```bash
-python scripts/jnl_rich_audio_controls.py --subject-list configs/stories_all_fmriprep_confounds_motionfiltered.py --gentle-root /path/to/narratives/stimuli/gentle
-```
-
-Windows PowerShell example:
-
-```powershell
-python scripts\jnl_rich_audio_controls.py --subject-list configs\stories_all_fmriprep_confounds_motionfiltered.py --gentle-root "D:\OpenNeuroData\narratives\stimuli\gentle"
-```
-
 ---
 
 ## Main scripts
 
 ```text
+scripts/jnl_13_story_loso.py
+    Runs the central story-balanced, 13-fold cross-narrative analysis and its
+    story-and-participant holdout and temporal-shift checks.
+
+scripts/jnl_13_story_component_sensitivity.py
+    Repeats the cross-narrative analysis with 1--10 retained GPT-2 components.
+
+scripts/jnl_13_story_transfer_figure.py
+    Creates the cross-narrative result figure.
+
+scripts/jnl_original_pieman_comparison.py
+    Runs the exploratory matched-performance comparison between piemanpni and
+    the original pieman recording.
+
 scripts/semantic_baseline_regressors.py
     Computes diagnostics comparing GPT-2 PC1 with lexical/time baselines.
 
@@ -409,10 +430,10 @@ scripts/audit_results.py
     Checks that expected final tables and figures are present and internally consistent.
 
 scripts/run_revision_pipeline.py
-    Runs the main revision-analysis pipeline.
+    Runs the legacy individual-scan pipeline retained for audit analyses.
 
 scripts/jnl_additional_robustness.py
-    Creates Journal of Neurolinguistics robustness tables, including
+    Creates robustness tables for the legacy individual-scan analysis, including
     participant-level, story-level, leave-one-story-out, and nuisance-strategy checks.
 
 scripts/jnl_pc_count_sensitivity.py
@@ -477,6 +498,9 @@ results/model_comparison/
 Final manuscript/supplement outputs:
 
 ```text
+results/jnl_13_story_extension/loso/
+results/jnl_13_story_extension/component_count_sensitivity/
+results/jnl_story_heterogeneity/original_pieman/
 results/final_tables/
 results/final_figures/
 results/jnl_shared_response_context_validation/

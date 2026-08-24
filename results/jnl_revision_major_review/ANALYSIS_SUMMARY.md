@@ -1,4 +1,4 @@
-# Journal of Neurolinguistics Major Revision Analyses
+# Major Review Analyses
 
 Generated for manuscript JNL-D-26-00113 on 2026-06-29. These outputs document the additional robustness and sensitivity analyses used in the revised manuscript and supplementary material.
 

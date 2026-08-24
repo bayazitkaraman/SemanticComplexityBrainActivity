@@ -1,128 +1,95 @@
 # Project Structure
 
-This repository is organized as a reproducible analysis pipeline for studying how low-dimensional GPT-2 semantic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
+This repository is a reproducible analysis pipeline for studying how
+low-dimensional GPT-2-derived predictors relate to fMRI responses during
+naturalistic spoken narrative comprehension.
 
 ## Main folders
 
 ```text
-configs/                  Story and subject configuration files
-scripts/                  Runnable analysis scripts
-src/semantic_fmri/         Reusable Python utilities
-results/final_tables/      Final manuscript and supplementary tables
-results/final_figures/     Final manuscript and supplementary figures
-docs/                     Project documentation
-archive/old_scripts/       Older scripts preserved for reference
-data/                     Local data only; not included in GitHub
+configs/                                      Portable and generated story configurations
+scripts/                                      Runnable analysis scripts
+src/semantic_fmri/                            Reusable Python utilities
+results/jnl_13_story_extension/loso/          Central cross-narrative outputs
+results/jnl_story_heterogeneity/              Exploratory matched-narrative outputs
+results/final_tables/                         Complementary and legacy result tables
+results/final_figures/                        Generated manuscript figures
+docs/                                         Analysis and data documentation
+archive/old_scripts/                          Older scripts preserved for reference
+data/                                         Local data only; excluded from Git
 ```
 
-## Main analysis workflow
+## Central workflow
 
-The main analysis uses:
+The central analysis uses:
 
-1. Gentle word-level forced alignments.
-2. GPT-2 contextual embeddings at TR resolution.
-3. Shared PCA across selected stories.
-4. HRF-convolved lexical, temporal, semantic, and optional acoustic predictors.
-5. Cross-validated ROI encoding models.
-6. Final summary tables and figures.
+1. Gentle word-level forced alignments and a common story-relative 1.5-s grid.
+2. Autoregressive cumulative-context GPT-2 embeddings at TR resolution.
+3. A story-balanced scaler and PCA fitted to 12 narratives in each fold.
+4. HRF-convolved lexical, acoustic, and GPT-2 predictors.
+5. Neural encoding coefficients fitted on 12 narratives and evaluated on the
+   complete omitted narrative.
+6. Story-and-participant holdout and temporal-shift validation.
+7. Ridge, component-count, within-story, ROI, and matched-performance checks.
 
-## Main scripts
+## Central scripts
 
 ```text
-scripts/semantic_baseline_regressors.py
+scripts/jnl_13_story_loso.py
 ```
 
-Computes diagnostic relationships between GPT-2 PC1 and lexical/time baseline regressors.
+Runs the 13-fold story-balanced analysis, including full shared-response,
+story-and-participant holdout, temporal-shift, and within-story outputs.
 
 ```text
-scripts/shared_pca_regressors.py
+scripts/jnl_13_story_component_sensitivity.py
 ```
 
-Extracts GPT-2 embeddings, fits shared PCA across stories, and saves TR-level regressors. When acoustic controls are enabled, this script also saves speech-density and audio-envelope predictors.
+Repeats all 13 folds with 1--10 retained GPT-2 components and refits the scaler,
+PCA, predictor scaling, and neural coefficients inside every fold.
 
 ```text
-scripts/gpt2_layer_pc_analysis.py
+scripts/jnl_13_story_transfer_figure.py
 ```
 
-Runs the descriptive GPT-2 layer-wise alignment analysis.
+Creates the cross-narrative result figure from the aggregate output tables.
 
 ```text
-scripts/roi_encoding_model_comparison.py
+scripts/jnl_original_pieman_comparison.py
 ```
 
-Fits cross-validated ROI encoding models and compares baseline-only, GPT-2-only, combined lexical-plus-GPT-2, and optional acoustic-control models.
+Compares the scanner-recorded `piemanpni` retelling with the original `pieman`
+performance while holding the reference fold's feature transform and neural
+model fixed. This is exploratory and does not enter the 13-story inference.
+
+## Supporting scripts
 
 ```text
-scripts/final_stats_and_tables.py
-```
-
-Generates final manuscript and supplementary result tables.
-
-```text
-scripts/audit_results.py
-```
-
-Checks that expected final tables and figures exist and that key consistency checks pass.
-
-```text
-scripts/run_revision_pipeline.py
-```
-
-Runs the main analysis pipeline. The filename is historical; this is the current full analysis pipeline.
-
-```text
-scripts/jnl_additional_robustness.py
+scripts/build_subject_list_from_openneuro.py
+scripts/build_subject_list_fmriprep.py
+scripts/motion_qc_from_confounds.py
+scripts/jnl_rich_audio_controls.py
 scripts/jnl_pc_count_sensitivity.py
-scripts/jnl_circular_shift_null.py
 ```
 
-Generate the added Journal of Neurolinguistics robustness checks: participant/story summaries, PC-count sensitivity, leave-one-story-out tests, nuisance-strategy deltas, and circular-shift null controls.
+These scripts prepare local configurations, apply motion quality control,
+construct the rich lexical-acoustic baseline, and create reusable ROI caches.
+
+The historical `run_revision_pipeline.py` workflow and its associated scripts
+remain available for the complementary individual-scan, BERT, layer,
+hemisphere, nuisance-regression, and earlier robustness analyses. They are not
+the central inferential workflow.
+
+## Public outputs
+
+Aggregate cross-narrative outputs are stored under:
 
 ```text
-scripts/static_embedding_regressors.py
+results/jnl_13_story_extension/loso/
+results/jnl_13_story_extension/component_count_sensitivity/
+results/jnl_story_heterogeneity/original_pieman/
 ```
 
-Creates static or contextual BERT embedding PCA regressors for exploratory embedding-model comparisons.
-
-## Recommended run order
-
-Primary analysis:
-
-```bash
-python scripts/run_revision_pipeline.py --subject-list configs/stories_all.py
-python scripts/final_stats_and_tables.py
-python scripts/audit_results.py
-```
-
-Acoustic-control analysis:
-
-```bash
-python scripts/run_revision_pipeline.py --subject-list configs/stories_all.py --include-acoustic
-python scripts/final_stats_and_tables.py
-python scripts/audit_results.py
-```
-
-If only acoustic-control code or regressors changed, this shorter rerun is usually sufficient:
-
-```bash
-python scripts/shared_pca_regressors.py --subject-list configs/stories_all.py
-python scripts/roi_encoding_model_comparison.py --subject-list configs/stories_all.py --include-acoustic
-python scripts/final_stats_and_tables.py
-python scripts/audit_results.py
-```
-
-## Final outputs
-
-Final tables are saved in:
-
-```text
-results/final_tables/
-```
-
-Final figures are saved in:
-
-```text
-results/final_figures/
-```
-
-Large intermediate outputs, raw data, WAV files, and neuroimaging files are not included in the repository.
+Raw fMRI data, WAV files, participant-level time series, machine-specific
+configurations, ROI caches, and large model intermediates are not included in
+the repository.

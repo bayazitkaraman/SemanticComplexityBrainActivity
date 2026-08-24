@@ -492,7 +492,7 @@ def write_summary(scan: pd.DataFrame, comparison: pd.DataFrame, out_dir: Path) -
     final_table.parent.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(final_rows).to_csv(final_table, index=False)
 
-    lines = ["# Journal of Neurolinguistics rich audio controls", ""]
+    lines = ["# Rich audio controls", ""]
     for _, item in stats_df.iterrows():
         lines.append(
             f"- `{item['analysis']}`: mean = {item['mean']:.4f}, "
