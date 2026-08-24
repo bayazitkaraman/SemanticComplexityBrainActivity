@@ -1,0 +1,3 @@
+story,transcript_words,unique_words,type_token_ratio,aligned_success_words,aligned_span_sec,transcript_words_per_min,filler_count,fillers_per_1000_words,question_mark_count,questions_per_1000_words,immediate_token_repetitions,pauses_over_0_5_sec,pauses_over_1_sec,model_TRs,nonempty_TRs,silence_fraction,aligned_words_per_TR
+pieman,956,382,0.399581589958159,954,414.390001,138.4203283418511,1,1.0460251046025104,6,6.2761506276150625,1,98,57,281,253,0.09964412811387902,3.395017793594306
+piemanpni,992,391,0.3941532258064516,985,399.7,148.91168376282212,3,3.024193548387097,7,7.056451612903226,5,99,36,266,261,0.018796992481203034,3.691729323308271

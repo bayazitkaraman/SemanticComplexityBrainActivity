@@ -1,0 +1,5 @@
+{
+  "token_sequence_match_ratio": 0.75564681724846,
+  "vocabulary_jaccard": 0.7688787185354691,
+  "bigram_jaccard": 0.5378228782287823
+}

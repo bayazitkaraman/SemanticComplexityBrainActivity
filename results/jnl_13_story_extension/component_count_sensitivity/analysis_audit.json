@@ -1,0 +1,19 @@
+{
+  "analysis": "13-story cross-narrative component-count sensitivity",
+  "component_counts": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "primary_component_count": 5,
+  "status": "exploratory sensitivity; primary model unchanged",
+  "maximum_primary_reproduction_error": 9.020562075079397e-17,
+  "script_sha256": "24f64a24804bb49404f9f6f48c844f651cfc21628d5524e44717603f1a4948a4"
+}

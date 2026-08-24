@@ -1,0 +1,155 @@
+{
+  "analysis": "exploratory original Pie Man comparison",
+  "reference_training_set": [
+    "shapessocial",
+    "shapesphysical",
+    "notthefallintact",
+    "milkyway",
+    "bronx",
+    "forgot",
+    "black",
+    "prettymouth",
+    "sherlock",
+    "merlin",
+    "21styear",
+    "tunnel"
+  ],
+  "reference_fold": "piemanpni",
+  "run_rule": "first valid run after published scan exclusions",
+  "motion_qc": {
+    "max_mean_fd": 0.3,
+    "max_pct_fd_gt_0_5": 0.2
+  },
+  "selected_participants": 75,
+  "reference_fold_stored_delta": -0.0122686548967146,
+  "reference_fold_reproduced_delta": -0.012268654896714611,
+  "participant_holdout_mean_delta": 0.009106378095067121,
+  "equal_n_subsampling": {
+    "seed": 20260806,
+    "repetitions": 1000,
+    "participants_per_repetition": 46,
+    "mean_delta": 0.040427639564493106,
+    "median_delta": 0.04042972955940374,
+    "minimum_delta": 0.01901108863798326,
+    "maximum_delta": 0.062142886308991854,
+    "fraction_positive": 1.0
+  },
+  "transcript_delivery": [
+    {
+      "story": "pieman",
+      "transcript_words": 956,
+      "unique_words": 382,
+      "type_token_ratio": 0.399581589958159,
+      "aligned_success_words": 954,
+      "aligned_span_sec": 414.390001,
+      "transcript_words_per_min": 138.4203283418511,
+      "filler_count": 1,
+      "fillers_per_1000_words": 1.0460251046025104,
+      "question_mark_count": 6,
+      "questions_per_1000_words": 6.2761506276150625,
+      "immediate_token_repetitions": 1,
+      "pauses_over_0_5_sec": 98,
+      "pauses_over_1_sec": 57,
+      "model_TRs": 281,
+      "nonempty_TRs": 253,
+      "silence_fraction": 0.09964412811387902,
+      "aligned_words_per_TR": 3.395017793594306
+    },
+    {
+      "story": "piemanpni",
+      "transcript_words": 992,
+      "unique_words": 391,
+      "type_token_ratio": 0.3941532258064516,
+      "aligned_success_words": 985,
+      "aligned_span_sec": 399.7,
+      "transcript_words_per_min": 148.91168376282212,
+      "filler_count": 3,
+      "fillers_per_1000_words": 3.024193548387097,
+      "question_mark_count": 7,
+      "questions_per_1000_words": 7.056451612903226,
+      "immediate_token_repetitions": 5,
+      "pauses_over_0_5_sec": 99,
+      "pauses_over_1_sec": 36,
+      "model_TRs": 266,
+      "nonempty_TRs": 261,
+      "silence_fraction": 0.018796992481203034,
+      "aligned_words_per_TR": 3.691729323308271
+    }
+  ],
+  "transcript_similarity": {
+    "token_sequence_match_ratio": 0.75564681724846,
+    "vocabulary_jaccard": 0.7688787185354691,
+    "bigram_jaccard": 0.5378228782287823
+  },
+  "baseline_sensitivity": [
+    {
+      "variant": "lexical_time",
+      "story": "pieman",
+      "mean_baseline_r": -0.010802850978475984,
+      "mean_combined_r": 0.04278877497614292,
+      "mean_delta_r": 0.0535916259546189,
+      "positive_rois": 14
+    },
+    {
+      "variant": "lexical_time",
+      "story": "piemanpni",
+      "mean_baseline_r": 0.006903300216018937,
+      "mean_combined_r": 0.00567140774939746,
+      "mean_delta_r": -0.0012318924666214841,
+      "positive_rois": 9
+    },
+    {
+      "variant": "speech_timing",
+      "story": "pieman",
+      "mean_baseline_r": 0.07491082089534963,
+      "mean_combined_r": 0.11749943506529663,
+      "mean_delta_r": 0.04258861416994701,
+      "positive_rois": 15
+    },
+    {
+      "variant": "speech_timing",
+      "story": "piemanpni",
+      "mean_baseline_r": 0.03158651636452874,
+      "mean_combined_r": 0.03744765994714466,
+      "mean_delta_r": 0.00586114358261592,
+      "positive_rois": 9
+    },
+    {
+      "variant": "current_rich",
+      "story": "pieman",
+      "mean_baseline_r": 0.08648464647187419,
+      "mean_combined_r": 0.13066116883845205,
+      "mean_delta_r": 0.044176522366577854,
+      "positive_rois": 14
+    },
+    {
+      "variant": "current_rich",
+      "story": "piemanpni",
+      "mean_baseline_r": 0.04469459206122497,
+      "mean_combined_r": 0.03242593716451035,
+      "mean_delta_r": -0.012268654896714611,
+      "positive_rois": 6
+    },
+    {
+      "variant": "rich_story_normalized",
+      "story": "pieman",
+      "mean_baseline_r": 0.09932010644163265,
+      "mean_combined_r": 0.13722611788769873,
+      "mean_delta_r": 0.03790601144606606,
+      "positive_rois": 14
+    },
+    {
+      "variant": "rich_story_normalized",
+      "story": "piemanpni",
+      "mean_baseline_r": 0.09060828734718357,
+      "mean_combined_r": 0.09117215068634688,
+      "mean_delta_r": 0.0005638633391632933,
+      "positive_rois": 8
+    }
+  ],
+  "files": {
+    "audio_sha256": "906b45236dd2929f3e52b030548581c8c3a75b3822e47fcb67217e90313f7df5",
+    "alignment_sha256": "5df0539b2e0482bc8436decf71c07c6b04fba1a52dc67801f3bca8b3d42125b8",
+    "script_sha256": "d6612a75196e590678f0df9bbd986d3e25b0fcd512322ff6f9003846f19bdf37"
+  }
+}
