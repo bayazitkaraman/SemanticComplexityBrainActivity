@@ -1,0 +1,443 @@
+analysis,set,story,hemisphere,roi,baseline_cv_r,combined_cv_r,delta_cv_r
+full_group,all_13,shapessocial,left,"Superior Temporal Gyrus, anterior division",0.4956824764895991,0.5469330659019646,0.05125058941236543
+full_group,all_13,shapessocial,right,"Superior Temporal Gyrus, anterior division",0.4674370805218127,0.5535885298433914,0.08615144932157864
+full_group,all_13,shapessocial,left,"Superior Temporal Gyrus, posterior division",0.2143147866578943,0.3768114383542804,0.16249665169638608
+full_group,all_13,shapessocial,right,"Superior Temporal Gyrus, posterior division",0.06727487580965279,0.47319594813344495,0.40592107232379215
+full_group,all_13,shapessocial,left,"Middle Temporal Gyrus, anterior division",0.24952137074519506,0.28159409725426593,0.032072726509070865
+full_group,all_13,shapessocial,right,"Middle Temporal Gyrus, anterior division",0.29264825284436574,0.4985030415967393,0.20585478875237356
+full_group,all_13,shapessocial,left,"Middle Temporal Gyrus, posterior division",0.3190799475857885,0.28152108469761644,-0.03755886288817206
+full_group,all_13,shapessocial,right,"Middle Temporal Gyrus, posterior division",0.13003048902943976,0.3140974484317849,0.18406695940234513
+full_group,all_13,shapessocial,left,"Inferior Frontal Gyrus, pars triangularis",0.0232806778836543,-0.045927569206043295,-0.0692082470896976
+full_group,all_13,shapessocial,right,"Inferior Frontal Gyrus, pars triangularis",0.5980646816690975,0.5973483413566383,-0.0007163403124592627
+full_group,all_13,shapessocial,left,"Inferior Frontal Gyrus, pars opercularis",-0.1840364846435336,0.007395629309025774,0.19143211395255935
+full_group,all_13,shapessocial,right,"Inferior Frontal Gyrus, pars opercularis",-0.2604629843400865,0.12859693767571329,0.3890599220157998
+full_group,all_13,shapessocial,left,Angular Gyrus,-0.5406961258395555,-0.47789016651295896,0.06280595932659655
+full_group,all_13,shapessocial,right,Angular Gyrus,-0.24170138207502595,-0.03332900518256658,0.20837237689245935
+full_group,all_13,shapessocial,left,"Supramarginal Gyrus, anterior division",0.32216375698532873,0.35553425587035187,0.03337049888502314
+full_group,all_13,shapessocial,right,"Supramarginal Gyrus, anterior division",0.34923949892182,0.5862141940891209,0.2369746951673009
+full_group,all_13,shapessocial,left,"Supramarginal Gyrus, posterior division",0.01745654641593136,0.049537511785290575,0.03208096536935921
+full_group,all_13,shapessocial,right,"Supramarginal Gyrus, posterior division",0.3768196624132105,0.6215197691693857,0.24470010675617515
+full_group,all_13,shapessocial,left,Frontal Pole,0.053858336860704153,0.1896406198954731,0.13578228303476894
+full_group,all_13,shapessocial,right,Frontal Pole,0.30487110576572396,0.3488948120283891,0.04402370626266516
+full_group,all_13,shapessocial,left,Precuneous Cortex,0.45918288237515015,0.4489112639842698,-0.010271618390880366
+full_group,all_13,shapessocial,right,Precuneous Cortex,0.43654228130222733,0.4314761334457669,-0.005066147856460423
+full_group,all_13,shapessocial,left,"Temporal Fusiform Cortex, anterior division",-0.14035748582428714,-0.1953417523576773,-0.05498426653339017
+full_group,all_13,shapessocial,right,"Temporal Fusiform Cortex, anterior division",-0.4611736925676229,-0.4226074668565368,0.038566225711086144
+full_group,all_13,shapessocial,left,"Temporal Fusiform Cortex, posterior division",-0.17673847977710902,-0.3263638287462058,-0.14962534896909677
+full_group,all_13,shapessocial,right,"Temporal Fusiform Cortex, posterior division",-0.2793792063772185,-0.2816465184132306,-0.002267312036012048
+full_group,all_13,shapessocial,left,"Parahippocampal Gyrus, anterior division",-0.4121955761819913,-0.2959506677766838,0.11624490840530755
+full_group,all_13,shapessocial,right,"Parahippocampal Gyrus, anterior division",-0.43610457335927816,-0.19888711779855617,0.237217455560722
+full_group,all_13,shapessocial,left,"Parahippocampal Gyrus, posterior division",0.07635654497162571,0.1906777268896763,0.11432118191805059
+full_group,all_13,shapessocial,right,"Parahippocampal Gyrus, posterior division",0.04370259774787503,0.16279721565191696,0.11909461790404194
+full_group,all_13,shapessocial,left,"Cingulate Gyrus, anterior division",0.031112685167672276,0.4990830343672353,0.467970349199563
+full_group,all_13,shapessocial,right,"Cingulate Gyrus, anterior division",0.04653077661559023,0.49624707992485306,0.4497163033092628
+full_group,all_13,shapessocial,left,"Cingulate Gyrus, posterior division",0.06532791338914005,0.3883513246812303,0.3230234112920902
+full_group,all_13,shapessocial,right,"Cingulate Gyrus, posterior division",0.09457278099733323,0.37199619557998354,0.2774234145826503
+full_group,all_13,shapesphysical,left,"Superior Temporal Gyrus, anterior division",0.6235062477557153,0.6590826281573682,0.035576380401652896
+full_group,all_13,shapesphysical,right,"Superior Temporal Gyrus, anterior division",0.5753485408226466,0.5824629694897991,0.007114428667152506
+full_group,all_13,shapesphysical,left,"Superior Temporal Gyrus, posterior division",0.6251224424781251,0.6425062712232746,0.017383828745149543
+full_group,all_13,shapesphysical,right,"Superior Temporal Gyrus, posterior division",0.48392414147198537,0.47754414568546283,-0.006379995786522541
+full_group,all_13,shapesphysical,left,"Middle Temporal Gyrus, anterior division",0.6452880892081237,0.6989188081867038,0.05363071897858007
+full_group,all_13,shapesphysical,right,"Middle Temporal Gyrus, anterior division",0.547628255920919,0.5315285177538566,-0.01609973816706245
+full_group,all_13,shapesphysical,left,"Middle Temporal Gyrus, posterior division",0.5996898167529218,0.7260275557239475,0.12633773897102574
+full_group,all_13,shapesphysical,right,"Middle Temporal Gyrus, posterior division",0.4936318164714534,0.6217166800186787,0.12808486354722537
+full_group,all_13,shapesphysical,left,"Inferior Frontal Gyrus, pars triangularis",0.37204547931201687,0.5637141213767929,0.19166864206477602
+full_group,all_13,shapesphysical,right,"Inferior Frontal Gyrus, pars triangularis",0.2307046056722688,0.276937272538961,0.046232666866692196
+full_group,all_13,shapesphysical,left,"Inferior Frontal Gyrus, pars opercularis",0.13189808098924444,0.6175243761926323,0.4856262952033879
+full_group,all_13,shapesphysical,right,"Inferior Frontal Gyrus, pars opercularis",-0.0012906571964305593,0.5600284773387182,0.5613191345351487
+full_group,all_13,shapesphysical,left,Angular Gyrus,0.2009770533852907,0.5530736506785443,0.3520965972932536
+full_group,all_13,shapesphysical,right,Angular Gyrus,-0.10234656117737122,0.13548781262301274,0.23783437380038397
+full_group,all_13,shapesphysical,left,"Supramarginal Gyrus, anterior division",0.5414981335748115,0.6830741225621796,0.14157598898736812
+full_group,all_13,shapesphysical,right,"Supramarginal Gyrus, anterior division",0.41808864142214247,0.5586683737106983,0.14057973228855586
+full_group,all_13,shapesphysical,left,"Supramarginal Gyrus, posterior division",0.5118532422998018,0.6805226963128133,0.16866945401301148
+full_group,all_13,shapesphysical,right,"Supramarginal Gyrus, posterior division",0.3625545400275464,0.5508936738114336,0.18833913378388722
+full_group,all_13,shapesphysical,left,Frontal Pole,0.09856097119909316,0.12032262531171954,0.021761654112626386
+full_group,all_13,shapesphysical,right,Frontal Pole,0.22337488909459652,0.19831530173300924,-0.025059587361587282
+full_group,all_13,shapesphysical,left,Precuneous Cortex,0.4581549550205344,0.2610672741934103,-0.19708768082712408
+full_group,all_13,shapesphysical,right,Precuneous Cortex,0.4796733820919148,0.32602865030342626,-0.15364473178848853
+full_group,all_13,shapesphysical,left,"Temporal Fusiform Cortex, anterior division",0.22044062451837457,0.40601501324913425,0.18557438873075968
+full_group,all_13,shapesphysical,right,"Temporal Fusiform Cortex, anterior division",-0.009774503674405284,0.16543659241495118,0.17521109608935645
+full_group,all_13,shapesphysical,left,"Temporal Fusiform Cortex, posterior division",-0.032553800631849344,0.322702071869735,0.3552558725015843
+full_group,all_13,shapesphysical,right,"Temporal Fusiform Cortex, posterior division",-0.022444894332721142,0.3325236265961174,0.3549685209288385
+full_group,all_13,shapesphysical,left,"Parahippocampal Gyrus, anterior division",-0.0954274169791152,0.19475069657992694,0.29017811355904216
+full_group,all_13,shapesphysical,right,"Parahippocampal Gyrus, anterior division",-0.16590026466012722,0.035951168909175185,0.2018514335693024
+full_group,all_13,shapesphysical,left,"Parahippocampal Gyrus, posterior division",0.048188379212232124,0.13267920088584806,0.08449082167361593
+full_group,all_13,shapesphysical,right,"Parahippocampal Gyrus, posterior division",0.10815618833431291,0.3529895765292815,0.24483338819496858
+full_group,all_13,shapesphysical,left,"Cingulate Gyrus, anterior division",0.3290566823963662,0.02053956984341248,-0.3085171125529537
+full_group,all_13,shapesphysical,right,"Cingulate Gyrus, anterior division",0.4524779858551273,0.1985855362591369,-0.25389244959599033
+full_group,all_13,shapesphysical,left,"Cingulate Gyrus, posterior division",0.39170026469136354,0.015067796174291456,-0.3766324685170721
+full_group,all_13,shapesphysical,right,"Cingulate Gyrus, posterior division",0.477776308469804,0.1978151043030386,-0.2799612041667654
+full_group,all_13,notthefallintact,left,"Superior Temporal Gyrus, anterior division",0.1285782877011094,0.17808415682639897,0.049505869125289564
+full_group,all_13,notthefallintact,right,"Superior Temporal Gyrus, anterior division",0.17160870215142443,0.2949114766258881,0.1233027744744637
+full_group,all_13,notthefallintact,left,"Superior Temporal Gyrus, posterior division",0.2415998341156793,0.6286556522482323,0.38705581813255296
+full_group,all_13,notthefallintact,right,"Superior Temporal Gyrus, posterior division",0.22225398650962255,0.549937889696561,0.3276839031869384
+full_group,all_13,notthefallintact,left,"Middle Temporal Gyrus, anterior division",0.1644334890545979,0.362352534023293,0.19791904496869508
+full_group,all_13,notthefallintact,right,"Middle Temporal Gyrus, anterior division",0.24433764789480436,0.4445308335456598,0.20019318565085545
+full_group,all_13,notthefallintact,left,"Middle Temporal Gyrus, posterior division",-0.1316660830997032,-0.208607538727385,-0.07694145562768179
+full_group,all_13,notthefallintact,right,"Middle Temporal Gyrus, posterior division",-0.061338654694042906,-0.03226986074502017,0.029068793949022738
+full_group,all_13,notthefallintact,left,"Inferior Frontal Gyrus, pars triangularis",-0.2253331434827713,-0.3485858158397102,-0.1232526723569389
+full_group,all_13,notthefallintact,right,"Inferior Frontal Gyrus, pars triangularis",-0.10277975501740201,-0.16046320647083456,-0.05768345145343255
+full_group,all_13,notthefallintact,left,"Inferior Frontal Gyrus, pars opercularis",0.11398947225356748,0.16159585204908866,0.04760637979552118
+full_group,all_13,notthefallintact,right,"Inferior Frontal Gyrus, pars opercularis",0.1276123666222525,0.1649598480363414,0.03734748141408889
+full_group,all_13,notthefallintact,left,Angular Gyrus,0.30346446616723144,0.31113485717897804,0.007670391011746602
+full_group,all_13,notthefallintact,right,Angular Gyrus,0.05092553400208489,0.12161809547042185,0.07069256146833697
+full_group,all_13,notthefallintact,left,"Supramarginal Gyrus, anterior division",-0.009839592075499021,-0.156555066666154,-0.14671547459065498
+full_group,all_13,notthefallintact,right,"Supramarginal Gyrus, anterior division",0.04309352919559288,0.04644818152319558,0.0033546523276027015
+full_group,all_13,notthefallintact,left,"Supramarginal Gyrus, posterior division",0.03203348939533739,-0.17596061344435968,-0.20799410283969708
+full_group,all_13,notthefallintact,right,"Supramarginal Gyrus, posterior division",0.03012303694213314,-0.048184980639854755,-0.0783080175819879
+full_group,all_13,notthefallintact,left,Frontal Pole,0.458882938761196,0.3519066913216081,-0.10697624743958789
+full_group,all_13,notthefallintact,right,Frontal Pole,0.3287111545510845,0.17144181676590262,-0.1572693377851819
+full_group,all_13,notthefallintact,left,Precuneous Cortex,0.032866349071428005,0.07182261434505889,0.038956265273630886
+full_group,all_13,notthefallintact,right,Precuneous Cortex,0.05051076836921266,0.0716836997435217,0.021172931374309048
+full_group,all_13,notthefallintact,left,"Temporal Fusiform Cortex, anterior division",-0.05121586912129268,-0.06018095759477806,-0.008965088473485379
+full_group,all_13,notthefallintact,right,"Temporal Fusiform Cortex, anterior division",-0.07672809178538821,-0.04159089470034605,0.03513719708504216
+full_group,all_13,notthefallintact,left,"Temporal Fusiform Cortex, posterior division",0.008525529894721957,-0.06550423298016991,-0.07402976287489187
+full_group,all_13,notthefallintact,right,"Temporal Fusiform Cortex, posterior division",-0.03112636506236716,-0.114802805074494,-0.08367644001212685
+full_group,all_13,notthefallintact,left,"Parahippocampal Gyrus, anterior division",0.02810737353140539,0.05010865057171694,0.022001277040311552
+full_group,all_13,notthefallintact,right,"Parahippocampal Gyrus, anterior division",0.04494873119085529,0.028534455724584937,-0.01641427546627035
+full_group,all_13,notthefallintact,left,"Parahippocampal Gyrus, posterior division",0.060329991594804955,-0.028742604780911354,-0.08907259637571631
+full_group,all_13,notthefallintact,right,"Parahippocampal Gyrus, posterior division",0.07025782501251915,-0.025227048926726718,-0.09548487393924587
+full_group,all_13,notthefallintact,left,"Cingulate Gyrus, anterior division",-0.00039792960380211035,0.04693652870430491,0.04733445830810702
+full_group,all_13,notthefallintact,right,"Cingulate Gyrus, anterior division",0.012593956964395078,0.09594768823721991,0.08335373127282483
+full_group,all_13,notthefallintact,left,"Cingulate Gyrus, posterior division",0.1377181865749791,0.17447861232710699,0.03676042575212787
+full_group,all_13,notthefallintact,right,"Cingulate Gyrus, posterior division",0.12504914529512892,0.17616140576209585,0.05111226046696693
+full_group,all_13,milkyway,left,"Superior Temporal Gyrus, anterior division",0.45582397823126697,0.28424300072792813,-0.17158097750333884
+full_group,all_13,milkyway,right,"Superior Temporal Gyrus, anterior division",0.14390264529348176,0.13886868089074564,-0.005033964402736124
+full_group,all_13,milkyway,left,"Superior Temporal Gyrus, posterior division",0.38825248719939787,-0.06556334598223357,-0.45381583318163143
+full_group,all_13,milkyway,right,"Superior Temporal Gyrus, posterior division",0.43364625398666373,-0.0015247806342411827,-0.4351710346209049
+full_group,all_13,milkyway,left,"Middle Temporal Gyrus, anterior division",0.41005643350079873,0.005616771521851663,-0.4044396619789471
+full_group,all_13,milkyway,right,"Middle Temporal Gyrus, anterior division",0.1308344369268398,-0.03306072253685509,-0.16389515946369487
+full_group,all_13,milkyway,left,"Middle Temporal Gyrus, posterior division",0.26599705901004905,0.014370151366681879,-0.25162690764336715
+full_group,all_13,milkyway,right,"Middle Temporal Gyrus, posterior division",-0.2778545927391322,-0.2677802942094645,0.010074298529667736
+full_group,all_13,milkyway,left,"Inferior Frontal Gyrus, pars triangularis",-0.06412427666027422,-0.09848343529001206,-0.034359158629737846
+full_group,all_13,milkyway,right,"Inferior Frontal Gyrus, pars triangularis",-0.39151347277766807,-0.3102520451408054,0.08126142763686267
+full_group,all_13,milkyway,left,"Inferior Frontal Gyrus, pars opercularis",0.09637586938238452,0.2160678264456606,0.1196919570632761
+full_group,all_13,milkyway,right,"Inferior Frontal Gyrus, pars opercularis",-0.038061898813996416,0.07631469367353211,0.11437659248752852
+full_group,all_13,milkyway,left,Angular Gyrus,-0.08563179360257284,-0.12636972976048064,-0.0407379361579078
+full_group,all_13,milkyway,right,Angular Gyrus,-0.16132922871530458,-0.2457829550794743,-0.08445372636416973
+full_group,all_13,milkyway,left,"Supramarginal Gyrus, anterior division",0.1638107639186345,0.1770343918873482,0.013223627968713708
+full_group,all_13,milkyway,right,"Supramarginal Gyrus, anterior division",-0.38503767361491703,-0.3617896731631638,0.023248000451753237
+full_group,all_13,milkyway,left,"Supramarginal Gyrus, posterior division",0.12858001581507705,-0.039602334055350824,-0.16818234987042788
+full_group,all_13,milkyway,right,"Supramarginal Gyrus, posterior division",-0.44067590050178235,-0.39282589499410175,0.04785000550768059
+full_group,all_13,milkyway,left,Frontal Pole,-0.14073998906203955,-0.016220849683713155,0.1245191393783264
+full_group,all_13,milkyway,right,Frontal Pole,-0.21551142421920252,-0.11997124092291284,0.09554018329628969
+full_group,all_13,milkyway,left,Precuneous Cortex,-0.2507164478425159,-0.3211303195536553,-0.07041387171113939
+full_group,all_13,milkyway,right,Precuneous Cortex,-0.2457898896030228,-0.34374673678569123,-0.09795684718266842
+full_group,all_13,milkyway,left,"Temporal Fusiform Cortex, anterior division",-0.0830659297772757,-0.11675918451515115,-0.03369325473787545
+full_group,all_13,milkyway,right,"Temporal Fusiform Cortex, anterior division",-0.2141219886181692,-0.28235272512618437,-0.06823073650801517
+full_group,all_13,milkyway,left,"Temporal Fusiform Cortex, posterior division",-0.12711990010959898,-0.1595473774726222,-0.03242747736302323
+full_group,all_13,milkyway,right,"Temporal Fusiform Cortex, posterior division",-0.20429416655459873,-0.24698861765277771,-0.04269445109817899
+full_group,all_13,milkyway,left,"Parahippocampal Gyrus, anterior division",-0.037632045912096714,-0.07332791479603039,-0.035695868883933675
+full_group,all_13,milkyway,right,"Parahippocampal Gyrus, anterior division",-0.2770606283643159,-0.21716674980358655,0.059893878560729336
+full_group,all_13,milkyway,left,"Parahippocampal Gyrus, posterior division",-0.1239972204367872,-0.08830053234652036,0.03569668809026684
+full_group,all_13,milkyway,right,"Parahippocampal Gyrus, posterior division",-0.16104595029005989,-0.1462520810959503,0.014793869194109577
+full_group,all_13,milkyway,left,"Cingulate Gyrus, anterior division",-0.18207321886325534,-0.21576182407071903,-0.033688605207463695
+full_group,all_13,milkyway,right,"Cingulate Gyrus, anterior division",-0.29885534946156517,-0.2939599342420103,0.004895415219554888
+full_group,all_13,milkyway,left,"Cingulate Gyrus, posterior division",-0.27854075743451884,-0.33632897553293645,-0.05778821809841761
+full_group,all_13,milkyway,right,"Cingulate Gyrus, posterior division",-0.2871823864099597,-0.3984254204928679,-0.1112430340829082
+full_group,all_13,bronx,left,"Superior Temporal Gyrus, anterior division",0.14515903272296818,0.1746104646813493,0.029451431958381125
+full_group,all_13,bronx,right,"Superior Temporal Gyrus, anterior division",0.10140065277229268,0.18088504145913437,0.07948438868684168
+full_group,all_13,bronx,left,"Superior Temporal Gyrus, posterior division",0.08226811965770234,0.13481055238896197,0.052542432731259636
+full_group,all_13,bronx,right,"Superior Temporal Gyrus, posterior division",0.06748450050418245,0.15476224191680252,0.08727774141262007
+full_group,all_13,bronx,left,"Middle Temporal Gyrus, anterior division",0.06399037181949885,0.08767193123875149,0.023681559419252637
+full_group,all_13,bronx,right,"Middle Temporal Gyrus, anterior division",0.039469320726524655,0.14800328803673393,0.10853396731020928
+full_group,all_13,bronx,left,"Middle Temporal Gyrus, posterior division",0.08837697253437407,0.06138526411223658,-0.026991708422137488
+full_group,all_13,bronx,right,"Middle Temporal Gyrus, posterior division",0.03359297150178383,0.1202443415805685,0.08665137007878468
+full_group,all_13,bronx,left,"Inferior Frontal Gyrus, pars triangularis",0.16478061029588542,0.1437372320754363,-0.021043378220449133
+full_group,all_13,bronx,right,"Inferior Frontal Gyrus, pars triangularis",0.1008574234091217,0.1085879129854859,0.0077304895763641995
+full_group,all_13,bronx,left,"Inferior Frontal Gyrus, pars opercularis",-0.05257764568666296,0.010090014368712928,0.06266766005537588
+full_group,all_13,bronx,right,"Inferior Frontal Gyrus, pars opercularis",0.01801953908751632,-0.0010184497908708088,-0.01903798887838713
+full_group,all_13,bronx,left,Angular Gyrus,-0.20633770772809215,-0.10364251326449522,0.10269519446359693
+full_group,all_13,bronx,right,Angular Gyrus,-0.12047158843934745,-0.09325471444168688,0.027216873997660568
+full_group,all_13,bronx,left,"Supramarginal Gyrus, anterior division",0.03310723041670328,0.09213764204389302,0.05903041162718974
+full_group,all_13,bronx,right,"Supramarginal Gyrus, anterior division",0.004037223443342967,0.10913105746080022,0.10509383401745725
+full_group,all_13,bronx,left,"Supramarginal Gyrus, posterior division",-0.03332063540054721,0.018587908487203264,0.05190854388775047
+full_group,all_13,bronx,right,"Supramarginal Gyrus, posterior division",-0.07268809464401117,0.03406604023202852,0.10675413487603969
+full_group,all_13,bronx,left,Frontal Pole,-0.23745951891817071,-0.27075647900309885,-0.033296960084928134
+full_group,all_13,bronx,right,Frontal Pole,-0.09422658996818847,-0.0985422563259156,-0.0043156663577271215
+full_group,all_13,bronx,left,Precuneous Cortex,-0.23797086615982668,-0.15310433315994507,0.08486653299988162
+full_group,all_13,bronx,right,Precuneous Cortex,-0.2157230572498502,-0.14379081294566234,0.07193224430418785
+full_group,all_13,bronx,left,"Temporal Fusiform Cortex, anterior division",-0.2556092068149548,-0.16775830625421861,0.08785090056073619
+full_group,all_13,bronx,right,"Temporal Fusiform Cortex, anterior division",-0.11718809378662957,-0.05157531553522845,0.06561277825140113
+full_group,all_13,bronx,left,"Temporal Fusiform Cortex, posterior division",-0.1799759964783211,-0.0719060848622683,0.10806991161605281
+full_group,all_13,bronx,right,"Temporal Fusiform Cortex, posterior division",-0.1661498685468629,-0.055433566076434126,0.11071630247042877
+full_group,all_13,bronx,left,"Parahippocampal Gyrus, anterior division",-0.2528928704520464,-0.23533805976146396,0.01755481069058243
+full_group,all_13,bronx,right,"Parahippocampal Gyrus, anterior division",-0.2383522803592471,-0.17171766351343842,0.06663461684580868
+full_group,all_13,bronx,left,"Parahippocampal Gyrus, posterior division",0.017357048467031296,0.037834226287461394,0.020477177820430098
+full_group,all_13,bronx,right,"Parahippocampal Gyrus, posterior division",0.00023883266862841549,0.016254843550433697,0.016016010881805282
+full_group,all_13,bronx,left,"Cingulate Gyrus, anterior division",-0.33948429548148784,-0.25323106298834086,0.08625323249314698
+full_group,all_13,bronx,right,"Cingulate Gyrus, anterior division",-0.27064021440068586,-0.18675496413448942,0.08388525026619645
+full_group,all_13,bronx,left,"Cingulate Gyrus, posterior division",-0.2976812071991889,-0.19251046739432148,0.10517073980486741
+full_group,all_13,bronx,right,"Cingulate Gyrus, posterior division",-0.2363010488225294,-0.13569799907602514,0.10060304974650425
+full_group,all_13,forgot,left,"Superior Temporal Gyrus, anterior division",0.3222320795175158,0.20822047062694635,-0.11401160889056947
+full_group,all_13,forgot,right,"Superior Temporal Gyrus, anterior division",0.09188820041335259,0.06727527447871984,-0.024612925934632754
+full_group,all_13,forgot,left,"Superior Temporal Gyrus, posterior division",0.2552292567827042,0.24918582284733848,-0.006043433935365716
+full_group,all_13,forgot,right,"Superior Temporal Gyrus, posterior division",-0.033137952714039354,0.04706239658656053,0.08020034930059988
+full_group,all_13,forgot,left,"Middle Temporal Gyrus, anterior division",0.1836352928534893,0.07919036571730359,-0.10444492713618572
+full_group,all_13,forgot,right,"Middle Temporal Gyrus, anterior division",-0.04631516068172917,-0.008312363831202322,0.03800279685052685
+full_group,all_13,forgot,left,"Middle Temporal Gyrus, posterior division",0.0938261316492092,0.022923537856157715,-0.07090259379305147
+full_group,all_13,forgot,right,"Middle Temporal Gyrus, posterior division",-0.026006580330217927,0.009801249838960892,0.03580783016917882
+full_group,all_13,forgot,left,"Inferior Frontal Gyrus, pars triangularis",0.012652257560194832,-0.09319965790577985,-0.10585191546597468
+full_group,all_13,forgot,right,"Inferior Frontal Gyrus, pars triangularis",0.2184213028184904,0.17620860971103336,-0.04221269310745704
+full_group,all_13,forgot,left,"Inferior Frontal Gyrus, pars opercularis",0.08215360266505616,0.004047749586371213,-0.07810585307868494
+full_group,all_13,forgot,right,"Inferior Frontal Gyrus, pars opercularis",-0.16117749604199494,-0.1609454224391519,0.00023207360284305256
+full_group,all_13,forgot,left,Angular Gyrus,-0.16086838458195685,-0.15227541022861407,0.008592974353342775
+full_group,all_13,forgot,right,Angular Gyrus,-0.2515493526209161,-0.27440018892104906,-0.02285083630013296
+full_group,all_13,forgot,left,"Supramarginal Gyrus, anterior division",0.005534167973353506,-0.09631392793482046,-0.10184809590817397
+full_group,all_13,forgot,right,"Supramarginal Gyrus, anterior division",-0.09387233638394989,-0.02132817872016809,0.07254415766378179
+full_group,all_13,forgot,left,"Supramarginal Gyrus, posterior division",-0.015246390462571703,-0.09176255317467415,-0.07651616271210245
+full_group,all_13,forgot,right,"Supramarginal Gyrus, posterior division",-0.093384115233093,-0.054428159452132974,0.03895595578096003
+full_group,all_13,forgot,left,Frontal Pole,-0.025175837206704618,-0.061080220674179356,-0.03590438346747474
+full_group,all_13,forgot,right,Frontal Pole,-0.044010313442770135,-0.08183084028961525,-0.037820526846845115
+full_group,all_13,forgot,left,Precuneous Cortex,-0.15925060859085363,-0.2689536747560535,-0.10970306616519984
+full_group,all_13,forgot,right,Precuneous Cortex,-0.17027058820403745,-0.27735187015430535,-0.10708128195026789
+full_group,all_13,forgot,left,"Temporal Fusiform Cortex, anterior division",0.16630821560831824,0.19008770546132714,0.0237794898530089
+full_group,all_13,forgot,right,"Temporal Fusiform Cortex, anterior division",0.04025670103522905,-0.02695950757089634,-0.06721620860612539
+full_group,all_13,forgot,left,"Temporal Fusiform Cortex, posterior division",0.0594219160741265,-0.03074658180776316,-0.09016849788188966
+full_group,all_13,forgot,right,"Temporal Fusiform Cortex, posterior division",-0.08035137133264193,-0.11566196737858124,-0.03531059604593931
+full_group,all_13,forgot,left,"Parahippocampal Gyrus, anterior division",-0.2502785108520326,-0.09500121214165012,0.15527729871038248
+full_group,all_13,forgot,right,"Parahippocampal Gyrus, anterior division",-0.23873967121282536,-0.19735151599660652,0.04138815521621883
+full_group,all_13,forgot,left,"Parahippocampal Gyrus, posterior division",-0.16663948257925276,-0.33926267669533283,-0.17262319411608007
+full_group,all_13,forgot,right,"Parahippocampal Gyrus, posterior division",-0.18910082362949526,-0.2992809487706026,-0.11018012514110731
+full_group,all_13,forgot,left,"Cingulate Gyrus, anterior division",-0.42609558165739125,-0.37100067061002096,0.0550949110473703
+full_group,all_13,forgot,right,"Cingulate Gyrus, anterior division",-0.39550308107325904,-0.36918341318171316,0.026319667891545884
+full_group,all_13,forgot,left,"Cingulate Gyrus, posterior division",-0.3221534890080739,-0.3520747825403424,-0.029921293532268523
+full_group,all_13,forgot,right,"Cingulate Gyrus, posterior division",-0.3235089153610785,-0.3481363689610257,-0.02462745359994717
+full_group,all_13,black,left,"Superior Temporal Gyrus, anterior division",-0.03996161486323845,0.2578390062023455,0.29780062106558397
+full_group,all_13,black,right,"Superior Temporal Gyrus, anterior division",-0.09197820134500917,0.32109899946359216,0.41307720080860133
+full_group,all_13,black,left,"Superior Temporal Gyrus, posterior division",3.918563850974745e-05,0.31693724961882147,0.31689806398031173
+full_group,all_13,black,right,"Superior Temporal Gyrus, posterior division",-0.015253047009320274,0.3195116960143014,0.3347647430236217
+full_group,all_13,black,left,"Middle Temporal Gyrus, anterior division",0.0068992376687791,0.2381609219305234,0.23126168426174432
+full_group,all_13,black,right,"Middle Temporal Gyrus, anterior division",-0.02430953775766042,0.3350178429394832,0.35932738069714365
+full_group,all_13,black,left,"Middle Temporal Gyrus, posterior division",0.031324902359852545,0.0674627406700317,0.03613783831017916
+full_group,all_13,black,right,"Middle Temporal Gyrus, posterior division",0.0020903968292032126,0.15845582453040855,0.15636542770120535
+full_group,all_13,black,left,"Inferior Frontal Gyrus, pars triangularis",0.008353566055716024,0.13265523134714455,0.12430166529142853
+full_group,all_13,black,right,"Inferior Frontal Gyrus, pars triangularis",0.1617558234698952,0.36332314244299047,0.20156731897309527
+full_group,all_13,black,left,"Inferior Frontal Gyrus, pars opercularis",0.07356172491842049,-0.022173046677600235,-0.09573477159602073
+full_group,all_13,black,right,"Inferior Frontal Gyrus, pars opercularis",0.07704492454947055,0.19292951766281324,0.11588459311334269
+full_group,all_13,black,left,Angular Gyrus,-0.04499610511965078,-0.1800043584292095,-0.13500825330955873
+full_group,all_13,black,right,Angular Gyrus,-0.056593068437803117,-0.20449386051954738,-0.14790079208174425
+full_group,all_13,black,left,"Supramarginal Gyrus, anterior division",0.06450271185002598,0.0727148964421293,0.008212184592103322
+full_group,all_13,black,right,"Supramarginal Gyrus, anterior division",0.054370958997815355,0.2265032537836784,0.17213229478586303
+full_group,all_13,black,left,"Supramarginal Gyrus, posterior division",0.09470992496493616,0.1164966162791032,0.021786691314167037
+full_group,all_13,black,right,"Supramarginal Gyrus, posterior division",0.023303993169476088,0.08176852905436416,0.05846453588488807
+full_group,all_13,black,left,Frontal Pole,0.022564556472101965,0.037572923588179916,0.015008367116077951
+full_group,all_13,black,right,Frontal Pole,0.023393740806380674,0.1072591780659413,0.08386543725956064
+full_group,all_13,black,left,Precuneous Cortex,-0.020396563617954333,-0.16751506780685785,-0.14711850418890351
+full_group,all_13,black,right,Precuneous Cortex,-0.039473781547191666,-0.2130909948105642,-0.17361721326337254
+full_group,all_13,black,left,"Temporal Fusiform Cortex, anterior division",0.17446870145206653,0.2713481955917697,0.09687949413970318
+full_group,all_13,black,right,"Temporal Fusiform Cortex, anterior division",-0.07926776518845315,-0.1113302929005838,-0.03206252771213065
+full_group,all_13,black,left,"Temporal Fusiform Cortex, posterior division",0.07956503300486402,-0.04139762036579414,-0.12096265337065816
+full_group,all_13,black,right,"Temporal Fusiform Cortex, posterior division",0.056734442587074094,-0.11445830565912161,-0.1711927482461957
+full_group,all_13,black,left,"Parahippocampal Gyrus, anterior division",0.10584835601292306,0.036699745037797105,-0.06914861097512595
+full_group,all_13,black,right,"Parahippocampal Gyrus, anterior division",0.03740007441696391,-0.07221051910438928,-0.10961059352135319
+full_group,all_13,black,left,"Parahippocampal Gyrus, posterior division",0.07160915527463765,-0.036828757076393125,-0.10843791235103079
+full_group,all_13,black,right,"Parahippocampal Gyrus, posterior division",0.05619076625776455,-0.06882582338984498,-0.12501658964760953
+full_group,all_13,black,left,"Cingulate Gyrus, anterior division",0.05618849726991585,0.078725471923102,0.022536974653186152
+full_group,all_13,black,right,"Cingulate Gyrus, anterior division",0.029716069368592612,0.015007473255537402,-0.01470859611305521
+full_group,all_13,black,left,"Cingulate Gyrus, posterior division",0.028014460764100076,-0.10317982964205225,-0.13119429040615233
+full_group,all_13,black,right,"Cingulate Gyrus, posterior division",-0.023572964371404284,-0.15856796438849796,-0.1349950000170937
+full_group,all_13,piemanpni,left,"Superior Temporal Gyrus, anterior division",0.5084725381684131,0.3819815223289291,-0.12649101583948397
+full_group,all_13,piemanpni,right,"Superior Temporal Gyrus, anterior division",0.49680529637908216,0.3888498154562819,-0.10795548092280027
+full_group,all_13,piemanpni,left,"Superior Temporal Gyrus, posterior division",0.48880759325500256,0.3733295034440329,-0.11547808981096969
+full_group,all_13,piemanpni,right,"Superior Temporal Gyrus, posterior division",0.40480503313689326,0.32787686126712373,-0.07692817186976952
+full_group,all_13,piemanpni,left,"Middle Temporal Gyrus, anterior division",0.4337706508883281,0.3099759083146523,-0.12379474257367579
+full_group,all_13,piemanpni,right,"Middle Temporal Gyrus, anterior division",0.4203519150093119,0.3391731157456131,-0.08117879926369881
+full_group,all_13,piemanpni,left,"Middle Temporal Gyrus, posterior division",0.3451688998276179,0.2887614123499933,-0.056407487477624585
+full_group,all_13,piemanpni,right,"Middle Temporal Gyrus, posterior division",0.2342361336810728,0.24632458099450655,0.012088447313433753
+full_group,all_13,piemanpni,left,"Inferior Frontal Gyrus, pars triangularis",-0.16833130922230746,-0.1774837132035061,-0.009152403981198626
+full_group,all_13,piemanpni,right,"Inferior Frontal Gyrus, pars triangularis",-0.2599184365092748,-0.2781217206572302,-0.018203284147955356
+full_group,all_13,piemanpni,left,"Inferior Frontal Gyrus, pars opercularis",0.10197490732177414,0.11313663684774311,0.011161729525968972
+full_group,all_13,piemanpni,right,"Inferior Frontal Gyrus, pars opercularis",0.0035321515839528018,-0.07045304325874734,-0.07398519484270014
+full_group,all_13,piemanpni,left,Angular Gyrus,-0.047879326918460245,-0.16580334937872437,-0.11792402246026412
+full_group,all_13,piemanpni,right,Angular Gyrus,-0.26433758567129756,-0.3835383005795845,-0.11920071490828693
+full_group,all_13,piemanpni,left,"Supramarginal Gyrus, anterior division",0.2506255556234353,0.2098254285419464,-0.04080012708148889
+full_group,all_13,piemanpni,right,"Supramarginal Gyrus, anterior division",0.06347053784357286,0.03362837011108525,-0.029842167732487608
+full_group,all_13,piemanpni,left,"Supramarginal Gyrus, posterior division",0.20255202727020002,0.1631497946951719,-0.03940223257502812
+full_group,all_13,piemanpni,right,"Supramarginal Gyrus, posterior division",-0.06594135495324967,-0.1453223667897638,-0.07938101183651412
+full_group,all_13,piemanpni,left,Frontal Pole,-0.1288140702029273,-0.2299289966745814,-0.1011149264716541
+full_group,all_13,piemanpni,right,Frontal Pole,0.03183068218036673,-0.11184364642416773,-0.14367432860453447
+full_group,all_13,piemanpni,left,Precuneous Cortex,-0.23407435820062947,-0.31750392665087396,-0.08342956845024449
+full_group,all_13,piemanpni,right,Precuneous Cortex,-0.1749937796399861,-0.2696574578584174,-0.09466367821843127
+full_group,all_13,piemanpni,left,"Temporal Fusiform Cortex, anterior division",-0.15480506674994143,-0.11621394490678885,0.03859112184315258
+full_group,all_13,piemanpni,right,"Temporal Fusiform Cortex, anterior division",-0.1986533875032956,-0.2694270141869913,-0.07077362668369569
+full_group,all_13,piemanpni,left,"Temporal Fusiform Cortex, posterior division",-0.0025574925524640482,-0.022851629734196056,-0.020294137181732008
+full_group,all_13,piemanpni,right,"Temporal Fusiform Cortex, posterior division",-0.03603975821921388,-0.12417550967294126,-0.08813575145372737
+full_group,all_13,piemanpni,left,"Parahippocampal Gyrus, anterior division",-0.026024734031452678,-0.08010484090611099,-0.05408010687465831
+full_group,all_13,piemanpni,right,"Parahippocampal Gyrus, anterior division",-0.01718225096818938,-0.11761002405916812,-0.10042777309097875
+full_group,all_13,piemanpni,left,"Parahippocampal Gyrus, posterior division",0.0626849480303909,0.01879842718323664,-0.04388652084715426
+full_group,all_13,piemanpni,right,"Parahippocampal Gyrus, posterior division",0.15592888130541588,0.09063562754801126,-0.06529325375740462
+full_group,all_13,piemanpni,left,"Cingulate Gyrus, anterior division",-0.006706571507742334,-0.12021045388494317,-0.11350388237720084
+full_group,all_13,piemanpni,right,"Cingulate Gyrus, anterior division",-0.1054404223095646,-0.2578139214043143,-0.1523734990947497
+full_group,all_13,piemanpni,left,"Cingulate Gyrus, posterior division",-0.16811364310674684,-0.2789168397245742,-0.11080319661782737
+full_group,all_13,piemanpni,right,"Cingulate Gyrus, posterior division",-0.22793161330273717,-0.3492735189552989,-0.12134190565256173
+full_group,all_13,prettymouth,left,"Superior Temporal Gyrus, anterior division",0.10274589055900957,0.07947171887764393,-0.02327417168136564
+full_group,all_13,prettymouth,right,"Superior Temporal Gyrus, anterior division",0.08223819923573503,0.20254209047438276,0.12030389123864774
+full_group,all_13,prettymouth,left,"Superior Temporal Gyrus, posterior division",0.0677859556194467,0.14276056410770066,0.07497460848825396
+full_group,all_13,prettymouth,right,"Superior Temporal Gyrus, posterior division",0.013626540821844378,0.21995617349051816,0.20632963266867377
+full_group,all_13,prettymouth,left,"Middle Temporal Gyrus, anterior division",0.02315913509868793,0.08298071501852665,0.05982157991983872
+full_group,all_13,prettymouth,right,"Middle Temporal Gyrus, anterior division",0.06153869834618529,0.2761825341569979,0.2146438358108126
+full_group,all_13,prettymouth,left,"Middle Temporal Gyrus, posterior division",0.00816623949629355,0.08986182395661468,0.08169558446032113
+full_group,all_13,prettymouth,right,"Middle Temporal Gyrus, posterior division",0.029215786724678065,0.21953317295494862,0.19031738623027056
+full_group,all_13,prettymouth,left,"Inferior Frontal Gyrus, pars triangularis",0.029525045702596252,0.020466245263532145,-0.009058800439064107
+full_group,all_13,prettymouth,right,"Inferior Frontal Gyrus, pars triangularis",0.07201301616525382,-0.007034211522564306,-0.07904722768781813
+full_group,all_13,prettymouth,left,"Inferior Frontal Gyrus, pars opercularis",0.12729194528164478,0.017786063736676835,-0.10950588154496795
+full_group,all_13,prettymouth,right,"Inferior Frontal Gyrus, pars opercularis",-0.11022806543304078,-0.16855355705143527,-0.05832549161839448
+full_group,all_13,prettymouth,left,Angular Gyrus,-0.12022393536775458,-0.15380537136604516,-0.03358143599829058
+full_group,all_13,prettymouth,right,Angular Gyrus,-0.3503918644659137,-0.13911366813366333,0.21127819633225037
+full_group,all_13,prettymouth,left,"Supramarginal Gyrus, anterior division",0.08848062630043531,0.08771312794761266,-0.0007674983528226514
+full_group,all_13,prettymouth,right,"Supramarginal Gyrus, anterior division",-0.083341513066286,-0.01243588449965966,0.07090562856662634
+full_group,all_13,prettymouth,left,"Supramarginal Gyrus, posterior division",0.12335117143204881,0.22627391194485935,0.10292274051281054
+full_group,all_13,prettymouth,right,"Supramarginal Gyrus, posterior division",0.010258348781432093,0.17535609216835685,0.16509774338692476
+full_group,all_13,prettymouth,left,Frontal Pole,0.0769019230427734,0.029666294187282654,-0.04723562885549075
+full_group,all_13,prettymouth,right,Frontal Pole,-0.07855235729047957,-0.10117521947578108,-0.022622862185301504
+full_group,all_13,prettymouth,left,Precuneous Cortex,-0.13789776656105954,-0.11878013270437703,0.01911763385668251
+full_group,all_13,prettymouth,right,Precuneous Cortex,-0.15743165215767713,-0.04350931855439659,0.11392233360328054
+full_group,all_13,prettymouth,left,"Temporal Fusiform Cortex, anterior division",-0.1683221745837138,-0.110561602511413,0.057760572072300786
+full_group,all_13,prettymouth,right,"Temporal Fusiform Cortex, anterior division",-0.2289614711734372,-0.17372738362388507,0.05523408754955214
+full_group,all_13,prettymouth,left,"Temporal Fusiform Cortex, posterior division",-0.17334467098571665,-0.16615966151575726,0.007185009469959397
+full_group,all_13,prettymouth,right,"Temporal Fusiform Cortex, posterior division",-0.21670590828339328,-0.15313153980093022,0.06357436848246306
+full_group,all_13,prettymouth,left,"Parahippocampal Gyrus, anterior division",-0.10942744009302259,0.027890938576643633,0.13731837866966623
+full_group,all_13,prettymouth,right,"Parahippocampal Gyrus, anterior division",-0.19567371186848176,0.03066596537603759,0.22633967724451934
+full_group,all_13,prettymouth,left,"Parahippocampal Gyrus, posterior division",-0.22636499101867347,-0.16981267443015904,0.05655231658851442
+full_group,all_13,prettymouth,right,"Parahippocampal Gyrus, posterior division",-0.3449669077217536,-0.136201032584002,0.20876587513775158
+full_group,all_13,prettymouth,left,"Cingulate Gyrus, anterior division",-0.08576662649658248,0.12751031525583553,0.21327694175241801
+full_group,all_13,prettymouth,right,"Cingulate Gyrus, anterior division",-0.15930510439734555,0.06143657068984917,0.22074167508719472
+full_group,all_13,prettymouth,left,"Cingulate Gyrus, posterior division",-0.15323483789831413,-0.037282859436280735,0.1159519784620334
+full_group,all_13,prettymouth,right,"Cingulate Gyrus, posterior division",-0.20725029599487574,-0.018021121388126685,0.18922917460674904
+full_group,all_13,sherlock,left,"Superior Temporal Gyrus, anterior division",0.3804323313844461,0.42320821431582106,0.042775882931374964
+full_group,all_13,sherlock,right,"Superior Temporal Gyrus, anterior division",0.07667863025651188,0.26828486142550273,0.19160623116899084
+full_group,all_13,sherlock,left,"Superior Temporal Gyrus, posterior division",0.34835723278514624,0.40026003190686466,0.05190279912171841
+full_group,all_13,sherlock,right,"Superior Temporal Gyrus, posterior division",0.03675557726064292,0.14358472938888162,0.1068291521282387
+full_group,all_13,sherlock,left,"Middle Temporal Gyrus, anterior division",0.22014744010322507,0.295169127529867,0.07502168742664195
+full_group,all_13,sherlock,right,"Middle Temporal Gyrus, anterior division",-0.032785787288415406,0.08768030153939889,0.12046608882781429
+full_group,all_13,sherlock,left,"Middle Temporal Gyrus, posterior division",0.1618150369623738,0.13435292185198497,-0.02746211511038882
+full_group,all_13,sherlock,right,"Middle Temporal Gyrus, posterior division",-0.05634499739982474,-0.08323537988285516,-0.026890382483030426
+full_group,all_13,sherlock,left,"Inferior Frontal Gyrus, pars triangularis",-0.0417455391567114,0.061797956620145915,0.10354349577685731
+full_group,all_13,sherlock,right,"Inferior Frontal Gyrus, pars triangularis",0.07692204528055122,0.23547509254589172,0.1585530472653405
+full_group,all_13,sherlock,left,"Inferior Frontal Gyrus, pars opercularis",-0.05006244457578441,0.01067919220919059,0.060741636784975
+full_group,all_13,sherlock,right,"Inferior Frontal Gyrus, pars opercularis",0.06226010421688254,0.07555647815193173,0.013296373935049184
+full_group,all_13,sherlock,left,Angular Gyrus,0.0327496213114566,-0.019469357926201372,-0.052218979237657975
+full_group,all_13,sherlock,right,Angular Gyrus,0.2476858173137221,0.19672078020816888,-0.050965037105553224
+full_group,all_13,sherlock,left,"Supramarginal Gyrus, anterior division",0.04273124249530418,0.07406652801621527,0.03133528552091109
+full_group,all_13,sherlock,right,"Supramarginal Gyrus, anterior division",-0.11224082768162288,0.010771284727744818,0.1230121124093677
+full_group,all_13,sherlock,left,"Supramarginal Gyrus, posterior division",-0.03326738219112395,0.01261077521755868,0.04587815740868263
+full_group,all_13,sherlock,right,"Supramarginal Gyrus, posterior division",-0.0059553051092787355,-0.005769915881267657,0.00018538922801107811
+full_group,all_13,sherlock,left,Frontal Pole,0.09486026443545269,0.3833471072846136,0.2884868428491609
+full_group,all_13,sherlock,right,Frontal Pole,0.030992704695507405,0.37057041152043035,0.33957770682492294
+full_group,all_13,sherlock,left,Precuneous Cortex,0.20786298162840494,0.20764445486868743,-0.0002185267597175078
+full_group,all_13,sherlock,right,Precuneous Cortex,0.23458095172031637,0.19588856511237168,-0.03869238660794469
+full_group,all_13,sherlock,left,"Temporal Fusiform Cortex, anterior division",-0.05858938079463612,-0.028224019022520846,0.03036536177211527
+full_group,all_13,sherlock,right,"Temporal Fusiform Cortex, anterior division",-0.12198401978285918,0.07267466639706603,0.1946586861799252
+full_group,all_13,sherlock,left,"Temporal Fusiform Cortex, posterior division",-0.02875868529126133,-0.04224142914450003,-0.013482743853238697
+full_group,all_13,sherlock,right,"Temporal Fusiform Cortex, posterior division",0.06943281029652192,0.06024891909889248,-0.009183891197629433
+full_group,all_13,sherlock,left,"Parahippocampal Gyrus, anterior division",-0.01795982101628847,0.1346598628827804,0.15261968389906888
+full_group,all_13,sherlock,right,"Parahippocampal Gyrus, anterior division",0.09687504526501245,0.2395764240793989,0.14270137881438644
+full_group,all_13,sherlock,left,"Parahippocampal Gyrus, posterior division",0.09964822541432239,0.051636890999251055,-0.048011334415071334
+full_group,all_13,sherlock,right,"Parahippocampal Gyrus, posterior division",0.15300306659033083,0.04506597510012192,-0.10793709149020891
+full_group,all_13,sherlock,left,"Cingulate Gyrus, anterior division",0.20340091091697232,0.28568480212479946,0.08228389120782714
+full_group,all_13,sherlock,right,"Cingulate Gyrus, anterior division",0.2820519518645805,0.3368027351900754,0.054750783325494934
+full_group,all_13,sherlock,left,"Cingulate Gyrus, posterior division",0.20111845172796078,0.18122837850646986,-0.019890073221490917
+full_group,all_13,sherlock,right,"Cingulate Gyrus, posterior division",0.2577724407723967,0.24550085684613518,-0.012271583926261515
+full_group,all_13,merlin,left,"Superior Temporal Gyrus, anterior division",0.5614984285251647,0.41797766561015365,-0.1435207629150111
+full_group,all_13,merlin,right,"Superior Temporal Gyrus, anterior division",0.22024732113157094,0.1845490762794148,-0.03569824485215614
+full_group,all_13,merlin,left,"Superior Temporal Gyrus, posterior division",0.4883016063350757,0.38539519898905394,-0.10290640734602174
+full_group,all_13,merlin,right,"Superior Temporal Gyrus, posterior division",0.22836668060502363,0.07538928736903633,-0.1529773932359873
+full_group,all_13,merlin,left,"Middle Temporal Gyrus, anterior division",0.5139597969599907,0.3741758626060361,-0.13978393435395464
+full_group,all_13,merlin,right,"Middle Temporal Gyrus, anterior division",0.16877156924979173,0.2670444839567724,0.09827291470698066
+full_group,all_13,merlin,left,"Middle Temporal Gyrus, posterior division",0.48124938623533176,0.28510846544516644,-0.19614092079016532
+full_group,all_13,merlin,right,"Middle Temporal Gyrus, posterior division",0.06248674732627034,0.29834299504817857,0.23585624772190822
+full_group,all_13,merlin,left,"Inferior Frontal Gyrus, pars triangularis",0.275881349120401,0.16542948302963895,-0.11045186609076207
+full_group,all_13,merlin,right,"Inferior Frontal Gyrus, pars triangularis",0.09745238890813032,0.40149791590426964,0.3040455269961393
+full_group,all_13,merlin,left,"Inferior Frontal Gyrus, pars opercularis",0.1444837423480583,-0.07962459528110354,-0.22410833762916182
+full_group,all_13,merlin,right,"Inferior Frontal Gyrus, pars opercularis",-0.07207113811139948,0.1403818253640062,0.21245296347540568
+full_group,all_13,merlin,left,Angular Gyrus,0.08919052354567679,0.027410312567759297,-0.06178021097791749
+full_group,all_13,merlin,right,Angular Gyrus,0.11438263222556877,0.3663906963532073,0.25200806412763854
+full_group,all_13,merlin,left,"Supramarginal Gyrus, anterior division",0.2688813417422792,0.020767905400809118,-0.24811343634147007
+full_group,all_13,merlin,right,"Supramarginal Gyrus, anterior division",0.06754009789133623,0.2759158626194746,0.20837576472813835
+full_group,all_13,merlin,left,"Supramarginal Gyrus, posterior division",0.19668437995152557,-0.016983235481826512,-0.21366761543335208
+full_group,all_13,merlin,right,"Supramarginal Gyrus, posterior division",0.17435479301432963,0.38161641831601184,0.2072616253016822
+full_group,all_13,merlin,left,Frontal Pole,0.08730931457932797,0.31822759691081914,0.23091828233149117
+full_group,all_13,merlin,right,Frontal Pole,0.2648002242639411,0.4657058524301015,0.20090562816616037
+full_group,all_13,merlin,left,Precuneous Cortex,0.14520744956594536,0.19676861773026025,0.051561168164314886
+full_group,all_13,merlin,right,Precuneous Cortex,0.16089708227804309,0.2557140323255159,0.09481695004747284
+full_group,all_13,merlin,left,"Temporal Fusiform Cortex, anterior division",0.23804157595026149,0.37657869694231677,0.13853712099205528
+full_group,all_13,merlin,right,"Temporal Fusiform Cortex, anterior division",-0.0747781215107092,0.46929645449207585,0.5440745760027851
+full_group,all_13,merlin,left,"Temporal Fusiform Cortex, posterior division",0.28606043248663754,0.06728709684333284,-0.2187733356433047
+full_group,all_13,merlin,right,"Temporal Fusiform Cortex, posterior division",0.24930942522516383,0.025564616665655744,-0.2237448085595081
+full_group,all_13,merlin,left,"Parahippocampal Gyrus, anterior division",0.03399489463128763,0.3304699730106409,0.2964750783793533
+full_group,all_13,merlin,right,"Parahippocampal Gyrus, anterior division",-0.07610212577771439,0.22832341035089718,0.30442553612861156
+full_group,all_13,merlin,left,"Parahippocampal Gyrus, posterior division",0.13579344714959998,0.15033352892129007,0.014540081771690083
+full_group,all_13,merlin,right,"Parahippocampal Gyrus, posterior division",0.13160877594828976,0.08190985014441221,-0.04969892580387755
+full_group,all_13,merlin,left,"Cingulate Gyrus, anterior division",-0.0023247067484586793,0.1709517672434756,0.17327647399193427
+full_group,all_13,merlin,right,"Cingulate Gyrus, anterior division",0.11277572565944663,0.39194254339398193,0.27916681773453533
+full_group,all_13,merlin,left,"Cingulate Gyrus, posterior division",0.10204648631987306,0.17207698742288557,0.07003050110301251
+full_group,all_13,merlin,right,"Cingulate Gyrus, posterior division",0.17567178899641311,0.342683273520878,0.1670114845244649
+full_group,all_13,21styear,left,"Superior Temporal Gyrus, anterior division",0.30676193732839224,0.32441951457311413,0.01765757724472189
+full_group,all_13,21styear,right,"Superior Temporal Gyrus, anterior division",0.2982745064722347,0.32013423055794854,0.02185972408571385
+full_group,all_13,21styear,left,"Superior Temporal Gyrus, posterior division",0.004699602901383448,0.11668860633874137,0.11198900343735792
+full_group,all_13,21styear,right,"Superior Temporal Gyrus, posterior division",0.02241873072059503,0.0935038267997315,0.07108509607913648
+full_group,all_13,21styear,left,"Middle Temporal Gyrus, anterior division",0.055279026165267676,0.04404629987546258,-0.011232726289805095
+full_group,all_13,21styear,right,"Middle Temporal Gyrus, anterior division",0.1397158470267759,0.14991793812139675,0.010202091094620863
+full_group,all_13,21styear,left,"Middle Temporal Gyrus, posterior division",0.0591256127413592,0.041195136069296215,-0.017930476672062982
+full_group,all_13,21styear,right,"Middle Temporal Gyrus, posterior division",0.0678386102042632,0.11484008456069805,0.047001474356434855
+full_group,all_13,21styear,left,"Inferior Frontal Gyrus, pars triangularis",-0.023006956048418112,0.1468088235099751,0.16981577955839322
+full_group,all_13,21styear,right,"Inferior Frontal Gyrus, pars triangularis",-0.05412585735882167,0.05857802912925169,0.11270388648807336
+full_group,all_13,21styear,left,"Inferior Frontal Gyrus, pars opercularis",0.02667269185398638,0.07335430891041635,0.046681617056429967
+full_group,all_13,21styear,right,"Inferior Frontal Gyrus, pars opercularis",0.03449568714737561,0.08419241665752482,0.04969672951014921
+full_group,all_13,21styear,left,Angular Gyrus,0.020897321259937703,0.00421825229006442,-0.016679068969873284
+full_group,all_13,21styear,right,Angular Gyrus,0.0491701439659191,0.07827866185627416,0.02910851789035506
+full_group,all_13,21styear,left,"Supramarginal Gyrus, anterior division",0.08533980981233817,0.07566905053373642,-0.009670759278601754
+full_group,all_13,21styear,right,"Supramarginal Gyrus, anterior division",0.06917810074530208,0.10071432434882423,0.03153622360352215
+full_group,all_13,21styear,left,"Supramarginal Gyrus, posterior division",0.04566184651038608,0.015275380093361548,-0.030386466417024534
+full_group,all_13,21styear,right,"Supramarginal Gyrus, posterior division",0.013531708855566097,0.09249730168118321,0.07896559282561712
+full_group,all_13,21styear,left,Frontal Pole,-0.051223208837821325,0.06935410458837268,0.12057731342619402
+full_group,all_13,21styear,right,Frontal Pole,0.011615971235216311,0.14579047776753418,0.13417450653231786
+full_group,all_13,21styear,left,Precuneous Cortex,0.12821825151217145,0.17812873744235375,0.0499104859301823
+full_group,all_13,21styear,right,Precuneous Cortex,0.15431590345301696,0.17038388838388174,0.01606798493086478
+full_group,all_13,21styear,left,"Temporal Fusiform Cortex, anterior division",0.03971399804181572,0.0940121174454942,0.054298119403678485
+full_group,all_13,21styear,right,"Temporal Fusiform Cortex, anterior division",0.05336900360443784,0.07348307909509699,0.020114075490659154
+full_group,all_13,21styear,left,"Temporal Fusiform Cortex, posterior division",0.06566329356920449,0.11834561225136106,0.05268231868215657
+full_group,all_13,21styear,right,"Temporal Fusiform Cortex, posterior division",0.07688771612992126,0.11140706842869277,0.03451935229877151
+full_group,all_13,21styear,left,"Parahippocampal Gyrus, anterior division",0.11936346547601982,0.0575380324932671,-0.061825432982752726
+full_group,all_13,21styear,right,"Parahippocampal Gyrus, anterior division",0.07586297935317565,0.10880969599555318,0.03294671664237753
+full_group,all_13,21styear,left,"Parahippocampal Gyrus, posterior division",0.0685888507332012,0.16038468890637084,0.09179583817316964
+full_group,all_13,21styear,right,"Parahippocampal Gyrus, posterior division",0.11139231398480004,0.14603802390386475,0.03464570991906471
+full_group,all_13,21styear,left,"Cingulate Gyrus, anterior division",0.08075654462010867,0.0710462707695301,-0.009710273850578571
+full_group,all_13,21styear,right,"Cingulate Gyrus, anterior division",0.08626052914317506,0.09662164289056378,0.010361113747388725
+full_group,all_13,21styear,left,"Cingulate Gyrus, posterior division",0.08473348554840333,0.08941327411049506,0.0046797885620917246
+full_group,all_13,21styear,right,"Cingulate Gyrus, posterior division",0.10331227831473208,0.10898027727956447,0.005667998964832388
+full_group,all_13,tunnel,left,"Superior Temporal Gyrus, anterior division",0.2433268924172613,0.2555269634533387,0.012200071036077398
+full_group,all_13,tunnel,right,"Superior Temporal Gyrus, anterior division",0.19951983178706714,0.19871614101489177,-0.000803690772175375
+full_group,all_13,tunnel,left,"Superior Temporal Gyrus, posterior division",0.3876820219656923,0.4447247184088331,0.057042696443140806
+full_group,all_13,tunnel,right,"Superior Temporal Gyrus, posterior division",0.3833950770767375,0.45461553693163576,0.07122045985489828
+full_group,all_13,tunnel,left,"Middle Temporal Gyrus, anterior division",0.3995716572392821,0.4504104503024915,0.050838793063209375
+full_group,all_13,tunnel,right,"Middle Temporal Gyrus, anterior division",0.31749390036063946,0.29452946888546483,-0.02296443147517463
+full_group,all_13,tunnel,left,"Middle Temporal Gyrus, posterior division",0.23443866701933697,0.14705662111597298,-0.08738204590336399
+full_group,all_13,tunnel,right,"Middle Temporal Gyrus, posterior division",0.19057112958768072,0.1732137340655795,-0.01735739552210122
+full_group,all_13,tunnel,left,"Inferior Frontal Gyrus, pars triangularis",0.016638556133098486,-0.019757476942169328,-0.036396033075267814
+full_group,all_13,tunnel,right,"Inferior Frontal Gyrus, pars triangularis",0.125847713315217,0.030744568848416046,-0.09510314446680095
+full_group,all_13,tunnel,left,"Inferior Frontal Gyrus, pars opercularis",-0.11279766083142329,-0.22668591702280053,-0.11388825619137724
+full_group,all_13,tunnel,right,"Inferior Frontal Gyrus, pars opercularis",-0.172471262759184,-0.34589095369636713,-0.17341969093718312
+full_group,all_13,tunnel,left,Angular Gyrus,-0.06911680793507705,-0.04591387945855092,0.02320292847652613
+full_group,all_13,tunnel,right,Angular Gyrus,0.030245703719337592,0.03166170538203795,0.0014160016627003565
+full_group,all_13,tunnel,left,"Supramarginal Gyrus, anterior division",0.16730761497080915,-0.006813529763804491,-0.17412114473461365
+full_group,all_13,tunnel,right,"Supramarginal Gyrus, anterior division",0.2161662926313222,0.15429905391827653,-0.06186723871304567
+full_group,all_13,tunnel,left,"Supramarginal Gyrus, posterior division",0.21747703863456957,0.12024748011097645,-0.09722955852359312
+full_group,all_13,tunnel,right,"Supramarginal Gyrus, posterior division",0.2832423330041083,0.32077052194599104,0.037528188941882756
+full_group,all_13,tunnel,left,Frontal Pole,0.036225077512921866,0.03486034221644842,-0.0013647352964734488
+full_group,all_13,tunnel,right,Frontal Pole,0.012138906314319162,0.03566171544066032,0.023522809126341155
+full_group,all_13,tunnel,left,Precuneous Cortex,-0.09002128483520336,-0.03716022809909102,0.05286105673611234
+full_group,all_13,tunnel,right,Precuneous Cortex,-0.05526243901565493,-0.04765620001959679,0.00760623899605814
+full_group,all_13,tunnel,left,"Temporal Fusiform Cortex, anterior division",-0.05418043074036045,0.17451325847811855,0.228693689218479
+full_group,all_13,tunnel,right,"Temporal Fusiform Cortex, anterior division",0.013930816545527086,0.0014785298296200618,-0.012452286715907025
+full_group,all_13,tunnel,left,"Temporal Fusiform Cortex, posterior division",-0.05670024964689593,-0.06100471068755856,-0.0043044610406626355
+full_group,all_13,tunnel,right,"Temporal Fusiform Cortex, posterior division",0.07374194736786097,0.09432980384266738,0.020587856474806418
+full_group,all_13,tunnel,left,"Parahippocampal Gyrus, anterior division",-0.04165210697322652,-0.07045363428133128,-0.028801527308104757
+full_group,all_13,tunnel,right,"Parahippocampal Gyrus, anterior division",0.02208223138972866,0.08562597509957927,0.06354374370985061
+full_group,all_13,tunnel,left,"Parahippocampal Gyrus, posterior division",-0.07958629313483974,-0.07338098331491422,0.0062053098199255224
+full_group,all_13,tunnel,right,"Parahippocampal Gyrus, posterior division",-0.02636954270826735,-0.03279686591029145,-0.0064273232020240975
+full_group,all_13,tunnel,left,"Cingulate Gyrus, anterior division",-0.10591183699965652,-0.09805683402143664,0.00785500297821988
+full_group,all_13,tunnel,right,"Cingulate Gyrus, anterior division",-0.060754025984598975,-0.04672572738711757,0.014028298597481406
+full_group,all_13,tunnel,left,"Cingulate Gyrus, posterior division",-0.07011382704641884,-0.01876935712588809,0.05134446992053075
+full_group,all_13,tunnel,right,"Cingulate Gyrus, posterior division",-0.00044951905823499295,0.010411521892885422,0.010861040951120414

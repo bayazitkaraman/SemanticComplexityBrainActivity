@@ -2,13 +2,13 @@
 
 This repository contains a reproducible Python pipeline for analyzing how low-dimensional GPT-2-derived linguistic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
 
-The analyses reported in the manuscript use the public **Narratives** fMRI dataset, Gentle word-level alignments, autoregressive cumulative-context GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, cross-narrative shared-response ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
+The analyses reported in the manuscript use the public **Narratives** fMRI dataset, Gentle word-level alignments, autoregressive cumulative-context and independent local GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, cross-narrative shared-response and individual-scan ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
 
 Raw neuroimaging data, participant-level time series, virtual environments, WAV files, and large intermediate outputs are intentionally **not** stored in this repository.
 
 ## Main analysis
 
-The primary result is a 13-fold leave-one-story-out analysis of the response shared across listeners. In each fold, the scaler, PCA, predictor scaling, and neural encoding coefficients are fitted to 12 narratives and evaluated on the complete omitted narrative. Every training story receives equal total weight while all available TRs are retained. A stricter story-and-participant holdout removes each tested listener from every training-story group response before neural-model fitting.
+The primary result is a 13-fold leave-one-story-out analysis of the response shared across listeners. In each fold, the scaler, PCA, predictor scaling, and neural encoding coefficients are fitted to 12 narratives and evaluated on the complete omitted narrative. Every training story receives equal total weight while all available TRs are retained. A stricter story-and-participant holdout removes each tested listener from every training-story group response before neural-model fitting. The same 13 folds directly compare cumulative-context and independently embedded local representations.
 
 After downloading the dataset and fMRIPrep derivatives, first create the local motion-filtered subject list:
 
@@ -21,11 +21,12 @@ After preparing the rich-audio regressors and ROI caches described below, run th
 
 ```bash
 python scripts/jnl_13_story_loso.py --gentle-root /path/to/gentle --stage all
+python scripts/jnl_13_story_context_comparison.py --gentle-root /path/to/gentle
 python scripts/jnl_13_story_transfer_figure.py
 python scripts/jnl_13_story_component_sensitivity.py
 ```
 
-`jnl_13_story_loso.py` computes story-balanced leave-one-story-out PCA, the primary train-12/test-1 neural transfer analysis, the story-and-participant holdout, the 1,000-iteration temporal-shift null, and secondary within-story results. The primary setting uses five final-layer GPT-2 components and ridge `alpha=10`; separate output directories hold the ridge sensitivity runs at 1, 100, and 1,000. `jnl_13_story_component_sensitivity.py` repeats all 13 folds with 1--10 retained components, refitting the scaler, PCA, and neural coefficients inside every fold. `jnl_13_story_transfer_figure.py` creates the three-panel cross-story result figure. Generated machine-specific configurations and ROI caches remain local because they contain local paths or derived imaging data.
+`jnl_13_story_loso.py` computes story-balanced leave-one-story-out PCA, the primary train-12/test-1 neural transfer analysis, the story-and-participant holdout, the 1,000-iteration temporal-shift null, and secondary within-story results. The primary setting uses five final-layer GPT-2 components and ridge `alpha=10`; separate output directories hold the ridge sensitivity runs at 1, 100, and 1,000. `jnl_13_story_context_comparison.py` repeats the cross-narrative and within-story procedures with independent chunks and writes paired all-13-story comparisons. The cumulative-minus-independent cross-narrative difference is `0.0131` (`p=0.0366`; 10/13 positive). `jnl_13_story_component_sensitivity.py` repeats all 13 folds with 1--10 retained components, and `jnl_13_story_transfer_figure.py` creates the three-panel cross-story result figure. Generated machine-specific configurations and ROI caches remain local because they contain local paths or derived imaging data.
 
 Build the richer waveform, spectral, pitch, and coarse-voicing controls for a
 prepared subject configuration:
@@ -55,6 +56,31 @@ The inclusion logic, equal-weight implementation, principal results, and
 implementation checks are documented in
 `results/jnl_13_story_extension/analysis_audit.md`.
 
+### Complementary 13-story individual analysis
+
+The individual subject--story analysis uses the same 13 narratives, 567 motion-quality-controlled scans, and 277 participants. Each TR is embedded independently, without preceding story context. In the primary analysis, the scaler and five-component PCA are fitted to the other 12 stories, and separate temporal encoding models compare the rich baseline with rich baseline plus local GPT-2 PC1--PC5 for every scan and ROI.
+
+```bash
+python scripts/jnl_13_story_individual_local.py --gentle-root /path/to/gentle --stage all
+python scripts/jnl_13_story_individual_direct_extension.py --gentle-root /path/to/gentle
+```
+
+The primary inference averages scans within story and tests the 13 story means; a crossed participant-and-story model is secondary. The primary result is null (mean story-level `Delta cv_r = -0.0014`, two-sided `p = 0.849`; crossed-model `p = 0.833`). A combined lexical/time, pooled-PCA, no-gap sensitivity is slightly positive but also null (`Delta cv_r = 0.0020`, `p = 0.786`). All stories are retained regardless of effect direction.
+
+The locked primary specification is `results/jnl_13_story_individual_local/locked_analysis_specification.json` (SHA-256 `AACC8436EE6F97CF650A8DBA22BAC25880ADB9F987456942E406A4F1CE194408`). The combined-sensitivity specification is `results/jnl_13_story_individual_local/direct_extension_specification.json` (SHA-256 `1757A57D99330ED7F2D5BD6B4C23D747679F254FED338082899F0311423C226D`). Machine-readable summaries and analysis audits are stored in the same result directories.
+
+### Complementary all-13-story sensitivities
+
+The BERT, GPT-2 layer-4, hemisphere, and fold-specific participant-normalization checks use the same 13 narratives. BERT and layer analyses include all 567 subject--story scans and fit the feature transformation to the other 12 stories in every fold. The hemisphere and normalization analyses repeat the full-group, split-half, and leave-one-participant-out models across all 13 stories.
+
+```bash
+python scripts/jnl_13_story_auxiliary_embeddings.py --gentle-root /path/to/gentle
+python scripts/jnl_13_story_hemisphere_sensitivity.py --gentle-root /path/to/gentle
+python scripts/jnl_13_story_fold_safe_normalization.py --gentle-root /path/to/gentle
+```
+
+Portable outputs are stored in `results/jnl_13_story_auxiliary_embeddings/`, `results/jnl_13_story_hemisphere_sensitivity/`, and `results/jnl_13_story_fold_safe_normalization/`. Large embedding arrays and participant-level hemisphere caches are excluded from version control.
+
 For every shared-response analysis, cached participant ROI series are placed at their actual acquisition times relative to story onset and linearly interpolated to the common 1.5-s story grid. Only time points supported by every participant in a story are retained; the stimulus designs are restricted to the same effective grid.
 
 ---
@@ -71,7 +97,7 @@ This project supports the following analyses:
 6. Fit neural encoding coefficients on the same 12 narratives and evaluate the complete omitted narrative.
 7. Test participant generalization by removing the tested listener from all training-story responses.
 8. Evaluate temporal specificity, regularization, within-story prediction, and ROI sensitivity.
-9. Evaluate individual-scan, independent-chunk, BERT, hemisphere, and layer analyses as complementary checks.
+9. Compare cumulative and local representations and run BERT, hemisphere, normalization, and layer checks across all 13 stories.
 10. Compare matched performances of the Pie Man account as an exploratory boundary condition.
 11. Generate final tables and figures for the manuscript and supplementary material.
 
@@ -86,6 +112,11 @@ SemanticComplexityBrainActivity/
 ├── scripts/                                  # Runnable analysis scripts
 ├── src/semantic_fmri/                         # Reusable package utilities
 ├── results/jnl_13_story_extension/loso/      # Central cross-story outputs
+├── results/jnl_13_story_context_comparison/  # Cumulative versus local outputs
+├── results/jnl_13_story_individual_local/    # Thirteen-story individual outputs
+├── results/jnl_13_story_auxiliary_embeddings/ # BERT and GPT-2 layer outputs
+├── results/jnl_13_story_hemisphere_sensitivity/ # Hemisphere outputs
+├── results/jnl_13_story_fold_safe_normalization/ # Normalization outputs
 ├── results/jnl_story_heterogeneity/          # Matched-story analysis
 ├── results/final_tables/                      # Complementary result tables
 ├── results/final_figures/                     # Generated figures
@@ -406,6 +437,13 @@ scripts/jnl_13_story_component_sensitivity.py
 scripts/jnl_13_story_transfer_figure.py
     Creates the cross-narrative result figure.
 
+scripts/jnl_13_story_individual_local.py
+    Runs the 13-story individual local-feature analysis with story-held-out PCA,
+    prespecified sensitivities, story-level inference, and crossed mixed effects.
+
+scripts/jnl_13_story_individual_direct_extension.py
+    Runs the combined lexical/time, pooled-PCA, no-gap individual sensitivity.
+
 scripts/jnl_original_pieman_comparison.py
     Runs the exploratory matched-performance comparison between piemanpni and
     the original pieman recording.
@@ -458,16 +496,16 @@ scripts/jnl_heldout_story_sensitivity.py
     Runs sensitivity analyses for the held-out shared-response specification.
 
 scripts/jnl_shared_response_context_validation.py
-    Runs the eight-story development shared-response analysis after mapping each
-    participant's ROI series to the common story-relative grid.
+    Preserves the earlier development-subset shared-response analysis for audit
+    and backward compatibility; it does not generate the current manuscript tables.
 
 scripts/jnl_fold_safe_subject_normalization.py
-    Repeats the full-group, split-half, and leave-one-participant-out analyses
-    with participant normalization estimated inside each temporal training fold.
+    Preserves the earlier subset-based normalization sensitivity. The current
+    manuscript uses scripts/jnl_13_story_fold_safe_normalization.py.
 
 scripts/jnl_shared_response_hemisphere_sensitivity.py
-    Repeats the central shared-response analyses separately for left and right
-    hemisphere ROI sets and evaluates paired right-minus-left differences.
+    Preserves the earlier subset-based hemisphere sensitivity. The current
+    manuscript uses scripts/jnl_13_story_hemisphere_sensitivity.py.
 
 scripts/jnl_shared_response_pc_count_sensitivity.py
     Preserves the locked PC1--PC5 regressors, appends development-fitted
@@ -500,6 +538,7 @@ Final manuscript/supplement outputs:
 ```text
 results/jnl_13_story_extension/loso/
 results/jnl_13_story_extension/component_count_sensitivity/
+results/jnl_13_story_individual_local/
 results/jnl_story_heterogeneity/original_pieman/
 results/final_tables/
 results/final_figures/
@@ -544,7 +583,7 @@ vs.
 combined_rich_audio_gpt2_pc1_to_pc5
 ```
 
-where the rich baseline includes lexical/time predictors, acoustic-envelope/speech-density controls, and additional waveform, spectral, pitch, and coarse voicing-related predictors. The primary target is the full-story-standardized ROI response averaged across listeners within each story. This participant-level full-story standardization is distinct from the fold-specific detrending and scaling of the resulting shared encoding target. A sensitivity analysis additionally estimates participant means and scales only from the training portion of each temporal fold. The individual subject--story comparison is a complementary null result rather than the central evidence.
+where the rich baseline includes lexical/time predictors, acoustic-envelope/speech-density controls, and additional waveform, spectral, pitch, and coarse voicing-related predictors. The primary target is the full-story-standardized ROI response averaged across listeners within each story. This participant-level full-story standardization is distinct from the fold-specific detrending and scaling of the resulting shared encoding target. A sensitivity analysis additionally estimates participant means and scales only from the training portion of each temporal fold. The complementary individual subject--story analysis uses all 13 narratives, target-story-excluded PCA for its primary feature transformation, and story-level inference; it is a null result rather than the central evidence.
 
 The primary performance metric is:
 

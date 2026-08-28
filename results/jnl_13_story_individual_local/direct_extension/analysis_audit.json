@@ -1,0 +1,10 @@
+{
+  "specification_sha256": "1757A57D99330ED7F2D5BD6B4C23D747679F254FED338082899F0311423C226D",
+  "script_sha256": "44C0F9F7F7777AA3358A344C12AEE80D8530232DDC55113B80432828F93F58D5",
+  "n_stories": 13,
+  "n_scans": 567,
+  "n_unique_participants": 277,
+  "all_scan_effects_finite": true,
+  "outcome_based_exclusions": 0,
+  "replaces_locked_primary": false
+}

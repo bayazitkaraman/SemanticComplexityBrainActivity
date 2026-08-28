@@ -1,0 +1,69 @@
+{
+  "status": "fixed before computing the 13-story individual local-feature outcomes",
+  "date_locked": "2026-08-27",
+  "purpose": "extend the complementary individual subject-story analysis to the same complete set of 13 eligible intact narratives used by the central cross-narrative analysis",
+  "dataset": {
+    "source": "OpenNeuro ds002345 version 1.1.4",
+    "stories": [
+      "shapessocial",
+      "shapesphysical",
+      "notthefallintact",
+      "milkyway",
+      "bronx",
+      "forgot",
+      "black",
+      "piemanpni",
+      "prettymouth",
+      "sherlock",
+      "merlin",
+      "21styear",
+      "tunnel"
+    ],
+    "expected_motion_filtered_scans": 567,
+    "expected_unique_participants": 277,
+    "story_inclusion": "all intact single-run narratives with at least 20 usable participants and at least 5 minutes median duration",
+    "outcome_handling": "all 13 stories and all motion-quality-controlled scans are retained regardless of effect direction or significance"
+  },
+  "primary_analysis": {
+    "representation": "GPT-2 final-layer embeddings computed independently for each 1.5-second TR chunk, with no preceding-story context",
+    "empty_tr_strategy": "GPT-2 EOS embedding",
+    "feature_transform": "for each evaluated story, fit a story-balanced scaler and five-component PCA to local embeddings from the other 12 stories and project the evaluated story without refitting",
+    "baseline": "rich lexical, speech-timing, waveform, spectral, approximate-pitch, and voicing controls",
+    "combined_model": "rich baseline plus local GPT-2 PC1-PC5",
+    "neural_model": "separate within-scan ridge encoding models for each participant and ROI",
+    "ridge_alpha": 10.0,
+    "time_series_splits": 5,
+    "cv_gap_trs": 10,
+    "target_preprocessing": "linear detrending and standardization estimated separately within each temporal training fold",
+    "predictor_preprocessing": "standardization estimated separately within each temporal training fold",
+    "scan_effect": "mean combined-minus-baseline change in cross-validated prediction correlation across 17 ROIs",
+    "primary_unit": "one mean scan effect per story after averaging participants within story",
+    "primary_tests": [
+      "two-sided one-sample t test across 13 story means",
+      "one-sided Wilcoxon signed-rank test for a positive increment",
+      "one-sided exact sign test for a positive increment"
+    ]
+  },
+  "prespecified_sensitivities": [
+    {
+      "name": "lexical_loso_gap10",
+      "change_from_primary": "use the lexical and linear-time baseline"
+    },
+    {
+      "name": "rich_loso_gap0",
+      "change_from_primary": "remove the temporal gap to match the earlier eight-story temporal-CV setting"
+    },
+    {
+      "name": "rich_pooled_gap10",
+      "change_from_primary": "fit one pooled-TR scaler and PCA to local embeddings from all 13 stories, matching the earlier shared-PCA construction while expanding the story set"
+    }
+  ],
+  "secondary_inference": "intercept-only crossed mixed-effects model of scan effects with participant and story variance components",
+  "interpretation_constraints": [
+    "The primary result will be reported regardless of sign or statistical significance.",
+    "No sensitivity analysis will replace the primary specification based on its outcome.",
+    "This is a within-story individual-response analysis and does not test transfer of neural coefficients to an unseen narrative.",
+    "A nonsignificant result will be described as no reliable incremental effect, not as proof of no effect.",
+    "A significant result will be described as an expanded analysis developed before its outcomes were examined, not as an independent prospective replication."
+  ]
+}

@@ -1,0 +1,2 @@
+analysis,model,n_subject_story_scans,n_subjects,n_stories,estimate,se,z,p,ci95_low,ci95_high,converged,warnings
+direct_extension_lexical_pooled_gap0,y ~ 1 + (1 | subject) + (1 | story),567,277,13,0.0016663721837237083,0.007401300688468118,0.22514585663572131,0.8218658081837298,-0.012839910604425308,0.016172654971872726,True,lbfgs: The MLE may be on the boundary of the parameter space.

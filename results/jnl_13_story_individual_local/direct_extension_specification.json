@@ -1,0 +1,22 @@
+{
+  "status": "specified after the locked primary 13-story result but before computing this direct-extension outcome",
+  "date_specified": "2026-08-27",
+  "purpose": "extend the exact earlier eight-story individual analysis settings to all 13 eligible stories for direct numerical comparability",
+  "stories": "the same 13 eligible intact narratives and 567 motion-quality-controlled scans used by the locked primary analysis",
+  "settings": {
+    "representation": "independent-TR GPT-2 final-layer embeddings",
+    "feature_transform": "one pooled-TR scaler and five-component PCA fitted to all 13 stories",
+    "baseline": "lexical and linear-time controls",
+    "ridge_alpha": 10.0,
+    "time_series_splits": 5,
+    "cv_gap_trs": 0,
+    "target_preprocessing": "fold-specific detrending and standardization",
+    "predictor_preprocessing": "fold-specific standardization"
+  },
+  "inference": {
+    "primary_unit": "one mean effect per story after averaging participants and 17 ROIs",
+    "tests": "two-sided story-level t test, one-sided Wilcoxon test, and one-sided sign test",
+    "secondary": "crossed participant-and-story mixed-effects model"
+  },
+  "interpretation": "This direct-comparability result cannot replace the locked rich-baseline, story-held-out-PCA, 10-TR-gap primary analysis. It will be reported regardless of outcome."
+}

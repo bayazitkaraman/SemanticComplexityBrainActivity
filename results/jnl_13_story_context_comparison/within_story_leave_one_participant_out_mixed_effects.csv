@@ -1,0 +1,4 @@
+analysis,model,n_subject_story_scans,n_subjects,n_stories,estimate,se,z,p,ci95_low,ci95_high,converged,warnings
+cumulative_added,y ~ 1 + (1 | subject) + (1 | story),567,277,13,0.011165126423665673,0.005971114667135514,1.8698563075865113,0.0615037746202065,-0.0005380432714788084,0.022868296118810152,True,lbfgs: The MLE may be on the boundary of the parameter space.
+independent_added,y ~ 1 + (1 | subject) + (1 | story),567,277,13,-0.0022944109615444844,0.005878670468594117,-0.3902941955671811,0.6963190149193582,-0.013816393356968158,0.009227571433879188,True,lbfgs: The MLE may be on the boundary of the parameter space.
+cumulative_minus_independent,y ~ 1 + (1 | subject) + (1 | story),567,277,13,0.013452774871582954,0.00760100478862373,1.769867964261442,0.07674913865074728,-0.0014449207604360428,0.02835047050360195,True,lbfgs: The MLE may be on the boundary of the parameter space.

@@ -1,0 +1,2 @@
+variant,n_stories,n_scans,mean_delta_cv_r,median_delta_cv_r,ci95_low,ci95_high,positive_stories,t_stat,p_ttest_two_sided,wilcoxon_stat,p_wilcoxon_greater,p_sign_greater
+direct_extension_lexical_pooled_gap0,13,567,0.001961605034889825,0.008965965086102812,-0.013396873296470345,0.017320083366249996,9,0.27828083775873635,0.7855337614815332,64.0,0.108154296875,0.1334228515625

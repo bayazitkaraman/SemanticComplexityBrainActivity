@@ -1,0 +1,32 @@
+{
+  "specification_sha256": "AACC8436EE6F97CF650A8DBA22BAC25880ADB9F987456942E406A4F1CE194408",
+  "script_sha256": "360654BD9375F981AE2A54DC5CC841C9772146E92C9D9AC0211C3D580F197CDD",
+  "stories": [
+    "shapessocial",
+    "shapesphysical",
+    "notthefallintact",
+    "milkyway",
+    "bronx",
+    "forgot",
+    "black",
+    "piemanpni",
+    "prettymouth",
+    "sherlock",
+    "merlin",
+    "21styear",
+    "tunnel"
+  ],
+  "n_stories": 13,
+  "n_scans": 567,
+  "n_unique_participants": 277,
+  "expected_unique_participants": 277,
+  "expected_scans": 567,
+  "scan_count_matches_specification": true,
+  "participant_count_matches_specification": true,
+  "all_embeddings_finite": true,
+  "all_scan_effects_finite": true,
+  "all_story_effects_finite": true,
+  "all_variants_have_13_stories": true,
+  "primary_test_story_excluded_from_pca": true,
+  "outcome_based_exclusions": 0
+}

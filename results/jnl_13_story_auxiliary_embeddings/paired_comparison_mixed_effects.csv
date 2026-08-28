@@ -1,0 +1,3 @@
+analysis,model,n_subject_story_scans,n_subjects,n_stories,estimate,se,z,p,ci95_low,ci95_high,converged,warnings
+bert_contextual_minus_static,y ~ 1 + (1 | subject) + (1 | story),567,277,13,-0.0016374652481741933,0.003363894957118161,-0.48677656973480676,0.6264166762166407,-0.008230578211901698,0.004955647715553312,True,lbfgs: The MLE may be on the boundary of the parameter space.
+gpt2_layer4_minus_final,y ~ 1 + (1 | subject) + (1 | story),567,277,13,-0.004105620655143607,0.0027343564517919587,-1.5014943104630674,0.13322775717302257,-0.00946486082155058,0.001253619511263365,True,lbfgs: The MLE may be on the boundary of the parameter space.
