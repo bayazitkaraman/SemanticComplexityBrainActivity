@@ -2884,5 +2884,1125 @@ stories = [
         "bold_file": "data/openneuro/ds002345/sub-315/func/sub-315_task-piemanpni_bold.nii.gz",
         "events_file": "data/openneuro/ds002345/sub-315/func/sub-315_task-piemanpni_events.tsv",
         "transcript_file": "data/transcripts/piemanpni_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-023",
+        "bold_file": "data/openneuro/ds002345/sub-023/func/sub-023_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-023/func/sub-023_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-030",
+        "bold_file": "data/openneuro/ds002345/sub-030/func/sub-030_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-030/func/sub-030_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-032",
+        "bold_file": "data/openneuro/ds002345/sub-032/func/sub-032_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-032/func/sub-032_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-034",
+        "bold_file": "data/openneuro/ds002345/sub-034/func/sub-034_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-034/func/sub-034_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-038",
+        "bold_file": "data/openneuro/ds002345/sub-038/func/sub-038_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-038/func/sub-038_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-050",
+        "bold_file": "data/openneuro/ds002345/sub-050/func/sub-050_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-050/func/sub-050_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-052",
+        "bold_file": "data/openneuro/ds002345/sub-052/func/sub-052_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-052/func/sub-052_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-065",
+        "bold_file": "data/openneuro/ds002345/sub-065/func/sub-065_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-065/func/sub-065_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-066",
+        "bold_file": "data/openneuro/ds002345/sub-066/func/sub-066_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-066/func/sub-066_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-079",
+        "bold_file": "data/openneuro/ds002345/sub-079/func/sub-079_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-079/func/sub-079_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-081",
+        "bold_file": "data/openneuro/ds002345/sub-081/func/sub-081_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-081/func/sub-081_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-083",
+        "bold_file": "data/openneuro/ds002345/sub-083/func/sub-083_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-083/func/sub-083_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-084",
+        "bold_file": "data/openneuro/ds002345/sub-084/func/sub-084_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-084/func/sub-084_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-085",
+        "bold_file": "data/openneuro/ds002345/sub-085/func/sub-085_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-085/func/sub-085_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-086",
+        "bold_file": "data/openneuro/ds002345/sub-086/func/sub-086_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-086/func/sub-086_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-087",
+        "bold_file": "data/openneuro/ds002345/sub-087/func/sub-087_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-087/func/sub-087_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-088",
+        "bold_file": "data/openneuro/ds002345/sub-088/func/sub-088_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-088/func/sub-088_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-089",
+        "bold_file": "data/openneuro/ds002345/sub-089/func/sub-089_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-089/func/sub-089_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-090",
+        "bold_file": "data/openneuro/ds002345/sub-090/func/sub-090_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-090/func/sub-090_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-091",
+        "bold_file": "data/openneuro/ds002345/sub-091/func/sub-091_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-091/func/sub-091_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-092",
+        "bold_file": "data/openneuro/ds002345/sub-092/func/sub-092_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-092/func/sub-092_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-093",
+        "bold_file": "data/openneuro/ds002345/sub-093/func/sub-093_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-093/func/sub-093_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-094",
+        "bold_file": "data/openneuro/ds002345/sub-094/func/sub-094_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-094/func/sub-094_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-095",
+        "bold_file": "data/openneuro/ds002345/sub-095/func/sub-095_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-095/func/sub-095_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-096",
+        "bold_file": "data/openneuro/ds002345/sub-096/func/sub-096_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-096/func/sub-096_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-097",
+        "bold_file": "data/openneuro/ds002345/sub-097/func/sub-097_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-097/func/sub-097_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-098",
+        "bold_file": "data/openneuro/ds002345/sub-098/func/sub-098_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-098/func/sub-098_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-099",
+        "bold_file": "data/openneuro/ds002345/sub-099/func/sub-099_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-099/func/sub-099_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-100",
+        "bold_file": "data/openneuro/ds002345/sub-100/func/sub-100_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-100/func/sub-100_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-101",
+        "bold_file": "data/openneuro/ds002345/sub-101/func/sub-101_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-101/func/sub-101_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-102",
+        "bold_file": "data/openneuro/ds002345/sub-102/func/sub-102_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-102/func/sub-102_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-103",
+        "bold_file": "data/openneuro/ds002345/sub-103/func/sub-103_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-103/func/sub-103_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-104",
+        "bold_file": "data/openneuro/ds002345/sub-104/func/sub-104_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-104/func/sub-104_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-105",
+        "bold_file": "data/openneuro/ds002345/sub-105/func/sub-105_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-105/func/sub-105_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-106",
+        "bold_file": "data/openneuro/ds002345/sub-106/func/sub-106_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-106/func/sub-106_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-107",
+        "bold_file": "data/openneuro/ds002345/sub-107/func/sub-107_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-107/func/sub-107_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-108",
+        "bold_file": "data/openneuro/ds002345/sub-108/func/sub-108_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-108/func/sub-108_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-109",
+        "bold_file": "data/openneuro/ds002345/sub-109/func/sub-109_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-109/func/sub-109_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-110",
+        "bold_file": "data/openneuro/ds002345/sub-110/func/sub-110_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-110/func/sub-110_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "prettymouth",
+        "subject": "sub-111",
+        "bold_file": "data/openneuro/ds002345/sub-111/func/sub-111_task-prettymouth_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-111/func/sub-111_task-prettymouth_events.tsv",
+        "transcript_file": "data/transcripts/prettymouth_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-075",
+        "bold_file": "data/openneuro/ds002345/sub-075/func/sub-075_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-075/func/sub-075_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-146",
+        "bold_file": "data/openneuro/ds002345/sub-146/func/sub-146_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-146/func/sub-146_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-147",
+        "bold_file": "data/openneuro/ds002345/sub-147/func/sub-147_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-147/func/sub-147_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-148",
+        "bold_file": "data/openneuro/ds002345/sub-148/func/sub-148_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-148/func/sub-148_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-149",
+        "bold_file": "data/openneuro/ds002345/sub-149/func/sub-149_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-149/func/sub-149_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-150",
+        "bold_file": "data/openneuro/ds002345/sub-150/func/sub-150_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-150/func/sub-150_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-151",
+        "bold_file": "data/openneuro/ds002345/sub-151/func/sub-151_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-151/func/sub-151_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-152",
+        "bold_file": "data/openneuro/ds002345/sub-152/func/sub-152_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-152/func/sub-152_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-153",
+        "bold_file": "data/openneuro/ds002345/sub-153/func/sub-153_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-153/func/sub-153_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-154",
+        "bold_file": "data/openneuro/ds002345/sub-154/func/sub-154_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-154/func/sub-154_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-155",
+        "bold_file": "data/openneuro/ds002345/sub-155/func/sub-155_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-155/func/sub-155_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-156",
+        "bold_file": "data/openneuro/ds002345/sub-156/func/sub-156_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-156/func/sub-156_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-157",
+        "bold_file": "data/openneuro/ds002345/sub-157/func/sub-157_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-157/func/sub-157_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-158",
+        "bold_file": "data/openneuro/ds002345/sub-158/func/sub-158_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-158/func/sub-158_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-159",
+        "bold_file": "data/openneuro/ds002345/sub-159/func/sub-159_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-159/func/sub-159_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-160",
+        "bold_file": "data/openneuro/ds002345/sub-160/func/sub-160_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-160/func/sub-160_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-161",
+        "bold_file": "data/openneuro/ds002345/sub-161/func/sub-161_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-161/func/sub-161_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-162",
+        "bold_file": "data/openneuro/ds002345/sub-162/func/sub-162_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-162/func/sub-162_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-163",
+        "bold_file": "data/openneuro/ds002345/sub-163/func/sub-163_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-163/func/sub-163_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-164",
+        "bold_file": "data/openneuro/ds002345/sub-164/func/sub-164_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-164/func/sub-164_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-165",
+        "bold_file": "data/openneuro/ds002345/sub-165/func/sub-165_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-165/func/sub-165_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-166",
+        "bold_file": "data/openneuro/ds002345/sub-166/func/sub-166_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-166/func/sub-166_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-167",
+        "bold_file": "data/openneuro/ds002345/sub-167/func/sub-167_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-167/func/sub-167_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-168",
+        "bold_file": "data/openneuro/ds002345/sub-168/func/sub-168_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-168/func/sub-168_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-169",
+        "bold_file": "data/openneuro/ds002345/sub-169/func/sub-169_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-169/func/sub-169_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-170",
+        "bold_file": "data/openneuro/ds002345/sub-170/func/sub-170_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-170/func/sub-170_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-171",
+        "bold_file": "data/openneuro/ds002345/sub-171/func/sub-171_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-171/func/sub-171_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-172",
+        "bold_file": "data/openneuro/ds002345/sub-172/func/sub-172_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-172/func/sub-172_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-173",
+        "bold_file": "data/openneuro/ds002345/sub-173/func/sub-173_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-173/func/sub-173_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-174",
+        "bold_file": "data/openneuro/ds002345/sub-174/func/sub-174_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-174/func/sub-174_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-175",
+        "bold_file": "data/openneuro/ds002345/sub-175/func/sub-175_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-175/func/sub-175_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-176",
+        "bold_file": "data/openneuro/ds002345/sub-176/func/sub-176_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-176/func/sub-176_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-177",
+        "bold_file": "data/openneuro/ds002345/sub-177/func/sub-177_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-177/func/sub-177_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-178",
+        "bold_file": "data/openneuro/ds002345/sub-178/func/sub-178_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-178/func/sub-178_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-179",
+        "bold_file": "data/openneuro/ds002345/sub-179/func/sub-179_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-179/func/sub-179_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "sherlock",
+        "subject": "sub-180",
+        "bold_file": "data/openneuro/ds002345/sub-180/func/sub-180_task-sherlock_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-180/func/sub-180_task-sherlock_events.tsv",
+        "transcript_file": "data/transcripts/sherlock_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-075",
+        "bold_file": "data/openneuro/ds002345/sub-075/func/sub-075_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-075/func/sub-075_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-146",
+        "bold_file": "data/openneuro/ds002345/sub-146/func/sub-146_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-146/func/sub-146_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-147",
+        "bold_file": "data/openneuro/ds002345/sub-147/func/sub-147_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-147/func/sub-147_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-148",
+        "bold_file": "data/openneuro/ds002345/sub-148/func/sub-148_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-148/func/sub-148_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-149",
+        "bold_file": "data/openneuro/ds002345/sub-149/func/sub-149_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-149/func/sub-149_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-150",
+        "bold_file": "data/openneuro/ds002345/sub-150/func/sub-150_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-150/func/sub-150_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-151",
+        "bold_file": "data/openneuro/ds002345/sub-151/func/sub-151_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-151/func/sub-151_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-152",
+        "bold_file": "data/openneuro/ds002345/sub-152/func/sub-152_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-152/func/sub-152_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-153",
+        "bold_file": "data/openneuro/ds002345/sub-153/func/sub-153_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-153/func/sub-153_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-154",
+        "bold_file": "data/openneuro/ds002345/sub-154/func/sub-154_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-154/func/sub-154_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-155",
+        "bold_file": "data/openneuro/ds002345/sub-155/func/sub-155_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-155/func/sub-155_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-156",
+        "bold_file": "data/openneuro/ds002345/sub-156/func/sub-156_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-156/func/sub-156_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-157",
+        "bold_file": "data/openneuro/ds002345/sub-157/func/sub-157_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-157/func/sub-157_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-158",
+        "bold_file": "data/openneuro/ds002345/sub-158/func/sub-158_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-158/func/sub-158_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-159",
+        "bold_file": "data/openneuro/ds002345/sub-159/func/sub-159_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-159/func/sub-159_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-160",
+        "bold_file": "data/openneuro/ds002345/sub-160/func/sub-160_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-160/func/sub-160_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-161",
+        "bold_file": "data/openneuro/ds002345/sub-161/func/sub-161_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-161/func/sub-161_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-162",
+        "bold_file": "data/openneuro/ds002345/sub-162/func/sub-162_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-162/func/sub-162_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-163",
+        "bold_file": "data/openneuro/ds002345/sub-163/func/sub-163_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-163/func/sub-163_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-164",
+        "bold_file": "data/openneuro/ds002345/sub-164/func/sub-164_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-164/func/sub-164_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-165",
+        "bold_file": "data/openneuro/ds002345/sub-165/func/sub-165_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-165/func/sub-165_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-166",
+        "bold_file": "data/openneuro/ds002345/sub-166/func/sub-166_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-166/func/sub-166_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-167",
+        "bold_file": "data/openneuro/ds002345/sub-167/func/sub-167_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-167/func/sub-167_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-168",
+        "bold_file": "data/openneuro/ds002345/sub-168/func/sub-168_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-168/func/sub-168_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-169",
+        "bold_file": "data/openneuro/ds002345/sub-169/func/sub-169_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-169/func/sub-169_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-170",
+        "bold_file": "data/openneuro/ds002345/sub-170/func/sub-170_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-170/func/sub-170_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-171",
+        "bold_file": "data/openneuro/ds002345/sub-171/func/sub-171_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-171/func/sub-171_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-172",
+        "bold_file": "data/openneuro/ds002345/sub-172/func/sub-172_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-172/func/sub-172_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-173",
+        "bold_file": "data/openneuro/ds002345/sub-173/func/sub-173_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-173/func/sub-173_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-174",
+        "bold_file": "data/openneuro/ds002345/sub-174/func/sub-174_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-174/func/sub-174_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-175",
+        "bold_file": "data/openneuro/ds002345/sub-175/func/sub-175_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-175/func/sub-175_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-176",
+        "bold_file": "data/openneuro/ds002345/sub-176/func/sub-176_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-176/func/sub-176_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-177",
+        "bold_file": "data/openneuro/ds002345/sub-177/func/sub-177_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-177/func/sub-177_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-178",
+        "bold_file": "data/openneuro/ds002345/sub-178/func/sub-178_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-178/func/sub-178_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-179",
+        "bold_file": "data/openneuro/ds002345/sub-179/func/sub-179_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-179/func/sub-179_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "merlin",
+        "subject": "sub-180",
+        "bold_file": "data/openneuro/ds002345/sub-180/func/sub-180_task-merlin_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-180/func/sub-180_task-merlin_events.tsv",
+        "transcript_file": "data/transcripts/merlin_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-075",
+        "bold_file": "data/openneuro/ds002345/sub-075/func/sub-075_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-075/func/sub-075_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-131",
+        "bold_file": "data/openneuro/ds002345/sub-131/func/sub-131_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-131/func/sub-131_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-190",
+        "bold_file": "data/openneuro/ds002345/sub-190/func/sub-190_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-190/func/sub-190_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-201",
+        "bold_file": "data/openneuro/ds002345/sub-201/func/sub-201_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-201/func/sub-201_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-235",
+        "bold_file": "data/openneuro/ds002345/sub-235/func/sub-235_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-235/func/sub-235_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-244",
+        "bold_file": "data/openneuro/ds002345/sub-244/func/sub-244_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-244/func/sub-244_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-249",
+        "bold_file": "data/openneuro/ds002345/sub-249/func/sub-249_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-249/func/sub-249_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-254",
+        "bold_file": "data/openneuro/ds002345/sub-254/func/sub-254_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-254/func/sub-254_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-255",
+        "bold_file": "data/openneuro/ds002345/sub-255/func/sub-255_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-255/func/sub-255_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-256",
+        "bold_file": "data/openneuro/ds002345/sub-256/func/sub-256_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-256/func/sub-256_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-257",
+        "bold_file": "data/openneuro/ds002345/sub-257/func/sub-257_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-257/func/sub-257_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-258",
+        "bold_file": "data/openneuro/ds002345/sub-258/func/sub-258_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-258/func/sub-258_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-259",
+        "bold_file": "data/openneuro/ds002345/sub-259/func/sub-259_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-259/func/sub-259_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-260",
+        "bold_file": "data/openneuro/ds002345/sub-260/func/sub-260_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-260/func/sub-260_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-261",
+        "bold_file": "data/openneuro/ds002345/sub-261/func/sub-261_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-261/func/sub-261_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-262",
+        "bold_file": "data/openneuro/ds002345/sub-262/func/sub-262_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-262/func/sub-262_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-263",
+        "bold_file": "data/openneuro/ds002345/sub-263/func/sub-263_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-263/func/sub-263_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-264",
+        "bold_file": "data/openneuro/ds002345/sub-264/func/sub-264_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-264/func/sub-264_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-265",
+        "bold_file": "data/openneuro/ds002345/sub-265/func/sub-265_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-265/func/sub-265_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-266",
+        "bold_file": "data/openneuro/ds002345/sub-266/func/sub-266_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-266/func/sub-266_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-267",
+        "bold_file": "data/openneuro/ds002345/sub-267/func/sub-267_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-267/func/sub-267_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-268",
+        "bold_file": "data/openneuro/ds002345/sub-268/func/sub-268_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-268/func/sub-268_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-269",
+        "bold_file": "data/openneuro/ds002345/sub-269/func/sub-269_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-269/func/sub-269_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-270",
+        "bold_file": "data/openneuro/ds002345/sub-270/func/sub-270_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-270/func/sub-270_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "21styear",
+        "subject": "sub-271",
+        "bold_file": "data/openneuro/ds002345/sub-271/func/sub-271_task-21styear_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-271/func/sub-271_task-21styear_events.tsv",
+        "transcript_file": "data/transcripts/21styear_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-001",
+        "bold_file": "data/openneuro/ds002345/sub-001/func/sub-001_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-001/func/sub-001_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-004",
+        "bold_file": "data/openneuro/ds002345/sub-004/func/sub-004_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-004/func/sub-004_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-005",
+        "bold_file": "data/openneuro/ds002345/sub-005/func/sub-005_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-005/func/sub-005_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-013",
+        "bold_file": "data/openneuro/ds002345/sub-013/func/sub-013_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-013/func/sub-013_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-022",
+        "bold_file": "data/openneuro/ds002345/sub-022/func/sub-022_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-022/func/sub-022_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-025",
+        "bold_file": "data/openneuro/ds002345/sub-025/func/sub-025_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-025/func/sub-025_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-026",
+        "bold_file": "data/openneuro/ds002345/sub-026/func/sub-026_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-026/func/sub-026_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-041",
+        "bold_file": "data/openneuro/ds002345/sub-041/func/sub-041_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-041/func/sub-041_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-052",
+        "bold_file": "data/openneuro/ds002345/sub-052/func/sub-052_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-052/func/sub-052_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-053",
+        "bold_file": "data/openneuro/ds002345/sub-053/func/sub-053_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-053/func/sub-053_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-055",
+        "bold_file": "data/openneuro/ds002345/sub-055/func/sub-055_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-055/func/sub-055_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-056",
+        "bold_file": "data/openneuro/ds002345/sub-056/func/sub-056_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-056/func/sub-056_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-057",
+        "bold_file": "data/openneuro/ds002345/sub-057/func/sub-057_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-057/func/sub-057_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-058",
+        "bold_file": "data/openneuro/ds002345/sub-058/func/sub-058_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-058/func/sub-058_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-059",
+        "bold_file": "data/openneuro/ds002345/sub-059/func/sub-059_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-059/func/sub-059_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-060",
+        "bold_file": "data/openneuro/ds002345/sub-060/func/sub-060_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-060/func/sub-060_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-061",
+        "bold_file": "data/openneuro/ds002345/sub-061/func/sub-061_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-061/func/sub-061_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-062",
+        "bold_file": "data/openneuro/ds002345/sub-062/func/sub-062_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-062/func/sub-062_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-063",
+        "bold_file": "data/openneuro/ds002345/sub-063/func/sub-063_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-063/func/sub-063_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-064",
+        "bold_file": "data/openneuro/ds002345/sub-064/func/sub-064_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-064/func/sub-064_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-065",
+        "bold_file": "data/openneuro/ds002345/sub-065/func/sub-065_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-065/func/sub-065_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-066",
+        "bold_file": "data/openneuro/ds002345/sub-066/func/sub-066_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-066/func/sub-066_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
+    },
+    {
+        "name": "tunnel",
+        "subject": "sub-069",
+        "bold_file": "data/openneuro/ds002345/sub-069/func/sub-069_task-tunnel_bold.nii.gz",
+        "events_file": "data/openneuro/ds002345/sub-069/func/sub-069_task-tunnel_events.tsv",
+        "transcript_file": "data/transcripts/tunnel_transcript.txt"
     }
 ]

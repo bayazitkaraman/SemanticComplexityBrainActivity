@@ -23,9 +23,9 @@ The central analysis:
 8. Evaluates temporal-shift, ridge, component-count, within-story, ROI, and
    matched-performance sensitivity analyses.
 
-The older individual-scan, BERT, layer, hemisphere, and independent-chunk
-analyses are retained as complementary checks; they are not the central
-inferential basis of the manuscript.
+The individual-scan, BERT, layer, hemisphere, fold-specific normalization, and
+independent-chunk analyses use the same 13 stories as complementary checks.
+They are not the central inferential basis of the manuscript.
 
 ## Interpretation
 

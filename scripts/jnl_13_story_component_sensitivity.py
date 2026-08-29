@@ -21,25 +21,8 @@ from semantic_fmri.utils import hrf_convolve  # noqa: E402
 
 def default_args() -> argparse.Namespace:
     return argparse.Namespace(
-        development_regressor_dir=(
-            "results/jnl_revision_major_review/rich_audio_controls/rich_audio_regressors"
-        ),
-        initial_evaluation_regressor_dir=(
-            "results/jnl_heldout_story_replication/heldout_regressors"
-        ),
-        new_evaluation_regressor_dir=(
-            "results/jnl_13_story_extension/new_story_fixed_pca/heldout_regressors"
-        ),
-        development_roi_cache=(
-            "results/journal_neurolinguistics_robustness/pc_count_full_corrected/"
-            "roi_time_series_cache"
-        ),
-        initial_evaluation_roi_cache=(
-            "results/jnl_heldout_story_replication/roi_cache"
-        ),
-        new_evaluation_roi_cache=(
-            "results/jnl_13_story_extension/new_story_fixed_pca/roi_cache"
-        ),
+        regressor_dir=loso.DEFAULT_REGRESSOR_DIR,
+        roi_cache=loso.DEFAULT_ROI_CACHE,
         alpha=10.0,
     )
 

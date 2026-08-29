@@ -14,6 +14,8 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from jnl_13_story_loso import (  # noqa: E402
+    DEFAULT_REGRESSOR_DIR,
+    DEFAULT_ROI_CACHE,
     STORIES,
     baseline_matrix,
     cache_dir,
@@ -173,31 +175,12 @@ def main() -> None:
         "--embedding-dir", default="results/jnl_13_story_extension/loso/embeddings"
     )
     parser.add_argument(
-        "--development-regressor-dir",
-        default="results/jnl_revision_major_review/rich_audio_controls/rich_audio_regressors",
+        "--regressor-dir",
+        default=DEFAULT_REGRESSOR_DIR,
     )
     parser.add_argument(
-        "--initial-evaluation-regressor-dir",
-        default="results/jnl_heldout_story_replication/heldout_regressors",
-    )
-    parser.add_argument(
-        "--new-evaluation-regressor-dir",
-        default="results/jnl_13_story_extension/new_story_fixed_pca/heldout_regressors",
-    )
-    parser.add_argument(
-        "--development-roi-cache",
-        default=(
-            "results/journal_neurolinguistics_robustness/pc_count_full_corrected/"
-            "roi_time_series_cache"
-        ),
-    )
-    parser.add_argument(
-        "--initial-evaluation-roi-cache",
-        default="results/jnl_heldout_story_replication/roi_cache",
-    )
-    parser.add_argument(
-        "--new-evaluation-roi-cache",
-        default="results/jnl_13_story_extension/new_story_fixed_pca/roi_cache",
+        "--roi-cache",
+        default=DEFAULT_ROI_CACHE,
     )
     parser.add_argument("--gentle-root", required=True)
     parser.add_argument("--n-splits", type=int, default=5)

@@ -49,17 +49,12 @@ STORIES = [
     "tunnel",
 ]
 
-DEVELOPMENT_STORIES = STORIES[:8]
-INITIAL_EVALUATION_STORIES = STORIES[8:11]
-NEW_EVALUATION_STORIES = STORIES[11:]
+DEFAULT_REGRESSOR_DIR = "results/jnl_13_story_resources/rich_audio_regressors"
+DEFAULT_ROI_CACHE = "results/jnl_13_story_resources/roi_cache"
 
 
 def template_map(args: argparse.Namespace) -> dict[str, dict]:
-    sources = [
-        ROOT / args.development_config,
-        ROOT / args.initial_evaluation_config,
-        ROOT / args.new_evaluation_config,
-    ]
+    sources = [ROOT / args.subject_list]
     templates: dict[str, dict] = {}
     for source in sources:
         rows = load_story_list(str(source))
@@ -140,11 +135,7 @@ def project(
 
 
 def source_regressor_path(args: argparse.Namespace, story: str) -> Path:
-    if story in DEVELOPMENT_STORIES:
-        return ROOT / args.development_regressor_dir / f"{story}_shared_pca_regressors.csv"
-    if story in INITIAL_EVALUATION_STORIES:
-        return ROOT / args.initial_evaluation_regressor_dir / f"{story}_shared_pca_regressors.csv"
-    return ROOT / args.new_evaluation_regressor_dir / f"{story}_shared_pca_regressors.csv"
+    return ROOT / args.regressor_dir / f"{story}_shared_pca_regressors.csv"
 
 
 def baseline_matrix(frame: pd.DataFrame) -> np.ndarray:
@@ -162,11 +153,7 @@ def baseline_matrix(frame: pd.DataFrame) -> np.ndarray:
 
 
 def cache_dir(args: argparse.Namespace, story: str) -> Path:
-    if story in DEVELOPMENT_STORIES:
-        return ROOT / args.development_roi_cache
-    if story in INITIAL_EVALUATION_STORIES:
-        return ROOT / args.initial_evaluation_roi_cache
-    return ROOT / args.new_evaluation_roi_cache
+    return ROOT / args.roi_cache
 
 
 def story_subjects(args: argparse.Namespace, story: str) -> list[str]:
@@ -595,46 +582,19 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="results/jnl_13_story_extension/loso")
     parser.add_argument(
-        "--development-config",
+        "--subject-list",
         default="configs/stories_all_fmriprep_confounds_motionfiltered.py",
+        help="Unified motion-QC-passed configuration for all 13 stories.",
     )
     parser.add_argument(
-        "--initial-evaluation-config",
-        default="results/jnl_heldout_story_replication/heldout_motionfiltered_config.py",
+        "--regressor-dir",
+        default=DEFAULT_REGRESSOR_DIR,
+        help="Directory containing rich-audio regressor CSVs for all 13 stories.",
     )
     parser.add_argument(
-        "--new-evaluation-config",
-        default=(
-            "results/jnl_13_story_extension/new_story_fixed_pca/"
-            "heldout_motionfiltered_config.py"
-        ),
-    )
-    parser.add_argument(
-        "--development-regressor-dir",
-        default="results/jnl_revision_major_review/rich_audio_controls/rich_audio_regressors",
-    )
-    parser.add_argument(
-        "--initial-evaluation-regressor-dir",
-        default="results/jnl_heldout_story_replication/heldout_regressors",
-    )
-    parser.add_argument(
-        "--new-evaluation-regressor-dir",
-        default="results/jnl_13_story_extension/new_story_fixed_pca/heldout_regressors",
-    )
-    parser.add_argument(
-        "--development-roi-cache",
-        default=(
-            "results/journal_neurolinguistics_robustness/pc_count_full_corrected/"
-            "roi_time_series_cache"
-        ),
-    )
-    parser.add_argument(
-        "--initial-evaluation-roi-cache",
-        default="results/jnl_heldout_story_replication/roi_cache",
-    )
-    parser.add_argument(
-        "--new-evaluation-roi-cache",
-        default="results/jnl_13_story_extension/new_story_fixed_pca/roi_cache",
+        "--roi-cache",
+        default=DEFAULT_ROI_CACHE,
+        help="Directory containing participant ROI time series for all 13 stories.",
     )
     parser.add_argument("--gentle-root", required=True)
     parser.add_argument("--alpha", type=float, default=10.0)

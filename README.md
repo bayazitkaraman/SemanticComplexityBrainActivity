@@ -1,282 +1,100 @@
 # Semantic Complexity and Brain Activity
 
-This repository contains a reproducible Python pipeline for analyzing how low-dimensional GPT-2-derived linguistic predictors relate to fMRI responses during naturalistic spoken narrative comprehension.
+This repository contains the analysis code and aggregate results for examining
+whether low-dimensional GPT-2 features improve prediction of fMRI responses
+during naturalistic spoken narrative comprehension.
 
-The analyses reported in the manuscript use the public **Narratives** fMRI dataset, Gentle word-level alignments, autoregressive cumulative-context and independent local GPT-2 embeddings, PCA-derived predictors, TR-sampled HRF convolution, story-relative resampling of BOLD targets, cross-narrative shared-response and individual-scan ROI encoding models, participant-separated validation, and rich lexical and acoustic controls.
+The final design uses all 13 eligible intact narratives from the public
+Narratives dataset (`ds002345`). After motion quality control, the dataset
+contains 567 subject-story scans from 277 participants.
 
-Raw neuroimaging data, participant-level time series, virtual environments, WAV files, and large intermediate outputs are intentionally **not** stored in this repository.
+## Final analysis
 
-## Main analysis
+The central analysis uses 13 leave-one-story-out folds. In each fold:
 
-The primary result is a 13-fold leave-one-story-out analysis of the response shared across listeners. In each fold, the scaler, PCA, predictor scaling, and neural encoding coefficients are fitted to 12 narratives and evaluated on the complete omitted narrative. Every training story receives equal total weight while all available TRs are retained. A stricter story-and-participant holdout removes each tested listener from every training-story group response before neural-model fitting. The same 13 folds directly compare cumulative-context and independently embedded local representations.
+1. One complete narrative is reserved for testing.
+2. The feature scaler and story-balanced PCA are fitted to the other 12 stories.
+3. Neural encoding coefficients are fitted to those same 12 stories.
+4. The fitted model is evaluated on the complete omitted story.
 
-After downloading the dataset and fMRIPrep derivatives, first create the local motion-filtered subject list:
+Every training story receives equal total weight while all available TRs are
+retained. The primary comparison adds five cumulative-context GPT-2 components
+to a rich lexical-acoustic baseline.
+
+The mean story-level increase in prediction correlation is `0.017398`
+(`p = 0.007782`, two-sided story-level t test; 10/13 stories positive). A
+story-and-participant holdout sensitivity gives a smaller positive effect of
+`0.004500` (`p = 0.034289`; 10/13 stories positive).
+
+Independent local GPT-2 features do not reliably improve cross-narrative
+prediction (`Delta r = 0.004316`, `p = 0.292879`). The paired
+cumulative-minus-independent difference is `0.013082` (`p = 0.036636`). The
+complementary individual subject-story analysis is null (`Delta cv_r =
+-0.001433`, `p = 0.849227`).
+
+## Repository layout
+
+```text
+configs/                                           Story and participant configurations
+docs/                                             Data and analysis documentation
+scripts/                                          Analysis programs
+src/semantic_fmri/                                Shared Python utilities
+results/FINAL_RESULTS_SUMMARY.md                  Current result index
+results/jnl_13_story_extension/loso/              Central cross-narrative outputs
+results/jnl_13_story_context_comparison/           Cumulative-versus-local comparison
+results/jnl_13_story_individual_local/             Individual subject-story outputs
+results/jnl_13_story_auxiliary_embeddings/         BERT and GPT-2 layer checks
+results/jnl_13_story_hemisphere_sensitivity/       Hemisphere sensitivity
+results/jnl_13_story_fold_safe_normalization/      Normalization sensitivity
+results/jnl_story_heterogeneity/original_pieman/   Matched-narrative comparison
+```
+
+## Setup
+
+Create a virtual environment and install the package:
+
+```bash
+python -m venv .venv
+python -m pip install --upgrade pip
+python -m pip install -e .
+```
+
+Windows PowerShell activation:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+macOS/Linux activation:
+
+```bash
+source .venv/bin/activate
+```
+
+## Data configuration
+
+The tracked portable configuration contains 572 available subject-story rows
+before motion QC:
+
+```text
+configs/stories_all.py
+```
+
+Map those rows to local fMRIPrep outputs and apply motion QC:
 
 ```bash
 python scripts/build_subject_list_fmriprep.py --subject-list configs/stories_all.py --fmriprep-dir /path/to/fmriprep --output configs/stories_all_fmriprep_confounds.py
 python scripts/motion_qc_from_confounds.py --subject-list configs/stories_all_fmriprep_confounds.py --filtered-output configs/stories_all_fmriprep_confounds_motionfiltered.py
 ```
 
-After preparing the rich-audio regressors and ROI caches described below, run the central 13-story analysis:
+The final motion-filtered file has 567 scans. Machine-specific configurations
+are excluded from Git. See `configs/README.md` and `docs/DATA_DOWNLOAD.md` for
+the full configuration chain and story counts.
 
-```bash
-python scripts/jnl_13_story_loso.py --gentle-root /path/to/gentle --stage all
-python scripts/jnl_13_story_context_comparison.py --gentle-root /path/to/gentle
-python scripts/jnl_13_story_transfer_figure.py
-python scripts/jnl_13_story_component_sensitivity.py
-```
+## Timing and preprocessing
 
-`jnl_13_story_loso.py` computes story-balanced leave-one-story-out PCA, the primary train-12/test-1 neural transfer analysis, the story-and-participant holdout, the 1,000-iteration temporal-shift null, and secondary within-story results. The primary setting uses five final-layer GPT-2 components and ridge `alpha=10`; separate output directories hold the ridge sensitivity runs at 1, 100, and 1,000. `jnl_13_story_context_comparison.py` repeats the cross-narrative and within-story procedures with independent chunks and writes paired all-13-story comparisons. The cumulative-minus-independent cross-narrative difference is `0.0131` (`p=0.0366`; 10/13 positive). `jnl_13_story_component_sensitivity.py` repeats all 13 folds with 1--10 retained components, and `jnl_13_story_transfer_figure.py` creates the three-panel cross-story result figure. Generated machine-specific configurations and ROI caches remain local because they contain local paths or derived imaging data.
-
-Build the richer waveform, spectral, pitch, and coarse-voicing controls for a
-prepared subject configuration:
-
-```bash
-python scripts/jnl_rich_audio_controls.py --subject-list configs/stories_all_fmriprep_confounds_motionfiltered.py --gentle-root /path/to/narratives/stimuli/gentle
-```
-
-Windows PowerShell example:
-
-```powershell
-python scripts\jnl_rich_audio_controls.py --subject-list configs\stories_all_fmriprep_confounds_motionfiltered.py --gentle-root "D:\OpenNeuroData\narratives\stimuli\gentle"
-```
-
-The matched-narrative analysis compares the scanner-recorded `piemanpni` retelling with the original `pieman` performance while keeping the `piemanpni` fold's 12-story feature transformation and neural model fixed:
-
-```bash
-python scripts/jnl_original_pieman_comparison.py --dataset-dir /path/to/narratives
-```
-
-This comparison is descriptive and is not part of the 13-story inference. Its outputs are written to `results/jnl_story_heterogeneity/original_pieman/`.
-
-The 13-story analysis specification is
-`results/jnl_13_story_extension/locked_analysis_specification.json`
-(SHA-256 `3B988713ECBE5038ECC8DA8381D22EC14FFCA9B407B412A000574531A7BB1E28`).
-The inclusion logic, equal-weight implementation, principal results, and
-implementation checks are documented in
-`results/jnl_13_story_extension/analysis_audit.md`.
-
-### Complementary 13-story individual analysis
-
-The individual subject--story analysis uses the same 13 narratives, 567 motion-quality-controlled scans, and 277 participants. Each TR is embedded independently, without preceding story context. In the primary analysis, the scaler and five-component PCA are fitted to the other 12 stories, and separate temporal encoding models compare the rich baseline with rich baseline plus local GPT-2 PC1--PC5 for every scan and ROI.
-
-```bash
-python scripts/jnl_13_story_individual_local.py --gentle-root /path/to/gentle --stage all
-python scripts/jnl_13_story_individual_direct_extension.py --gentle-root /path/to/gentle
-```
-
-The primary inference averages scans within story and tests the 13 story means; a crossed participant-and-story model is secondary. The primary result is null (mean story-level `Delta cv_r = -0.0014`, two-sided `p = 0.849`; crossed-model `p = 0.833`). A combined lexical/time, pooled-PCA, no-gap sensitivity is slightly positive but also null (`Delta cv_r = 0.0020`, `p = 0.786`). All stories are retained regardless of effect direction.
-
-The locked primary specification is `results/jnl_13_story_individual_local/locked_analysis_specification.json` (SHA-256 `AACC8436EE6F97CF650A8DBA22BAC25880ADB9F987456942E406A4F1CE194408`). The combined-sensitivity specification is `results/jnl_13_story_individual_local/direct_extension_specification.json` (SHA-256 `1757A57D99330ED7F2D5BD6B4C23D747679F254FED338082899F0311423C226D`). Machine-readable summaries and analysis audits are stored in the same result directories.
-
-### Complementary all-13-story sensitivities
-
-The BERT, GPT-2 layer-4, hemisphere, and fold-specific participant-normalization checks use the same 13 narratives. BERT and layer analyses include all 567 subject--story scans and fit the feature transformation to the other 12 stories in every fold. The hemisphere and normalization analyses repeat the full-group, split-half, and leave-one-participant-out models across all 13 stories.
-
-```bash
-python scripts/jnl_13_story_auxiliary_embeddings.py --gentle-root /path/to/gentle
-python scripts/jnl_13_story_hemisphere_sensitivity.py --gentle-root /path/to/gentle
-python scripts/jnl_13_story_fold_safe_normalization.py --gentle-root /path/to/gentle
-```
-
-Portable outputs are stored in `results/jnl_13_story_auxiliary_embeddings/`, `results/jnl_13_story_hemisphere_sensitivity/`, and `results/jnl_13_story_fold_safe_normalization/`. Large embedding arrays and participant-level hemisphere caches are excluded from version control.
-
-For every shared-response analysis, cached participant ROI series are placed at their actual acquisition times relative to story onset and linearly interpolated to the common 1.5-s story grid. Only time points supported by every participant in a story are retained; the stimulus designs are restricted to the same effective grid.
-
----
-
-## Project goals
-
-This project supports the following analyses:
-
-1. Include all 13 intact narratives meeting the objective run, duration, and participant criteria.
-2. Align spoken words and participant BOLD volumes to a common story-relative 1.5-s grid.
-3. Extract GPT-2 contextual embeddings at TR resolution.
-4. In each fold, fit a story-balanced scaler and PCA to 12 narratives and project the omitted narrative without refitting.
-5. Test whether cumulative-context GPT-2 PC1--PC5 adds prediction beyond a rich lexical/acoustic baseline.
-6. Fit neural encoding coefficients on the same 12 narratives and evaluate the complete omitted narrative.
-7. Test participant generalization by removing the tested listener from all training-story responses.
-8. Evaluate temporal specificity, regularization, within-story prediction, and ROI sensitivity.
-9. Compare cumulative and local representations and run BERT, hemisphere, normalization, and layer checks across all 13 stories.
-10. Compare matched performances of the Pie Man account as an exploratory boundary condition.
-11. Generate final tables and figures for the manuscript and supplementary material.
-
----
-
-## Repository structure
-
-```text
-SemanticComplexityBrainActivity/
-│
-├── configs/                                  # Story/subject configurations
-├── scripts/                                  # Runnable analysis scripts
-├── src/semantic_fmri/                         # Reusable package utilities
-├── results/jnl_13_story_extension/loso/      # Central cross-story outputs
-├── results/jnl_13_story_context_comparison/  # Cumulative versus local outputs
-├── results/jnl_13_story_individual_local/    # Thirteen-story individual outputs
-├── results/jnl_13_story_auxiliary_embeddings/ # BERT and GPT-2 layer outputs
-├── results/jnl_13_story_hemisphere_sensitivity/ # Hemisphere outputs
-├── results/jnl_13_story_fold_safe_normalization/ # Normalization outputs
-├── results/jnl_story_heterogeneity/          # Matched-story analysis
-├── results/final_tables/                      # Complementary result tables
-├── results/final_figures/                     # Generated figures
-├── docs/                                     # Notes and documentation
-├── archive/old_scripts/                       # Older scripts preserved for reference
-├── data/                                     # Local data only; not pushed to GitHub
-├── requirements.txt
-├── pyproject.toml
-└── README.md
-```
-
----
-
-## Setup
-
-Create and activate a virtual environment:
-
-```bash
-python -m venv .venv
-```
-
-Windows PowerShell:
-
-```powershell
-.venv\Scripts\activate
-```
-
-macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements-lock.txt
-pip install -e .
-```
-
-`requirements-lock.txt` records the exact direct-dependency versions used for
-the reported analyses. `requirements.txt` remains the unpinned convenience list.
-
-The editable install is important because the scripts import utilities from:
-
-```text
-src/semantic_fmri/
-```
-
----
-
-## Data requirements
-
-The repository does **not** include raw fMRI data, fMRIPrep outputs, WAV files, or OpenNeuro/DataLad data.
-
-The final analysis used the public **Narratives** dataset from OpenNeuro/DataLad:
-
-```text
-OpenNeuro accession: ds002345
-```
-
-The 13 intact eligible narratives are:
-
-```text
-21styear
-black
-bronx
-forgot
-merlin
-milkyway
-notthefallintact
-piemanpni
-prettymouth
-shapesphysical
-shapessocial
-sherlock
-tunnel
-```
-
-The objective candidate scan required at least 20 usable participants, at
-least 5 minutes' median duration, and a single BOLD run per participant.
-The two temporally scrambled `notthefall` controls were excluded because the
-analysis concerns intact narratives. `pieman` and `schema` failed the run or
-duration criteria, while `slumlordreach` and `lucy` had fewer than 20 usable
-participants. All 13 remaining stories had the external Gentle alignments and
-audio resources needed for modeling and all 13 entered the leave-one-story-out
-analysis. See `docs/STORY_INCLUSION.md`, `scripts/scan_story_candidates.py`,
-and `results/jnl_13_story_extension/analysis_audit.md` for the complete
-inclusion record.
-
-The exact local data layout can vary depending on how the dataset was downloaded. The pipeline uses the paths defined in:
-
-```text
-configs/stories_all.py
-```
-
-Each story/subject entry should point to the local BOLD image, events file, transcript file, and, when available, fMRIPrep confounds file.
-
----
-
-## Gentle timing files
-
-The final manuscript analysis used Gentle word-level forced alignments.
-
-Set the Gentle alignment directory before running the manuscript pipeline:
-
-Windows PowerShell:
-
-```powershell
-$env:SEMANTIC_FMRI_TIMING="gentle"
-$env:SEMANTIC_FMRI_GENTLE_DIR="D:\OpenNeuroData\narratives\stimuli\gentle"
-```
-
-macOS/Linux:
-
-```bash
-export SEMANTIC_FMRI_TIMING="gentle"
-export SEMANTIC_FMRI_GENTLE_DIR="/path/to/narratives/stimuli/gentle"
-```
-
-Expected Gentle layout:
-
-```text
-gentle/
-├── 21styear/align.json
-├── black/align.json
-├── bronx/align.json
-├── forgot/align.json
-├── milkywayoriginal/align.json
-├── notthefallintact/align.json
-├── piemanpni/align.json
-├── shapesphysical/align.json
-├── shapessocial/align.json
-├── prettymouth/align.json
-├── sherlock/align.json
-├── merlin/align.json
-└── tunnel/align.json
-```
-
-Each story directory must contain `align.json`; the rich-audio analysis also
-uses `a.wav` from the same directory. The code maps the story name `milkyway`
-to the Gentle folder `milkywayoriginal`.
-
----
-
-## Manuscript analysis settings
-
-The primary manuscript analysis used:
-
-```text
-Gentle word-level timing
-fMRIPrep-preprocessed MNI-space BOLD images
-motion-quality-control exclusion
-no additional nuisance regression
-no high-pass filter
-```
-
-Use these environment settings for the primary analysis:
-
-Windows PowerShell:
+The analysis uses Gentle word-level alignments and a common story-relative
+1.5-s grid. Configure the alignment directory before running the pipeline:
 
 ```powershell
 $env:SEMANTIC_FMRI_TIMING="gentle"
@@ -285,322 +103,74 @@ $env:SEMANTIC_FMRI_CONFOUND_STRATEGY="none"
 $env:SEMANTIC_FMRI_HIGH_PASS="none"
 ```
 
-macOS/Linux:
+The reported analysis uses motion-QC-passed fMRIPrep MNI-space BOLD data
+without additional nuisance regression or high-pass filtering.
+
+## Local resources
+
+The current scripts use one unified set of local intermediate resources:
+
+```text
+results/jnl_13_story_resources/rich_audio_regressors/
+results/jnl_13_story_resources/roi_cache/
+results/jnl_13_story_resources/hemisphere_roi_cache/
+```
+
+These directories are excluded from Git because they contain local paths or
+participant-level derived data. Each directory must contain all 13 stories.
+The validated local copy contains 13 regressor files and 567 ROI files in each
+ROI cache.
+
+## Run the analyses
+
+Central cross-narrative analysis and representation comparison:
 
 ```bash
-export SEMANTIC_FMRI_TIMING="gentle"
-export SEMANTIC_FMRI_GENTLE_DIR="/path/to/narratives/stimuli/gentle"
-export SEMANTIC_FMRI_CONFOUND_STRATEGY="none"
-export SEMANTIC_FMRI_HIGH_PASS="none"
+python scripts/jnl_13_story_loso.py --gentle-root /path/to/gentle --stage all
+python scripts/jnl_13_story_context_comparison.py --gentle-root /path/to/gentle
+python scripts/jnl_13_story_component_sensitivity.py
+python scripts/jnl_13_story_transfer_figure.py
 ```
 
-`SEMANTIC_FMRI_CONFOUND_STRATEGY="none"` means that the analysis uses motion-QC-passed fMRIPrep data without additional nuisance regression. Motion6 and motion24 are used only as sensitivity analyses.
-
-Supported nuisance-regression strategies include:
-
-```text
-none
-motion6
-motion24
-motion24_wmcsf
-acompcor6
-full
-```
-
----
-
-## Acoustic-envelope sensitivity analysis
-
-The acoustic-control analysis adds:
-
-```text
-speech_duration_sec
-mean_word_duration_sec
-pause_fraction
-articulation_rate
-word_rate
-audio_rms
-audio_abs_mean
-```
-
-The speech-timing variables are derived from Gentle word timings. The waveform-envelope features are extracted from WAV files when available.
-
-Set the audio directory before running acoustic controls:
-
-Windows PowerShell:
-
-```powershell
-$env:SEMANTIC_FMRI_AUDIO_DIR="data/openneuro/ds002345/stimuli"
-```
-
-macOS/Linux:
+Complementary all-13 analyses:
 
 ```bash
-export SEMANTIC_FMRI_AUDIO_DIR="data/openneuro/ds002345/stimuli"
+python scripts/jnl_13_story_individual_local.py --gentle-root /path/to/gentle --stage all
+python scripts/jnl_13_story_individual_direct_extension.py --gentle-root /path/to/gentle
+python scripts/jnl_13_story_auxiliary_embeddings.py --gentle-root /path/to/gentle
+python scripts/jnl_13_story_hemisphere_sensitivity.py --gentle-root /path/to/gentle
+python scripts/jnl_13_story_fold_safe_normalization.py --gentle-root /path/to/gentle
+python scripts/jnl_original_pieman_comparison.py --dataset-dir /path/to/narratives
 ```
 
-Expected WAV filenames include:
+All central programs default to the unified subject configuration, regressor
+directory, and ROI cache described above.
+
+## Current outputs
+
+The current numerical index is `results/FINAL_RESULTS_SUMMARY.md`. Principal
+machine-readable files include:
 
 ```text
-black_audio.wav
-bronx_audio.wav
-forgot_audio.wav
-milkywayoriginal_audio.wav
-notthefallintact_audio.wav
-piemanpni_audio.wav
-shapesphysical_audio.wav
-shapessocial_audio.wav
-prettymouth_audio.wav
-sherlock_audio.wav
-merlin_audio.wav
+results/jnl_13_story_extension/loso/cross_story_transfer_summary.csv
+results/jnl_13_story_extension/loso/cross_story_transfer_story_means.csv
+results/jnl_13_story_extension/loso/cross_story_participant_transfer_summary.csv
+results/jnl_13_story_extension/loso/cross_story_temporal_shift_summary.csv
+results/jnl_13_story_context_comparison/cross_story_direct_comparison_inference.csv
+results/jnl_13_story_extension/component_count_sensitivity/component_count_summary.csv
+results/jnl_13_story_individual_local/summary.csv
+results/jnl_13_story_auxiliary_embeddings/representation_summary.csv
+results/jnl_13_story_hemisphere_sensitivity/left_right_paired_summary.csv
+results/jnl_13_story_fold_safe_normalization/fold_safe_summary.csv
 ```
 
-This envelope-only control belongs to the earlier individual-scan pipeline. The current shared-response analysis uses the richer lexical/acoustic baseline described below.
-
----
-
-## Build or update the subject list
-
-If needed, build the subject/story configuration file:
-
-```bash
-python scripts/build_subject_list.py --data-dir data --output configs/stories_all.py
-```
-
-The final manuscript analyses use:
-
-```text
-configs/stories_all.py
-```
-
----
-
-## Quick test
-
-Run a quick test before launching the full analysis:
-
-```bash
-python scripts/run_revision_pipeline.py --quick --subject-list configs/stories_all.py
-```
-
----
-
-## Legacy individual-scan pipeline
-
-Run the earlier individual-scan pipeline retained for audit and supplementary comparisons:
-
-```bash
-python scripts/run_revision_pipeline.py --subject-list configs/stories_all.py
-python scripts/final_stats_and_tables.py
-python scripts/audit_results.py
-```
-
-The audit should end with:
-
-```text
-Audit finished: all expected final files were found.
-```
-
----
-
-## Legacy pipeline with envelope controls
-
-Run the acoustic-envelope and speech-density sensitivity analysis:
-
-```bash
-python scripts/run_revision_pipeline.py --subject-list configs/stories_all.py --include-acoustic
-python scripts/final_stats_and_tables.py
-python scripts/audit_results.py
-```
-
-If only the shared regressors or acoustic-control code changed, the following shorter rerun is usually sufficient:
-
-```bash
-python scripts/shared_pca_regressors.py --subject-list configs/stories_all.py
-python scripts/roi_encoding_model_comparison.py --subject-list configs/stories_all.py --include-acoustic
-python scripts/final_stats_and_tables.py
-python scripts/audit_results.py
-```
-
----
-
-## Main scripts
-
-```text
-scripts/jnl_13_story_loso.py
-    Runs the central story-balanced, 13-fold cross-narrative analysis and its
-    story-and-participant holdout and temporal-shift checks.
-
-scripts/jnl_13_story_component_sensitivity.py
-    Repeats the cross-narrative analysis with 1--10 retained GPT-2 components.
-
-scripts/jnl_13_story_transfer_figure.py
-    Creates the cross-narrative result figure.
-
-scripts/jnl_13_story_individual_local.py
-    Runs the 13-story individual local-feature analysis with story-held-out PCA,
-    prespecified sensitivities, story-level inference, and crossed mixed effects.
-
-scripts/jnl_13_story_individual_direct_extension.py
-    Runs the combined lexical/time, pooled-PCA, no-gap individual sensitivity.
-
-scripts/jnl_original_pieman_comparison.py
-    Runs the exploratory matched-performance comparison between piemanpni and
-    the original pieman recording.
-
-scripts/semantic_baseline_regressors.py
-    Computes diagnostics comparing GPT-2 PC1 with lexical/time baselines.
-
-scripts/shared_pca_regressors.py
-    Extracts GPT-2 embeddings, fits shared PCA, creates TR-level regressors,
-    and optionally adds acoustic/speech-density controls.
-
-scripts/gpt2_layer_pc_analysis.py
-    Performs descriptive GPT-2 layer-wise alignment analysis.
-
-scripts/roi_encoding_model_comparison.py
-    Fits cross-validated ROI encoding models and compares model families.
-
-scripts/final_stats_and_tables.py
-    Generates final manuscript and supplementary tables.
-
-scripts/audit_results.py
-    Checks that expected final tables and figures are present and internally consistent.
-
-scripts/run_revision_pipeline.py
-    Runs the legacy individual-scan pipeline retained for audit analyses.
-
-scripts/jnl_additional_robustness.py
-    Creates robustness tables for the legacy individual-scan analysis, including
-    participant-level, story-level, leave-one-story-out, and nuisance-strategy checks.
-
-scripts/jnl_pc_count_sensitivity.py
-    Evaluates combined lexical-plus-GPT-2 models using PC1 through PC1--PC10.
-
-scripts/jnl_circular_shift_null.py
-    Runs circular-shift null tests for the temporal alignment of GPT-2 PC regressors.
-
-scripts/static_embedding_regressors.py
-    Creates static or contextual BERT embedding PCA regressors for exploratory
-    embedding-model comparisons.
-
-scripts/jnl_rich_audio_controls.py
-    Runs the richer waveform/spectral/coarse-voicing audio-control sensitivity
-    analysis and writes table21_rich_audio_control_sensitivity.csv.
-
-scripts/jnl_heldout_story_replication.py
-    Runs the locked held-out cumulative-context shared-response analysis,
-    including participant split-half and leave-one-participant-out tests.
-
-scripts/jnl_heldout_story_sensitivity.py
-    Runs sensitivity analyses for the held-out shared-response specification.
-
-scripts/jnl_shared_response_context_validation.py
-    Preserves the earlier development-subset shared-response analysis for audit
-    and backward compatibility; it does not generate the current manuscript tables.
-
-scripts/jnl_fold_safe_subject_normalization.py
-    Preserves the earlier subset-based normalization sensitivity. The current
-    manuscript uses scripts/jnl_13_story_fold_safe_normalization.py.
-
-scripts/jnl_shared_response_hemisphere_sensitivity.py
-    Preserves the earlier subset-based hemisphere sensitivity. The current
-    manuscript uses scripts/jnl_13_story_hemisphere_sensitivity.py.
-
-scripts/jnl_shared_response_pc_count_sensitivity.py
-    Preserves the locked PC1--PC5 regressors, appends development-fitted
-    PC6--PC10, and repeats the full-group and cross-participant analyses while
-    requiring exact reproduction of the locked PC5 story results.
-
-scripts/jnl_submission_reporting_tables.py
-    Combines development and held-out absolute baseline, combined-model, and
-    incremental correlations and computes pooled leave-one-participant-out
-    story-level inference for manuscript reporting.
-```
-
----
-
-## Important outputs
-
-Intermediate outputs:
-
-```text
-results/diagnostics/pc1_vs_baselines_correlations.csv
-results/regressors/shared_pca_explained_variance.csv
-results/regressors/*_shared_pca_regressors.csv
-results/regressors/shared_pc1_vs_baselines_correlations.csv
-results/layer_analysis/
-results/model_comparison/
-```
-
-Final manuscript/supplement outputs:
-
-```text
-results/jnl_13_story_extension/loso/
-results/jnl_13_story_extension/component_count_sensitivity/
-results/jnl_13_story_individual_local/
-results/jnl_story_heterogeneity/original_pieman/
-results/final_tables/
-results/final_figures/
-results/jnl_shared_response_context_validation/
-results/jnl_heldout_story_replication/
-results/jnl_fold_safe_subject_normalization/
-results/jnl_shared_response_hemisphere_sensitivity/
-results/jnl_shared_response_pc_count_sensitivity/
-results/jnl_submission_reporting/
-```
-
-Key final tables include:
-
-```text
-results/final_tables/table1_dataset_story_counts.csv
-results/final_tables/table2_primary_model_comparison.csv
-results/final_tables/table3_primary_paired_model_delta_stats.csv
-results/final_tables/table3c_participant_level_primary_delta_stats.csv
-results/final_tables/table4_roi_delta_stats_combined_pc1_to_pc5_vs_baseline.csv
-results/final_tables/table5_layer_overall_summary.csv
-results/final_tables/table7_sensitivity_model_comparison_by_strategy.csv
-results/final_tables/table8_motion_correlation_with_gpt2_delta.csv
-results/final_tables/table9_pc_count_sensitivity_scan_stats.csv
-results/final_tables/table9b_pc_count_sensitivity_participant_stats.csv
-results/final_tables/table10_motion_strategy_scan_level_delta_tests.csv
-results/final_tables/table11_leave_one_story_out_primary_delta.csv
-results/final_tables/table12_circular_shift_null_summary.csv
-results/final_tables/table13_embedding_model_comparison_summary.csv
-results/final_tables/table13b_embedding_model_paired_scan_comparisons.csv
-results/final_tables/table21_rich_audio_control_sensitivity.csv
-```
-
----
-
-## Reproducibility notes
-
-The current central shared-response analysis compares:
-
-```text
-baseline_rich_audio
-vs.
-combined_rich_audio_gpt2_pc1_to_pc5
-```
-
-where the rich baseline includes lexical/time predictors, acoustic-envelope/speech-density controls, and additional waveform, spectral, pitch, and coarse voicing-related predictors. The primary target is the full-story-standardized ROI response averaged across listeners within each story. This participant-level full-story standardization is distinct from the fold-specific detrending and scaling of the resulting shared encoding target. A sensitivity analysis additionally estimates participant means and scales only from the training portion of each temporal fold. The complementary individual subject--story analysis uses all 13 narratives, target-story-excluded PCA for its primary feature transformation, and story-level inference; it is a null result rather than the central evidence.
-
-The primary performance metric is:
-
-```text
-cross-validated prediction correlation (cv_r)
-```
-
-Cross-validated R-squared is computed as a secondary diagnostic metric, but it is not used for primary interpretation because it is unstable and often negative for short naturalistic fMRI time series.
-
----
-
-## Citation and data availability
-
-Raw fMRI data, WAV files, virtual environments, and large intermediate outputs are not included in this repository. The fMRI data are publicly available through the Narratives dataset on OpenNeuro/DataLad under accession:
-
-```text
-ds002345
-```
-
-This repository contains the analysis code, portable configuration templates, final result tables, and generated manuscript figures needed to reproduce the final analysis outputs, assuming the user has local access to the required fMRI, transcript, alignment, confound, and audio files. Machine-specific configurations and derived imaging caches remain local.
+## Interpretation
+
+The results support a small cross-narrative contribution from a compact GPT-2
+representation beyond the measured lexical and acoustic controls. They do not
+establish a complete model of semantic comprehension, a uniquely localized
+neural mechanism, or reliable prediction at the individual scan level.
+
+Raw fMRI data, WAV files, participant-level time series, model caches, and
+machine-specific paths are not distributed in this repository. The public fMRI
+data are available under OpenNeuro accession `ds002345`.

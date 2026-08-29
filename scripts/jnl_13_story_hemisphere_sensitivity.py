@@ -14,8 +14,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from jnl_13_story_loso import (  # noqa: E402
-    DEVELOPMENT_STORIES,
-    INITIAL_EVALUATION_STORIES,
+    DEFAULT_REGRESSOR_DIR,
     STORIES,
     baseline_matrix,
     fold_scores,
@@ -53,11 +52,7 @@ def load_embeddings(directory: Path) -> dict[str, np.ndarray]:
 
 
 def hemisphere_cache(args: argparse.Namespace, story: str) -> Path:
-    if story in DEVELOPMENT_STORIES:
-        return ROOT / args.development_hemisphere_cache
-    if story in INITIAL_EVALUATION_STORIES:
-        return ROOT / args.initial_evaluation_hemisphere_cache
-    return ROOT / args.new_evaluation_hemisphere_cache
+    return ROOT / args.hemisphere_cache
 
 
 def evaluate_story(
@@ -227,46 +222,16 @@ def main() -> None:
         "--embedding-dir", default="results/jnl_13_story_extension/loso/embeddings"
     )
     parser.add_argument(
-        "--development-config",
+        "--subject-list",
         default="configs/stories_all_fmriprep_confounds_motionfiltered.py",
     )
     parser.add_argument(
-        "--initial-evaluation-config",
-        default="results/jnl_heldout_story_replication/heldout_motionfiltered_config.py",
+        "--regressor-dir",
+        default=DEFAULT_REGRESSOR_DIR,
     )
     parser.add_argument(
-        "--new-evaluation-config",
-        default=(
-            "results/jnl_13_story_extension/new_story_fixed_pca/"
-            "heldout_motionfiltered_config.py"
-        ),
-    )
-    parser.add_argument(
-        "--development-regressor-dir",
-        default="results/jnl_revision_major_review/rich_audio_controls/rich_audio_regressors",
-    )
-    parser.add_argument(
-        "--initial-evaluation-regressor-dir",
-        default="results/jnl_heldout_story_replication/heldout_regressors",
-    )
-    parser.add_argument(
-        "--new-evaluation-regressor-dir",
-        default="results/jnl_13_story_extension/new_story_fixed_pca/heldout_regressors",
-    )
-    parser.add_argument(
-        "--development-hemisphere-cache",
-        default=(
-            "results/jnl_revision_major_review/hemisphere_sensitivity/"
-            "roi_time_series_cache_corrected"
-        ),
-    )
-    parser.add_argument(
-        "--initial-evaluation-hemisphere-cache",
-        default="results/jnl_shared_response_hemisphere_sensitivity/heldout_roi_cache",
-    )
-    parser.add_argument(
-        "--new-evaluation-hemisphere-cache",
-        default="results/jnl_13_story_hemisphere_sensitivity/new_story_roi_cache",
+        "--hemisphere-cache",
+        default="results/jnl_13_story_resources/hemisphere_roi_cache",
     )
     parser.add_argument("--gentle-root", required=True)
     parser.add_argument("--n-splits", type=int, default=5)
@@ -275,19 +240,19 @@ def main() -> None:
     parser.add_argument("--subject-splits", type=int, default=50)
     parser.add_argument("--atlas-threshold", type=float, default=0.0)
     parser.add_argument("--fwhm", type=float, default=6.0)
-    parser.add_argument("--skip-new-extraction", action="store_true")
+    parser.add_argument("--rebuild-cache", action="store_true")
     args = parser.parse_args()
 
     os.environ["SEMANTIC_FMRI_TIMING"] = "gentle"
     os.environ["SEMANTIC_FMRI_GENTLE_DIR"] = str(Path(args.gentle_root))
     output_dir = ROOT / args.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
-    new_cache = ROOT / args.new_evaluation_hemisphere_cache
-    new_cache.mkdir(parents=True, exist_ok=True)
-    if not args.skip_new_extraction:
+    cache = ROOT / args.hemisphere_cache
+    cache.mkdir(parents=True, exist_ok=True)
+    if args.rebuild_cache or not any(cache.glob("*.npz")):
         extract_heldout_hemisphere_targets(
-            ROOT / args.new_evaluation_config,
-            new_cache,
+            ROOT / args.subject_list,
+            cache,
             atlas_threshold=args.atlas_threshold,
             fwhm=args.fwhm,
         )

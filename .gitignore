@@ -84,35 +84,39 @@ results/regressors_static_bert_base_uncased_gentle/
 results/regressors_static_bert_base_uncased_gentle_motionfiltered/
 results/regressors_static_bert_base_uncased_uniform_smoke/
 
-# Ignore most old result folders but keep final paper outputs and placeholder folders
-results/csv/*
-!results/csv/.gitkeep
-results/figures/*
-!results/figures/.gitkeep
-results/group_averages/*
-!results/group_averages/.gitkeep
-results/maps/*
-!results/maps/.gitkeep
+# Superseded placeholder folders
+results/csv/
+results/figures/
+results/group_averages/
+results/maps/
 
-# Keep final reproducibility outputs
+# Current result documentation
 !results/
 !results/README.md
-!results/final_tables/
-!results/final_tables/**
-!results/final_figures/
-!results/final_figures/**
+!results/FINAL_RESULTS_SUMMARY.md
 
-# Local-path-containing diagnostic table
-results/final_tables/table8b_run_level_delta_with_motion_qc.csv
+# Unified local resources for the 13-story analyses
+results/jnl_13_story_resources/*
+!results/jnl_13_story_resources/README.md
+
+# Superseded result packages are not part of the current repository
+results/final_tables/
+results/final_figures/
+results/jnl_contextual_unique_rich_audio_gap5/
+results/jnl_fold_safe_subject_normalization/
+results/jnl_heldout_story_replication/
+results/jnl_individual_timing_corrected/
+results/jnl_revision_major_review/
+results/jnl_shared_response_context_validation/
+results/jnl_shared_response_hemisphere_sensitivity/
+results/jnl_shared_response_pc_count_sensitivity/
+results/jnl_submission_reporting/
+results/regressors_gpt2_zero_empty_silence_corrected/
 
 # Generated local-path configs/tables
 configs/stories_all_fmriprep.py
 configs/stories_all_fmriprep_confounds.py
 configs/stories_all_fmriprep_confounds_motionfiltered.py
-configs/stories_13.py
-configs/stories_13_fmriprep_confounds.py
-configs/stories_13_fmriprep_confounds_motionfiltered.py
-results/jnl_heldout_story_replication/heldout_motionfiltered_config.py
 
 # LaTeX build products
 *.aux

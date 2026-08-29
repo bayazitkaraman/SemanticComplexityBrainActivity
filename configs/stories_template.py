@@ -1,4 +1,5 @@
-# Copy this file to stories_all.py or generate one using scripts/build_subject_list.py
+# Minimal schema example only. Generate the active 13-story configuration as
+# described in configs/README.md rather than copying this example verbatim.
 
 stories = [
     {

@@ -1,3 +1,0 @@
-analysis,model,n_subject_story_scans,n_subjects,n_stories,estimate,se,z,p,ci95_low,ci95_high,converged,warnings
-left_hemisphere_combined_pc1_to_pc5_minus_baseline,y ~ 1 + (1 | subject) + (1 | story),408,204,8,-5.356371780789298e-05,0.011698073029983236,-0.004578849667855915,0.9963466193098321,-0.02298136554509438,0.022874238109478594,True,lbfgs: The MLE may be on the boundary of the parameter space.
-right_hemisphere_combined_pc1_to_pc5_minus_baseline,y ~ 1 + (1 | subject) + (1 | story),408,204,8,0.001675323132821781,0.011774896350316366,0.14227922547927724,0.8868594552436173,-0.021403049635490425,0.024753695901133986,True,lbfgs: The MLE may be on the boundary of the parameter space.

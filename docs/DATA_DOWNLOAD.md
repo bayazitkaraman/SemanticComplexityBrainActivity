@@ -41,17 +41,16 @@ Create a local subject list from the BIDS dataset, map it to fMRIPrep files,
 and apply the reported motion thresholds:
 
 ```bash
-python scripts/build_subject_list_from_openneuro.py --dataset-dir /path/to/ds002345 --stories "21styear,black,bronx,forgot,merlin,milkyway,notthefallintact,piemanpni,prettymouth,shapesphysical,shapessocial,sherlock,tunnel" --output configs/stories_13.py
-python scripts/build_subject_list_fmriprep.py --subject-list configs/stories_13.py --fmriprep-dir /path/to/fmriprep --output configs/stories_13_fmriprep_confounds.py
-python scripts/motion_qc_from_confounds.py --subject-list configs/stories_13_fmriprep_confounds.py --filtered-output configs/stories_13_fmriprep_confounds_motionfiltered.py
+python scripts/build_subject_list_from_openneuro.py --dataset-dir /path/to/ds002345 --stories "shapessocial,shapesphysical,notthefallintact,milkyway,bronx,forgot,black,piemanpni,prettymouth,sherlock,merlin,21styear,tunnel" --output configs/stories_all.py --raw-bold
+python scripts/build_subject_list_fmriprep.py --subject-list configs/stories_all.py --fmriprep-dir /path/to/fmriprep --output configs/stories_all_fmriprep_confounds.py
+python scripts/motion_qc_from_confounds.py --subject-list configs/stories_all_fmriprep_confounds.py --filtered-output configs/stories_all_fmriprep_confounds_motionfiltered.py
 ```
 
 Generated configurations contain machine-specific paths and are intentionally
-ignored by Git. The central driver retains separate development and evaluation
-configuration arguments because the analysis inputs were originally generated
-in stages. For a clean rerun, the three configuration arguments may all point
-to the same motion-filtered 13-story configuration; likewise, the three
-regressor-directory and ROI-cache arguments may point to unified directories.
+ignored by Git. The tracked `configs/stories_all.py` contains 572 available
+subject-story rows before motion QC. The final motion-filtered configuration
+contains 567 scans from 277 participants. See `configs/README.md` for per-story
+counts and file roles.
 
 ## Gentle alignments and audio
 
@@ -114,14 +113,12 @@ python scripts/jnl_13_story_transfer_figure.py
 python scripts/jnl_13_story_component_sensitivity.py
 ```
 
-The short command uses the stage-specific input locations recorded as script
-defaults. With unified local inputs, point each input group to the same prepared
-resource:
+The scripts use the unified local resource directories by default. To use a
+different location, specify it directly:
 
 ```bash
-python scripts/jnl_13_story_loso.py --gentle-root /path/to/gentle --development-config configs/stories_13_fmriprep_confounds_motionfiltered.py --initial-evaluation-config configs/stories_13_fmriprep_confounds_motionfiltered.py --new-evaluation-config configs/stories_13_fmriprep_confounds_motionfiltered.py --development-regressor-dir /path/to/rich_audio_regressors --initial-evaluation-regressor-dir /path/to/rich_audio_regressors --new-evaluation-regressor-dir /path/to/rich_audio_regressors --development-roi-cache /path/to/roi_cache --initial-evaluation-roi-cache /path/to/roi_cache --new-evaluation-roi-cache /path/to/roi_cache --stage all
+python scripts/jnl_13_story_loso.py --gentle-root /path/to/gentle --subject-list configs/stories_all_fmriprep_confounds_motionfiltered.py --regressor-dir /path/to/rich_audio_regressors --roi-cache /path/to/roi_cache --stage all
 ```
 
 The complete command descriptions and output locations are in the main
-`README.md`. The older `run_revision_pipeline.py` workflow is retained only for
-the complementary individual-scan and earlier sensitivity analyses.
+`README.md`.

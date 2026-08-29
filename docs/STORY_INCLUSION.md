@@ -40,6 +40,10 @@ tunnel
 After the same motion-quality-control rules were applied, these stories
 contributed 567 subject-story scans from 277 unique participants.
 
+The tracked portable configuration contains 572 rows before motion QC. Five
+rows are excluded by the reported thresholds. The current configuration chain
+and per-story final counts are documented in `configs/README.md`.
+
 The analysis uses 13 leave-one-story-out folds: each story is omitted once, the
 feature transform and neural encoding model are fitted to the other 12 stories,
 and the complete omitted story is evaluated.
