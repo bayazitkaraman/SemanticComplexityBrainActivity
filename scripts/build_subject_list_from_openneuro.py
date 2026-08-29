@@ -103,15 +103,18 @@ def find_bolds(dataset_dir: Path, story: str, raw_only: bool = False, require_re
 
 
 def find_event(dataset_dir: Path, story: str, subject: str):
-    patterns = [
-        f"{subject}/func/{subject}_task-{story}*_events.tsv",
-        f"{subject}/**/*_task-{story}*_events.tsv",
-        f"**/{subject}/func/*_task-{story}*_events.tsv",
-    ]
-    matches = []
-    for pattern in patterns:
-        matches.extend(dataset_dir.glob(pattern))
-    matches = sorted(set([p for p in matches if p.is_file()]))
+    subject_dir = dataset_dir / subject
+    matches = sorted(
+        path
+        for path in (subject_dir / "func").glob(f"{subject}_task-{story}*_events.tsv")
+        if path.is_file()
+    )
+    if not matches:
+        matches = sorted(
+            path
+            for path in subject_dir.glob(f"**/*_task-{story}*_events.tsv")
+            if path.is_file()
+        )
     if not matches:
         return None
 
@@ -282,7 +285,8 @@ def main():
         if args.max_subjects_per_story and args.max_subjects_per_story > 0:
             subjects = subjects[: args.max_subjects_per_story]
 
-        print(f"\nStory {story}: found {len(bolds)} readable subjects, using {len(subjects)}")
+        candidate_label = "BOLD candidates" if args.allow_unreadable_bold else "readable subjects"
+        print(f"\nStory {story}: found {len(bolds)} {candidate_label}, using {len(subjects)}")
         if skipped_unreadable:
             print(f"  Skipped unreadable/not-downloaded BOLD candidates: {len(skipped_unreadable)}")
 

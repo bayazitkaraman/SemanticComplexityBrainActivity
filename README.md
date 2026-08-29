@@ -1,8 +1,8 @@
-# Semantic Complexity and Brain Activity
+# Low-Dimensional GPT-2 Features Improve Cross-Narrative Prediction of Shared fMRI Responses
 
-This repository contains the analysis code and aggregate results for examining
-whether low-dimensional GPT-2 features improve prediction of fMRI responses
-during naturalistic spoken narrative comprehension.
+This repository contains the analysis code and aggregate results for the paper
+*Low-Dimensional GPT-2 Features Improve Cross-Narrative Prediction of Shared
+fMRI Responses*.
 
 The final design uses all 13 eligible intact narratives from the public
 Narratives dataset (`ds002345`). After motion quality control, the dataset
@@ -51,12 +51,10 @@ results/jnl_story_heterogeneity/original_pieman/   Matched-narrative comparison
 
 ## Setup
 
-Create a virtual environment and install the package:
+Create a Python 3.10 or newer virtual environment:
 
 ```bash
 python -m venv .venv
-python -m pip install --upgrade pip
-python -m pip install -e .
 ```
 
 Windows PowerShell activation:
@@ -70,6 +68,16 @@ macOS/Linux activation:
 ```bash
 source .venv/bin/activate
 ```
+
+Install the pinned dependencies and the local package after activation:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install -e . --no-deps
+```
+
+`requirements.txt` pins the direct dependency versions reported in the paper.
 
 ## Data configuration
 

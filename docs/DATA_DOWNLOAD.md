@@ -41,10 +41,14 @@ Create a local subject list from the BIDS dataset, map it to fMRIPrep files,
 and apply the reported motion thresholds:
 
 ```bash
-python scripts/build_subject_list_from_openneuro.py --dataset-dir /path/to/ds002345 --stories "shapessocial,shapesphysical,notthefallintact,milkyway,bronx,forgot,black,piemanpni,prettymouth,sherlock,merlin,21styear,tunnel" --output configs/stories_all.py --raw-bold
+python scripts/build_subject_list_from_openneuro.py --dataset-dir /path/to/ds002345 --stories "shapessocial,shapesphysical,notthefallintact,milkyway,bronx,forgot,black,piemanpni,prettymouth,sherlock,merlin,21styear,tunnel" --output configs/stories_all.py --raw-bold --allow-unreadable-bold
 python scripts/build_subject_list_fmriprep.py --subject-list configs/stories_all.py --fmriprep-dir /path/to/fmriprep --output configs/stories_all_fmriprep_confounds.py
 python scripts/motion_qc_from_confounds.py --subject-list configs/stories_all_fmriprep_confounds.py --filtered-output configs/stories_all_fmriprep_confounds_motionfiltered.py
 ```
+
+`--allow-unreadable-bold` permits discovery from DataLad/git-annex BOLD
+placeholders. The analysis itself uses the mapped fMRIPrep derivatives, which
+must be present and readable before ROI extraction.
 
 Generated configurations contain machine-specific paths and are intentionally
 ignored by Git. The tracked `configs/stories_all.py` contains 572 available
@@ -100,8 +104,6 @@ without additional nuisance regression or high-pass filtering:
 $env:SEMANTIC_FMRI_CONFOUND_STRATEGY="none"
 $env:SEMANTIC_FMRI_HIGH_PASS="none"
 ```
-
-Motion6 and motion24 are retained as sensitivity-analysis options.
 
 ## Central analysis
 

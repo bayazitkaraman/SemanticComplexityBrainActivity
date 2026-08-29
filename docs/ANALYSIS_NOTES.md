@@ -21,7 +21,7 @@ The central analysis:
 7. Tests transfer across both stories and listeners by removing each tested
    participant from every available training-story group response.
 8. Evaluates temporal-shift, ridge, component-count, within-story, ROI, and
-   matched-performance sensitivity analyses.
+   matched-narrative sensitivity analyses.
 
 The individual-scan, BERT, layer, hemisphere, fold-specific normalization, and
 independent-chunk analyses use the same 13 stories as complementary checks.
