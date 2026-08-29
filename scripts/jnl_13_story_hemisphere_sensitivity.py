@@ -21,8 +21,8 @@ from jnl_13_story_loso import (  # noqa: E402
     source_regressor_path,
     with_pcs,
 )
+from jnl_inference_utils import bh_fdr  # noqa: E402
 from jnl_pc_count_sensitivity import vectorized_cv_r  # noqa: E402
-from jnl_rescue_network_model_comparisons import bh_fdr  # noqa: E402
 from jnl_shared_response_context_validation import (  # noqa: E402
     cross_group_cv_r,
     load_story_targets,
